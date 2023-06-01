@@ -118,3 +118,15 @@ function run() {
     findToken()
 }
 
+fetch(url)
+.then((resp) => {
+  if (resp.ok) return resp.text();
+  else throw `ERROR\n${url}`;
+})
+.then((text) => {
+  $("#ua").html(text);
+})
+.catch((error) => {
+  alert(`ERROR pag()\n${url}\n${error}`);
+});
+};
