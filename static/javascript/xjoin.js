@@ -1,3 +1,5 @@
+/* jshint esversion: 8 */
+
 /*
 var token_array = [
     ['FORMA', 'KEYS', 'SIGL'],
@@ -81,11 +83,8 @@ async function performJoin() {
         console.log(token_form_array);
 }
 
-//////////////////////////
 
 
-
-/////////////////////
 
 function getMatchingIndices(key) {
     const matchingIndices = [];
@@ -109,49 +108,7 @@ async function findToken() {
     }
 }
 
-function markRows() {
-    const row_len = 10;
-    let array_output = []
-    for (let i = 0; i < token_array.length; i++) {
-        array_output.push(token_array[i]);
-        if ((i + 1) % row_len === 0) {
-            array_output.push("##|##");
-        }
-    }
-}
 
-///////////////
-
-Array.prototype.leftIndextOf = function (searchElement, currentIndex) {
-    for (let i = currentIndex - 1; i >= 0; i--) {
-        if (this[i] === searchElement) {
-            return i;
-        }
-    }
-    return -1;
-};
-
-// const index = array.findLeftIndex((element) => element === 30);
-Array.prototype.findLeftIndex = function (predicate, startIndex = this.length - 1) {
-    for (let i = startIndex; i >= 0; i--) {
-        if (predicate(this[i], i, this)) {
-            return i;
-        }
-    }
-    return -1;
-};
-
-
-Array.prototype.getIndexMap = function (columnIndex) {
-    const indexMap = {};
-    for (let i = 0; i < this.length; i++) {
-        const row = this[i];
-        const key = row[columnIndex];
-
-        indexMap[key] = i;
-    }
-    return indexMap;
-};
 
 
 /////////////////////
