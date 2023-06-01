@@ -84,8 +84,9 @@ const html_dict_menu = `
   </li>
 </ul>
 </div>
+`;
 
-
+const html_dict_head = `
 <div id='dict_head_id'>
 <table>
 <tr>
@@ -127,6 +128,13 @@ const html_dict_rows = `
   <td class="m">{m}</td>
 </tr> 
 `;
+
+dorm_cols = ["FORMA", "KEY", "LEMMA", "ETIMO", "LANG", "DATE", "POS", "FUNCT"];
+msd_cols = ["GENDER", "NUMBER", "CASE", "DEGREE", "DETERTYPE", "MWES", "PRONTYPE", "PERSON", "VERBFORM", "MOOD", "TENSE", "VOICE", "PROPERTY", "ADPTYPE", "ADVTYPE", "ADVTYPE2", "NUMTYPE", "PARTTYPE"];
+
+sigl_cols = ["G", "P", "V"];
+loc_cols = ["LOC.1", "LOC.2", "LOC.3", "LOC.4"];
+date_cols = ["DATE.0", "DATE.1", "DATE.2"];
 
 var DictForm = {
   id: "dict_form_id",
@@ -220,66 +228,65 @@ var DictForm = {
   },
   open: async function () {
     document.getElementById(this.id).innerHTML = menu_dict_form;
-    this.bind_menu();
-    this.form_lst2html();
+    // this.bind_menu();
+    // this.form_lst2html();
   },
-  load_data: async function () {
-    const ok = await DbFormLpmx.load_data();
-    if (!ok) {
-      return false;
-    }
-    this.form_lst2html();
-    FormText.data2html();
-    return true;
-  },
-  form_lst2html: function () {
-    const lfe = DbFormLpmx.form_lst.length;
-    if (lfe == 0)
-      return;
-    let jt = UaJt();
-    jt.append("<table>");
-    for (let i = 0; i < lfe; i++) {
-      const r = DbFormLpmx.form_lst[i];
-      const disp = r[0] == r[1] ? "f" : "k";
-      const d = {
-        i: i,
-        fr: r[0],
-        disp: disp,
-        fk: r[1],
-        l: r[2],
-        e: r[3],
-        ph: r[4],
-        p: r[5],
-        fn: r[6],
-        m: r[7]
-      };
-      jt.append(html_dict_rows, d);
-    }
-    jt.append("</table>");
-    const html = jt.html();
-    $("#dict_rows_id").html(html);
-    //setta la classe bl per le form che hanno omografi nel corpus
-    const fr_lst = document.querySelectorAll("#dict_rows_id tr td.fr");
-    const omogr_js = DbFormLpmx.omogr_json;
-    const omogr_ks = Object.keys(omogr_js);
-    const omogr_lst = Array.from(fr_lst).filter(e => omogr_ks.includes(e.innerHTML));
-    for (let td of omogr_lst) {
-      let tr = td.parentElement;
-      tr.classList.add("bl");
-    }
-
-    //sett la clase emp per le form che non hanno tokens 
-    const fk_lst = document.querySelectorAll("#dict_rows_id tr td[name='fk']");
-    let tks = DbFormLpmx.token_lst.map(e => e[1]);
-    let fks = DbFormLpmx.form_lst.map(e => e[1]);
-    let fkes = fks.filter((e) => !tks.includes(e));
-    const empty_lst = Array.from(fk_lst).filter(e => fkes.includes(e.innerHTML));
-    for (let td of empty_lst) {
-      let tr = td.parentElement;
-      tr.classList.add("empty");
-    }
-    this.bind_rows();
-  },
+  // load_data: async function () {
+  //   const ok = await DbFormLpmx.load_data();
+  //   if (!ok) {
+  //     return false;
+  //   }
+  //   this.form_lst2html();
+  //   FormText.data2html();
+  //   return true;
+  // },
+  // form_lst2html: function () {
+  //   const lfe = DbFormLpmx.form_lst.length;
+  //   if (lfe == 0)
+  //     return;
+  //   let jt = UaJt();
+  //   jt.append("<table>");
+  //   for (let i = 0; i < lfe; i++) {
+  //     const r = DbFormLpmx.form_lst[i];
+  //     const disp = r[0] == r[1] ? "f" : "k";
+  //     const d = {
+  //       i: i,
+  //       fr: r[0],
+  //       disp: disp,
+  //       fk: r[1],
+  //       l: r[2],
+  //       e: r[3],
+  //       ph: r[4],
+  //       p: r[5],
+  //       fn: r[6],
+  //       m: r[7]
+  //     };
+  //     jt.append(html_dict_rows, d);
+  //   }
+  //   jt.append("</table>");
+  //   const html = jt.html();
+  //   $("#dict_rows_id").html(html);
+  //   //setta la classe bl per le form che hanno omografi nel corpus
+  //   const fr_lst = document.querySelectorAll("#dict_rows_id tr td.fr");
+  //   const omogr_js = DbFormLpmx.omogr_json;
+  //   const omogr_ks = Object.keys(omogr_js);
+  //   const omogr_lst = Array.from(fr_lst).filter(e => omogr_ks.includes(e.innerHTML));
+  //   for (let td of omogr_lst) {
+  //     let tr = td.parentElement;
+  //     tr.classList.add("bl");
+  //   }
+  //   //sett la clase emp per le form che non hanno tokens 
+  //   const fk_lst = document.querySelectorAll("#dict_rows_id tr td[name='fk']");
+  //   let tks = DbFormLpmx.token_lst.map(e => e[1]);
+  //   let fks = DbFormLpmx.form_lst.map(e => e[1]);
+  //   let fkes = fks.filter((e) => !tks.includes(e));
+  //   const empty_lst = Array.from(fk_lst).filter(e => fkes.includes(e.innerHTML));
+  //   for (let td of empty_lst) {
+  //     let tr = td.parentElement;
+  //     tr.classList.add("empty");
+  //   }
+  //   this.bind_rows();
+  // },
   bind_menu: function () {
     const menu = document.getElementById("dict_menu_id");
     const call = (ev) => {

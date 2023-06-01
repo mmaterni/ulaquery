@@ -1,21 +1,13 @@
-const ULA_DATA_DIR = `/ula_data`;
-const DATA_DIR = `${ULA_DATA_DIR}/data`;
-const URL_TEXT_LIST = `${ULA_DATA_DIR}/data/text_list.txt`;
-const URL_CORPUS_OMOGR = `${ULA_DATA_DIR}/data_corpus/corpus_omogr.json`;
+const DIR_ULA_DATA = `/ula_data`;
+const DIR_DATA_EXP = `${DIR_ULA_DATA}/DIR_DATA_EXP`;
+const DICT_FORM_PATH = `${DIR_DATA_EXP}/dictionary.ula.csv`;
 
 // let ALPHABETIC = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzàèéìòù";
 // let NUMERIC = "0123456789";
 // var ULACHARSET = ALPHABETIC + NUMERIC;
 var UAPUNCTS = `,.;::?!^~()[]{}<>=+-*#@£&%/«»“‘’"\`'`;
 
-//key corpus con formkey duplicate
-const KEY_OMOGR = "ula_omogr";
-
-// key nome testo nello store
-const KEY_TEXT_NAME = "ula_text_name";
-
 // key nome dati
-const KEY_DATA = "ula_data";
 const KEY_DATA_FORM = "ula_form";
 const KEY_DATA_TOKEN = "ula_token";
 
@@ -75,7 +67,7 @@ var DataManager = {
   save_csv: function (rows, file_name) {
     const rs = rows.map((x) => x.join("|"));
     const data = rs.join("\n");
-    const url = `/write${DATA_DIR}/${file_name}`;
+    const url = `/write${DIR_DATA_EXP}/${file_name}`;
     fetch(url, {
       method: "POST",
       cache: 'default',
@@ -108,7 +100,7 @@ var DataManager = {
     return true;
   },
   load_csv: async function (file_name) {
-    const url = `${DATA_DIR}/${file_name}`;
+    const url = `${DIR_DATA_EXP}/${file_name}`;
     let csv_data = "";
     const resp = await fetch(url, {
       method: 'GET',

@@ -32,19 +32,16 @@ var sleep = function (delay) {
 };
 
 
+// let DICT_FORM_ID = Null
+
 var UlaQuery = {
   open: async function () {
-    wait_start();
-    try {
-      await sleep(3000);
-      wait_stop();
-      const e = document.getElementById("query_id");
-      e.innerHTML = "<h1>Pippo</h1>";
-    } catch (error) {
-      console.error(error);
-      wait_stop();
-      alert("errore");
-    }
+    cmd_wait_start();
+    // DICT_FORM_ID = document.getElementById("dict_form_id");
+    // UaLog.setXY(-300, 0).setZ(11).new();
+    // const lst = await DataManger.load_dict_form_rows();
+    DictForm.open();
+    cmd_wait_stop();
+    // FormLpmx.scroll_top();
   }
 };
-

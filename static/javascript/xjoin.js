@@ -36,13 +36,13 @@ async function readCSV(url) {
 
 async function readTokenForm() {
     try {
-        const tokenURL = '/ula_data/data_export/tr1.g.ula.csv';
+        const tokenURL = '/ula_data/DIR_DATA_EXP/tr1.g.ula.csv';
         token_array = await readCSV(tokenURL);
     } catch (error) {
         console.error(error);
     }
     try {
-        const formURL = '/ula_data/data_export/dictionary.ula.csv';
+        const formURL = '/ula_data/DIR_DATA_EXP/dictionary.ula.csv';
         form_array = await readCSV(formURL);
     } catch (error) {
         console.error(error);
