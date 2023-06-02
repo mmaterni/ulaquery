@@ -292,52 +292,79 @@ div.menu_bar {
 @font_head: @fsize_07;
 
 #dict_head_id {
-  
-  padding: 5px 0 0 0;
+  width:100%;
+  // padding: 5px;
   font-size: @font_head;
   font-family: @fserif;
   max-height: @dict_head_height;
-  min-width: @dict_head_width;
-  max-width: @dict_head_width;
+  // min-width: @dict_head_width;
+  // max-width: @dict_head_width;
 
-  table {
-    padding: 0;
+  ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    list-style: none;
     margin: 0;
-    border-spacing: 0;
-    border-collapse: collapse;
-    display: block;
-    table-layout: fixed;
+    padding: 0;
 
-    tr {
-      td {
-        background: @head_back;
-        color: @head_color;
-        padding-left: 2px;
-        font-size: @font_head;
-        font-family: @fsans;
-        text-align: center;
-        border-width: 0 1px 1px 0;
-        border-style: solid;
-        border-color: @head_border_color;
-        min-width: @dict_col_width;
-        max-width: @dict_col_width;
-      }
+    // li:nth-child(odd) {
+    //     background: lighten(@head_back, -5%);
+    // }
 
-      // td.n {
-      //   min-width: @row_num_width;
-      //   max-width: @row_num_width;
-      //   font-size: @font_num;
-      //   font-family: @fserif;
-      //   font-weight: normal;
-      //   text-align: center;
-      //   padding-right: 5px;
-      // }
-
-      td.key {
-        display: none;
-      }
+    li {
+      position: relative;
+      text-align: center;
+      flex: 1;
+      // background: @head_back;
+      background: red;
+      color: @head_color;
+      padding-left: 2px;
+      font-size: @font_head;
+      font-family: @fsans;
+      border-width: 0 2px 2px 0;
+      border-style: solid;
+      border-color: @head_border_color;
+      // min-width: @dict_col_width;
+      // max-width: @dict_col_width;
     }
+
+    li.key {
+      display: none;
+    }
+
   }
+
+  // table {
+  //   padding: 0;
+  //   margin: 0;
+  //   border-spacing: 0;
+  //   border-collapse: collapse;
+  //   display: block;
+  //   table-layout: fixed;
+
+  //   tr {
+  //     td {
+  //       background: @head_back;
+  //       color: @head_color;
+  //       padding-left: 2px;
+  //       font-size: @font_head;
+  //       font-family: @fsans;
+  //       text-align: center;
+  //       border-width: 0 1px 1px 0;
+  //       border-style: solid;
+  //       border-color: @head_border_color;
+  //       min-width: @dict_col_width;
+  //       max-width: @dict_col_width;
+  //     }
+
+
+  //     td.key {
+  //       display: none;
+  //     }
+  //   }
+  // }
 }
 
 @font_num: @fsize_07;

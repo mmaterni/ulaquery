@@ -186,17 +186,17 @@ var DictForm = {
     let jt = UaJth();
     jt.append(html_dict_menu);
 
-    jt.append(`<div id='dict_head_id'><table><tr>`);
+    jt.append(`<div id='dict_head_id'><ul>`);
 
-    let r = (c,d) => ` <td class="${c}">${d}</td>`;
+    let r = (c,d) => ` <li class="${c}">${d}</li>`;
     for (const lbl of form_cols)
       jt.append(r, 'p',lbl)
 
-    r = (d) => ` <td class="m">${d}</td>`;
+    r = (d) => ` <li class="m">${d}</li>`;
     for (const lbl of sigl_cols)
       jt.append(r, lbl)
 
-    jt.append(`</tr></table</div>`);
+    jt.append(`</ul></div>`);
     // jt.append(`<div id='dict_rows_id'></div>`);
     document.getElementById(this.id).innerHTML = jt.html();
     // this.bind_menu();
