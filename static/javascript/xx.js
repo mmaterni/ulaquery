@@ -19,43 +19,49 @@ const table = [
   ['aconpaignier', 'aconpaignier', 'acompagnier', 'COMPANIO', '', '', 'verb', '']
 ];
 
-function checkCell(cellValue, value) {
-  if (value === '')
-    return true;
-  const parts = value.split('|');
-  for (let i = 0; i < parts.length; i++) {
-    const part = parts[i];
-    if (part === '*')
-      return true;
-    const regex = new RegExp(`^${part.replace(/\*/g, '.*')}$`);
-    if (regex.test(cellValue))
-      return true;
-  }
-  return false;
-}
 
-function checkRow(row, conditions) {
-  let ok = true;
-  for (let i = 0; i < conditions.length; i++) {
-    const [column, value] = conditions[i];
-    const cellValue = row[column];
-    if (!checkCell(cellValue, value)) {
-      ok = false;
-      break;
-    }
-  }
-  return ok;
-}
 
 function queryTab(tab, conditions) {
+
+  const checkRow = function (row) {
+
+    const checkCell = function (cellValue, value) {
+      if (value === '')
+        return true;
+      const parts = value.split('|');
+      for (let i = 0; i < parts.length; i++) {
+        const part = parts[i];
+        if (part === '*')
+          return true;
+        const regex = new RegExp(`^${part.replace(/\*/g, '.*')}$`);
+        if (regex.test(cellValue))
+          return true;
+      }
+      return false;
+    }
+
+    let ok = true;
+    for (let i = 0; i < conditions.length; i++) {
+      const [column, value] = conditions[i];
+      const cellValue = row[column];
+      if (!checkCell(cellValue, value)) {
+        ok = false;
+        break;
+      }
+    }
+    return ok;
+  }
+
   let indexs = [];
   for (let i = 0; i < tab.length; i++) {
     const row = tab[i];
-    if (checkRow(row, conditions, null))
+    if (checkRow(row))
       indexs.push(i)
   }
   return indexs;
 }
+
+
 
 const conditions = [[0, 'acon*'], [6, 'verb']];
 
@@ -63,6 +69,10 @@ const arr = queryTab(table, conditions)
 
 for (let x of arr)
   console.log(x)
+
+
+
+
 
 
 function run() {
@@ -73,3 +83,7 @@ function run() {
 }
 
 
+// Array.prototype.queryTab = function(conditions) {
+//   const checkRow = function(row) {
+//     // Implementazione della funzione checkRow
+   

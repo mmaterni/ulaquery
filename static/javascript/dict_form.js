@@ -1,4 +1,5 @@
 /* jshint esversion: 11 */
+"use strict"
 
 const html_dict_menu = `
 <div id="dict_menu_id" class="menu_bar" >
@@ -129,12 +130,12 @@ const html_dict_rows = `
 </tr> 
 `;
 
-dorm_cols = ["FORMA", "KEY", "LEMMA", "ETIMO", "LANG", "DATE", "POS", "FUNCT"];
-msd_cols = ["GENDER", "NUMBER", "CASE", "DEGREE", "DETERTYPE", "MWES", "PRONTYPE", "PERSON", "VERBFORM", "MOOD", "TENSE", "VOICE", "PROPERTY", "ADPTYPE", "ADVTYPE", "ADVTYPE2", "NUMTYPE", "PARTTYPE"];
+const form_cols = ["FORMA", "KEY", "LEMMA", "ETIMO", "LANG", "DATE", "POS", "FUNCT"];
+const msd_cols = ["GENDER", "NUMBER", "CASE", "DEGREE", "DETERTYPE", "MWES", "PRONTYPE", "PERSON", "VERBFORM", "MOOD", "TENSE", "VOICE", "PROPERTY", "ADPTYPE", "ADVTYPE", "ADVTYPE2", "NUMTYPE", "PARTTYPE"];
 
-sigl_cols = ["G", "P", "V"];
-loc_cols = ["LOC.1", "LOC.2", "LOC.3", "LOC.4"];
-date_cols = ["DATE.0", "DATE.1", "DATE.2"];
+const sigl_cols = ["G", "P", "V"];
+const loc_cols = ["LOC.1", "LOC.2", "LOC.3", "LOC.4"];
+const date_cols = ["DATE.0", "DATE.1", "DATE.2"];
 
 var DictForm = {
   id: "dict_form_id",
@@ -227,7 +228,7 @@ var DictForm = {
     }
   },
   open: async function () {
-    document.getElementById(this.id).innerHTML = html_dict_menuw;
+    document.getElementById(this.id).innerHTML = html_dict_menu;
     // this.bind_menu();
     // this.form_lst2html();
   },
