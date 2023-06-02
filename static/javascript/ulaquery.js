@@ -34,6 +34,7 @@ var sleep = function (delay) {
 var UlaQuery = {
   open: async function () {
     cmd_wait_start();
+    await sleep(100);
     // DICT_FORM_ID = document.getElementById("dict_form_id");
     // UaLog.setXY(-300, 0).setZ(11).new();
     // const lst = await DataManger.load_dict_form_rows();

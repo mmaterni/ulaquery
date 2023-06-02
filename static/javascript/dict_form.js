@@ -4,50 +4,27 @@
 const html_dict_menu = `
 <div id="dict_menu_id" class="menu_bar" >
 <ul>
-  <li class="v">
+
+<li class="v">
     <a class="tipb" href="#" cmd="show_text">Text
       <span class="tiptextb">Display Lines of Text</span>
     </a>
   </li>
+  
   <li class="v">
     <a class="tipb" cmd="save_data" href="#">Save
       <span class="tiptextb">Save the Data on the Server</span>
     </a>
   </li>
+
   <li class="v">
     <a class="tipb" cmd="load_data" href="#">Load
       <span class="tiptextb">Read Data from Server</span>
     </a>
   </li>
 
-  <li class="v">
-    <a href="#">Corpus</a>
-    <ul class="v">   
-      <li class="h">
-          <a class="tipr" cmd="check_text" href="#">Check Text
-            <span class="tiptextr">Check Homographs and Forms without Tokens</span>
-          </a>
-      </li>
-      <li class="h">
-          <a class="cmd tipr" cmd="diff_text_corpus" href="#">Compare Corpus
-            <span class="tiptextr">Compare the Text on the server with the Corpus</span>
-          </a>
-      </li>
-      <li class="h">
-          <a class="cmd tipr" cmd="upd_corpus" href="#">Update Corpus
-            <span class="tiptextr">Update Corpus with the Text</span>
-          </a>
-      </li>
-      <li class="h">
-        <a class="cmd tipr" cmd="upd_text" href="#">Update Text
-            <span class="tiptextr">Update Text with the Corpus</span>
-          </a>
-        </li>     
-    </ul>
-  </li>
-
   <li class="v tipb" >
-    <a class="title" cmd="select_text" href="#">Select Text </a>
+    <a  cmd="select_text" href="#">Select Text </a>
     <span class="tiptextb">Load Selected Text</span>
    </li>
   
@@ -70,49 +47,27 @@ const html_dict_menu = `
       </li>
     </ul>
   </li>
+
   <li class="v">
     <a class="cmd" cmd="help" href="#">Help
     </a>
   </li>
+
   <li class="v">
     <a class="tipb" cmd="cmd_log" href="#">Log
       <span class="tiptextb">Toggle Log</span>
     </a>
   </li>
+
   <li class="v">
     <a cmd="close" href="#">close
     </a>
   </li>
-</ul>
+
+  </ul>
 </div>
 `;
 
-const html_dict_head = `
-<div id='dict_head_id'>
-<table>
-<tr>
-  <td class="n" ><span class="tipb">C
-    <span class="tiptextb">Open Context of Form</span>
-  </span></td>
-  <td class="fr">form</td>
-  <td class="find">
-    <a class="cmd tipb" cmd="scroll" href="#">find
-      <span class="tiptextb">Goes to the position<br/> of the selected word</span>
-    </a>
-    <input type="text" value="" size="2" >
-  </td>
-  <td class="l">lemma</td>
-  <td class="e">etimo</td>
-  <td class="ph">lang</td>
-  <td class="p">POS</td>
-  <td class="fn">funct</td>
-  <td class="m">MSD</td>
-</tr> 
-</table>
-</div>
-
-<div id='dict_rows_id'></div>;
-`;
 
 
 //forma, lemma, etimo, lang, POS, funct, MSD
@@ -132,7 +87,6 @@ const html_dict_rows = `
 
 const form_cols = ["FORMA", "KEY", "LEMMA", "ETIMO", "LANG", "DATE", "POS", "FUNCT"];
 const msd_cols = ["GENDER", "NUMBER", "CASE", "DEGREE", "DETERTYPE", "MWES", "PRONTYPE", "PERSON", "VERBFORM", "MOOD", "TENSE", "VOICE", "PROPERTY", "ADPTYPE", "ADVTYPE", "ADVTYPE2", "NUMTYPE", "PARTTYPE"];
-
 const sigl_cols = ["G", "P", "V"];
 const loc_cols = ["LOC.1", "LOC.2", "LOC.3", "LOC.4"];
 const date_cols = ["DATE.0", "DATE.1", "DATE.2"];
@@ -228,7 +182,19 @@ var DictForm = {
     }
   },
   open: async function () {
-    document.getElementById(this.id).innerHTML = html_dict_menu;
+    // const head = form_cols + msd_cols + sigl_cols + loc_cols + date_cols;
+    const head = form_cols;
+    //  + msd_cols + sigl_cols + loc_cols + date_cols;
+    let jt = UaJth();
+    jt.append(html_dict_menu);
+    jt.append(`<div id='dict_head_id'><table><tr>`);
+    const r=(d)=>` <td class="m">${d}</td>`;  
+    for (const lbl of head){
+      jt.append(r,lbl)
+    }
+    jt.append(`</tr></table</div>`);
+    jt.append(`<div id='dict_rows_id'></div>`);
+    document.getElementById(this.id).innerHTML = jt.html();
     // this.bind_menu();
     // this.form_lst2html();
   },
