@@ -28,5 +28,5 @@ var DataManager = {
       alert(`Errror:${url}\n ${error}`);
       throw error;
     }
-  };
-
+  },
+};

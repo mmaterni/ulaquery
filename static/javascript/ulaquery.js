@@ -16,12 +16,12 @@ var cmd_log_show = (...args) => {
   UaLog.log_show(...args);
 };
 
-var wait_start = function () {
+var cmd_wait_start = function () {
   const bd = document.querySelector("body");
   bd.classList.add("wait");
 };
 
-var wait_stop = function () {
+var cmd_wait_stop = function () {
   document.querySelector("body").classList.remove("wait");
 };
 
@@ -30,9 +30,6 @@ var sleep = function (delay) {
     setTimeout(resolve, delay)
   });
 };
-
-
-// let DICT_FORM_ID = Null
 
 var UlaQuery = {
   open: async function () {
