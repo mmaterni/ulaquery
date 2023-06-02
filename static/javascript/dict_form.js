@@ -183,15 +183,20 @@ var DictForm = {
   },
   open: async function () {
     // const head = form_cols + msd_cols + sigl_cols + loc_cols + date_cols;
-    const head = form_cols;
-    //  + msd_cols + sigl_cols + loc_cols + date_cols;
     let jt = UaJth();
     jt.append(html_dict_menu);
     jt.append(`<div id='dict_head_id'><table><tr>`);
-    const r=(d)=>` <td class="m">${d}</td>`;  
-    for (const lbl of head){
-      jt.append(r,lbl)
-    }
+
+    let r = (c,d) => ` <td class="${c}">${d}</td>`;
+    for (const lbl of form_cols)
+      jt.append(r, 'p',lbl)
+
+    r = (d) => ` <td class="m">${d}</td>`;
+    for (const lbl of sigl_cols)
+      jt.append(r, lbl)
+
+
+
     jt.append(`</tr></table</div>`);
     jt.append(`<div id='dict_rows_id'></div>`);
     document.getElementById(this.id).innerHTML = jt.html();

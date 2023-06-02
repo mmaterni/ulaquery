@@ -62,13 +62,18 @@ var UaJth = function () {
       this.rows = [];
       return this;
     },
-    insert(templ, data, n = 0) {
-      let t = !data ? templ : templ(data, n);
+    insert(templ, ...args) {
+      let t = args.length == 0 ? templ : templ(...args);
       this.rows.unshift(t);
       return this;
     },
-    append(templ, data, n = 0) {
-      let t = !data ? templ : templ(data, n);
+    // append(templ, data, n = 0) {
+    //   let t = !data ? templ : templ(data, n);
+    //   this.rows.push(t);
+    //   return this;
+    // },
+    append(templ, ...args) {
+      let t = args.length == 0 ? templ : templ(...args);
       this.rows.push(t);
       return this;
     },

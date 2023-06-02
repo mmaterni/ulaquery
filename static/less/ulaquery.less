@@ -9,17 +9,12 @@
 @fsize_07: 13px;
 
 @font_base: @fsize_10;
-@font_menu: @fsize_08;
-@font_label: @fsize_09;
-@font_text: @fsize_09;
-@font_text2: @fsize_08;
 // @font_table: @fsize_08;
 // @font_table2: @fsize_07;
 // @font_input: @fsize_08;
 // @font_input2: @fsize_07;
 // @font_select: @fsize_09;
 // @font_msg: @fsize_08;
-@font_num: @fsize_07;
 // @font_option: @fsize_08;
 
 // @fserif: "Ties New Roman", Times, Georgia, serif;
@@ -31,21 +26,11 @@
 .sans {
   font-family: arial, verdana, sans-serif;
 }
-@html_width:1450px;
+@html_width: 1450px;
 @body_height: 800px;
 // @body_width: 1200px;
-@menu_height: 25px;
-// @menuh_width: 700px;
-@menu_sub_top: 26px;
-
-// form
-@form_head_height: 30px;
-@lpmx_rows_width: 1099px;
-@row_num_width: 50px;
-
-
-@form_rows_height: 745px;
 // @form_cnt_height: 400px;
+
 // text
 // @text_height: 775px;
 // @text_top: calc(@menu_height + 2px);
@@ -129,7 +114,7 @@ body.wait {
     display: block;
     position: absolute;
     top: calc(50vh - 150px);
-    left:calc(50vw - 75px);
+    left: calc(50vw - 75px);
     border-radius: 50%;
     background: inherit;
     border: 2px solid @color_wait;
@@ -153,6 +138,11 @@ body.wait {
     transform: rotate(360deg);
   }
 }
+
+@menu_height: 25px;
+// @menuh_width: 700px;
+@menu_sub_top: 26px;
+@font_menu: @fsize_08;
 
 div.menu_bar {
   width: 100%;
@@ -294,15 +284,20 @@ div.menu_bar {
   // }
 }
 
+@dict_head_height: 30px;
+@dict_head_width: 1099px;
+@dict_col_width: 50px;
+// @row_num_width: 50px;
+@dict_rows_height: 745px;
+@font_head: @fsize_09;
 
-
-#dict_head_id{
+#dict_head_id {
   padding: 5px 0 0 0;
-  font-size: @font_label;
+  font-size: @font_head;
   font-family: @fserif;
-  max-height: @form_head_height;
-  min-width: @lpmx_rows_width;
-  max-width: @lpmx_rows_width;
+  max-height: @dict_head_height;
+  min-width: @dict_head_width;
+  max-width: @dict_head_width;
 
   table {
     padding: 0;
@@ -317,90 +312,40 @@ div.menu_bar {
         background: @head_back;
         color: @head_color;
         padding-left: 2px;
-        font-size: @font_label;
+        font-size: @font_head;
         font-family: @fsans;
         text-align: center;
         border-width: 0 1px 1px 0;
         border-style: solid;
         border-color: @head_border_color;
+        min-width: @dict_col_width;
+        max-width: @dict_col_width;
       }
 
-      td.n {
-        min-width: @row_num_width;
-        max-width: @row_num_width;
-        font-size: @font_num;
-        font-family: @fserif;
-        font-weight: normal;
-        text-align: center;
-        padding-right: 5px;
-      }
+      // td.n {
+      //   min-width: @row_num_width;
+      //   max-width: @row_num_width;
+      //   font-size: @font_num;
+      //   font-family: @fserif;
+      //   font-weight: normal;
+      //   text-align: center;
+      //   padding-right: 5px;
+      // }
 
-      td.fr {
+      td.key {
         display: none;
       }
-
-      td.find {
-        min-width: 240px;
-        max-width: 240px;
-        padding-left: 5px;
-
-        input {
-          height: 20px;
-          min-width: 150px;
-        }
-
-        a {
-          color: @cmd_color;
-          background: @cmd_back;
-          font-size: @font_label;
-          font-family: @fsans;
-          font-weight: bold;
-          vertical-align: middle;
-          padding: 0 5px 0 5px;
-          text-decoration: none;
-        }
-
-        a:hover {
-          background: @cmd_hover_back;
-          text-decoration: underline;
-        }
-      }
-    }
-
-    td.l {
-      min-width: 150px;
-      max-width: 150px;
-    }
-
-    td.e {
-      min-width: 150px;
-      max-width: 150px;
-    }
-
-    td.ph {
-      min-width: 90px;
-      max-width: 90px;
-    }
-
-    td.p {
-      min-width: 70px;
-      max-width: 70px;
-    }
-
-    td.fn {
-      min-width: 70px;
-      max-width: 70px;
-    }
-
-    td.m {
-      min-width: 250px;
     }
   }
 }
 
+@font_num: @fsize_07;
+@font_text: @fsize_09;
+@font_text2: @fsize_08;
+
 #lpmx_rows_id {
-  min-height: @form_rows_height;
-  max-height: @form_rows_height;
+  min-height: @dict_rows_height;
+  max-height: @dict_rows_height;
   padding: 0;
   margin: 0;
   overflow-y: scroll;
@@ -437,8 +382,8 @@ div.menu_bar {
 
       td.n {
         cursor: pointer;
-        min-width: @row_num_width;
-        max-width: @row_num_width;
+        // min-width: @row_num_width;
+        // max-width: @row_num_width;
         font-size: @font_num;
         font-family: @fserif;
         font-weight: normal;
