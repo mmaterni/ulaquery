@@ -227,7 +227,7 @@ var DictForm = {
     }
   },
   open: async function () {
-    document.getElementById(this.id).innerHTML = html_dict_menu;
+    document.getElementById(this.id).innerHTML = html_dict_menuw;
     // this.bind_menu();
     // this.form_lst2html();
   },

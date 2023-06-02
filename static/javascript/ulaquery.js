@@ -1,4 +1,4 @@
-// jshint esversion: 11
+"use strict"
 
 var cmd_close = function () {
   if (confirm("Chiudi Applicazione ?")) window.close();
