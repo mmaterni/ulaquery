@@ -185,6 +185,7 @@ var DictForm = {
     // const head = form_cols + msd_cols + sigl_cols + loc_cols + date_cols;
     let jt = UaJth();
     jt.append(html_dict_menu);
+
     jt.append(`<div id='dict_head_id'><table><tr>`);
 
     let r = (c,d) => ` <td class="${c}">${d}</td>`;
@@ -195,10 +196,8 @@ var DictForm = {
     for (const lbl of sigl_cols)
       jt.append(r, lbl)
 
-
-
     jt.append(`</tr></table</div>`);
-    jt.append(`<div id='dict_rows_id'></div>`);
+    // jt.append(`<div id='dict_rows_id'></div>`);
     document.getElementById(this.id).innerHTML = jt.html();
     // this.bind_menu();
     // this.form_lst2html();
