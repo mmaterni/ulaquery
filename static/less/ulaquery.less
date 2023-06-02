@@ -10,16 +10,16 @@
 
 @font_base: @fsize_10;
 @font_menu: @fsize_08;
-// @font_label: @fsize_09;
-// @font_text: @fsize_09;
-// @font_text2: @fsize_08;
+@font_label: @fsize_09;
+@font_text: @fsize_09;
+@font_text2: @fsize_08;
 // @font_table: @fsize_08;
 // @font_table2: @fsize_07;
 // @font_input: @fsize_08;
 // @font_input2: @fsize_07;
 // @font_select: @fsize_09;
 // @font_msg: @fsize_08;
-// @font_num: @fsize_07;
+@font_num: @fsize_07;
 // @font_option: @fsize_08;
 
 // @fserif: "Ties New Roman", Times, Georgia, serif;
@@ -39,15 +39,18 @@
 @menu_sub_top: 26px;
 
 // form
-// @form_head_height: 30px;
-// @form_rows_height: 745px;
+@form_head_height: 30px;
+@lpmx_rows_width: 1099px;
+@row_num_width: 50px;
+
+
+@form_rows_height: 745px;
 // @form_cnt_height: 400px;
 // text
 // @text_height: 775px;
 // @text_top: calc(@menu_height + 2px);
 // @text_row_width: 1000px;
 //
-// @row_num_width: 50px;
 
 .border0 {
   border: 1px solid #ff0000;
@@ -150,8 +153,6 @@ body.wait {
     transform: rotate(360deg);
   }
 }
-
-
 
 div.menu_bar {
   width: 100%;
@@ -293,3 +294,305 @@ div.menu_bar {
   // }
 }
 
+
+
+#dict_head_id{
+  padding: 5px 0 0 0;
+  font-size: @font_label;
+  font-family: @fserif;
+  max-height: @form_head_height;
+  min-width: @lpmx_rows_width;
+  max-width: @lpmx_rows_width;
+
+  table {
+    padding: 0;
+    margin: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: block;
+    table-layout: fixed;
+
+    tr {
+      td {
+        background: @head_back;
+        color: @head_color;
+        padding-left: 2px;
+        font-size: @font_label;
+        font-family: @fsans;
+        text-align: center;
+        border-width: 0 1px 1px 0;
+        border-style: solid;
+        border-color: @head_border_color;
+      }
+
+      td.n {
+        min-width: @row_num_width;
+        max-width: @row_num_width;
+        font-size: @font_num;
+        font-family: @fserif;
+        font-weight: normal;
+        text-align: center;
+        padding-right: 5px;
+      }
+
+      td.fr {
+        display: none;
+      }
+
+      td.find {
+        min-width: 240px;
+        max-width: 240px;
+        padding-left: 5px;
+
+        input {
+          height: 20px;
+          min-width: 150px;
+        }
+
+        a {
+          color: @cmd_color;
+          background: @cmd_back;
+          font-size: @font_label;
+          font-family: @fsans;
+          font-weight: bold;
+          vertical-align: middle;
+          padding: 0 5px 0 5px;
+          text-decoration: none;
+        }
+
+        a:hover {
+          background: @cmd_hover_back;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    td.l {
+      min-width: 150px;
+      max-width: 150px;
+    }
+
+    td.e {
+      min-width: 150px;
+      max-width: 150px;
+    }
+
+    td.ph {
+      min-width: 90px;
+      max-width: 90px;
+    }
+
+    td.p {
+      min-width: 70px;
+      max-width: 70px;
+    }
+
+    td.fn {
+      min-width: 70px;
+      max-width: 70px;
+    }
+
+    td.m {
+      min-width: 250px;
+    }
+  }
+}
+
+#lpmx_rows_id {
+  min-height: @form_rows_height;
+  max-height: @form_rows_height;
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
+  overflow-x: auto;
+  scrollbar-color: @scroll_bar1 @scroll_bar2;
+  scrollbar-width: auto;
+
+  table {
+    padding: 0;
+    margin: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: block;
+    table-layout: fixed;
+
+    tr {
+      td {
+        background: @cell_back;
+        color: @cell_color;
+        margin: 0;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        padding-left: 2px;
+        padding-right: 0;
+        font-size: @font_text;
+        font-family: @fserif;
+        font-weight: normal;
+        text-align: left;
+        white-space: nowrap;
+        border-width: 1px;
+        border-style: solid;
+        border-color: @cell_border_color;
+      }
+
+      td.n {
+        cursor: pointer;
+        min-width: @row_num_width;
+        max-width: @row_num_width;
+        font-size: @font_num;
+        font-family: @fserif;
+        font-weight: normal;
+        text-align: right;
+        padding-right: 5px;
+        background: @cmd_back;
+        color: @cmd_color;
+        border-top: 1px solid @cmd_border_color_l;
+        border-bottom: 1px solid @cmd_border_color_l;
+      }
+
+      td.fr {
+        // FORM non visibile
+        display: none;
+      }
+
+      td.f {
+        // FORM / FORMKY
+        min-width: 240px;
+        max-width: 240px;
+        padding-left: 5px;
+      }
+
+      td.k {
+        //FORM/FORMKEY
+        min-width: 240px;
+        max-width: 240px;
+        text-decoration: underline;
+        font-style: italic;
+        padding-left: 5px;
+      }
+
+      td.l {
+        //LEMMA
+        min-width: 150px;
+        max-width: 150px;
+
+        input {
+          width: 95%;
+        }
+      }
+
+      td.e {
+        min-width: 150px;
+        max-width: 150px;
+
+        input {
+          width: 95%;
+        }
+      }
+
+      td.ph {
+        //LANG
+        min-width: 90px;
+        max-width: 90px;
+        font-size: @font_text2;
+        font-family: @fsans;
+      }
+
+      td.p {
+        //POS
+        min-width: 70px;
+        max-width: 70px;
+        font-size: @font_text2;
+        font-family: @fsans;
+      }
+
+      td.fn {
+        //FUN
+        min-width: 70px;
+        max-width: 70px;
+        font-size: @font_text2;
+        font-family: @fsans;
+      }
+
+      td.m {
+        //MSD
+        min-width: 250px;
+        //max-width: 250px;
+        font-size: @font_text2;
+        font-family: @fsans;
+      }
+    }
+
+    tr:nth-child(odd) {
+      td.f,
+      td.k,
+      td.m,
+      td.p,
+      td.fn,
+      td.ph {
+        background: darken(@cell_back, 10%);
+      }
+
+      td.l,
+      td.e {
+        input {
+          background: darken(@inp_back, 10%);
+        }
+      }
+    }
+
+    tr.select {
+      td.f,
+      td.k,
+      td.m,
+      td.p,
+      td.ph,
+      td.fn,
+      td.m {
+        background: @cell_jshover_back !important;
+        color: @cell_jshover_color;
+      }
+
+      td.n {
+        background: @row_num_select_back !important;
+      }
+    }
+
+    tr.hover {
+      td.f,
+      td.k,
+      td.m,
+      td.p,
+      td.fn,
+      td.ph {
+        background: darken(@cell_back, 30%);
+      }
+
+      td.n {
+        background: @cmd_hover_back;
+      }
+
+      td.l,
+      td.e {
+        input {
+          background: darken(@inp_back, 20%);
+        }
+      }
+    }
+
+    tr.bl {
+      td.n {
+        background: @cmd_back2;
+        animation: blinker 1s linear infinite !important;
+      }
+    }
+
+    tr.empty {
+      td.f,
+      td.k {
+        background: @form_empty;
+        color: wheat;
+      }
+    }
+  }
+}
