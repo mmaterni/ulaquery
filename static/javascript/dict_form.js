@@ -79,7 +79,6 @@ const msd_cols = ["GENDER", "NUMBER", "CASE", "DEGREE", "DETERTYPE", "MWES", "PR
 const sigl_cols = ["G", "P", "V"];
 const loc_cols = ["LOC.1", "LOC.2", "LOC.3", "LOC.4"];
 const date_cols = ["DATE.0", "DATE.1", "DATE.2"];
-
 var DictForm = {
   tr_selected: null,
   exe: function (cmd) {
@@ -215,15 +214,29 @@ var DictForm = {
     for (const x of date_cols) jt.append(r, x.toLowerCase())
     jt.append(`</tr></thead><tbody>`);
 
-    r = (d) => `<td>${d}</td>`;
     DataManager.dict_form_rows.shift();
     // DataManager.dict_form_rows.splice(10);
     const le = DataManager.dict_form_rows.length;
+    r = (d) => `<td>${d}</td>`;
+    const r1 = (d) => `<td class="m">${d}</td>`;
+    // r2 = (d) => `<td>${d}</td>`;
+    // r3 = (d) => `<td>${d}</td>`;
+    const ler = DataManager.dict_form_rows[0].length;
+    const lefm = form_cols.length + msd_cols.length - 1;
     for (let i = 0; i < le; i++) {
       const row = DataManager.dict_form_rows[i];
       jt.append("<tr>")
       jt.append(r, i);
-      for (const x of row) jt.append(r, x)
+      for (let i = 0; i < 6; i++)
+        jt.append(r, row[i])
+      for (let i = 6; i < lefm; i++)
+        jt.append(r1, row[i])
+      for (let i = lefm; i < ler; i++)
+        jt.append(r, row[i])
+
+
+      // for (const x of row)
+      //   jt.append(r, x)
       jt.append("</tr>")
     }
     jt.append(`</tbody></table>`);
