@@ -68,23 +68,6 @@ const html_dict_menu = `
 </div>
 `;
 
-
-
-//forma, lemma, etimo, lang, POS, funct, MSD
-const html_dict_rows = `
-<tr n="{i}">
-  <td class="n" name="n">{i}</td>
-  <td class="fr" name="fr" >{fr}</td>
-  <td class="{disp}" name="fk">{fk}</td>
-  <td class="l" name="l"><input type="text" value="{l}" size="4" ></td>
-  <td class="e" name="e"><input type="text" value="{e}" size="4" ></td>
-  <td class="ph">{ph}</td>
-  <td class="p">{p}</td>
-  <td class="fn">{fn}</td>
-  <td class="m">{m}</td>
-</tr> 
-`;
-
 const form_cols = ["FORMA", "KEY", "LEMMA", "ETIMO", "LANG", "DATE", "POS", "FUNCT"];
 const msd_cols = ["GENDER", "NUMBER", "CASE", "DEGREE", "DETERTYPE", "MWES", "PRONTYPE", "PERSON", "VERBFORM", "MOOD", "TENSE", "VOICE", "PROPERTY", "ADPTYPE", "ADVTYPE", "ADVTYPE2", "NUMTYPE", "PARTTYPE"];
 const sigl_cols = ["G", "P", "V"];
@@ -181,24 +164,46 @@ var DictForm = {
         alert("command not found.");
     }
   },
+
   open: async function () {
     // const head = form_cols + msd_cols + sigl_cols + loc_cols + date_cols;
+    const arr0 = form_cols.map((x) => x.toLowerCase());
+    const arr1 = msd_cols.map((x) => x.toLowerCase());
+    const arr2 = sigl_cols.map((x) => x.toLowerCase());
+
+
     let jt = UaJth();
     jt.append(html_dict_menu);
 
-    jt.append(`<div id='dict_head_id'><ul>`);
+    jt.append(`<div id='dict_table_id'><table><thead><tr>`);
+    let r = (d) => `<th>${d}</th>`;
+    for (const x of arr0)
+      jt.append(r, x)
+    r = (d) => `<th>${d}</th>`;
+    for (const x of sigl_cols)
+      jt.append(r, x)
+    jt.append(`</tr></thead><tbody>`);
 
-    let r = (c,d) => ` <li class="${c}">${d}</li>`;
-    for (const lbl of form_cols)
-      jt.append(r, 'p',lbl)
-
-    r = (d) => ` <li class="m">${d}</li>`;
-    for (const lbl of sigl_cols)
-      jt.append(r, lbl)
-
-    jt.append(`</ul></div>`);
-    // jt.append(`<div id='dict_rows_id'></div>`);
+    let r0 = (i, d) => `<td>${i}${d}</td>`;
+    let r1 = (d) => `<td>${d}</td>`;
+    for (let i = 0; i < 80; i++) {
+      jt.append("<tr>")
+      let n = true;
+      for (const x of arr0) {
+        let s = ''
+        if (n) {
+          s = "" + i;
+          n = false;
+        }
+        jt.append(r0, s, x)
+      }
+      for (const x of arr2)
+        jt.append(r1, x)
+      jt.append("</tr>")
+    }
+    jt.append(`</tbody></table></div>`);
     document.getElementById(this.id).innerHTML = jt.html();
+
     // this.bind_menu();
     // this.form_lst2html();
   },
