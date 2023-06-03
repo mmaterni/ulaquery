@@ -139,7 +139,7 @@ body.wait {
   }
 }
 
-@menu_height: 25px;
+@menu_height: 25x;
 // @menuh_width: 700px;
 @menu_sub_top: 26px;
 @font_menu: @fsize_08;
@@ -259,14 +259,13 @@ div.menu_bar {
   }
 }
 
-@dict_head_height: 50px;
+@dict_row_height: 30px;
 // @dict_head_width: 1099px;
-@dict_col_width: 30px;
+// @dict_col_width: 30px;
 // @row_num_width: 50px;
 // @dict_rows_height: 745px;
 @font_head: @fsize_07;
-
-@font_num: @fsize_07;
+// @font_num: @fsize_07;
 @font_text: @fsize_09;
 @font_text2: @fsize_08;
 
@@ -275,7 +274,7 @@ div.menu_bar {
   height: 700px;
   overflow-y: scroll;
   overflow-x: scroll;
-  padding-left: 2px;
+  padding-left: 2px;;
 
   table {
     box-sizing: border-box;
@@ -284,28 +283,26 @@ div.menu_bar {
     border-collapse: collapse;
     display: block;
     table-layout: fixed;
+    margin-left: 0px;
     thead {
       top: 0;
       position: sticky;
       z-index: 1;
-      background-color: transparent;
+      // background-color: transparent;
       th {
         z-index: 11;
-        // box-sizing: border-box;
         text-align: left;
         padding: 0 2px 0 2px !important;
         font-size: @font_head;
         font-family: @fsans;
         font-weight: normal;
-
         border-width: 0 1px 1px 0;
         border-style: solid;
         border-color: @head_border_color;
-
-        background: #bce7bc;
-        min-height: @dict_head_height;
-        max-height: @dict_head_height;
-        // min-width: @dict_col_width;
+        background: @head_back;
+        color: @head_color;
+        min-height: @dict_row_height;
+        max-height: @dict_row_height;
       }
     }
     tbody {
@@ -321,9 +318,8 @@ div.menu_bar {
           border-width: 0 1px 1px 0;
           border-style: solid;
           border-color: @cell_border_color;
-          min-height: @dict_head_height;
-          max-height: @dict_head_height;
-          // min-width: @dict_col_width;
+          min-height: @dict_row_height;
+          max-height: @dict_row_height;
         }
       }
       tr:nth-child(odd) {
@@ -337,82 +333,6 @@ div.menu_bar {
           color: @cell_hover_color;
         }
       }
-    }
-  }
-}
-
-#xdict_table_id {
-  box-sizing: border-box;
-  height: 700px;
-  overflow-y: scroll;
-  overflow-x: scroll;
-  padding-left: 5px;
-
-  table {
-    box-sizing: border-box;
-    width: 100%;
-    border-spacing: 0;
-    border-collapse: collapse;
-    display: block;
-    table-layout: fixed;
-    tr {
-      td {
-        box-sizing: border-box;
-        text-align: center;
-        padding: 0 2px 0 2px;
-        font-size: @font_head;
-        font-family: @fsans;
-        font-weight: normal;
-        border-width: 0 1px 1px 0;
-        border-style: solid;
-        border-color: @head_border_color;
-        min-height: @dict_head_height;
-        max-height: @dict_head_height;
-        min-width: @dict_col_width;
-      }
-      td.h {
-        box-sizing: border-box;
-        // background: @head_back;
-        background: #bce7bc;
-        color: @head_color;
-        // padding: 0 2px 0 2px;
-        padding: 2px;
-        margin: 2px;
-        font-size: @font_head;
-        font-family: @fsans;
-        font-weight: normal;
-        // border-width: 0 2px 2px 0 !important;
-        // border-style: solid;
-        // border-color: #000000 !important;
-        border: 2px solid #eb1717 !important;
-        min-height: @dict_head_height;
-        max-height: @dict_head_height;
-        min-width: @dict_col_width;
-      }
-    }
-    tr.h {
-      top: 90px;
-      position: sticky;
-      z-index: 1;
-      // td.h{
-      //   box-sizing: border-box;
-      //   // background: @head_back;
-      //   background: #bce7bc;
-      //   color: @head_color;
-      //   // padding: 0 2px 0 2px;
-      //   padding:2px;
-      //   margin:2px;
-      //   font-size: @font_head;
-      //   font-family: @fsans;
-      //   font-weight: normal;
-      //   // border-width: 0 2px 2px 0 !important;
-      //   // border-style: solid;
-      //   // border-color: #000000 !important;
-      //   border: 2px solid #eb1717 !important;
-      //   min-height: @dict_head_height;
-      //   max-height: @dict_head_height;
-      //   min-width: @dict_col_width;
-      // }
     }
   }
 }
