@@ -261,7 +261,7 @@ div.menu_bar {
 
 @dict_head_height: 50px;
 // @dict_head_width: 1099px;
-@dict_col_width: 90px;
+@dict_col_width: 30px;
 // @row_num_width: 50px;
 // @dict_rows_height: 745px;
 @font_head: @fsize_07;
@@ -285,13 +285,13 @@ div.menu_bar {
     display: block;
     table-layout: fixed;
     thead {
-      top: 0px;
+      top: 0;
       position: sticky;
       // z-index: 1;
       background-color: transparent;
       th {
         box-sizing: border-box;
-        text-align: center;
+        text-align: left;
         padding: 0 2px 0 2px !important;
         font-size: @font_head;
         font-family: @fsans;
@@ -311,7 +311,7 @@ div.menu_bar {
         // background: @head_back;
         background: #93c493;
         color: @head_color;
-        text-align: center;
+        text-align: left;
         padding: 0 2px 0 2px;
         font-size: @font_head;
         font-family: @fsans;

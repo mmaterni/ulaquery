@@ -172,30 +172,30 @@ var DictForm = {
     document.getElementById("dict_form_id").innerHTML = jt.html();
 
     // const head = form_cols + msd_cols + sigl_cols + loc_cols + date_cols;
-    const arr0 = form_cols.map((x) => x.toLowerCase());
-    const arr1 = msd_cols.map((x) => x.toLowerCase());
-    const arr2 = sigl_cols.map((x) => x.toLowerCase());
 
+    await DataManager.load_dict_form();
     jt.reset();
     jt.append(`<table><thead><tr>`);
     let r = (d) => `<th>${d}</th>`;
-    for (const x of arr0) jt.append(r, x)
+    for (const x of form_cols) jt.append(r, x)
     for (const x of msd_cols) jt.append(r, x)
     for (const x of sigl_cols) jt.append(r, x)
+    for (const x of loc_cols) jt.append(r, x)
+    for (const x of date_cols) jt.append(r, x)
     jt.append(`</tr></thead><tbody>`);
 
     r = (d) => `<td>${d}</td>`;
-    for (let i = 0; i < 190; i++) {
-      arr0[0] = i;
+    DataManager.dict_form_rows.shift();
+    const le = DataManager.dict_form_rows.length;
+    for (let i = 0; i < le; i++) {
+      const row = DataManager.dict_form_rows[i];
       jt.append("<tr>")
-      for (const x of arr0) jt.append(r, x)
-      for (const x of arr1) jt.append(r, x)
-      for (const x of arr2) jt.append(r, x)
+      jt.append(r, i);
+      for (const x of row) jt.append(r, x)
       jt.append("</tr>")
     }
     jt.append(`</tbody></table>`);
     document.getElementById("dict_table_id").innerHTML = jt.html();
-    console.log(jt.text());
 
     // this.bind_menu();
     // this.form_lst2html();
