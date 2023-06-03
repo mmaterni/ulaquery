@@ -207,7 +207,7 @@ var DictForm = {
     let jt = UaJth();
     jt.reset();
     jt.append(`<table class='dict'><thead><tr>`);
-    let r = (d) => `<th>${d}</th>`;
+    let r = (d) => `<th><span>${d}</span></th>`;
     for (const x of form_cols) jt.append(r, x.toLowerCase())
     for (const x of msd_cols) jt.append(r, x.toLowerCase())
     for (const x of sigl_cols) jt.append(r, x.toLowerCase())

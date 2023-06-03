@@ -286,24 +286,29 @@ div.menu_bar {
     table-layout: fixed;
     margin-left: 5px;
     thead {
+      z-index: 1;
       top: 0;
       position: sticky;
-      z-index: 1;
       tr {
         th {
-          z-index: 11 !important;
-          text-align: center;
-          padding: 0 5px 0 5px !important;
-          font-size: @font_head;
-          font-family: @fsans;
-          font-weight: normal;
-          border-left: 1px solid @head_border_color !important;
-          border-right: 1px solid @head_border_color !important;
           background: @head_back;
           color: @head_color;
-          max-height: @dict_row_height !important;
-          min-height: @dict_row_height !important;
+          max-height: @dict_row_height;
+          min-height: @dict_row_height;
           min-width: @dict_col_width;
+          span {
+            box-sizing: border-box;
+            display: block;
+            width: 100% !important;
+            padding:0 5px 0 5px;
+            border-width: 0 1px 1px 0;
+            border-style: solid;
+            border-color: @cell_border_color;
+            text-align: center;
+            font-size: @font_head;
+            font-family: @fsans;
+            font-weight: normal;
+          }
         }
       }
     }
@@ -320,8 +325,8 @@ div.menu_bar {
           border-width: 0 1px 1px 0;
           border-style: solid;
           border-color: @cell_border_color;
-          max-height: @dict_row_height !important;
-          min-height: @dict_row_height !important;
+          max-height: @dict_row_height;
+          min-height: @dict_row_height;
           min-width: @dict_col_width;
         }
       }
