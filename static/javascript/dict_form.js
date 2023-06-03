@@ -70,7 +70,7 @@ const html_dict_menu = `
 <div id="dict_table_id" ></div>
 `;
 
-const form_cols = ["FORMA", "KEY", "LEMMA", "ETIMO", "LANG", "DATE", "POS", "FUNCT"];
+const form_cols = ["n", "FORMA", "KEY", "LEMMA", "ETIMO", "LANG", "DATE", "POS", "FUNCT"];
 const msd_cols = ["GENDER", "NUMBER", "CASE", "DEGREE", "DETERTYPE", "MWES", "PRONTYPE", "PERSON", "VERBFORM", "MOOD", "TENSE", "VOICE", "PROPERTY", "ADPTYPE", "ADVTYPE", "ADVTYPE2", "NUMTYPE", "PARTTYPE"];
 const sigl_cols = ["G", "P", "V"];
 const loc_cols = ["LOC.1", "LOC.2", "LOC.3", "LOC.4"];
@@ -167,41 +167,30 @@ var DictForm = {
   },
 
   open: async function () {
+    let jt = UaJth();
+    jt.append(html_dict_menu);
+    document.getElementById("dict_form_id").innerHTML = jt.html();
+
     // const head = form_cols + msd_cols + sigl_cols + loc_cols + date_cols;
     const arr0 = form_cols.map((x) => x.toLowerCase());
     const arr1 = msd_cols.map((x) => x.toLowerCase());
     const arr2 = sigl_cols.map((x) => x.toLowerCase());
 
-
-    let jt = UaJth();
-    jt.append(html_dict_menu);
-    document.getElementById("dict_form_id").innerHTML = jt.html();
-    
     jt.reset();
     jt.append(`<table><thead><tr>`);
-    let r = (d) => `<th>${d}</th>`;
-    for (const x of arr0)
-      jt.append(r, x)
-    r = (d) => `<th>${d}</th>`;
-    for (const x of sigl_cols)
-      jt.append(r, x)
-    jt.append(`</tr></thead><tbody>`);
+    let r = (d) => `<td>${d}</td>`;
+    for (const x of arr0) jt.append(r, x)
+    for (const x of msd_cols) jt.append(r, x)
+    for (const x of sigl_cols) jt.append(r, x)
 
-    let r0 = (i, d) => `<td>${i}${d}</td>`;
-    let r1 = (d) => `<td>${d}</td>`;
+    jt.append(`</tr></thead><tbody>`);
+    r = (d) => `<td>${d}</td>`;
     for (let i = 0; i < 90; i++) {
+      arr0[0] = i;
       jt.append("<tr>")
-      let n = true;
-      for (const x of arr0) {
-        let s = ''
-        if (n) {
-          s = "" + i;
-          n = false;
-        }
-        jt.append(r0, s, x)
-      }
-      for (const x of arr2)
-        jt.append(r1, x)
+      for (const x of arr0) jt.append(r, x)
+      for (const x of arr1) jt.append(r, x)
+      for (const x of arr2) jt.append(r, x)
       jt.append("</tr>")
     }
     jt.append(`</tbody></table>`);
