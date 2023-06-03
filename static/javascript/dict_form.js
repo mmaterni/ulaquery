@@ -4,24 +4,28 @@
 const html_dict_menu = `
 <div id="dict_menu_id" class="menu_bar" >
 <ul>
-
-<li class="v">
-    <a class="tipb" href="#" cmd="show_text">Text
-      <span class="tiptextb">Display Lines of Text</span>
-    </a>
-  </li>
-  
+ 
   <li class="v">
-    <a class="tipb" cmd="save_data" href="#">Save
-      <span class="tiptextb">Save the Data on the Server</span>
+    <a class="tipb" cmd="scroll_top" href="#">Top
+      <span class="tiptextb">Scroll Top</span>
+    </a>
+  </li>
+  <li class="v">
+    <a class="tipb" cmd="scroll_bottom" href="#">Bottom
+      <span class="tiptextb">Scroll Bottom</span>
+    </a>
+  </li>
+  <li class="v">
+    <a class="tipb" cmd="scroll_left" href="#">Left
+      <span class="tiptextb">Scroll Left</span>
+    </a>
+  </li>
+  <li class="v">
+    <a class="tipb" cmd="scroll_right" href="#">Right
+      <span class="tiptextb">Scroll Right</span>
     </a>
   </li>
 
-  <li class="v">
-    <a class="tipb" cmd="load_data" href="#">Load
-      <span class="tiptextb">Read Data from Server</span>
-    </a>
-  </li>
 
   <li class="v tipb" >
     <a  cmd="select_text" href="#">Select Text </a>
@@ -84,17 +88,26 @@ var DictForm = {
       //   this.save_store();
       //   Ula.show_text();
       //   break;
-      // case "select_text":
-      //   this.select_text();
-      //   break;
+      case "scroll_top":
+        this.scroll_top();
+        break;
+      case "scroll_bottom":
+        this.scroll_bottom();
+        break;
+      case "scroll_left":
+        this.scroll_left();
+        break;
+      case "scroll_right":
+        this.scroll_right();
+        break;
       // case "save_data":
       //   if (confirm("Save Data ?"))
       //     this.save_data();
       //   break;
-      case "load_data":
-        if (confirm("Load Data ?"))
-          this.load_data();
-        break;
+      // case "load_data":
+      //   if (confirm("Load Data ?"))
+      //     this.load_data();
+      //   break;
       // case "check_text":
       //   this.check_text();
       //   break;
@@ -170,12 +183,30 @@ var DictForm = {
     let jt = UaJth();
     jt.append(html_dict_menu);
     document.getElementById("dict_form_id").innerHTML = jt.html();
-
-    // const head = form_cols + msd_cols + sigl_cols + loc_cols + date_cols;
-
+    this.bind_menu();
+    this.dict_form2html()
+  },
+  scroll_top: function () {
+    const e = document.getElementById("dict_table_id");
+    e.scrollTop = 0;
+  },
+  scroll_bottom: function () {
+    const e = document.getElementById("dict_table_id");
+    e.scrollTop = e.scrollHeight;
+  },
+  scroll_left: function () {
+    const e = document.getElementById("dict_table_id");
+    e.scrollLeft = 0;
+  },
+  scroll_right: function () {
+    const e = document.getElementById("dict_table_id");
+    e.scrollLeft = e.scrollWidth;
+  },
+  dict_form2html: async function () {
     await DataManager.load_dict_form();
+    let jt = UaJth();
     jt.reset();
-    jt.append(`<table><thead><tr>`);
+    jt.append(`<table class='dict'><thead><tr>`);
     let r = (d) => `<th>${d}</th>`;
     for (const x of form_cols) jt.append(r, x)
     for (const x of msd_cols) jt.append(r, x)
@@ -186,6 +217,7 @@ var DictForm = {
 
     r = (d) => `<td>${d}</td>`;
     DataManager.dict_form_rows.shift();
+    // DataManager.dict_form_rows.splice(10);
     const le = DataManager.dict_form_rows.length;
     for (let i = 0; i < le; i++) {
       const row = DataManager.dict_form_rows[i];
@@ -196,97 +228,22 @@ var DictForm = {
     }
     jt.append(`</tbody></table>`);
     document.getElementById("dict_table_id").innerHTML = jt.html();
+    // console.log(jt.html());
 
-    // this.bind_menu();
-    // this.form_lst2html();
+    this.bind_rows();
   },
-  // load_data: async function () {
-  //   const ok = await DbFormLpmx.load_data();
-  //   if (!ok) {
-  //     return false;
-  //   }
-  //   this.form_lst2html();
-  //   FormText.data2html();
-  //   return true;
-  // },
-  // form_lst2html: function () {
-  //   const lfe = DbFormLpmx.form_lst.length;
-  //   if (lfe == 0)
-  //     return;
-  //   let jt = UaJt();
-  //   jt.append("<table>");
-  //   for (let i = 0; i < lfe; i++) {
-  //     const r = DbFormLpmx.form_lst[i];
-  //     const disp = r[0] == r[1] ? "f" : "k";
-  //     const d = {
-  //       i: i,
-  //       fr: r[0],
-  //       disp: disp,
-  //       fk: r[1],
-  //       l: r[2],
-  //       e: r[3],
-  //       ph: r[4],
-  //       p: r[5],
-  //       fn: r[6],
-  //       m: r[7]
-  //     };
-  //     jt.append(html_dict_rows, d);
-  //   }
-  //   jt.append("</table>");
-  //   const html = jt.html();
-  //   $("#dict_rows_id").html(html);
-  //   //setta la classe bl per le form che hanno omografi nel corpus
-  //   const fr_lst = document.querySelectorAll("#dict_rows_id tr td.fr");
-  //   const omogr_js = DbFormLpmx.omogr_json;
-  //   const omogr_ks = Object.keys(omogr_js);
-  //   const omogr_lst = Array.from(fr_lst).filter(e => omogr_ks.includes(e.innerHTML));
-  //   for (let td of omogr_lst) {
-  //     let tr = td.parentElement;
-  //     tr.classList.add("bl");
-  //   }
-  //   //sett la clase emp per le form che non hanno tokens 
-  //   const fk_lst = document.querySelectorAll("#dict_rows_id tr td[name='fk']");
-  //   let tks = DbFormLpmx.token_lst.map(e => e[1]);
-  //   let fks = DbFormLpmx.form_lst.map(e => e[1]);
-  //   let fkes = fks.filter((e) => !tks.includes(e));
-  //   const empty_lst = Array.from(fk_lst).filter(e => fkes.includes(e.innerHTML));
-  //   for (let td of empty_lst) {
-  //     let tr = td.parentElement;
-  //     tr.classList.add("empty");
-  //   }
-  //   this.bind_rows();
-  // },
   bind_menu: function () {
-    const menu = document.getElementById("dict_menu_id");
     const call = (ev) => {
       const t = ev.target;
       if (t.tagName == 'A') {
         const cmd = t.getAttribute("cmd");
-        if (!!cmd) {
-          this.exe(cmd);
-        }
+        if (!!cmd) this.exe(cmd);
       }
     };
+    const menu = document.getElementById("dict_menu_id");
     menu.addEventListener("click", call);
-    const head = document.getElementById("dict_head_id");
-    head.addEventListener("keyup", (ev) => {
-      const t = ev.target;
-      if (t.tagName == "INPUT") {
-        const key = ev.which || ev.keyCode || 0;
-        if (ev.ctrlKey) {
-          if (key == 88) {
-            ev.target.value = "";
-            ev.preventDefault();
-          }
-          ev.stopImmediatePropagation();
-          return;
-        }
-        if (key == "13") {
-          this.scroll();
-          ev.preventDefault();
-        }
-      }
-    });
+  },
+  bind_rows: function () {
   }
 };
 
