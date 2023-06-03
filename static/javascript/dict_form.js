@@ -66,6 +66,8 @@ const html_dict_menu = `
 
   </ul>
 </div>
+
+<div id="dict_table_id" ></div>
 `;
 
 const form_cols = ["FORMA", "KEY", "LEMMA", "ETIMO", "LANG", "DATE", "POS", "FUNCT"];
@@ -75,7 +77,6 @@ const loc_cols = ["LOC.1", "LOC.2", "LOC.3", "LOC.4"];
 const date_cols = ["DATE.0", "DATE.1", "DATE.2"];
 
 var DictForm = {
-  id: "dict_form_id",
   tr_selected: null,
   exe: function (cmd) {
     switch (cmd) {
@@ -174,8 +175,10 @@ var DictForm = {
 
     let jt = UaJth();
     jt.append(html_dict_menu);
-
-    jt.append(`<div id='dict_table_id'><table><thead><tr>`);
+    document.getElementById("dict_form_id").innerHTML = jt.html();
+    
+    jt.reset();
+    jt.append(`<table><thead><tr>`);
     let r = (d) => `<th>${d}</th>`;
     for (const x of arr0)
       jt.append(r, x)
@@ -186,7 +189,7 @@ var DictForm = {
 
     let r0 = (i, d) => `<td>${i}${d}</td>`;
     let r1 = (d) => `<td>${d}</td>`;
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 90; i++) {
       jt.append("<tr>")
       let n = true;
       for (const x of arr0) {
@@ -201,8 +204,9 @@ var DictForm = {
         jt.append(r1, x)
       jt.append("</tr>")
     }
-    jt.append(`</tbody></table></div>`);
-    document.getElementById(this.id).innerHTML = jt.html();
+    jt.append(`</tbody></table>`);
+    document.getElementById("dict_table_id").innerHTML = jt.html();
+    console.log(jt.text());
 
     // this.bind_menu();
     // this.form_lst2html();

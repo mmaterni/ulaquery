@@ -259,46 +259,50 @@ div.menu_bar {
   }
 }
 
+
 #dict_table_id {
   box-sizing: border-box;
   // width: 100%;
-  position: absolute;
-  top: 100px;
-  left: 50px;
+  // position: absolute;
+  // top: 100px;
+  // left: 50px;
   background: #efef4c;
   border: 2px solid red;
-  padding: 5px !important;
-
-  height: 500px;
+  // padding: 5px !important;
+  height: 600px;
   overflow-y: scroll;
+  overflow-x: scroll;
 
   table {
-    // width: 100%;
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px dotted #253ce6;
     border-collapse: collapse;
     thead {
-      // top: 80px;
-      // position: sticky;
-      // background-color: #0ccb2c;
-      // z-index: 1;
+      top: 0;
+      position: sticky;
+      // display: block;
+      width: 100%;
       tr {
         th {
-          padding: 5px;
-          text-align: left;
-          // border-bottom: 1px solid #ddd;
-          background: #0dc988 !important;
-          border: 2px dotted red !important;
+          padding: 4px;
+          text-align: center;
+          background: #5cf0bd !important;
+          // border: 2px dotted red !important;
+          border:1px solid black !important;
         }
       }
     }
     tbody {
-      display: block;
-      overflow-y: scroll;
+      // display: block;
+      // overflow-y: scroll;
       height: 100%;
+      width: 100%;
       tr {
         td {
-          padding: 8px;
-          text-align: left;
-          border-bottom: 1px solid #ddd;
+          padding: 4px;
+          text-align: center;
+          border:1px solid black;
         }
       }
     }
