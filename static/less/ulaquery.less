@@ -259,16 +259,77 @@ div.menu_bar {
   }
 }
 
-@dict_head_height: 40px;
+@dict_head_height: 50px;
 // @dict_head_width: 1099px;
-@dict_col_width: 50px;
+@dict_col_width: 90px;
 // @row_num_width: 50px;
-@dict_rows_height: 745px;
+// @dict_rows_height: 745px;
 @font_head: @fsize_07;
+
+@font_num: @fsize_07;
+@font_text: @fsize_09;
+@font_text2: @fsize_08;
 
 #dict_table_id {
   box-sizing: border-box;
-  height: 600px;
+  height: 700px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  padding-left: 2px;
+
+  table {
+    box-sizing: border-box;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: block;
+    table-layout: fixed;
+    thead {
+      top: 0px;
+      position: sticky;
+      // z-index: 1;
+      background-color: transparent;
+      th {
+        box-sizing: border-box;
+        text-align: center;
+        padding: 0 2px 0 2px !important;
+        font-size: @font_head;
+        font-family: @fsans;
+        font-weight: normal;
+        // border-width: 0 1px 1px 0;
+        // border-style: solid;
+        // border-color: @head_border_color;
+        background: #bce7bc;
+        min-height: @dict_head_height;
+        max-height: @dict_head_height;
+        min-width: @dict_col_width;
+        border: 1px dotted #ff0000 !important;
+      }
+    }
+    tbody {
+      td {
+        // background: @head_back;
+        background: #93c493;
+        color: @head_color;
+        text-align: center;
+        padding: 0 2px 0 2px;
+        font-size: @font_head;
+        font-family: @fsans;
+        font-weight: normal;
+        border-width: 0 1px 1px 0;
+        border-style: solid;
+        border-color: #000000;
+        min-height: @dict_head_height;
+        max-height: @dict_head_height;
+        min-width: @dict_col_width;
+      }
+    }
+  }
+}
+
+#xdict_table_id {
+  box-sizing: border-box;
+  height: 700px;
   overflow-y: scroll;
   overflow-x: scroll;
   padding-left: 5px;
@@ -280,106 +341,67 @@ div.menu_bar {
     border-collapse: collapse;
     display: block;
     table-layout: fixed;
-
-    thead {
-      box-sizing: border-box;
-      top: 0;
-      position: sticky;
-      display: block;
-      width: 100%;
-      tr {
-        td {
-          text-align: center;
-          background: #5cf0bd !important;
-          padding: 0 5px 0 5px;
-          // font-size: @font_head ;
-          font-size: 17px;
-          font-family: @fsans;
-          font-weight: normal;
-          border-width: 0 1px 1px 0;
-          border-style: solid;
-          border-color: @head_border_color;
-          min-height: @dict_head_height;
-          max-height: @dict_head_height;
-          min-width: @dict_col_width;
-          // max-width: @dict_col_width;
-        }
+    tr {
+      td {
+        box-sizing: border-box;
+        text-align: center;
+        padding: 0 2px 0 2px;
+        font-size: @font_head;
+        font-family: @fsans;
+        font-weight: normal;
+        border-width: 0 1px 1px 0;
+        border-style: solid;
+        border-color: @head_border_color;
+        min-height: @dict_head_height;
+        max-height: @dict_head_height;
+        min-width: @dict_col_width;
+      }
+      td.h {
+        box-sizing: border-box;
+        // background: @head_back;
+        background: #bce7bc;
+        color: @head_color;
+        // padding: 0 2px 0 2px;
+        padding: 2px;
+        margin: 2px;
+        font-size: @font_head;
+        font-family: @fsans;
+        font-weight: normal;
+        // border-width: 0 2px 2px 0 !important;
+        // border-style: solid;
+        // border-color: #000000 !important;
+        border: 2px solid #eb1717 !important;
+        min-height: @dict_head_height;
+        max-height: @dict_head_height;
+        min-width: @dict_col_width;
       }
     }
-    tbody {
-      box-sizing: border-box;
-      display: block;
-      height: 100%;
-      width: 100%;
-      tr {
-        td {
-          text-align: center;
-          // background: #5cf0bd !important;
-          padding: 0 5px 0 5px;
-          // font-size: @font_head ;
-          font-size: 17px;
-          font-family: @fsans;
-          font-weight: normal;
-          border-width: 0 1px 1px 0;
-          border-style: solid;
-          border-color: @head_border_color;
-          min-height: @dict_head_height;
-          max-height: @dict_head_height;
-          min-width: @dict_col_width;
-          // max-width: @dict_col_width;
-        }
-      }
+    tr.h {
+      top: 90px;
+      position: sticky;
+      z-index: 1;
+      // td.h{
+      //   box-sizing: border-box;
+      //   // background: @head_back;
+      //   background: #bce7bc;
+      //   color: @head_color;
+      //   // padding: 0 2px 0 2px;
+      //   padding:2px;
+      //   margin:2px;
+      //   font-size: @font_head;
+      //   font-family: @fsans;
+      //   font-weight: normal;
+      //   // border-width: 0 2px 2px 0 !important;
+      //   // border-style: solid;
+      //   // border-color: #000000 !important;
+      //   border: 2px solid #eb1717 !important;
+      //   min-height: @dict_head_height;
+      //   max-height: @dict_head_height;
+      //   min-width: @dict_col_width;
+      // }
     }
   }
 }
-
-// #dict_head_id {
-//   // width:100%;
-//   padding: 0;
-//   font-size: @font_head;
-//   font-family: @fserif;
-//   min-height: @dict_head_height;
-//   max-height: @dict_head_height;
-//   // min-width: @dict_head_width;
-//   // max-width: @dict_head_width;
-
-//   table {
-//     padding: 0;
-//     margin: 0;
-//     border-spacing: 0;
-//     border-collapse: collapse;
-//     display: block;
-//     table-layout: fixed;
-
-//     tr {
-//       td {
-//         // background: @head_back;
-//         background: red;
-//         color: @head_color;
-//         padding: 5px 5px 0 5px;
-//         // font-size: @font_head ;
-//         font-size: 10px;
-//         font-family: @fsans;
-//         text-align: center;
-//         border-width: 0 1px 1px 0;
-//         border-style: solid;
-//         border-color: @head_border_color;
-//         min-height: @dict_head_height;
-//         max-height: @dict_head_height;
-//         // min-width: @dict_col_width;
-//         // max-width: @dict_col_width;
-//       }
-
-//       td.key {
-//         display: none;
-//       }
-//     }
-//   }
-// }
-
-@font_num: @fsize_07;
-@font_text: @fsize_09;
-@font_text2: @fsize_08;
 
 // #dict_rows_id {
 //   min-height: @dict_rows_height;

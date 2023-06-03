@@ -178,14 +178,14 @@ var DictForm = {
 
     jt.reset();
     jt.append(`<table><thead><tr>`);
-    let r = (d) => `<td>${d}</td>`;
+    let r = (d) => `<th>${d}</th>`;
     for (const x of arr0) jt.append(r, x)
     for (const x of msd_cols) jt.append(r, x)
     for (const x of sigl_cols) jt.append(r, x)
-
     jt.append(`</tr></thead><tbody>`);
+
     r = (d) => `<td>${d}</td>`;
-    for (let i = 0; i < 90; i++) {
+    for (let i = 0; i < 190; i++) {
       arr0[0] = i;
       jt.append("<tr>")
       for (const x of arr0) jt.append(r, x)
