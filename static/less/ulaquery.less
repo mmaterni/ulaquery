@@ -287,41 +287,55 @@ div.menu_bar {
     thead {
       top: 0;
       position: sticky;
-      // z-index: 1;
+      z-index: 1;
       background-color: transparent;
       th {
-        box-sizing: border-box;
+        z-index: 11;
+        // box-sizing: border-box;
         text-align: left;
         padding: 0 2px 0 2px !important;
         font-size: @font_head;
         font-family: @fsans;
         font-weight: normal;
-        // border-width: 0 1px 1px 0;
-        // border-style: solid;
-        // border-color: @head_border_color;
+
+        border-width: 0 1px 1px 0;
+        border-style: solid;
+        border-color: @head_border_color;
+
         background: #bce7bc;
         min-height: @dict_head_height;
         max-height: @dict_head_height;
-        min-width: @dict_col_width;
-        border: 1px dotted #ff0000 !important;
+        // min-width: @dict_col_width;
       }
     }
     tbody {
-      td {
-        // background: @head_back;
-        background: #93c493;
-        color: @head_color;
-        text-align: left;
-        padding: 0 2px 0 2px;
-        font-size: @font_head;
-        font-family: @fsans;
-        font-weight: normal;
-        border-width: 0 1px 1px 0;
-        border-style: solid;
-        border-color: #000000;
-        min-height: @dict_head_height;
-        max-height: @dict_head_height;
-        min-width: @dict_col_width;
+      tr {
+        td {
+          background: @cell_back;
+          color: @cell_color;
+          text-align: left;
+          padding: 0 2px 0 2px;
+          font-size: @font_head;
+          font-family: @fsans;
+          font-weight: normal;
+          border-width: 0 1px 1px 0;
+          border-style: solid;
+          border-color: @cell_border_color;
+          min-height: @dict_head_height;
+          max-height: @dict_head_height;
+          // min-width: @dict_col_width;
+        }
+      }
+      tr:nth-child(odd) {
+        td {
+          background: lighten(@cell_back, 10%);
+        }
+      }
+      tr:hover {
+        td {
+          background: @cell_hover_back;
+          color: @cell_hover_color;
+        }
       }
     }
   }
