@@ -289,10 +289,11 @@ div.menu_bar {
       top: 0;
       position: sticky;
       z-index: 1;
+      tr {
         th {
           z-index: 11 !important;
           text-align: center;
-          padding: 0 2px 0 2px !important;
+          padding: 0 5px 0 5px !important;
           font-size: @font_head;
           font-family: @fsans;
           font-weight: normal;
@@ -303,6 +304,7 @@ div.menu_bar {
           max-height: @dict_row_height !important;
           min-width: @dict_col_width;
         }
+      }
     }
     tbody {
       tr {
@@ -310,7 +312,7 @@ div.menu_bar {
           background: @cell_back;
           color: @cell_color;
           text-align: left;
-          padding: 0 4px 0 4px;
+          padding: 0 5px 0 5px;
           font-size: @font_text;
           font-family: @fsans;
           font-weight: normal;

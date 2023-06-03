@@ -208,11 +208,11 @@ var DictForm = {
     jt.reset();
     jt.append(`<table class='dict'><thead><tr>`);
     let r = (d) => `<th>${d}</th>`;
-    for (const x of form_cols) jt.append(r, x)
-    for (const x of msd_cols) jt.append(r, x)
-    for (const x of sigl_cols) jt.append(r, x)
-    for (const x of loc_cols) jt.append(r, x)
-    for (const x of date_cols) jt.append(r, x)
+    for (const x of form_cols) jt.append(r, x.toLowerCase())
+    for (const x of msd_cols) jt.append(r, x.toLowerCase())
+    for (const x of sigl_cols) jt.append(r, x.toLowerCase())
+    for (const x of loc_cols) jt.append(r, x.toLowerCase())
+    for (const x of date_cols) jt.append(r, x.toLowerCase())
     jt.append(`</tr></thead><tbody>`);
 
     r = (d) => `<td>${d}</td>`;
