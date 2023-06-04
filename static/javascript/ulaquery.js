@@ -35,6 +35,7 @@ var UlaQuery = {
     wait_start();
     await sleep(10);
     await dm_.load_dict();
+    await Filter.init();
     await DictForm.open();
     UaLog.setXY(-300, 0).setZ(11).new();
     wait_stop();

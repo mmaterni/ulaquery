@@ -10,6 +10,7 @@
     const DIR_ULA_DATA = `/ula_data`;
     const DIR_DATA_EXP = `${DIR_ULA_DATA}/data_export`;
     const DICT_FORM_PATH = `${DIR_DATA_EXP}/dictionary.ula.csv`;
+    const POS_MSD_PATH = `cfg/pos_msd.csv`;
 
     const DM = {
       dict_rows: [],
@@ -27,8 +28,7 @@
           const data = await resp.text();
           const rows = data.trim().split("\n");
           this.dict_rows = rows.map((x) => x.split("|"));
-
-          // let rows = data.trim().split("\n");
+          // test per duplicaione array 
           // rows = rows.map((x) => x.split("|"));
           // let rr = [];
           // for (let i = 0; i < 4; i++) 
@@ -40,6 +40,25 @@
           throw error;
         }
       },
+      load_pos_msd: async function () {
+        const url = `${POS_MSD_PATH}`;
+        try {
+          const resp = await fetch(url, {
+            method: 'GET',
+            headers: { "Content-Type": "text/plain;charset=UTF-8" },
+            cache: 'no-store'
+          });
+          if (!resp.ok) {
+            throw new Error(`Erroe:${resp.status} ${resp.statusText}`);
+          }
+          const data = await resp.text();
+          const lines = data.trim().split("\n");
+          return lines.map((x) => x.split("|"));
+        } catch (error) {
+          alert(`Errror:${url}\n ${error}`);
+          throw error;
+        }
+      }
     };
     window.dm_ = DM;
   }).call(this);

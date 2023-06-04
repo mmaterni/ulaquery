@@ -1,0 +1,272 @@
+/*
+POS|pos_name|msd_name|attrs
+NOUN|noun|gender|Masc,Fem,Neut
+NOUN|noun|number|Sing,Plur
+PROPN|properNoun|number|Sing,Plur
+PROPN|properNoun|case|Nom,Acc
+ADJ|adjective|gender|Masc,Fem,Neut
+DET|determiner|deterType|ArtDef,ArtIndef,Poss,Rel,Dem,Neg,Ind,Int,Exc
+DET|determiner|MWEs|MWEs
+PRON|pronoun|MWEs|MWEs
+VERB|verb|verbForm|Fin,Ind
+VERB|verb|tense|Past,Pres,Fut,Imp
+VERB|verb|voice|Act,Pass,Rfl
+VERB|verb|property|Intr,Trans
+VERB|verb|person|1,2,3
+VERB|verb|number|Sing,Plur
+VERB|verb|gender|Masc,Fem,Neut
+VERB|verb|MWEs|MWEs
+ADP|adposition|adpType|PrepS,PrepArt
+INTJ|interjection||
+X|other||
+-|del||
+    var js = {
+      "VERB": {
+        "tense": ["Pots", "Pres", "Fut", "Imp"],
+        "voice": ["Act", "Pass", "Rfl"]
+      }
+    }   
+
+*/
+
+
+
+var Filter = {
+  pmjs: {},
+  init:async function(){
+    await this.set_pos_msd_json();
+  },
+  set_pos_msd_json: async function () {
+    const rows = await dm_.load_pos_msd();
+    rows.shift()
+    let js = {};
+    for (let row of rows) {
+      const pos = row[0];
+      if (!js[pos]) js[pos] = {};
+      const msd = row[2]
+      const attrs = row[3].split(',');
+      js[pos][msd] = attrs;
+    };
+    // const s = JSON.stringify(js, null, 2);
+    // console.log(s);
+    this.pos_msd_js = js
+  }
+};
+
+
+// var xPosMsd = {
+//   id: 'lpmx_pos_id',
+//   wind: null,
+//   pos_selected: "",
+
+//   open: async function () {
+//     await PosMsdJson.read_csv();
+//     let pos_sign_list = PosMsdJson.pos_sign_list();
+//     let rs = [];
+//     for (let pos_sign of pos_sign_list) {
+//       let r = ` 
+//   <tr class='data'> 
+//   <td>${pos_sign}</td> 
+//   </tr> 
+//       `;
+//       rs.push(r);
+//     }
+//     let html = `
+// <table>
+// <tr class='h'><td>POS</td></tr>
+// ${rs.join("")}
+// </table>
+//      `.replace(/\s+|\[rn]/g, ' ');
+//     if (!this.wind) {
+//       this.wind = UaWindowAdm.create(this.id, "lpmx_id");
+//       this.setXY();
+//       this.wind.drag();
+//     }
+//     this.wind.setHtml(html);
+//     this.bind_pos();
+//     this.show();
+//     let td = $("#lpmx_pos_id tr.data td").first();
+//     this.show_msd(td);
+//   },
+//   show: function (url) {
+//     if (!this.wind) return;
+//     this.wind.show();
+//   },
+//   hide: function () {
+//     if (!this.wind) return;
+//     this.wind.hide(this.id);
+//   },
+//   setXY: function () {
+//     let p = $("#lpmx_rows_head_id").offset();
+//     let lp_wd = $("#lpmx_rows_head_id").width();
+//     lp_wd = lp_wd > 500 ? lp_wd : 1099;
+//     const left = lp_wd + p.left + 20;
+//     this.wind.setXY(left, 10, -1).show();
+//   },
+//   resetXY: function () {
+//     this.wind.reset();
+//     this.setXY();
+//   },
+//   show_msd: function (td) {
+//     let pos_sign = $(td).html();
+//     Msd.open(pos_sign);
+//   },
+//   bind_pos: function () {
+//     $("#lpmx_pos_id").off("click");
+//     $("#lpmx_pos_id").on("click ", "table tr.data td", {}, function (e) {
+//       $("#lpmx_pos_id tr.data td").removeClass("select");
+//       $(this).addClass("select");
+//       PosMsd.pos_selected = this.innerHTML;
+//       PosMsd.show_msd(this);
+//       Msd.toggle();
+//     });
+//     $("#lpmx_pos_id").off("mouseenter");
+//     $("#lpmx_pos_id")
+//       .on("mouseenter", "tr.data td", {}, function (event) {
+//         event.preventDefault();
+//         if (Msd.is_active)
+//           return;
+//         PosMsd.show_msd(this);
+//         $("#lpmx_pos_id tr.data td").removeClass("select");
+//       });
+//   }
+// };
+
+// var Msd = {
+//   id: 'lpmx_msd_id',
+//   wind: null,
+//   is_active: false,
+//   msd_attrs: [],
+//   show: function () {
+//     if (!this.wind) return;
+//     this.wind.show();
+//   },
+//   hide: function () {
+//     if (!this.wind) return;
+//     this.wind.hide(this.id);
+//   },
+//   resetXY: function () {
+//     this.wind.reset();
+//     this.setXY();
+//   },
+//   setXY: function () {
+//     var p = $("#lpmx_rows_head_id").offset();
+//     let left = $("#lpmx_rows_head_id").width() + p.left + 20;
+//     let top = $("#lpmx_pos_id").height() + 30;
+//     this.wind.setXY(left, top, -1).show();
+//   },
+//   open(pos_sign) {
+//     let rows = PosMsdJson.get_msd_list(pos_sign);
+//     let max_attr = 0;
+//     for (let row of rows) {
+//       let na = row.attrs.length;
+//       max_attr = Math.max(max_attr, na);
+//     }
+//     let jt = UaJt();
+//     let head = `
+// <table>
+// <thead>
+// <tr>
+// <th colspan="{max_attr}">
+// <span class="a" >{pos_name}</span>
+// <a href="#">Confirm</a>
+// </th>
+// </tr>
+// </thead>
+// <tbody class="nodrag">
+// `;
+//     let pos_name = PosMsdJson.get_poas_name(pos_sign);
+//     let data = {
+//       "pos_name": pos_name,
+//       "pos_sign": pos_sign,
+//       "max_attr": max_attr
+//     };
+//     jt.append(head, data);
+//     let i = 0;
+//     for (let row of rows) {
+//       let data = {
+//         "i": i,
+//         "msd_name": row.msd_name
+//       };
+//       let tr = '<tr n="{i}" name="{msd_name}">';
+//       jt.append(tr, data);
+//       for (let attr of row.attrs) {
+//         let data = { "attr": attr };
+//         let td = '<td name="{attr}">{attr}</td>';
+//         jt.append(td, data);
+//       }
+//       jt.append("</tr>");
+//       i++;
+//     }
+//     jt.append('</tbody></table>');
+//     let html = jt.html();
+//     if (!this.wind) {
+//       this.wind = UaWindowAdm.create(this.id, "lpmx_id");
+//       this.setXY();
+//       this.wind.drag();
+//     }
+//     this.wind.setHtml(html);
+//     this.show();
+//     this.bind_msd();
+//   },
+//   bind_msd: function () {
+//     $("#lpmx_msd_id").off("click");
+//     $("#lpmx_msd_id")
+//       .on("click", "table thead tr th a", {}, function (e) {
+//         e.preventDefault();
+//         e.stopImmediatePropagation();
+//         Msd.set_pos_msd();
+//       })
+//       .on("click", "table tbody tr td", {}, function (e) {
+//         e.preventDefault();
+//         e.stopImmediatePropagation();
+//         let td = $(e.currentTarget);
+//         let tr = td.parents('tr').first();
+//         let msd_name = tr.attr("name");
+//         let attr = td.attr("name");
+//         Msd.set_attr(msd_name, attr);
+//       });
+//   },
+//   toggle: function () {
+//     if (this.is_active)
+//       this.deactivate();
+//     else
+//       this.activate();
+//   },
+//   activate: function () {
+//     this.is_active = true;
+//     $("#lpmx_msd_id table thead tr").addClass("select");
+//   },
+//   deactivate: function () {
+//     this.is_active = false;
+//     $("#lpmx_msd_id table thead tr").removeClass("select");
+//     Msd.msd_attrs = [];
+//   },
+//   set_pos_msd: function () {
+//     if (!this.is_active)
+//       return;
+//     let pos = PosMsd.pos_selected;
+//     const attrs = Msd.msd_attrs.filter((x) => !!x);
+//     const h = attrs.join(',');
+//     FormLpmx.set_pos_msd(pos, h);
+//     this.deactivate();
+//   },
+//   set_attr: function (msd_name, attr) {
+//     if (!this.is_active)
+//       return;
+//     let tr = document.querySelector("#lpmx_msd_id tbody tr[name=" + msd_name + "]");
+//     let tr_row = tr.getAttribute('n');
+//     tr_row = parseInt(tr_row);
+//     let td = tr.querySelector("td[name='" + attr + "']");
+//     let td_old = tr.querySelector("td.select");
+//     if (!!td_old) {
+//       td_old.classList.remove("select");
+//       if (td == td_old) {
+//         this.msd_attrs[tr_row] = null;
+//         return;
+//       }
+//     }
+//     td.classList.add("select");
+//     this.msd_attrs[tr_row] = attr;
+//   }
+// };
