@@ -4,7 +4,6 @@
 const html_dict_menu = `
 <div id="dict_menu_id" class="menu_bar" >
 <ul>
- 
   <li class="v">
     <a class="tipb" cmd="scroll_top" href="#">Top
       <span class="tiptextb">Scroll Top</span>
@@ -74,11 +73,6 @@ const html_dict_menu = `
 <div id="dict_table_id" ></div>
 `;
 
-const form_cols = ["n", "FORMA", "KEY", "LEMMA", "ETIMO", "LANG", "DATE", "POS", "FUNCT"];
-const msd_cols = ["GENDER", "NUMBER", "CASE", "DEGREE", "DETERTYPE", "MWES", "PRONTYPE", "PERSON", "VERBFORM", "MOOD", "TENSE", "VOICE", "PROPERTY", "ADPTYPE", "ADVTYPE", "ADVTYPE2", "NUMTYPE", "PARTTYPE"];
-const sigl_cols = ["G", "P", "V"];
-const loc_cols = ["LOC.1", "LOC.2", "LOC.3", "LOC.4"];
-const date_cols = ["DATE.0", "DATE.1", "DATE.2"];
 var DictForm = {
   tr_selected: null,
   exe: function (cmd) {
@@ -202,7 +196,21 @@ var DictForm = {
     e.scrollLeft = e.scrollWidth;
   },
   dict_form2html: async function () {
+    const form_cols = ["n", "FORMA", "KEY", "LEMMA", "ETIMO", "LANG", "DATE", "POS", "FUNCT"];
+    const msd_cols = ["GENDER", "NUMBER", "CASE", "DEGREE", "DETERTYPE", "MWES", "PRONTYPE", "PERSON", "VERBFORM", "MOOD", "TENSE", "VOICE", "PROPERTY", "ADPTYPE", "ADVTYPE", "ADVTYPE2", "NUMTYPE", "PARTTYPE"];
+    const sigl_cols = ["G", "P", "V"];
+    const loc_cols = ["LOC.1", "LOC.2", "LOC.3", "LOC.4"];
+    const date_cols = ["DATE.0", "DATE.1", "DATE.2"];
+    
+
     await DataManager.load_dict_form();
+    const head_cols = DataManager.dict_form_rows[0];
+    DataManager.dict_form_rows.shift();
+    // DataManager.dict_form_rows.splice(10);
+    
+
+
+
     let jt = UaJth();
     jt.reset();
     jt.append(`<table class='dict'><thead><tr>`);
@@ -214,13 +222,9 @@ var DictForm = {
     for (const x of date_cols) jt.append(r, x.toLowerCase())
     jt.append(`</tr></thead><tbody>`);
 
-    DataManager.dict_form_rows.shift();
-    // DataManager.dict_form_rows.splice(10);
     const le = DataManager.dict_form_rows.length;
     r = (d) => `<td>${d}</td>`;
     const r1 = (d) => `<td class="m">${d}</td>`;
-    // r2 = (d) => `<td>${d}</td>`;
-    // r3 = (d) => `<td>${d}</td>`;
     const ler = DataManager.dict_form_rows[0].length;
     const lefm = form_cols.length + msd_cols.length - 1;
     for (let i = 0; i < le; i++) {
