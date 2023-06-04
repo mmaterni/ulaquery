@@ -8,28 +8,28 @@
 function gestisciScrollConTastiCtrl(event) {
     if (event.ctrlKey) {
       switch (event.key) {
-        case "t": // Ctrl + T verso l'alto
+        case "t": 
           window.scrollTo({
             top: window.scrollY - window.innerHeight,
             behavior: "smooth"
           });
           event.preventDefault();
           break;
-        case "b": // Ctrl + B verso il basso
+        case "b": 
           window.scrollTo({
             top: window.scrollY + window.innerHeight,
             behavior: "smooth"
           });
           event.preventDefault();
           break;
-        case "l": // Ctrl + L a sinistra
+        case "l": 
           window.scrollTo({
             left: window.scrollX - window.innerWidth,
             behavior: "smooth"
           });
           event.preventDefault();
           break;
-        case "r": // Ctrl + R a destra
+        case "r": /
           window.scrollTo({
             left: window.scrollX + window.innerWidth,
             behavior: "smooth"

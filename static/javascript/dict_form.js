@@ -201,7 +201,7 @@ var DictForm = {
     // const sigl_cols = ["G", "P", "V"];
     // const loc_cols = ["LOC.1", "LOC.2", "LOC.3", "LOC.4"];
     // const date_cols = ["DATE.0", "DATE.1", "DATE.2"];
-    await dm_.load_dict();
+    // await dm_.load_dict();
     const forms_len = 8;
     const heads = dm_.dict_rows[0];
     const head_form = heads.slice(0, forms_len);

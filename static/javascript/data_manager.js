@@ -1,40 +1,48 @@
 "use strict"
 
-// let ALPHABETIC = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzàèéìòù";
-// let NUMERIC = "0123456789";
-// var ULACHARSET = ALPHABETIC + NUMERIC;
-// var UAPUNCTS = `,.;::?!^~()[]{}<>=+-*#@£&%/«»“‘’"\`'`;
+  // let ALPHABETIC = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzàèéìòù";
+  // let NUMERIC = "0123456789";
+  // var ULACHARSET = ALPHABETIC + NUMERIC;
+  // var UAPUNCTS = `,.;::?!^~()[]{}<>=+-*#@£&%/«»“‘’"\`'`;
 
-var dm_ = (function () {
-  const DIR_ULA_DATA = `/ula_data`;
-  const DIR_DATA_EXP = `${DIR_ULA_DATA}/data_export`;
-  const DICT_FORM_PATH = `${DIR_DATA_EXP}/dictionary.ula.csv`;
+  // var dm_ = (function () {
+  ; (function () {
+    const DIR_ULA_DATA = `/ula_data`;
+    const DIR_DATA_EXP = `${DIR_ULA_DATA}/data_export`;
+    const DICT_FORM_PATH = `${DIR_DATA_EXP}/dictionary.ula.csv`;
 
-  const DM = {
-    dict_rows: [],
-    load_dict: async function () {
-      const url = `${DICT_FORM_PATH}`;
-      try {
-        const resp = await fetch(url, {
-          method: 'GET',
-          headers: { "Content-Type": "text/plain;charset=UTF-8" },
-          cache: 'no-store'
-        });
-        if (!resp.ok) {
-          throw new Error(`Erroe:${resp.status} ${resp.statusText}`);
+    const DM = {
+      dict_rows: [],
+      load_dict: async function () {
+        const url = `${DICT_FORM_PATH}`;
+        try {
+          const resp = await fetch(url, {
+            method: 'GET',
+            headers: { "Content-Type": "text/plain;charset=UTF-8" },
+            cache: 'no-store'
+          });
+          if (!resp.ok) {
+            throw new Error(`Erroe:${resp.status} ${resp.statusText}`);
+          }
+          const data = await resp.text();
+          const rows = data.trim().split("\n");
+          this.dict_rows = rows.map((x) => x.split("|"));
+
+          // let rows = data.trim().split("\n");
+          // rows = rows.map((x) => x.split("|"));
+          // let rr = [];
+          // for (let i = 0; i < 4; i++) 
+          //   rr = rr.concat(rows);
+          // this.dict_rows = rr;
+
+        } catch (error) {
+          alert(`Errror:${url}\n ${error}`);
+          throw error;
         }
-        const data = await resp.text();
-        const rows = data.trim().split("\n");
-        this.dict_rows = rows.map((x) => x.split("|"));
-      } catch (error) {
-        alert(`Errror:${url}\n ${error}`);
-        throw error;
-      }
-    },
-  };
-  return DM;
-}).call(this);
-  // })();
+      },
+    };
+    window.dm_ = DM;
+  }).call(this);
 
 /*
 my=(function(){
@@ -47,6 +55,8 @@ my=(function(){
  }
 
 }).call(this);
+oppure
+})();
 
 uso:
 my.name1(...);

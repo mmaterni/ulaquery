@@ -16,16 +16,15 @@ var cmd_log_show = (...args) => {
   UaLog.log_show(...args);
 };
 
-var cmd_wait_start = function () {
-  const bd = document.querySelector("body");
-  bd.classList.add("wait");
+function wait_start() {
+  document.querySelector("body").classList.add("wait");
 };
 
-var cmd_wait_stop = function () {
+function wait_stop() {
   document.querySelector("body").classList.remove("wait");
 };
 
-var sleep = function (delay) {
+function sleep(delay) {
   return new Promise((resolve) => {
     setTimeout(resolve, delay)
   });
@@ -33,13 +32,11 @@ var sleep = function (delay) {
 
 var UlaQuery = {
   open: async function () {
-    cmd_wait_start();
-    await sleep(100);
-    // DICT_FORM_ID = document.getElementById("dict_form_id");
-    // UaLog.setXY(-300, 0).setZ(11).new();
-    // const lst = await DataManger.load_dict_form_rows();
-    DictForm.open();
-    cmd_wait_stop();
-    // FormLpmx.scroll_top();
+    wait_start();
+    await sleep(10);
+    await dm_.load_dict();
+    await DictForm.open();
+    UaLog.setXY(-300, 0).setZ(11).new();
+    wait_stop();
   }
 };
