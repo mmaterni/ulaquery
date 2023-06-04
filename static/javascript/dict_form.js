@@ -196,57 +196,43 @@ var DictForm = {
     e.scrollLeft = e.scrollWidth;
   },
   dict_form2html: async function () {
-    const form_cols = ["n", "FORMA", "KEY", "LEMMA", "ETIMO", "LANG", "DATE", "POS", "FUNCT"];
-    const msd_cols = ["GENDER", "NUMBER", "CASE", "DEGREE", "DETERTYPE", "MWES", "PRONTYPE", "PERSON", "VERBFORM", "MOOD", "TENSE", "VOICE", "PROPERTY", "ADPTYPE", "ADVTYPE", "ADVTYPE2", "NUMTYPE", "PARTTYPE"];
-    const sigl_cols = ["G", "P", "V"];
-    const loc_cols = ["LOC.1", "LOC.2", "LOC.3", "LOC.4"];
-    const date_cols = ["DATE.0", "DATE.1", "DATE.2"];
-    
-
-    await DataManager.load_dict_form();
-    const head_cols = DataManager.dict_form_rows[0];
-    DataManager.dict_form_rows.shift();
-    // DataManager.dict_form_rows.splice(10);
-    
-
-
-
+    // const form_cols = ["n", "FORMA", "KEY", "LEMMA", "ETIMO", "LANG", "DATE", "POS", "FUNCT"];
+    // const msd_cols = ["GENDER", "NUMBER", "CASE", "DEGREE", "DETERTYPE", "MWES", "PRONTYPE", "PERSON", "VERBFORM", "MOOD", "TENSE", "VOICE", "PROPERTY", "ADPTYPE", "ADVTYPE", "ADVTYPE2", "NUMTYPE", "PARTTYPE"];
+    // const sigl_cols = ["G", "P", "V"];
+    // const loc_cols = ["LOC.1", "LOC.2", "LOC.3", "LOC.4"];
+    // const date_cols = ["DATE.0", "DATE.1", "DATE.2"];
+    await dm_.load_dict();
+    const forms_len = 8;
+    const heads = dm_.dict_rows[0];
+    const head_form = heads.slice(0, forms_len);
+    const head_msd = heads.slice(forms_len);
+    // elimina la prima riga
+    dm_.dict_rows.shift();
+    // head
     let jt = UaJth();
-    jt.reset();
     jt.append(`<table class='dict'><thead><tr>`);
-    let r = (d) => `<th><span>${d}</span></th>`;
-    for (const x of form_cols) jt.append(r, x.toLowerCase())
-    for (const x of msd_cols) jt.append(r, x.toLowerCase())
-    for (const x of sigl_cols) jt.append(r, x.toLowerCase())
-    for (const x of loc_cols) jt.append(r, x.toLowerCase())
-    for (const x of date_cols) jt.append(r, x.toLowerCase())
+    let h = (d) => `<th><span>${d}</span></th>`;
+    jt.append(h, "N.");
+    for (const x of head_form) jt.append(h, x.toUpperCase());
+    for (const x of head_msd) jt.append(h, x.toUpperCase())
     jt.append(`</tr></thead><tbody>`);
-
-    const le = DataManager.dict_form_rows.length;
-    r = (d) => `<td>${d}</td>`;
+    // rowa
+    const le = dm_.dict_rows.length;
+    const r0 = (d) => `<td>${d}</td>`;
     const r1 = (d) => `<td class="m">${d}</td>`;
-    const ler = DataManager.dict_form_rows[0].length;
-    const lefm = form_cols.length + msd_cols.length - 1;
+    const ler = dm_.dict_rows[0].length;
     for (let i = 0; i < le; i++) {
-      const row = DataManager.dict_form_rows[i];
+      const row = dm_.dict_rows[i];
       jt.append("<tr>")
-      jt.append(r, i);
-      for (let i = 0; i < 6; i++)
-        jt.append(r, row[i])
-      for (let i = 6; i < lefm; i++)
-        jt.append(r1, row[i])
-      for (let i = lefm; i < ler; i++)
-        jt.append(r, row[i])
-
-
-      // for (const x of row)
-      //   jt.append(r, x)
+      jt.append(r0, i);
+      for (let i = 0; i < forms_len; i++) jt.append(r0, row[i])
+      for (let i = forms_len; i < ler; i++) jt.append(r1, row[i])
       jt.append("</tr>")
     }
     jt.append(`</tbody></table>`);
     document.getElementById("dict_table_id").innerHTML = jt.html();
     // console.log(jt.html());
-
+    // gestione eventi sulla tabella
     this.bind_rows();
   },
   bind_menu: function () {

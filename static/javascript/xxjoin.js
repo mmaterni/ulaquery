@@ -17,7 +17,6 @@ var token_array = [];
 var form_array = [];
 var token_form_array = [];
 
-// Funzione per leggere il file CSV e restituire un array
 async function readCSV(url) {
     const response = await fetch(url);
     const csvData = await response.text();
@@ -32,7 +31,6 @@ async function readCSV(url) {
     }
     return data_array;
 }
-
 
 async function readTokenForm() {
     try {
@@ -49,14 +47,13 @@ async function readTokenForm() {
     }
 }
 
-
-async function performJoin() {
+async function joinTokenForm() {
     await readTokenForm();
+
     // Creazione di un oggetto mappa per il form_array utilizzando la colonna "KEYS" come chiave
     const formMap = {};
     for (let i = 1; i < form_array.length; i++) {
         const key = form_array[i][1]; // Colonna "KEYS"
-        // formMap[key] = form_array[i];
         formMap[key] = i;
     }
 
@@ -69,7 +66,6 @@ async function performJoin() {
         }
         const index = formMap[key];
         const form_row = form_array[index];
-        // const form_row = formMap[key];
         if (!form_row) {
             console.log(token_row)
         }
@@ -77,56 +73,13 @@ async function performJoin() {
         token_form_array.push(mergedRow);
     }
 
-    // Stampare il risultato
     const ok = confirm("ok")
     if (ok)
         console.log(token_form_array);
 }
 
 
-
-
-function getMatchingIndices(key) {
-    const matchingIndices = [];
-    for (let i = 1; i < token_array.length; i++) {
-        if (token_array[i][1] === key) {
-            matchingIndices.push(i);
-        }
-    }
-    return matchingIndices;
-}
-
-
-async function findToken() {
-    await readTokenForm();
-    const rows = token_array.slice(10, 20);
-    const keys = rows.map(row => row[1]);
-    for (let key of keys) {
-        const indices = getMatchingIndices(key);
-        console.log(key)
-        console.log(indices);
-    }
-}
-
-
-
-
-/////////////////////
-
 function run() {
-    // performJoin()
-    findToken()
+    joinTokenForm()
 }
 
-fetch(url)
-.then((resp) => {
-  if (resp.ok) return resp.text();
-  else throw `ERROR\n${url}`;
-})
-.then((text) => {
-  $("#ua").html(text);
-})
-.catch((error) => {
-  alert(`ERROR pag()\n${url}\n${error}`);
-});
-};
