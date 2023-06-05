@@ -62,7 +62,6 @@ var PosMsd = {
   open: async function () {
     const rows = await this.load();
     rows.shift()
-    return;
     let js = {};
     for (let row of rows) {
       const pos = row[0];
@@ -75,7 +74,12 @@ var PosMsd = {
     // console.log(s);
     const jt = UaJth();
     jt.append(`<div class="pos_msd">
-    <ul>`)
+      <ul class="head">
+      <li>POS</li>
+      <li>MSD</li>
+      <li>ATTRS</li>
+      </ul>
+    <ul class="pos">`)
     const hp = (pos) => `
       <li>${pos}</li>
     `;
@@ -93,8 +97,6 @@ var PosMsd = {
     this.wind.setHtml(html);
     // this.bind_pos();
     this.show();
-    // let td = $("#lpmx_pos_id tr.data td").first();
-    // this.show_msd(td);
   },
   show: function (url) {
     if (!this.wind) return;
@@ -109,7 +111,8 @@ var PosMsd = {
     // let lp_wd = $("#lpmx_rows_head_id").width();
     // lp_wd = lp_wd > 500 ? lp_wd : 1099;
     // const left = lp_wd + p.left + 20;
-    // this.wind.setXY(left, 10, -1).show();
+    const left = 400;
+    this.wind.setXY(left, 100, -1).show();
   },
   resetXY: function () {
     this.wind.reset();

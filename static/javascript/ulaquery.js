@@ -37,7 +37,7 @@ var UlaQuery = {
     await dm_.load_dict();
     await DictForm.open();
     await Filter.open();
-    // UaLog.setXY(-300, 0).setZ(11).new();
+    UaLog.setXY(-300, 0).setZ(11).new().log_show();
     wait_stop();
   }
 };
