@@ -32,13 +32,37 @@ X|other||
 
 
 var Filter = {
-  pos_msd_js: {},
-  init: async function () {
-    await this.set_pos_msd_json();
+  open: async function () {
+    await PosMsd.open();
+  }
+};
+
+
+var PosMsd = {
+  id: 'pos_msd_id',
+  wind: null,
+  load: async function () {
+    const url = `cfg/pos_msd.csv`;
+    try {
+      const resp = await fetch(url, {
+        method: 'GET',
+        headers: { "Content-Type": "text/plain;charset=UTF-8" },
+      });
+      if (!resp.ok) {
+        throw new Error(`Erroe:${resp.status} ${resp.statusText}`);
+      }
+      const data = await resp.text();
+      const rows = data.trim().split("\n");
+      return rows.map((x) => x.split("|"));
+    } catch (error) {
+      alert(`Errror:${url}\n ${error}`);
+      throw error;
+    }
   },
-  set_pos_msd_json: async function () {
-    const rows = await dm_.load_pos_msd();
+  open: async function () {
+    const rows = await this.load();
     rows.shift()
+    return;
     let js = {};
     for (let row of rows) {
       const pos = row[0];
@@ -46,110 +70,71 @@ var Filter = {
       const msd = row[2]
       const attrs = row[3].split(',');
       js[pos][msd] = attrs;
-    };  
+    };
     // const s = JSON.stringify(js, null, 2);
     // console.log(s);
-    
-    this.pos_msd_js = js
-  },
-
-  build_pos_msd_html: function () {
-    const js = UaJth();
-    jt.append("<div>")
-    const hp=(pos)=>`
-      <div>${pos}</div>
+    const jt = UaJth();
+    jt.append(`<div class="pos_msd">
+    <ul>`)
+    const hp = (pos) => `
+      <li>${pos}</li>
     `;
-    const hr=(msd)=>`
-      ${msd}
-    `;
-    for (let pos in this.pos_msd_js) {
-
-
+    for (let pos in js) {
+      jt.append(hp, pos)
     }
-
-    jt.append("</div>")
-
-  }
+    jt.append("</ul></div>")
+    const html = jt.html();
+    console.log(jt.text());
+    if (!this.wind) {
+      this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
+      this.setXY();
+      this.wind.drag();
+    }
+    this.wind.setHtml(html);
+    // this.bind_pos();
+    this.show();
+    // let td = $("#lpmx_pos_id tr.data td").first();
+    // this.show_msd(td);
+  },
+  show: function (url) {
+    if (!this.wind) return;
+    this.wind.show();
+  },
+  hide: function () {
+    if (!this.wind) return;
+    this.wind.hide(this.id);
+  },
+  setXY: function () {
+    // let p = $("#lpmx_rows_head_id").offset();
+    // let lp_wd = $("#lpmx_rows_head_id").width();
+    // lp_wd = lp_wd > 500 ? lp_wd : 1099;
+    // const left = lp_wd + p.left + 20;
+    // this.wind.setXY(left, 10, -1).show();
+  },
+  resetXY: function () {
+    this.wind.reset();
+    this.setXY();
+  },
+  // bind_pos: function () {
+  //   $("#lpmx_pos_id").off("click");
+  //   $("#lpmx_pos_id").on("click ", "table tr.data td", {}, function (e) {
+  //     $("#lpmx_pos_id tr.data td").removeClass("select");
+  //     $(this).addClass("select");
+  //     PosMsd.pos_selected = this.innerHTML;
+  //     PosMsd.show_msd(this);
+  //     Msd.toggle();
+  //   });
+  //   $("#lpmx_pos_id").off("mouseenter");
+  //   $("#lpmx_pos_id")
+  //     .on("mouseenter", "tr.data td", {}, function (event) {
+  //       event.preventDefault();
+  //       if (Msd.is_active)
+  //         return;
+  //       PosMsd.show_msd(this);
+  //       $("#lpmx_pos_id tr.data td").removeClass("select");
+  //     });
+  // }
 };
-
-
-// var xPosMsd = {
-//   id: 'lpmx_pos_id',
-//   wind: null,
-//   pos_selected: "",
-
-//   open: async function () {
-//     await PosMsdJson.read_csv();
-//     let pos_sign_list = PosMsdJson.pos_sign_list();
-//     let rs = [];
-//     for (let pos_sign of pos_sign_list) {
-//       let r = ` 
-//   <tr class='data'> 
-//   <td>${pos_sign}</td> 
-//   </tr> 
-//       `;
-//       rs.push(r);
-//     }
-//     let html = `
-// <table>
-// <tr class='h'><td>POS</td></tr>
-// ${rs.join("")}
-// </table>
-//      `.replace(/\s+|\[rn]/g, ' ');
-//     if (!this.wind) {
-//       this.wind = UaWindowAdm.create(this.id, "lpmx_id");
-//       this.setXY();
-//       this.wind.drag();
-//     }
-//     this.wind.setHtml(html);
-//     this.bind_pos();
-//     this.show();
-//     let td = $("#lpmx_pos_id tr.data td").first();
-//     this.show_msd(td);
-//   },
-//   show: function (url) {
-//     if (!this.wind) return;
-//     this.wind.show();
-//   },
-//   hide: function () {
-//     if (!this.wind) return;
-//     this.wind.hide(this.id);
-//   },
-//   setXY: function () {
-//     let p = $("#lpmx_rows_head_id").offset();
-//     let lp_wd = $("#lpmx_rows_head_id").width();
-//     lp_wd = lp_wd > 500 ? lp_wd : 1099;
-//     const left = lp_wd + p.left + 20;
-//     this.wind.setXY(left, 10, -1).show();
-//   },
-//   resetXY: function () {
-//     this.wind.reset();
-//     this.setXY();
-//   },
-//   show_msd: function (td) {
-//     let pos_sign = $(td).html();
-//     Msd.open(pos_sign);
-//   },
-//   bind_pos: function () {
-//     $("#lpmx_pos_id").off("click");
-//     $("#lpmx_pos_id").on("click ", "table tr.data td", {}, function (e) {
-//       $("#lpmx_pos_id tr.data td").removeClass("select");
-//       $(this).addClass("select");
-//       PosMsd.pos_selected = this.innerHTML;
-//       PosMsd.show_msd(this);
-//       Msd.toggle();
-//     });
-//     $("#lpmx_pos_id").off("mouseenter");
-//     $("#lpmx_pos_id")
-//       .on("mouseenter", "tr.data td", {}, function (event) {
-//         event.preventDefault();
-//         if (Msd.is_active)
-//           return;
-//         PosMsd.show_msd(this);
-//         $("#lpmx_pos_id tr.data td").removeClass("select");
-//       });
-//   }
-// };
 
 // var Msd = {
 //   id: 'lpmx_msd_id',

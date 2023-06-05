@@ -175,7 +175,7 @@ var DictForm = {
   open: async function () {
     let jt = UaJth();
     jt.append(html_dict_menu);
-    document.getElementById("dict_form_id").innerHTML = jt.html();
+    document.getElementById("ulaquery_id").innerHTML = jt.html();
     this.bind_menu();
     this.dict_form2html()
   },
