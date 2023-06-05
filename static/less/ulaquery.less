@@ -348,7 +348,6 @@ div.pos_msd {
   border:1px solid red;
   padding:10px;
   min-width: 300px;
-  // height: 400px;;
   background: #63f995;
   ul.head {
     background: #e17272;
@@ -359,109 +358,32 @@ div.pos_msd {
     list-style: none;
     li {
       text-align: center;
+      margin-right:  60px;;
     }
   }
 
   ul.pos {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    justify-content: flex-start;
+    margin: 0;
+    padding: 0;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: left;
+    // justify-content: flex-start;
     list-style: none;
-    // margin: 0;
-    // padding: 0;
     li {
       background: #e67a7a;
       padding:5px;
-      // text-align: left;
       // flex: 1;
       border:1px solid black !important;
-
-      // a {
-      //   display: block;
-      //   min-height: @menu_height;
-      //   padding-top: 5px;
-      //   line-height: 1;
-      //   text-align: center;
-      //   text-decoration: none;
-      //   font-size: @font_menu;
-      //   font-family: @fserif;
-      //   font-weight: normal;
-      //   background: @menu_bck;
-      //   color: @menu_color;
-      //   border-right: 1px solid @menu_border_bck;
-      // }
-      // a.br {
-      //   line-height: 1;
-      // }
-      // a:hover {
-      //   background: @menu_hover_bck;
-      //   text-decoration: underline;
-      // }
-
-      ul {
-        // display: none !important;
-        // position: absolute;
-        // top: @menu_sub_top;
-        // left: 0;
-        // width: 100%;
-        // z-index: 99;
-
+      ul.msd {
+        margin-left: 120px;
+        margin-top: -30px;;
+        list-style: none;
         li {
-          border-top: 1px solid @menu_border_bck;
+          background: #3f7cee;
           width: 150px;
-
-          // a {
-          //   font-size: @font_menu;
-          //   padding-left: 0;
-          //   padding-right: 0;
-          //   line-height: 1;
-          // }
-
-          // a.br {
-          //   line-height: 1;
-          // }
-
-          // ul {
-          //   top: -1px;
-          //   left: 100%;
-          //   li {
-          //     border-top: 1px solid @menu_border_bck;
-
-          //     a {
-          //       min-width: 100%;
-          //       padding-left: 0;
-          //       padding-right: 0;
-          //       line-height: 1;
-          //     }
-
-          //     a.br {
-          //       line-height: 1;
-          //     }
-          //   }
-          // }
-
-          // ul.rgt {
-          //   left: -100%;
-
-          //   li {
-          //     margin-right: 2px;
-          //   }
-          // }
         }
       }
     }
-
-    // li.v:hover {
-    //   ul.v {
-    //     display: block !important;
-    //   }
-    // }
-
-    // li.h:hover {
-    //   ul.h {
-    //     display: block !important;
-    //   }
-    // }
   }
 }

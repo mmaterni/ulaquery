@@ -72,6 +72,7 @@ var PosMsd = {
     };
     // const s = JSON.stringify(js, null, 2);
     // console.log(s);
+    const jtm = UaJth();
     const jt = UaJth();
     jt.append(`<div class="pos_msd">
       <ul class="head">
@@ -80,12 +81,24 @@ var PosMsd = {
       <li>ATTRS</li>
       </ul>
     <ul class="pos">`)
-    const hp = (pos) => `
-      <li>${pos}</li>
+    const hp = (pos, msds) => `
+      <li>${pos}
+        <ul class="msd">
+        ${msds}
+        </ul>
+      </li>
+    `;
+    const hm = (msd) => `
+      <li>${msd}</li>
     `;
     for (let pos in js) {
-      jt.append(hp, pos)
+      jtm.reset();
+      for (let msd in js[pos])
+        jtm.append(hm, msd)
+      const msds = jtm.html();
+      jt.append(hp, pos, msds)
     }
+
     jt.append("</ul></div>")
     const html = jt.html();
     console.log(jt.text());
@@ -111,7 +124,7 @@ var PosMsd = {
     // let lp_wd = $("#lpmx_rows_head_id").width();
     // lp_wd = lp_wd > 500 ? lp_wd : 1099;
     // const left = lp_wd + p.left + 20;
-    const left = 400;
+    const left = 200;
     this.wind.setXY(left, 100, -1).show();
   },
   resetXY: function () {
