@@ -34,7 +34,7 @@
           alert(`Errror:${url}\n ${error}`);
           throw error;
         }
-      },
+      }, 
       load_pos_msd: async function () {
         const url = `${POS_MSD_PATH}`;
         try {
@@ -55,6 +55,7 @@
         }
       }
     };
+    
     window.dm_ = DM;
   }).call(this);
 

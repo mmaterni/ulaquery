@@ -46,11 +46,13 @@ var Filter = {
       const msd = row[2]
       const attrs = row[3].split(',');
       js[pos][msd] = attrs;
-    };
+    };  
     // const s = JSON.stringify(js, null, 2);
     // console.log(s);
+    
     this.pos_msd_js = js
   },
+
   build_pos_msd_html: function () {
     const js = UaJth();
     jt.append("<div>")
