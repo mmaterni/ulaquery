@@ -2,46 +2,63 @@
 <html lang="it">
 
     <style type="text/css">
-        .pm_container {
+
+        /* Classe per il wrapper principale */
+        .table-wrapper {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
         }
 
+        /* Classe per l'elemento principale */
         .table-list {
             list-style-type: none;
             margin: 0;
             padding: 0;
         }
 
+        /* Classe per i campi di primo livello (POS, NSD, ATTR) */
         .label-row {
             display: flex;
             align-items: center;
         }
 
+        /* Classe per il titolo dei campi di primo livello */
         .label {
             font-weight: bold;
             margin-right: 10px;
         }
 
+        /* Classe per i campi di secondo livello (VERB, NOM) */
         .secondary-row {
             margin-left: 20px;
         }
 
+        /* Classe per i campi di terzo livello (tense, voice, caso, genere) */
         .tertiary-row {
             margin-left: 40px;
         }
 
+        /* Classe per i campi separati (Pres, Fut, Imp, Sing., Plur., Masch., Femm.) */
         .separated-field {
             display: inline-block;
             margin-right: 5px;
         }
 
-        .pm_container ul {}
+        /* Esempio di utilizzo delle classi */
+        .table-wrapper ul {
+            /* Stile generale per il wrapper */
+        }
 
-        .pm_container ul li {}
+        .table-wrapper ul li {
+            /* Stile generale per gli elementi della lista */
+        }
 
-        .pm_container .label-row {}
+        .table-wrapper .label-row {
+            /* Stile specifico per i campi di primo livello */
+        }
+
+        /* Altre regole di stile per le diverse classi... */
     </style>
 
     <head>
@@ -55,58 +72,58 @@
     </head>
 
     <body>
-        <div class="pm_container">
+        <div class="table-wrapper">
             <ul class="table-list">
-                <li class="label-row">
-                    <span class="label">POS</span>
-                    <span class="label">NSD</span>
-                    <span class="label">ATTR</span>
-                </li>
-                <li class="secondary-row">
-                    <span class="label">VERB:</span>
-                    <ul class="table-list tertiary-row">
-                        <li class="label-row">
-                            <span class="label">tense:</span>
-                            <div class="field-row">
-                                <span class="field">Pots</span>
-                                <span class="field">Pres</span>
-                                <span class="field">Fut</span>
-                                <span class="field">Imp</span>
-                            </div>
-                        </li>
-                        <li class="label-row">
-                            <span class="label">voice:</span>
-                            <div class="field-row">
-                                <span class="field">Act</span>
-                                <span class="field">Pass</span>
-                                <span class="field">Rfl</span>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <li class="secondary-row">
-                    <span class="label">NOM:</span>
-                    <ul class="table-list tertiary-row">
-                        <li class="label-row">
-                            <span class="label">caso:</span>
-                            <div class="field-row">
-                                <span class="field">Sing.</span>
-                                <span class="field">Plur.</span>
-                            </div>
-                        </li>
-                        <li class="label-row">
-                            <span class="label">genere:</span>
-                            <div class="field-row">
-                                <span class="field">Masch.</span>
-                                <span class="field">Femm.</span>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <!-- Altri campi e livelli... -->
+              <li class="label-row">
+                <span class="label">POS</span>
+                <span class="label">NSD</span>
+                <span class="label">ATTR</span>
+              </li>
+              <li class="secondary-row">
+                <span class="label">VERB:</span>
+                <ul class="table-list tertiary-row">
+                  <li class="label-row">
+                    <span class="label">tense:</span>
+                    <div class="field-row">
+                      <span class="field">Pots</span>
+                      <span class="field">Pres</span>
+                      <span class="field">Fut</span>
+                      <span class="field">Imp</span>
+                    </div>
+                  </li>
+                  <li class="label-row">
+                    <span class="label">voice:</span>
+                    <div class="field-row">
+                      <span class="field">Act</span>
+                      <span class="field">Pass</span>
+                      <span class="field">Rfl</span>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li class="secondary-row">
+                <span class="label">NOM:</span>
+                <ul class="table-list tertiary-row">
+                  <li class="label-row">
+                    <span class="label">caso:</span>
+                    <div class="field-row">
+                      <span class="field">Sing.</span>
+                      <span class="field">Plur.</span>
+                    </div>
+                  </li>
+                  <li class="label-row">
+                    <span class="label">genere:</span>
+                    <div class="field-row">
+                      <span class="field">Masch.</span>
+                      <span class="field">Femm.</span>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <!-- Altri campi e livelli... -->
             </ul>
-        </div>
-
+          </div>
+          
 
     </body>
 

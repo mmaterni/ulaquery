@@ -343,3 +343,194 @@ div.menu_bar {
     }
   }
 }
+
+
+#lpmx_pos_id {
+  table {
+    margin: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: block;
+    table-layout: fixed;
+
+    tr.h {
+      td {
+        cursor: move;
+        background: @cmd_back;
+        color: @cmd_color;
+        border: 1px solid @head_border_color;
+        margin: 0;
+        padding: 4px 4px 0px 2px;
+        text-align: center;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: @font_table;
+        font-family: @fsans;
+      }
+    }
+
+    tr.data {
+      td {
+        cursor: pointer;
+        background: @cell_back;
+        color: @cell_color;
+        margin: 0;
+        padding: 4px 5px 0 5px;
+        font-size: @font_table;
+        font-family: @fsans;
+        font-weight: normal;
+        text-align: center;
+        white-space: nowrap;
+        border-width: 1px;
+        border-style: solid;
+        border-color: @cell_border_color;
+      }
+
+      td:hover {
+        background: @cell_hover_back;
+        color: @cell_hover_color;
+        text-decoration: underline;
+      }
+
+      td.select {
+        background: @cell_jshover_back;
+        color: @cell_jshover_color;
+      }
+    }
+
+    tr.data:nth-child(odd) {
+      td {
+        background: darken(@cell_back, 10%);
+      }
+
+      td:hover {
+        background: @cell_hover_back;
+        color: @cell_hover_color;
+        text-decoration: underline;
+      }
+
+      td.select {
+        background: @cell_jshover_back;
+        color: @cell_jshover_color;
+      }
+    }
+  }
+}
+
+#pos_msd_id {
+  table {
+    margin: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: block;
+    table-layout: fixed;
+
+    thead {
+      tr {
+        th {
+          cursor: move;
+          border: 1px solid @cell_border_color;
+          background: @cmd_back;
+          color: @cmd_color;
+          text-align: center;
+          padding: 2px 0 2px 0;
+          min-width: 140px;
+
+          span {
+            display: inline-block;
+            padding: 2px 2px 2px 2px;
+            margin: 0 auto 0 auto;
+            font-size: @font_table;
+            font-family: @fserif;
+            font-weight: bold;
+          }
+
+          a {
+            display: none;
+            padding: 0 5px 0 5px;
+            margin: 0px auto 0px auto;
+            background: @cmd_back;
+            color: @cmd_color;
+            font-size: @font_table;
+            font-family: @fsans;
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: none;
+            border: 2px solid @cmd_color;
+            border-radius: 9px;
+          }
+
+          a:hover {
+            font-style: italic;
+            padding: 0 20px 0 20px;
+            background: @cmd_hover_back;
+          }
+        }
+      }
+
+      tr.select {
+        th {
+          background: @cmd_back;
+
+          span.a {
+            display: none;
+          }
+
+          a {
+            display: inline-block;
+          }
+        }
+      }
+    }
+
+    tbody {
+      border: 1px solid @cell_border_color;
+
+      tr {
+        td {
+          cursor: pointer;
+          background: @cell_back;
+          color: @cell_color;
+          margin: 2px 0 2px 0;
+          padding: 5px 5px 5px 5px;
+          font-size: @font_table;
+          font-family: @fsans;
+          font-weight: normal;
+          text-align: center;
+          white-space: nowrap;
+          border-width: 1px;
+          border-style: solid;
+          border-color: @cell_border_color;
+        }
+
+        td:hover {
+          background: @cell_hover_back;
+          color: @cell_hover_color;
+          text-decoration: underline;
+        }
+
+        td.select {
+          background: @cell_jshover_back;
+          color: @cell_jshover_color;
+        }
+      }
+
+      tr:nth-child(odd) {
+        td {
+          background: darken(@cell_back, 10%);
+        }
+
+        td:hover {
+          background: @cell_hover_back;
+          color: @cell_hover_color;
+          text-decoration: underline;
+        }
+
+        td.select {
+          background: @cell_jshover_back;
+          color: @cell_jshover_color;
+        }
+      }
+    }
+  }
+}
