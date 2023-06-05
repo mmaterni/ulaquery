@@ -28,13 +28,8 @@
           const data = await resp.text();
           const rows = data.trim().split("\n");
           this.dict_rows = rows.map((x) => x.split("|"));
-          // test per duplicaione array 
-          // rows = rows.map((x) => x.split("|"));
-          // let rr = [];
-          // for (let i = 0; i < 4; i++) 
-          //   rr = rr.concat(rows);
-          // this.dict_rows = rr;
-
+          this.dict_rows.splice(20);
+          this.dict_rows.splice(0,1);
         } catch (error) {
           alert(`Errror:${url}\n ${error}`);
           throw error;
@@ -66,19 +61,15 @@
 /*
 my=(function(){
  ...
-
  return{
   name1:nameInt1,
   name2:nameInt2,
   ...
  }
-
 }).call(this);
-oppure
+   oppure
 })();
-
 uso:
 my.name1(...);
 my.name2(,,)
-
 */

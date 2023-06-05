@@ -26,22 +26,11 @@
 .sans {
   font-family: arial, verdana, sans-serif;
 }
-@html_width: 1450px;
-@body_height: 800px;
-// @body_width: 1200px;
-// @form_cnt_height: 400px;
-
-// text
-// @text_height: 775px;
-// @text_top: calc(@menu_height + 2px);
-// @text_row_width: 1000px;
-//
-
-.border0 {
+.b0 {
   border: 1px solid #ff0000 !important;
 }
 
-.border1 {
+.b1 {
   border: 1px solid #00ff00 !important;
 }
 
@@ -78,9 +67,13 @@ option {
   cursor: pointer;
 }
 
+@html_width: 1450px;
+
 html {
   width: @html_width;
 }
+
+@body_height: 800px;
 
 body {
   border-right: 1px solid maroon;
@@ -351,202 +344,3 @@ div.menu_bar {
     }
   }
 }
-
-// #dict_rows_id {
-//   min-height: @dict_rows_height;
-//   max-height: @dict_rows_height;
-//   padding: 0;
-//   margin: 0;
-//   overflow-y: scroll;
-//   overflow-x: auto;
-//   scrollbar-color: @scroll_bar1 @scroll_bar2;
-//   scrollbar-width: auto;
-
-//   table {
-//     padding: 0;
-//     margin: 0;
-//     border-spacing: 0;
-//     border-collapse: collapse;
-//     display: block;
-//     table-layout: fixed;
-
-//     tr {
-//       td {
-//         background: @cell_back;
-//         color: @cell_color;
-//         margin: 0;
-//         padding-top: 2px;
-//         padding-bottom: 2px;
-//         padding-left: 2px;
-//         padding-right: 0;
-//         font-size: @font_text;
-//         font-family: @fserif;
-//         font-weight: normal;
-//         text-align: left;
-//         white-space: nowrap;
-//         border-width: 1px;
-//         border-style: solid;
-//         border-color: @cell_border_color;
-//       }
-
-//       td.n {
-//         cursor: pointer;
-//         // min-width: @row_num_width;
-//         // max-width: @row_num_width;
-//         font-size: @font_num;
-//         font-family: @fserif;
-//         font-weight: normal;
-//         text-align: right;
-//         padding-right: 5px;
-//         background: @cmd_back;
-//         color: @cmd_color;
-//         border-top: 1px solid @cmd_border_color_l;
-//         border-bottom: 1px solid @cmd_border_color_l;
-//       }
-
-//       td.fr {
-//         // FORM non visibile
-//         display: none;
-//       }
-
-//       td.f {
-//         // FORM / FORMKY
-//         min-width: 240px;
-//         max-width: 240px;
-//         padding-left: 5px;
-//       }
-
-//       td.k {
-//         //FORM/FORMKEY
-//         min-width: 240px;
-//         max-width: 240px;
-//         text-decoration: underline;
-//         font-style: italic;
-//         padding-left: 5px;
-//       }
-
-//       td.l {
-//         //LEMMA
-//         min-width: 150px;
-//         max-width: 150px;
-
-//         input {
-//           width: 95%;
-//         }
-//       }
-
-//       td.e {
-//         min-width: 150px;
-//         max-width: 150px;
-
-//         input {
-//           width: 95%;
-//         }
-//       }
-
-//       td.ph {
-//         //LANG
-//         min-width: 90px;
-//         max-width: 90px;
-//         font-size: @font_text2;
-//         font-family: @fsans;
-//       }
-
-//       td.p {
-//         //POS
-//         min-width: 70px;
-//         max-width: 70px;
-//         font-size: @font_text2;
-//         font-family: @fsans;
-//       }
-
-//       td.fn {
-//         //FUN
-//         min-width: 70px;
-//         max-width: 70px;
-//         font-size: @font_text2;
-//         font-family: @fsans;
-//       }
-
-//       td.m {
-//         //MSD
-//         min-width: 250px;
-//         //max-width: 250px;
-//         font-size: @font_text2;
-//         font-family: @fsans;
-//       }
-//     }
-
-//     tr:nth-child(odd) {
-//       td.f,
-//       td.k,
-//       td.m,
-//       td.p,
-//       td.fn,
-//       td.ph {
-//         background: darken(@cell_back, 10%);
-//       }
-
-//       td.l,
-//       td.e {
-//         input {
-//           background: darken(@inp_back, 10%);
-//         }
-//       }
-//     }
-
-//     tr.select {
-//       td.f,
-//       td.k,
-//       td.m,
-//       td.p,
-//       td.ph,
-//       td.fn,
-//       td.m {
-//         background: @cell_jshover_back !important;
-//         color: @cell_jshover_color;
-//       }
-
-//       td.n {
-//         background: @row_num_select_back !important;
-//       }
-//     }
-
-//     tr.hover {
-//       td.f,
-//       td.k,
-//       td.m,
-//       td.p,
-//       td.fn,
-//       td.ph {
-//         background: darken(@cell_back, 30%);
-//       }
-
-//       td.n {
-//         background: @cmd_hover_back;
-//       }
-
-//       td.l,
-//       td.e {
-//         input {
-//           background: darken(@inp_back, 20%);
-//         }
-//       }
-//     }
-
-//     tr.bl {
-//       td.n {
-//         background: @cmd_back2;
-//         animation: blinker 1s linear infinite !important;
-//       }
-//     }
-
-//     tr.empty {
-//       td.f,
-//       td.k {
-//         background: @form_empty;
-//         color: wheat;
-//       }
-//     }
-//   }
-// }

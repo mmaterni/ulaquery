@@ -32,8 +32,8 @@ X|other||
 
 
 var Filter = {
-  pmjs: {},
-  init:async function(){
+  pos_msd_js: {},
+  init: async function () {
     await this.set_pos_msd_json();
   },
   set_pos_msd_json: async function () {
@@ -50,6 +50,23 @@ var Filter = {
     // const s = JSON.stringify(js, null, 2);
     // console.log(s);
     this.pos_msd_js = js
+  },
+  build_pos_msd_html: function () {
+    const js = UaJth();
+    jt.append("<div>")
+    const hp=(pos)=>`
+      <div>${pos}</div>
+    `;
+    const hr=(msd)=>`
+      ${msd}
+    `;
+    for (let pos in this.pos_msd_js) {
+
+
+    }
+
+    jt.append("</div>")
+
   }
 };
 
