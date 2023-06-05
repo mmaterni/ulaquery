@@ -17,7 +17,9 @@ var cmd_log_show = (...args) => {
 };
 
 function wait_start() {
-  document.querySelector("body").classList.add("wait");
+  const b = document.querySelector('body');
+  if (!!b)
+    b.classList.add("wait");
 };
 
 function wait_stop() {
@@ -42,4 +44,4 @@ var UlaQuery = {
   }
 };
 
-UlaQuery.open();
+// UlaQuery.open();

@@ -20,11 +20,17 @@ ADP|adposition|adpType|PrepS,PrepArt
 INTJ|interjection||
 X|other||
 -|del||
-    var js = {
+
+var js = {
       "VERB": {
         "tense": ["Pots", "Pres", "Fut", "Imp"],
         "voice": ["Act", "Pass", "Rfl"]
+      },
+     "NOUN": {
+        "gender": ["Masc.", "Femm.", "Neut."],
+        "number": ["Sing.", "Plur."]
       }
+      ........
     }   
 
 */
@@ -72,6 +78,7 @@ var PosMsd = {
     };
     // const s = JSON.stringify(js, null, 2);
     // console.log(s);
+    jta = UaJth();
     const jtm = UaJth();
     const jt = UaJth();
     jt.append(`<div class="pos_msd">
@@ -80,28 +87,44 @@ var PosMsd = {
       <li>MSD</li>
       <li>ATTRS</li>
       </ul>
-    <ul class="pos">`)
-    const hp = (pos, msds) => `
+    <ul class="pos">`);
+
+    const htp = (pos, msds) => `
       <li>${pos}
-        <ul class="msd">
+        <ul>
         ${msds}
         </ul>
       </li>
     `;
-    const hm = (msd) => `
-      <li>${msd}</li>
+    const htm = (msd, attrs) => `
+      <li>${msd}
+        <ul>
+          ${attrs}
+        </ul>
+      </li>
     `;
+    const hta = (attr) => `
+      <li>${attr}</li>
+    `;
+
     for (let pos in js) {
+      if (["X", 'INTJ','-'].includes(pos)) continue
       jtm.reset();
-      for (let msd in js[pos])
-        jtm.append(hm, msd)
+      for (let msd in js[pos]) {
+        jta.reset();
+        for (let attr of js[pos][msd]) {
+          jta.append(hta, attr);
+        }
+        const ha = jta.html()
+        jtm.append(htm, msd, ha)
+      }
       const msds = jtm.html();
-      jt.append(hp, pos, msds)
+      jt.append(htp, pos, msds)
     }
 
     jt.append("</ul></div>")
     const html = jt.html();
-    console.log(jt.text());
+    // console.log(jt.text());
     if (!this.wind) {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();

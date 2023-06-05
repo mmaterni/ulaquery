@@ -1,43 +1,5 @@
 <!DOCTYPE html>
 <html lang="it">
-    <style>
-        .table-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .table-list {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-        .label-row {
-            display: flex;
-            align-items: center;
-        }
-        .label {
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        .secondary-row {
-            margin-left: 20px;
-        }
-        .tertiary-row {
-            margin-left: 40px;
-        }
-        .separated-field {
-            display: inline-block;
-            margin-right: 5px;
-        }
-        .table-wrapper {
-            ul {
-            }
-            ul li {
-            }
-            .label-row {
-            }
-        }
-    </style>
 
     <head>
         <meta charset="UTF-8" />
@@ -50,57 +12,308 @@
     </head>
 
     <body>
-        <div class="table-wrapper">
-            <ul class="table-list">
-                <li class="label-row">
-                    <span class="label">POS</span>
-                    <span class="label">NSD</span>
-                    <span class="label">ATTR</span>
-                </li>
-                <li class="secondary-row">
-                    <span class="label">VERB:</span>
-                    <ul class="table-list tertiary-row">
-                        <li class="label-row">
-                            <span class="label">tense:</span>
-                            <div class="field-row">
-                                <span class="field">Pots</span>
-                                <span class="field">Pres</span>
-                                <span class="field">Fut</span>
-                                <span class="field">Imp</span>
-                            </div>
-                        </li>
-                        <li class="label-row">
-                            <span class="label">voice:</span>
-                            <div class="field-row">
-                                <span class="field">Act</span>
-                                <span class="field">Pass</span>
-                                <span class="field">Rfl</span>
-                            </div>
-                        </li>
+        <div class="pos_msd">
+            <ul class="head">
+                <li>POS</li>
+                <li>MSD</li>
+                <li>ATTRS</li>
+            </ul>
+            <ul class="pos">
+                <li>NOUN
+                    <ul>
+                        <li>gender</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                        </ul>
+                        <li>number</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                        </ul>
+                        <li>case</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                        </ul>
                     </ul>
                 </li>
-                <li class="secondary-row">
-                    <span class="label">NOM:</span>
-                    <ul class="table-list tertiary-row">
-                        <li class="label-row">
-                            <span class="label">caso:</span>
-                            <div class="field-row">
-                                <span class="field">Sing.</span>
-                                <span class="field">Plur.</span>
-                            </div>
-                        </li>
-                        <li class="label-row">
-                            <span class="label">genere:</span>
-                            <div class="field-row">
-                                <span class="field">Masch.</span>
-                                <span class="field">Femm.</span>
-                            </div>
-                        </li>
+
+                <li>PROPN
+                    <ul>
+                        <li>gender</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                        </ul>
+                        <li>number</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                        </ul>
+                        <li>case</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                        </ul>
+                    </ul>
+                </li>
+
+                <li>ADJ
+                    <ul>
+                        <li>gender</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                        </ul>
+                        <li>number</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                        </ul>
+                        <li>case</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                        </ul>
+                        <li>degree</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                        </ul>
+                    </ul>
+                </li>
+
+                <li>DET
+                    <ul>
+                        <li>deterType</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                            <li>5</li>
+                            <li>6</li>
+                            <li>7</li>
+                            <li>8</li>
+                        </ul>
+                        <li>gender</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                        </ul>
+                        <li>number</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                        </ul>
+                        <li>case</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                        </ul>
+                        <li>MWEs</li>
+                        <ul>
+                            <li>0</li>
+                        </ul>
+                    </ul>
+                </li>
+
+                <li>PRON
+                    <ul>
+                        <li>pronType</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                            <li>5</li>
+                            <li>6</li>
+                        </ul>
+                        <li>person</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                        </ul>
+                        <li>gender</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                        </ul>
+                        <li>number</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                        </ul>
+                        <li>case</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                        </ul>
+                        <li>MWEs</li>
+                        <ul>
+                            <li>0</li>
+                        </ul>
+                    </ul>
+                </li>
+
+                <li>VERB
+                    <ul>
+                        <li>verbForm</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                        </ul>
+                        <li>mood</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                            <li>5</li>
+                            <li>6</li>
+                        </ul>
+                        <li>tense</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                        </ul>
+                        <li>voice</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                        </ul>
+                        <li>property</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                        </ul>
+                        <li>person</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                        </ul>
+                        <li>number</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                        </ul>
+                        <li>gender</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                        </ul>
+                        <li>MWEs</li>
+                        <ul>
+                            <li>0</li>
+                        </ul>
+                    </ul>
+                </li>
+
+                <li>ADP
+                    <ul>
+                        <li>adpType</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                        </ul>
+                        <li>MWEs</li>
+                        <ul>
+                            <li>0</li>
+                        </ul>
+                    </ul>
+                </li>
+
+                <li>ADV
+                    <ul>
+                        <li>advType</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                        </ul>
+                        <li>advType2</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                        </ul>
+                        <li>degree</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                        </ul>
+                        <li>MWEs</li>
+                        <ul>
+                            <li>0</li>
+                        </ul>
+                    </ul>
+                </li>
+
+                <li>CCONJ
+                    <ul>
+                        <li>MWEs</li>
+                        <ul>
+                            <li>0</li>
+                        </ul>
+                    </ul>
+                </li>
+
+                <li>SCONJ
+                    <ul>
+                        <li>MWEs</li>
+                        <ul>
+                            <li>0</li>
+                        </ul>
+                    </ul>
+                </li>
+
+                <li>NUM
+                    <ul>
+                        <li>numType</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                        </ul>
+                    </ul>
+                </li>
+
+                <li>PART
+                    <ul>
+                        <li>partType</li>
+                        <ul>
+                            <li>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                        </ul>
                     </ul>
                 </li>
             </ul>
-        </div>
-
+        </div> 
 
     </body>
 
