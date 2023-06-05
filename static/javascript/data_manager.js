@@ -47,8 +47,8 @@
             throw new Error(`Erroe:${resp.status} ${resp.statusText}`);
           }
           const data = await resp.text();
-          const lines = data.trim().split("\n");
-          return lines.map((x) => x.split("|"));
+          const rows = data.trim().split("\n");
+          return rows.map((x) => x.split("|"));
         } catch (error) {
           alert(`Errror:${url}\n ${error}`);
           throw error;
