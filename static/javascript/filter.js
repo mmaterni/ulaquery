@@ -78,53 +78,45 @@ var PosMsd = {
     };
     // const s = JSON.stringify(js, null, 2);
     // console.log(s);
-    jta = UaJth();
-    const jtm = UaJth();
-    const jt = UaJth();
-    jt.append(`<div class="pos_msd">
-      <ul class="head">
-      <li>POS</li>
-      <li>MSD</li>
-      <li>ATTRS</li>
-      </ul>
-    <ul class="pos">`);
+    const jt1 = UaJth();
+    const jt0 = UaJth();
+    // jt0.append(`<div class="pos_msd">
+    //   <ul class="head">
+    //   <li>POS</li>
+    //   <li>MSD</li>
+    //   <li>ATTRS</li>
+    //   </ul>
+    // <ul class="pos">`);
 
-    const htp = (pos, msds) => `
-      <li>${pos}
-        <ul>
-        ${msds}
-        </ul>
+    jt0.append(`<div class="pos_msd">
+  <ul class="pos">`);
+
+    const ul0 = (pos, msds) => `
+      <li>
+        <div>${pos}</div>
+        <div>${msds}</div>
       </li>
     `;
-    const htm = (msd, attrs) => `
-      <li>${msd}
-        <ul>
-          ${attrs}
-        </ul>
-      </li>
-    `;
-    const hta = (attr) => `
-      <li>${attr}</li>
-    `;
+    const ul1 = (x) => `<li>${x}</li>`;
 
     for (let pos in js) {
-      if (["X", 'INTJ','-'].includes(pos)) continue
-      jtm.reset();
+      if (["X", 'INTJ', '-'].includes(pos)) continue
+       
+      jt1.reset();
       for (let msd in js[pos]) {
-        jta.reset();
-        for (let attr of js[pos][msd]) {
-          jta.append(hta, attr);
-        }
-        const ha = jta.html()
-        jtm.append(htm, msd, ha)
+        jt1.append("<ul>")
+        jt1.append(ul1, msd);
+        for (let x of js[pos][msd]) 
+          jt1.append(ul1, x);
+        jt1.append("</ul>")
       }
-      const msds = jtm.html();
-      jt.append(htp, pos, msds)
+      const h1=jt1.html()
+      
+      jt0.append(ul0,pos,h1)
     }
-
-    jt.append("</ul></div>")
-    const html = jt.html();
-    // console.log(jt.text());
+    jt0.append("</ul></div>")
+    const html = jt0.html();
+    console.log(jt0.text());
     if (!this.wind) {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
@@ -147,7 +139,7 @@ var PosMsd = {
     // let lp_wd = $("#lpmx_rows_head_id").width();
     // lp_wd = lp_wd > 500 ? lp_wd : 1099;
     // const left = lp_wd + p.left + 20;
-    const left = 200;
+    const left = 20;
     this.wind.setXY(left, 100, -1).show();
   },
   resetXY: function () {

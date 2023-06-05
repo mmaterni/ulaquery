@@ -353,7 +353,7 @@ div.pos_msd {
   padding: 5px;
   background: @flt_back;
   height: @pos_msd_height;
-  min-width:800px;
+  min-width: 800px;
   overflow-y: scroll;
   overflow-x: scroll;
 
@@ -369,7 +369,7 @@ div.pos_msd {
       font-family: @fsans;
       font-weight: bold;
       text-align: center;
-      margin: 0 ;
+      margin: 0;
       padding: 0 40px 0 40px;
       border-right: 1px solid @flt_border_color;
     }
@@ -382,29 +382,36 @@ div.pos_msd {
     li {
       background: @flt_back;
       padding: 5px 0 0 5px;
-      border-width: 1px 1px 0  0;
+      border-width: 1px 1px 0 0;
       border-style: solid;
-      border-color:@flt_border_color;
+      border-color: @flt_border_color;
       font-size: @fsize_07;
-      ul {
-        margin-left: 120px;
-        margin-top: -30px;
-        list-style: none;
-        li {
-          background: darken(@flt_back,-10%);
-          width: 150px;
-          height:20px;
-          font-size: @fsize_07;
-          ul {
-            display: flex;
-            flex-direction: row;
-            align-items: left;
-            justify-content: flex-start;
-            list-style: none;
-            li {
-              margin: 10px;
-              background: #ec4a4a;
-            }
+      div {
+        display: inline-block;
+        border: 1px solid black;
+        background: rgb(0, 255, 195);
+        min-width: 120px !important;
+      }
+      div {
+        display: inline-block;
+        border:1px solid red;
+        ul {
+          display: flex;
+          flex-direction: row;
+          align-items: left;
+          justify-content: flex-start;
+          list-style: none;
+          // margin-left: 120px;
+          margin-top: 0px;
+          li {
+            box-sizing: border-box;
+            background: darken(@flt_back, -10%);
+            width: 50px;
+            height: 30px !important;
+            font-size: @fsize_07;
+            border-width: 1px 1px 1px 0;
+            border-style: solid;
+            border-color: @flt_border_color;
           }
         }
       }
