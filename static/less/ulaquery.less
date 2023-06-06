@@ -426,11 +426,12 @@ div.pos_msd {
         background: darken(@wnd_back, 5%);
         color: @wnd_color;
         font-size: @fsize_08;
+        font-weight: bold;
       }
       div.m {
         // box-sizing: border-box;
         margin-left: 130px;
-        margin-top: -33px;
+        margin-top: -32px;
         border-bottom: 1px solid @wnd_border_color;
         ul {
           display: flex;
@@ -440,28 +441,29 @@ div.pos_msd {
           list-style: none;
           li {
             box-sizing: border-box;
-            background: darken(@wnd_back, -10%);
+            // background: darken(@wnd_back, -10%);
             min-height: 30px !important;
-            border-width: 1px 0 0 0;
-            border-style: solid;
-            border-color: @wnd_border_color;
+            // border-width: 1px 0 0 0;
+            // border-style: solid;
+            // border-color: @wnd_border_color;
             a {
-              padding: 0 5px 0 5px;
-              margin: 0px auto 0px auto;
+              padding: 0 9px 0 9px;
+              margin-right: 10px;
+              // margin: 0px auto 0px auto;
               background: darken(@wnd_back, -10%);
               color: @wnd_color;
-              font-size: @fsize_08;
+              font-size: @fsize_07;
               font-family: @fsans;
-              font-weight: bold;
+              // font-weight: bold;
               font-style: normal;
               text-decoration: none;
-              border: 2px solid @wnd_color;
-              border-radius: 9px;
+              border: 1px solid @wnd_color;
+              border-radius: 6px;
             }
 
             a:hover {
               font-style: italic;
-              padding: 0 20px 0 20px;
+              // padding: 0 20px 0 20px;
               background: @wnd_hover_back;
             }
           }
@@ -469,7 +471,7 @@ div.pos_msd {
             box-sizing: border-box;
             min-width: 120px;
             height: 30px !important;
-            background: darken(@wnd_back, 10%);
+            background: darken(@wnd_back, 5%);
             color: @wnd_color;
             padding: 0 0 0 5px;
             margin-right: 5px;
