@@ -67,6 +67,72 @@ var PosMsd = {
   },
   open: async function () {
     const rows = await this.load();
+
+    // rows.splice(5);
+
+    rows.shift()
+    let js = {};
+    for (let row of rows) {
+      const pos = row[0];
+      if (!js[pos]) js[pos] = {};
+      const msd = row[2]
+      const attrs = row[3].split(',');
+      js[pos][msd] = attrs;
+    };
+    // const s = JSON.stringify(js, null, 2);
+    // console.log(s);
+    const jt1 = UaJth();
+    const jt0 = UaJth();
+    jt0.append(`
+    <div class="menu_wnd">
+    <ul>
+    <li><a>Uno</a></li>
+    <li><a>Due</a></li>
+    <li><a>Tre</a></li>
+    </ul>
+    </div>
+    <div class="pos_msd">
+    <ul class="pos">`);
+
+    for (let pos in js) {
+      if (["X", 'INTJ', '-'].includes(pos)) continue
+      jt1.reset();
+      let okpos = true;
+      for (let msd in js[pos]) {
+        jt1.append(`<li><div><ul>`)
+        if (okpos)
+          jt1.append(`<li class="p"><span>${pos}</span></li>`);
+        else
+          jt1.append(`<li class="e"></li>`);
+        okpos = false;
+        jt1.append(`<li class="m"><span>${msd}</span></li>`);
+        for (let x of js[pos][msd])
+          jt1.append(`<li><a>${x}</a></li>`);
+        jt1.append(`</ul></div></li>`)
+      }
+
+      const h = jt1.html()
+      // console.log(jt1.text());
+      jt0.append(`${h}`);
+    }
+
+    jt0.append("</ul></div>")
+    const html = jt0.html();
+    console.log(jt0.text());
+
+    if (!this.wind) {
+      this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
+      this.setXY();
+      this.wind.drag();
+    }
+    this.wind.setHtml(html);
+    // this.bind_pos();
+    this.show();
+  }
+  ,
+
+  xopen: async function () {
+    const rows = await this.load();
     rows.shift()
     let js = {};
     for (let row of rows) {

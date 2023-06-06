@@ -27,8 +27,12 @@
           const data = await resp.text();
           const rows = data.trim().split("\n");
           this.dict_rows = rows.map((x) => x.split("|"));
+          // AAA test
+          // rimuove dallindice 20 alla fine
           this.dict_rows.splice(20);
+          // rimuove primo elemento
           this.dict_rows.splice(0,1);
+
         } catch (error) {
           alert(`Errror:${url}\n ${error}`);
           throw error;
