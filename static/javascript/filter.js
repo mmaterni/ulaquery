@@ -87,32 +87,31 @@ var PosMsd = {
     //   <li>ATTRS</li>
     //   </ul>
     // <ul class="pos">`);
-
     jt0.append(`<div class="pos_msd">
-  <ul class="pos">`);
-
+    <ul class="pos">`);
     const ul0 = (pos, msds) => `
-      <li>
-        <div>${pos}</div>
-        <div>${msds}</div>
-      </li>
-    `;
+    <li>
+      <div class="p">
+      ${pos}
+      </div>
+      <div class="m">${msds}</div>
+    </li>`;
     const ul1 = (x) => `<li>${x}</li>`;
 
     for (let pos in js) {
       if (["X", 'INTJ', '-'].includes(pos)) continue
-       
+
       jt1.reset();
       for (let msd in js[pos]) {
         jt1.append("<ul>")
         jt1.append(ul1, msd);
-        for (let x of js[pos][msd]) 
+        for (let x of js[pos][msd])
           jt1.append(ul1, x);
         jt1.append("</ul>")
       }
-      const h1=jt1.html()
-      
-      jt0.append(ul0,pos,h1)
+      const h1 = jt1.html()
+
+      jt0.append(ul0, pos, h1)
     }
     jt0.append("</ul></div>")
     const html = jt0.html();
