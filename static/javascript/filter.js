@@ -101,10 +101,9 @@ var PosMsd = {
       jt1.reset();
       for (let msd in js[pos]) {
         jt1.append("<ul>")
-        jt1.append(`<li><span>${msd}</span></li>`)
+        jt1.append(`<li class="m"><span>${msd}</span></li>`)
         for (let x of js[pos][msd])
           jt1.append(`<li><a>${x}</a></li>`);
-        // jt1.append(ht1, x);
         jt1.append("</ul>")
       }
       const h = jt1.html()
