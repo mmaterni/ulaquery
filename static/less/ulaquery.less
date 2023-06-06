@@ -396,7 +396,7 @@ div.menu_wnd {
 }
 
 @pos_msd_height: 600px;
-
+@pos_row_heigth: 25px;
 div.pos_msd {
   box-sizing: border-box;
   border: 1px solid @wnd_border_color;
@@ -418,7 +418,6 @@ div.pos_msd {
     li {
       div {
         margin-left: 5px;
-        // border-bottom: 1px solid @wnd_border_color;
 
         ul {
           display: flex;
@@ -429,11 +428,10 @@ div.pos_msd {
 
           li {
             box-sizing: border-box;
-            min-height: 30px !important;
+            max-height: @pos_row_heigth !important;
           }
 
           li.p {
-            // box-sizing: border-box;
             min-width: 120px;
             background: darken(@wnd_back, 5%);
             color: @wnd_color;
@@ -454,7 +452,6 @@ div.pos_msd {
           li.m {
             box-sizing: border-box;
             min-width: 120px;
-            height: 30px !important;
             background: darken(@wnd_back, 5%);
             color: @wnd_color;
             padding: 0 0 0 5px;
@@ -463,13 +460,14 @@ div.pos_msd {
             border-style: solid;
             border-color: @wnd_border_color;
             span {
-              font-size: @fsize_08;
+              font-size: @fsize_07;
               font-weight: bold;
             }
           }
           li.a {
             background: darken(@wnd_back, 10%);
             padding: 0;
+            border-radius: 6px;
             a {
               padding: 0 9px 0 9px;
               margin-right: 5px;
@@ -487,98 +485,19 @@ div.pos_msd {
               background: @wnd_hover_back;
               color: @wnd_hover_color;
             }
+            a.select {
+              background: @wnd_select_back;
+              color: @wnd_select_color;
+              text-decoration: underline;
+            }
+            a.select:hover {
+              background: lighten(@wnd_select_back,20%);
+              color: @wnd_select_color;
+              text-decoration: underline;
+            }
           }
         }
       }
     }
   }
 }
-
-// div.xpos_msd {
-//   box-sizing: border-box;
-//   border: 1px solid @wnd_border_color;
-//   padding: 5px 0 0 5px;
-//   background: @wnd_back;
-//   height: @pos_msd_height;
-//   overflow-y: scroll;
-//   overflow-x: scroll;
-//   ul.pos {
-//     margin: 0 0 0 0;
-//     padding: 0 0 0 0;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: left;
-//     justify-content: flex-start;
-//     list-style: none;
-//     li {
-//       div.p {
-//         box-sizing: border-box;
-//         width: 120px;
-//         height: 30px !important;
-//         padding: 5px 0 0 0;
-//         margin-top: 10px;
-//         border-width: 1px 1px 1px 1px;
-//         border-style: solid;
-//         border-color: @wnd_border_color;
-//         background: darken(@wnd_back, 5%);
-//         color: @wnd_color;
-//         font-size: @fsize_08;
-//         font-weight: bold;
-//       }
-//       div.m {
-//         // box-sizing: border-box;
-//         margin-left: 130px;
-//         margin-top: -32px;
-//         border-bottom: 1px solid @wnd_border_color;
-//         ul {
-//           display: flex;
-//           flex-direction: row;
-//           align-items: left;
-//           justify-content: flex-start;
-//           list-style: none;
-//           li {
-//             box-sizing: border-box;
-//             // background: darken(@wnd_back, -10%);
-//             min-height: 30px !important;
-//             // border-width: 1px 0 0 0;
-//             // border-style: solid;
-//             // border-color: @wnd_border_color;
-//             a {
-//               padding: 0 9px 0 9px;
-//               margin-right: 10px;
-//               background: darken(@wnd_back, -10%);
-//               color: @wnd_color;
-//               font-size: @fsize_07;
-//               font-family: @fsans;
-//               font-style: normal;
-//               text-decoration: none;
-//               border: 1px solid @wnd_color;
-//               border-radius: 6px;
-//             }
-//             a:hover {
-//               font-style: italic;
-//               background: @wnd_hover_back;
-//               color: @wnd_hover_color;
-//             }
-//           }
-//           li.m {
-//             box-sizing: border-box;
-//             min-width: 120px;
-//             height: 30px !important;
-//             background: darken(@wnd_back, 5%);
-//             color: @wnd_color;
-//             padding: 0 0 0 5px;
-//             margin-right: 5px;
-//             border-width: 1px 1px 0 1px;
-//             border-style: solid;
-//             border-color: @wnd_border_color;
-//             span {
-//               font-size: @fsize_08;
-//               font-weight: bold;
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
