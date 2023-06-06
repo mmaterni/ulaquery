@@ -405,9 +405,9 @@ div.pos_msd {
   height: @pos_msd_height;
   overflow-y: scroll;
   overflow-x: scroll;
-  
+
   ul.pos {
-    margin: 0 ;
+    margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -416,7 +416,6 @@ div.pos_msd {
     list-style: none;
 
     li {
-
       div {
         margin-left: 5px;
         // border-bottom: 1px solid @wnd_border_color;
@@ -431,27 +430,10 @@ div.pos_msd {
           li {
             box-sizing: border-box;
             min-height: 30px !important;
-            a {
-              padding: 0 9px 0 9px;
-              margin-right: 10px;
-              background: darken(@wnd_back, -10%);
-              color: @wnd_color;
-              font-size: @fsize_07;
-              font-family: @fsans;
-              font-style: normal;
-              text-decoration: none;
-              border: 1px solid @wnd_color;
-              border-radius: 6px;
-            }
-            a:hover {
-              font-style: italic;
-              background: @wnd_hover_back;
-              color: @wnd_hover_color;
-            }
           }
 
           li.p {
-            box-sizing: border-box;
+            // box-sizing: border-box;
             min-width: 120px;
             background: darken(@wnd_back, 5%);
             color: @wnd_color;
@@ -485,15 +467,31 @@ div.pos_msd {
               font-weight: bold;
             }
           }
-
+          li.a {
+            background: darken(@wnd_back, 10%);
+            padding: 0;
+            a {
+              padding: 0 9px 0 9px;
+              margin-right: 5px;
+              background: darken(@wnd_back, -10%);
+              color: @wnd_color;
+              font-size: @fsize_07;
+              font-family: @fsans;
+              font-style: normal;
+              text-decoration: none;
+              border: 1px solid @wnd_color;
+              border-radius: 6px;
+            }
+            a:hover {
+              font-style: italic;
+              background: @wnd_hover_back;
+              color: @wnd_hover_color;
+            }
+          }
         }
-
       }
-
     }
-
   }
-
 }
 
 // div.xpos_msd {

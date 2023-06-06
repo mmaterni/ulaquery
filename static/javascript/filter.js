@@ -107,7 +107,7 @@ var PosMsd = {
         okpos = false;
         jt1.append(`<li class="m"><span>${msd}</span></li>`);
         for (let x of js[pos][msd])
-          jt1.append(`<li><a>${x}</a></li>`);
+          jt1.append(`<li class="a"><a>${x}</a></li>`);
         jt1.append(`</ul></div></li>`)
       }
 
