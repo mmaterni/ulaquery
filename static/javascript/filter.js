@@ -80,22 +80,31 @@ var PosMsd = {
     // console.log(s);
     const jt1 = UaJth();
     const jt0 = UaJth();
-    jt0.append(`<div class="pos_msd">
+    jt0.append(`
+    <div class="menu_wnd">
+    <ul>
+    <li><a>Uno</a></li>
+    <li><a>Due</a></li>
+    <li><a>Tre</a></li>
+    </ul>
+    </div>
+    <div class="pos_msd">
     <ul class="pos">`);
     const ht0 = (pos, msds) => `
     <li>
       <div class="p">${pos}</div>
       <div class="m">${msds}</div>
     </li>`;
-    const ht1 = (x) => `<li>${x}</li>`;
+    // const ht1 = (x) => `<li><a>${x}</a></li>`;
     for (let pos in js) {
       if (["X", 'INTJ', '-'].includes(pos)) continue
       jt1.reset();
       for (let msd in js[pos]) {
         jt1.append("<ul>")
-        jt1.append(ht1, msd);
+        jt1.append(`<li><span>${msd}</span></li>`)
         for (let x of js[pos][msd])
-          jt1.append(ht1, x);
+          jt1.append(`<li><a>${x}</a></li>`);
+        // jt1.append(ht1, x);
         jt1.append("</ul>")
       }
       const h = jt1.html()
