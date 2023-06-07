@@ -30,7 +30,7 @@ const html_dict_menu = `
   </ul>
 
   <li class="v tipb" >
-    <a  cmd="select_text" href="#">Select Text </a>
+    <a  cmd="show_filter" href="#">Open Filter </a>
     <span class="tiptextb">Load Selected Text</span>
    </li>
   
@@ -80,10 +80,6 @@ var DictForm = {
   tr_selected: null,
   exe: function (cmd) {
     switch (cmd) {
-      // case "show_text":
-      //   this.save_store();
-      //   Ula.show_text();
-      //   break;
       case "scroll_top":
         this.scroll_top();
         break;
@@ -96,17 +92,15 @@ var DictForm = {
       case "scroll_right":
         this.scroll_right();
         break;
-      // case "save_data":
-      //   if (confirm("Save Data ?"))
-      //     this.save_data();
-      //   break;
+      case "show_filter":
+        this.show_filter();
+        break;
+
       // case "load_data":
       //   if (confirm("Load Data ?"))
       //     this.load_data();
       //   break;
-      // case "check_text":
-      //   this.check_text();
-      //   break;
+
       // case "upd_corpus":
       //   if (!confirm("Save Data ?"))
       //     return;
@@ -148,18 +142,17 @@ var DictForm = {
       //     this.diff_text_corpus();
       //   });
       //   break;
+
       // case "help":
       //   Help.toggle("help1.html");
       //   break;
-      // case "cmd_log":
-      //   cmd_log_toggle();
-      //   break;
+      case "cmd_log":
+        cmd_log_toggle();
+        break;
       // case "resetxy":
       //   relocate();
       //   break;
-      // case "show_store":
-      //   DbFormLpmx.show_store();
-      //   break;
+
       // case "clear_store":
       //   if (confirm("Clear Local Store ?"))
       //     DbFormLpmx.clear_store();
@@ -167,9 +160,6 @@ var DictForm = {
       case "close":
         cmd_close();
         break;
-      // case "scroll":
-      //   DictForm.scroll();
-      //   break;
       default:
         alert("command not found.");
     }
@@ -197,6 +187,9 @@ var DictForm = {
   scroll_right: function () {
     const e = document.getElementById("dict_table_id");
     e.scrollLeft = e.scrollWidth;
+  },
+  show_filter: function () {
+    PosMsd.show();
   },
   dict_form2html: async function () {
     // const form_cols = ["n", "FORMA", "KEY", "LEMMA", "ETIMO", "LANG", "DATE", "POS", "FUNCT"];
