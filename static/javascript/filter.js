@@ -79,6 +79,7 @@ var PosMsd = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
+      // this.wind.setStyle({ cursor: 'move' });
     }
     this.wind.setHtml(html);
     this.bind_menu();

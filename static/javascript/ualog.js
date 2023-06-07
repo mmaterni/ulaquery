@@ -29,6 +29,7 @@ var UaLog = {
             color: '#ffffff',
             fontSize: '15px',
             fontWeight: 'normal',
+            cursor:'move',
             borderRadius: '9px'
         });
 

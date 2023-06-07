@@ -4,27 +4,31 @@
 const html_dict_menu = `
 <div id="dict_menu_id" class="menu_bar" >
 <ul>
-  <li class="v">
-    <a class="tipb" cmd="scroll_top" href="#">Top
-      <span class="tiptextb">Scroll Top</span>
-    </a>
-  </li>
-  <li class="v">
-    <a class="tipb" cmd="scroll_bottom" href="#">Bottom
-      <span class="tiptextb">Scroll Bottom</span>
-    </a>
-  </li>
-  <li class="v">
-    <a class="tipb" cmd="scroll_left" href="#">Left
-      <span class="tiptextb">Scroll Left</span>
-    </a>
-  </li>
-  <li class="v">
-    <a class="tipb" cmd="scroll_right" href="#">Right
-      <span class="tiptextb">Scroll Right</span>
-    </a>
-  </li>
 
+<li class="v">
+  <a href="#">Scroll</a>
+   <ul class="v">
+    <li class="h">
+      <a class="tipb" cmd="scroll_top" href="#">Top
+        <span class="tiptextb">Scroll Top</span>
+      </a>
+    </li>
+    <li class="h">
+      <a class="tipb" cmd="scroll_bottom" href="#">Bottom
+        <span class="tiptextb">Scroll Bottom</span>
+      </a>
+    </li>
+    <li class="h">
+      <a class="tipb" cmd="scroll_left" href="#">Left
+        <span class="tiptextb">Scroll Left</span>
+      </a>
+    </li>
+    <li class="h">
+      <a class="tipb" cmd="scroll_right" href="#">Right
+        <span class="tiptextb">Scroll Right</span>
+      </a>
+    </li>
+  </ul>
 
   <li class="v tipb" >
     <a  cmd="select_text" href="#">Select Text </a>
