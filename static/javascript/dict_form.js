@@ -4,28 +4,27 @@
 const html_dict_menu = `
 <div id="dict_menu_id" class="menu_bar" >
 <ul>
-
-<li class="v">
+ <li class="v">
   <a href="#">Scroll</a>
    <ul class="v">
     <li class="h">
-      <a class="tipb" cmd="scroll_top" href="#">Top
-        <span class="tiptextb">Scroll Top</span>
+      <a class="tipr" cmd="scroll_top" href="#">Top
+        <span class="tiptextr">Scroll Top</span>
       </a>
     </li>
     <li class="h">
-      <a class="tipb" cmd="scroll_bottom" href="#">Bottom
-        <span class="tiptextb">Scroll Bottom</span>
+      <a class="tipr" cmd="scroll_bottom" href="#">Bottom
+        <span class="tiptextr">Scroll Bottom</span>
       </a>
     </li>
     <li class="h">
-      <a class="tipb" cmd="scroll_left" href="#">Left
-        <span class="tiptextb">Scroll Left</span>
+      <a class="tipr" cmd="scroll_left" href="#">Left
+        <span class="tiptextr">Scroll Left</span>
       </a>
     </li>
     <li class="h">
-      <a class="tipb" cmd="scroll_right" href="#">Right
-        <span class="tiptextb">Scroll Right</span>
+      <a class="tipr" cmd="scroll_right" href="#">Right
+        <span class="tiptextr">Scroll Right</span>
       </a>
     </li>
   </ul>

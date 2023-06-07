@@ -132,8 +132,8 @@ body.wait {
 }
 
 @menu_height: 25x;
-@menu_sub_top: 22px;
-@font_menu: @fsize_08;
+@menu_sub_top: 20px;
+@font_menu: @fsize_07;
 
 div.menu_bar {
   width: 100%;
@@ -159,11 +159,13 @@ div.menu_bar {
       position: relative;
       text-align: center;
       flex: 1;
-
+   
       a {
         display: block;
-        min-height: @menu_height;
-        padding-top: 5px;
+        min-height: @menu_height !important;
+        max-height: @menu_height !important;
+        padding-top: 4px;
+        padding-bottom: 2px;
         line-height: 1;
         text-align: center;
         text-decoration: none;
