@@ -45,7 +45,9 @@ var PosMsd = {
     </li>
 
     <li><a>Due</a></li>
-    <li><a>Tre</a></li>
+
+    <li><a cmd="hide"  hred="#">Close</a></li>
+    
     </ul>
     </div>
     <div class="pos_msd">
@@ -113,7 +115,7 @@ var PosMsd = {
   bind_menu: function () {
     const call = (ev) => {
       const t = ev.target;
-      if (t.tagName == 'A') {
+      if (t.tagName.toUpperCase() == 'A') {
         const cmd = t.getAttribute("cmd");
         if (!!cmd) this[cmd]();
       }
@@ -122,7 +124,6 @@ var PosMsd = {
     menu.addEventListener("click", call);
   },
   bind_pos_msd: function () {
-    // const elem = document.getElementById(this.id);
     const attrs = this.wind.w.querySelectorAll("div.pos_msd li.a a");
     for (let a of attrs) {
       a.addEventListener("click", (ev) => {
