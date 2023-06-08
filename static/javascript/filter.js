@@ -9,16 +9,16 @@ var FormLemma = {
     <div class="menu_wnd">
     <ul>
     <li>
-    <a class="tipb" cmd="unselect" href="#">Reset
+    <a class="tipb" onclick="FormLemma.unselect()" href="#">Reset
        <span class="tiptextb">Reset All Field Selected</span>
      </a>
     </li>
     <li><a>Due</a></li>
-    <li><a cmd="hide" onclick="FormLemma.hide()"  href="#">Close</a></li>  
+    <li><a  onclick="FormLemma.hide()"  href="#">Close</a></li>  
     </ul>
     </div>
     
-    <div class="pos_msd">
+    <div class="form_lemma">
     <ul>
         <li>
           <span>FORMA</span> 
@@ -90,17 +90,6 @@ var FormLemma = {
     for (let a of attrs) {
       a.classList.remove("select");
     }
-  },
-  bind_menu: function () {
-    const call = (ev) => {
-      const t = ev.target;
-      if (t.tagName.toUpperCase() == 'A') {
-        const cmd = t.getAttribute("cmd");
-        if (!!cmd) this[cmd]();
-      }
-    };
-    menu = this.wind.w.querySelector("div.menu_wnd");
-    menu.addEventListener("click", call);
   },
   bind_form_lemma: function () {
     // const attrs = this.wind.w.querySelectorAll("div.pos_msd li.a a");
