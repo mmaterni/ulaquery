@@ -14,49 +14,27 @@ var FormLemma = {
      </a>
     </li>
     <li><a>Due</a></li>
-    <li><a  onclick="FormLemma.hide()"  href="#">Close</a></li>  
+    <li><a  onclick="FormLemma.hide()" href="#">Close</a></li>  
     </ul>
     </div>
     
-    <div class="form_lemma">
-    <ul>
-        <li>
-          <span>FORMA</span> 
-          <input type="text" value="" name="form" size="6" ></span>
-       </li>
-       <li>
-         <span>LEMMA/span> 
-         <input type="text" value="" name="form" size="6" ></span>
-      </li>
-      <li>
-         <span>ETIMO</span> 
-          <input type="text" value="" name="form" size="6" ></span>
-      </li>
-
-      <li>
-        <span>LANG</span> 
-        <input type="text" value="" name="form" size="6" ></span>
-    </li>
-    <li>
-      <span>DATE</span> 
-      <input type="text" value="" name="form" size="6" ></span>
-    </li>
-    <li>
-      <span>FUNCT</span> 
-      <input type="text" value="" name="form" size="6" ></span>
-    </li>
-    <li>
-      <span>LOC.T</span> 
-      <input type="text" value="" name="form" size="6" ></span>
-    </li>
-    <li>
-      <span>DATE T.</span> 
-      <input type="text" value="" name="form" size="6" ></span>
-    </li>
-
+<div class="form_lemma">
+<ul>
+<li>
+  <div class="l">Forma</div>:
+  <div  class="i"> <input type="text" value="" name="forma" size="6" > </div>
+</li>
+<li>
+  <div class="l">Lemma</div>:
+  <div class="i"> <input type="text" value="" name="lemma" size="6" > </div>
+</li>
+<li>
+  <div class="l">Etimo</div>:
+  <div class="i"> <input type="text" value="" name="etimo" size="6" > </div> 
+</li>
 </ul>
-    
-    `);
+</div>
+       `);
     const html = jt.html();
     if (!this.wind) {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
@@ -64,8 +42,6 @@ var FormLemma = {
       this.wind.drag();
     }
     this.wind.setHtml(html);
-    // this.bind_menu();
-    // this.bind_form_lemma();
     this.show();
   },
   show: function (url) {
@@ -86,25 +62,10 @@ var FormLemma = {
     this.setXY();
   },
   unselect: function () {
-    const attrs = this.wind.w.querySelectorAll("div.pos_msd li.a a");
+    const attrs = this.wind.w.querySelectorAll(`div.form_lemma input`);
     for (let a of attrs) {
-      a.classList.remove("select");
+      a.value = '';
     }
-  },
-  bind_form_lemma: function () {
-    // const attrs = this.wind.w.querySelectorAll("div.pos_msd li.a a");
-    // for (let a of attrs) {
-    //   a.addEventListener("click", (ev) => {
-    //     ev.preventDefault();
-    //     ev.stopImmediatePropagation();
-    //     // const t = ev.target;
-    //     const t = ev.currentTarget;
-    //     if (t.classList.contains("select"))
-    //       t.classList.remove("select");
-    //     else
-    //       t.classList.add("select");
-    //   });
-    // }
   }
 };
 
