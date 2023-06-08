@@ -1,11 +1,123 @@
 
 
-var Filter = {
+var FormLemma = {
+  id: 'form_lemma_id',
+  wind: null,
   open: async function () {
-    await PosMsd.open();
+    const jt = UaJth();
+    jt.append(`
+    <div class="menu_wnd">
+    <ul>
+    <li>
+    <a class="tipb" cmd="unselect" href="#">Reset
+       <span class="tiptextb">Reset All Field Selected</span>
+     </a>
+    </li>
+    <li><a>Due</a></li>
+    <li><a cmd="hide" onclick="FormLemma.hide()"  href="#">Close</a></li>  
+    </ul>
+    </div>
+    
+    <div class="pos_msd">
+    <ul>
+        <li>
+          <span>FORMA</span> 
+          <input type="text" value="" name="form" size="6" ></span>
+       </li>
+       <li>
+         <span>LEMMA/span> 
+         <input type="text" value="" name="form" size="6" ></span>
+      </li>
+      <li>
+         <span>ETIMO</span> 
+          <input type="text" value="" name="form" size="6" ></span>
+      </li>
+
+      <li>
+        <span>LANG</span> 
+        <input type="text" value="" name="form" size="6" ></span>
+    </li>
+    <li>
+      <span>DATE</span> 
+      <input type="text" value="" name="form" size="6" ></span>
+    </li>
+    <li>
+      <span>FUNCT</span> 
+      <input type="text" value="" name="form" size="6" ></span>
+    </li>
+    <li>
+      <span>LOC.T</span> 
+      <input type="text" value="" name="form" size="6" ></span>
+    </li>
+    <li>
+      <span>DATE T.</span> 
+      <input type="text" value="" name="form" size="6" ></span>
+    </li>
+
+</ul>
+    
+    `);
+    const html = jt.html();
+    if (!this.wind) {
+      this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
+      this.setXY();
+      this.wind.drag();
+    }
+    this.wind.setHtml(html);
+    // this.bind_menu();
+    // this.bind_form_lemma();
+    this.show();
+  },
+  show: function (url) {
+    if (!this.wind) return;
+    this.wind.show();
+  },
+  hide: function () {
+    if (!this.wind) return;
+    this.wind.hide(this.id);
+  },
+  setXY: function () {
+    const left = 4;
+    const top = 50;
+    this.wind.setXY(left, top, -1).show();
+  },
+  resetXY: function () {
+    this.wind.reset();
+    this.setXY();
+  },
+  unselect: function () {
+    const attrs = this.wind.w.querySelectorAll("div.pos_msd li.a a");
+    for (let a of attrs) {
+      a.classList.remove("select");
+    }
+  },
+  bind_menu: function () {
+    const call = (ev) => {
+      const t = ev.target;
+      if (t.tagName.toUpperCase() == 'A') {
+        const cmd = t.getAttribute("cmd");
+        if (!!cmd) this[cmd]();
+      }
+    };
+    menu = this.wind.w.querySelector("div.menu_wnd");
+    menu.addEventListener("click", call);
+  },
+  bind_form_lemma: function () {
+    // const attrs = this.wind.w.querySelectorAll("div.pos_msd li.a a");
+    // for (let a of attrs) {
+    //   a.addEventListener("click", (ev) => {
+    //     ev.preventDefault();
+    //     ev.stopImmediatePropagation();
+    //     // const t = ev.target;
+    //     const t = ev.currentTarget;
+    //     if (t.classList.contains("select"))
+    //       t.classList.remove("select");
+    //     else
+    //       t.classList.add("select");
+    //   });
+    // }
   }
 };
-
 
 var PosMsd = {
   id: 'pos_msd_id',
@@ -30,14 +142,12 @@ var PosMsd = {
   },
   open: async function () {
     const rows = await this.load();
-    // rows.splice(5);
     rows.shift()
     const jt1 = UaJth();
     const jt0 = UaJth();
     jt0.append(`
     <div class="menu_wnd">
     <ul>
-
     <li>
     <a class="tipb" cmd="unselect" href="#">Reset
        <span class="tiptextb">Reset All Field Selected</span>
@@ -46,7 +156,7 @@ var PosMsd = {
 
     <li><a>Due</a></li>
 
-    <li><a cmd="hide"  hred="#">Close</a></li>
+    <li><a cmd="hide"  href="#">Close</a></li>
     
     </ul>
     </div>
@@ -95,12 +205,11 @@ var PosMsd = {
     this.wind.hide(this.id);
   },
   setXY: function () {
-    // let p = $("#lpmx_rows_head_id").offset();
-    // let lp_wd = $("#lpmx_rows_head_id").width();
-    // lp_wd = lp_wd > 500 ? lp_wd : 1099;
-    // const left = lp_wd + p.left + 20;
-    const left = 20;
-    const top = 50;
+    let e = document.getElementById(FormLemma.id);
+    const or = e.offsetWidth;
+    const ot = e.offsetTop;
+    const left = or + 10;
+    const top = ot;;
     this.wind.setXY(left, top, -1).show();
   },
   resetXY: function () {
@@ -140,4 +249,3 @@ var PosMsd = {
     }
   }
 };
-

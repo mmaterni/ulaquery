@@ -29,7 +29,7 @@
           this.dict_rows = rows.map((x) => x.split("|"));
           // AAA test
           // rimuove dallindice 20 alla fine
-          this.dict_rows.splice(20);
+          this.dict_rows.splice(60);
           // rimuove primo elemento
           this.dict_rows.splice(0,1);
 

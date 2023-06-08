@@ -1,6 +1,7 @@
 /* jshint esversion: 11 */
 "use strict"
 
+
 const html_dict_menu = `
 <div id="dict_menu_id" class="menu_bar" >
 <ul>
@@ -30,7 +31,7 @@ const html_dict_menu = `
   </ul>
 
   <li class="v tipb" >
-    <a  cmd="show_filter" href="#">Open Filter </a>
+    <a  cmd="show_windows" href="#">Open Filter </a>
     <span class="tiptextb">Load Selected Text</span>
    </li>
   
@@ -92,8 +93,8 @@ var DictForm = {
       case "scroll_right":
         this.scroll_right();
         break;
-      case "show_filter":
-        this.show_filter();
+      case "show_windows":
+        show_windows();
         break;
 
       // case "load_data":
@@ -149,9 +150,9 @@ var DictForm = {
       case "cmd_log":
         cmd_log_toggle();
         break;
-      // case "resetxy":
-      //   relocate();
-      //   break;
+      case "resetxy":
+        resetXY_windows();
+        break;
 
       // case "clear_store":
       //   if (confirm("Clear Local Store ?"))
@@ -188,7 +189,7 @@ var DictForm = {
     const e = document.getElementById("dict_table_id");
     e.scrollLeft = e.scrollWidth;
   },
-  show_filter: function () {
+  show_windows: function () {
     PosMsd.show();
   },
   dict_form2html: async function () {

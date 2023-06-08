@@ -32,13 +32,26 @@ function sleep(delay) {
   });
 };
 
+var show_windows = function () {
+  FormLemma.show();
+  PosMsd.show();
+};
+
+var resetXY_windows = function () {
+  FormLemma.resetXY();
+  PosMsd.resetXY();
+};
+
+
+
 var UlaQuery = {
   open: async function () {
     wait_start();
     await sleep(10);
     await dm_.load_dict();
     await DictForm.open();
-    await Filter.open();
+    await FormLemma.open();
+    await PosMsd.open();
     UaLog.setXY(-300, 0).setZ(11).new().log_show();
     wait_stop();
   }
