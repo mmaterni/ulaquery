@@ -15,6 +15,7 @@ Array.prototype.findLeftIndex = function (predicate, from = this.length - 1) {
   return -1;
 };
 
+// {i:key,..}
 Array.prototype.getIndexMap = function (columnIndex) {
   const indexMap = {};
   for (let i = 0; i < this.length; i++) {

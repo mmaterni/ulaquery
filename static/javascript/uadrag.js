@@ -2,7 +2,8 @@
 // release 24-04-2022
 
 
-const nodrag_tds = ['input', 'select', 'a'];
+// const nodrag_tds = ['input', 'select', 'a'];
+const nodrag_tds = ['input'];
 const nodrag_cls = "nodrag";
 
 var UaDrag = function (e) {
