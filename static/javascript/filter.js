@@ -1,5 +1,28 @@
 const top_filter = 50;
 
+var FLT = {
+  hide: function () {
+    FormLemma.hide();
+    Funct.hide();
+    Sigl.hide();
+    PosMsd.hide();
+  },
+  show: function () {
+    FormLemma.show();
+    Funct.show();
+    Sigl.show();
+    PosMsd.show();
+  },
+  resetXY: function () {
+    FormLemma.resetXY();
+    Sigl.resetXY();
+    Funct.resetXY();
+    PosMsd.resetXY();
+  }
+};
+
+
+
 var FormLemma = {
   id: 'form_lemma_id',
   wind: null,
@@ -42,7 +65,6 @@ var FormLemma = {
       this.wind.drag();
     }
     this.wind.setHtml(html);
-    // this.show();
   },
   show: function (url) {
     if (!this.wind) return;
@@ -55,11 +77,12 @@ var FormLemma = {
   setXY: function () {
     const left = 4;
     const top = top_filter;
-    this.wind.setXY(left, top, -1).show();
+    this.wind.setXY(left, top, -1);
   },
   resetXY: function () {
     this.wind.reset();
     this.setXY();
+    this.show();
   },
   unselect: function () {
     const attrs = this.wind.w.querySelectorAll(`div.form_lemma input`);
@@ -93,10 +116,6 @@ var Sigl = {
   open: async function () {
     const jt = UaJth();
     const rows = await this.load(`cfg/exp_loc_dat.csv`);
-    // g|LOC.1|grenoble|XII
-    // h|LOC.2|tour|XII
-    // p|LOC.3|paris|XIII
-    // v|LOC.4|venezia|XIV
     const sigls = [];
     const locts = [];
     const datets = [];
@@ -114,7 +133,7 @@ var Sigl = {
      </a>
     </li>
     <li><a>Due</a></li>
-    <li><a onclick="Sigl.hide()"  href="#">Close</a></li>  
+    <li><a onclick="Sigl.hide()" href="#">Close</a></li>  
     </ul>
     </div>
     <div class="sigl">`);
@@ -145,7 +164,6 @@ var Sigl = {
     }
     this.wind.setHtml(html);
     this.bind();
-    // this.show();
   },
   show: function (url) {
     if (!this.wind) return;
@@ -156,14 +174,14 @@ var Sigl = {
     this.wind.hide(this.id);
   },
   setXY: function () {
-    let e = document.getElementById(FormLemma.id);
     const left = 5;
-    const top = e.offsetTop + e.offsetHeight + 10;
-    this.wind.setXY(left, top, -1).show();
+    const top = top_filter + 120;
+    this.wind.setXY(left, top, -1);
   },
   resetXY: function () {
     this.wind.reset();
     this.setXY();
+    this.show();
   },
   bind: function () {
     const attrs = this.wind.w.querySelectorAll("div.sigl li a");
@@ -254,7 +272,6 @@ var Funct = {
     }
     this.wind.setHtml(html);
     this.bind();
-    // this.show();
   },
   show: function (url) {
     if (!this.wind) return;
@@ -265,15 +282,14 @@ var Funct = {
     this.wind.hide(this.id);
   },
   setXY: function () {
-    let e = document.getElementById(Sigl.id);
-    const left = e.offsetWidth + 10;
+    const left = 300;;
     const top = top_filter;
-    this.wind.setXY(left, top, -1).show();
-
+    this.wind.setXY(left, top, -1);
   },
   resetXY: function () {
     this.wind.reset();
     this.setXY();
+    this.show();
   },
   bind: function () {
     const attrs = this.wind.w.querySelectorAll("div.funct li a");
@@ -329,15 +345,12 @@ var PosMsd = {
     <div class="menu_wnd">
     <ul>
     <li>
-    <a class="tipb" cmd="unselect" href="#">Reset
+    <a class="tipb" onclick="PosMsd.unselect()" href="#">Reset
        <span class="tiptextb">Reset All Field Selected</span>
      </a>
     </li>
-
     <li><a>Due</a></li>
-
-    <li><a cmd="hide"  href="#">Close</a></li>
-    
+    <li><a onclick="PosMsd.hide()"  href="#">Close</a></li>  
     </ul>
     </div>
     <div class="pos_msd">
@@ -368,12 +381,9 @@ var PosMsd = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
-      // this.wind.setStyle({ cursor: 'move' });
     }
     this.wind.setHtml(html);
-    this.bind_menu();
-    this.bind_pos_msd();
-    // this.show();
+    this.bind();
   },
   show: function (url) {
     if (!this.wind) return;
@@ -384,16 +394,14 @@ var PosMsd = {
     this.wind.hide(this.id);
   },
   setXY: function () {
-    let e = document.getElementById(Funct.id);
-    const left = e.offsetLeft + e.offsetWidth + 10;
+    const left = 600;
     const top = top_filter;
-    // const left = 200;
-    // const top = 50;
-    this.wind.setXY(left, top, -1).show();
+    this.wind.setXY(left, top, -1);
   },
   resetXY: function () {
     this.wind.reset();
     this.setXY();
+    this.show();
   },
   unselect: function () {
     const attrs = this.wind.w.querySelectorAll("div.pos_msd li.a a");
@@ -401,18 +409,7 @@ var PosMsd = {
       a.classList.remove("select");
     }
   },
-  bind_menu: function () {
-    const call = (ev) => {
-      const t = ev.target;
-      if (t.tagName.toUpperCase() == 'A') {
-        const cmd = t.getAttribute("cmd");
-        if (!!cmd) this[cmd]();
-      }
-    };
-    menu = this.wind.w.querySelector("div.menu_wnd");
-    menu.addEventListener("click", call);
-  },
-  bind_pos_msd: function () {
+  bind: function () {
     const attrs = this.wind.w.querySelectorAll("div.pos_msd li.a a");
     for (let a of attrs) {
       a.addEventListener("click", (ev) => {

@@ -32,45 +32,23 @@ function sleep(delay) {
   });
 };
 
-var hide_filter = function () {
-  FormLemma.hide();
-  Funct.hide();
-  Sigl.hide();
-  PosMsd.hide();
-};
-
-var show_filter = function () {
-  FormLemma.show();
-  Funct.show();
-  Sigl.show();
-  PosMsd.show();
-};
-
-var relocate_filter = function () {
-  FormLemma.resetXY();
-  Sigl.resetXY();
-  Funct.resetXY();
-  PosMsd.resetXY();
-};
-
-const menu = `
+const menu = function () {
+  const h = `
 <div id="ulaquery_id" class="menu_bar">
-
 <ul>
-
 <li class="v">
   <a href="#">Filter</a>
   <ul class="v">
     <li class="h">
-      <a class="tipr" href="javascript:show_filter()">Open
+      <a class="tipr" onclick="FLT.show()" href="#">Open
       <span class="tiptextr">Opoen Window FIlter</span></a>
     </li>
     <li class="h">
-      <a class="tipr" ref="javascript:hide_filter()">Close
+      <a class="tipr" onclick="FLT.hide()" ref="#">Close
       <span class="tiptextr">Close Windows Filetr</span> </a>
     </li>
     <li class="h">
-      <a class="tipr" ref="javascript:resetXY_filter()">Relocate
+      <a class="tipr" onclick="FLT.resetXY()" ref="#" >Relocate
       <span class="tiptextr">Relocate Window Filetr</span> </a>
     </li>
   </ul>
@@ -80,15 +58,15 @@ const menu = `
   <a href="#">Dictionary</a>
   <ul class="v">
     <li class="h">
-      <a class="tipr" href="javascript:DictForm.show()">Open
+      <a class="tipr" onclick="DictForm.show()" href="#">Open
       <span class="tiptextr">Opoen Window Dictionary</span></a>
     </li>
     <li class="h">
-      <a class="tipr" href="javascript:DictForm.hide();">Close
+      <a class="tipr" onclick="DictForm.hide()" href="#" >Close
       <span class="tiptextr">Close Window Dictionary</span> </a>
     </li>
     <li class="h">
-      <a class="tipr" href="javascript:DictForm.resetXY();">Relocate
+      <a class="tipr" onclick="DictForm.resetXY()" href="#">Relocate
       <span class="tiptextr">Relocate Window Dictionary</span> </a>
     </li>
   </ul>
@@ -113,53 +91,40 @@ const menu = `
 </li>
 
 <li class="v">
-  <a class="tipb" href="javascript:cmd_log_toggle()">Log
+  <a class="tipb" onclick="cmd_log_toggle()" href="#">Log
   <span class="tiptextb">Toggle Log</span></a>
 </li>
 
 <li class="v">
-    <a href="javascript:cmd_close()">close</a>
+    <a onclick="cmd_close()" href="#" >close</a>
 </li>
 
 </ul>
 </div>
 `;
+  return h.replace(/\s+|\[rn]/g, " ");
+}
 
 var UlaQuery = {
-  id:"ulaquery_id",
+  id: "ulaquery_id",
   open: async function () {
     wait_start();
-    await sleep(10);
-    this.open2();
+    await sleep(100);
+    await this.open_menu();
 
     await dm_.load_dict();
-
     await DictForm.open();
-    // await FormLemma.open();
-    // await Sigl.open();
-    // await Funct.open();
-    // await PosMsd.open();
-    UaLog.setXY(-3, 0).setZ(11).new();
 
+    await FormLemma.open();
+    await Sigl.open();
+    await Funct.open();
+    await PosMsd.open();
+    
+    UaLog.setXY(-3, 0).setZ(11).new();
     wait_stop();
   },
-  open2: function () {
-    let jt = UaJth();
-    jt.append(menu);
-    const html=jt.html();
-    // console.log(jt.text());
+  open_menu: async function () {
+    const html = menu();
     document.getElementById("ulaquery_id").innerHTML = html;
-    // this.bind_menu();
-  },
-  bind_menu: function () {
-    const call = (ev) => {
-      const t = ev.target;
-      if (t.tagName == 'A') {
-        const cmd = t.getAttribute("cmd");
-        if (!!cmd) exe(cmd);
-      }
-    };
-    const menu = document.getElementById(this.id);
-    menu.addEventListener("click", call);
   }
 }

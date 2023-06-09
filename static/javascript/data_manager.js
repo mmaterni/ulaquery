@@ -26,7 +26,7 @@
           this.dict_rows = rows.map((x) => x.trim().split("|"));
           
           // AAA rimuove dallindice 60 alla fine
-          this.dict_rows.splice(60);
+          // this.dict_rows.splice(60);
 
           // this.set_dict_columns(this.dict_rows[0])
           // rimuove primo elemento
