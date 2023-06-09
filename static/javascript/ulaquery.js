@@ -1,18 +1,18 @@
 "use strict"
 
-var cmd_close = function () {
+function cmd_close() {
   if (confirm("Chiudi Applicazione ?")) window.close();
 };
 
-var cmd_log_toggle = function () {
+function cmd_log_toggle() {
   UaLog.toggle();
 };
 
-var cmd_log = function (...args) {
+function cmd_log (...args) {
   UaLog.log(...args);
 };
 
-var cmd_log_show = (...args) => {
+function cmd_log_show(...args){
   UaLog.log_show(...args);
 };
 
@@ -110,16 +110,13 @@ var UlaQuery = {
   open: async function () {
     wait_start();
     await sleep(100);
-    await this.open_menu();
-
     await dm_.load_dict();
+    await this.open_menu();
     await DictForm.open();
-
     await FormLemma.open();
     await Sigl.open();
     await Funct.open();
-    await PosMsd.open();
-    
+    await PosMsd.open();   
     UaLog.setXY(-3, 0).setZ(11).new();
     wait_stop();
   },

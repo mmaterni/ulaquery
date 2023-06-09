@@ -1,4 +1,4 @@
-const top_filter = 50;
+const top_filter = 40;
 
 var FLT = {
   hide: function () {
