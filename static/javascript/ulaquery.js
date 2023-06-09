@@ -67,7 +67,7 @@ const menu = `
     </li>
     <li class="h">
       <a class="tipr" ref="javascript:hide_filter()">Close
-      <span class="tiptextr">Close Window sFiletr</span> </a>
+      <span class="tiptextr">Close Windows Filetr</span> </a>
     </li>
     <li class="h">
       <a class="tipr" ref="javascript:resetXY_filter()">Relocate
@@ -76,6 +76,24 @@ const menu = `
   </ul>
 </li>
   
+<li class="v">
+  <a href="#">Dictionary</a>
+  <ul class="v">
+    <li class="h">
+      <a class="tipr" href="javascript:DictForm.show()">Open
+      <span class="tiptextr">Opoen Window Dictionary</span></a>
+    </li>
+    <li class="h">
+      <a class="tipr" href="javascript:DictForm.hide();">Close
+      <span class="tiptextr">Close Window Dictionary</span> </a>
+    </li>
+    <li class="h">
+      <a class="tipr" href="javascript:DictForm.resetXY();">Relocate
+      <span class="tiptextr">Relocate Window Dictionary</span> </a>
+    </li>
+  </ul>
+</li>
+
 <li class="v">
   <a href="#">Utils</a>
     <ul class="v">
@@ -116,7 +134,7 @@ var UlaQuery = {
 
     await dm_.load_dict();
 
-    // await DictForm.open();
+    await DictForm.open();
     // await FormLemma.open();
     // await Sigl.open();
     // await Funct.open();
@@ -129,7 +147,7 @@ var UlaQuery = {
     let jt = UaJth();
     jt.append(menu);
     const html=jt.html();
-    console.log(jt.text());
+    // console.log(jt.text());
     document.getElementById("ulaquery_id").innerHTML = html;
     // this.bind_menu();
   },

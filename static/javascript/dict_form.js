@@ -75,6 +75,7 @@ var DictForm = {
       this.setXY();
       this.wind.drag();
     }
+    this.wind.hide();
     this.wind.setHtml(html);
     // this.show();
   },
