@@ -32,118 +32,78 @@ function sleep(delay) {
   });
 };
 
-var show_windows = function () {
+var hide_filter = function () {
+  FormLemma.hide();
+  Funct.hide();
+  Sigl.hide();
+  PosMsd.hide();
+};
+
+var show_filter = function () {
   FormLemma.show();
   Funct.show();
   Sigl.show();
   PosMsd.show();
 };
 
-var resetXY_windows = function () {
+var relocate_filter = function () {
   FormLemma.resetXY();
   Sigl.resetXY();
   Funct.resetXY();
   PosMsd.resetXY();
 };
 
-function exe(cmd) {
-  switch (cmd) {
-    case "scroll_top":
-      DictForm.scroll_top();
-      break;
-    case "scroll_bottom":
-      DictForm.scroll_bottom();
-      break;
-    case "scroll_left":
-      DictForm.scroll_left();
-      break;
-    case "scroll_right":
-      DictForm.scroll_right();
-      break;
-    case "show_windows":
-      show_windows();
-      break;
-    case "cmd_log":
-      cmd_log_toggle();
-      break;
-    case "resetxy":
-      resetXY_windows();
-      break;
-    case "close":
-      cmd_close();
-      break;
-    default:
-      alert("command not found.");
-  }
-}
-
-
 const menu = `
-<div class="ulaquery">
-<div class="menu_bar" >
+<div id="ulaquery_id" class="menu_bar">
+
 <ul>
- <li class="v">
-  <a href="#">Scroll</a>
-   <ul class="v">
+
+<li class="v">
+  <a href="#">Filter</a>
+  <ul class="v">
     <li class="h">
-      <a class="tipr" cmd="scroll_top" href="#">Top
-        <span class="tiptextr">Scroll Top</span>
-      </a>
+      <a class="tipr" href="javascript:show_filter()">Open
+      <span class="tiptextr">Opoen Window FIlter</span></a>
     </li>
     <li class="h">
-      <a class="tipr" cmd="scroll_bottom" href="#">Bottom
-        <span class="tiptextr">Scroll Bottom</span>
-      </a>
+      <a class="tipr" ref="javascript:hide_filter()">Close
+      <span class="tiptextr">Close Window sFiletr</span> </a>
     </li>
     <li class="h">
-      <a class="tipr" cmd="scroll_left" href="#">Left
-        <span class="tiptextr">Scroll Left</span>
-      </a>
-    </li>
-    <li class="h">
-      <a class="tipr" cmd="scroll_right" href="#">Right
-        <span class="tiptextr">Scroll Right</span>
-      </a>
+      <a class="tipr" ref="javascript:resetXY_filter()">Relocate
+      <span class="tiptextr">Relocate Window Filetr</span> </a>
     </li>
   </ul>
-  <li class="v tipb" >
-    <a  cmd="show_windows" href="#">Open Filter </a>
-    <span class="tiptextb">Load Selected Text</span>
-   </li>
-  <li class="v">
-    <a href="#">Utils</a>
+</li>
+  
+<li class="v">
+  <a href="#">Utils</a>
     <ul class="v">
       <li class="h">
-        <a class="tipr" cmd="resetxy" href="#">Relocate
-          <span class="tiptextr">Relocate all Windows</span>
-        </a>
-      </li>
-      <li class="h">
         <a class="cmd tipr" cmd="show_store" href="#">Show Store
-        </a>
+        <span class="tiptextr">Show LocalStore</span></a>
       </li>
       <li class="h">
         <a class="cmd tipr" cmd="clear_store" href="#">Clean Store
-          <span class="tiptextr">Clean LocalStore</span>
-        </a>
+        <span class="tiptextr">Clean LocalStore</span></a>
       </li>
     </ul>
-  </li>
-  <li class="v">
-    <a class="cmd" cmd="help" href="#">Help
-    </a>
-  </li>
-  <li class="v">
-    <a class="tipb" cmd="cmd_log" href="#">Log
-      <span class="tiptextb">Toggle Log</span>
-    </a>
-  </li>
-  <li class="v">
-    <a cmd="close" href="#">close
-    </a>
-  </li>
-  </ul>
-</div>
+</li>
+
+<li class="v">
+  <a class="cmd" cmd="help" href="#">Help</a>
+</li>
+
+<li class="v">
+  <a class="tipb" href="javascript:cmd_log_toggle()">Log
+  <span class="tiptextb">Toggle Log</span></a>
+</li>
+
+<li class="v">
+    <a href="javascript:cmd_close()">close</a>
+</li>
+
+</ul>
 </div>
 `;
 
@@ -153,20 +113,25 @@ var UlaQuery = {
     wait_start();
     await sleep(10);
     this.open2();
+
     await dm_.load_dict();
-    await DictForm.open();
+
+    // await DictForm.open();
     // await FormLemma.open();
     // await Sigl.open();
     // await Funct.open();
     // await PosMsd.open();
-    // UaLog.setXY(-300, 0).setZ(11).new().log_show();
+    UaLog.setXY(-3, 0).setZ(11).new();
+
     wait_stop();
   },
   open2: function () {
     let jt = UaJth();
     jt.append(menu);
-    document.getElementById("ulaquery_id").innerHTML = jt.html();
-    this.bind_menu();
+    const html=jt.html();
+    console.log(jt.text());
+    document.getElementById("ulaquery_id").innerHTML = html;
+    // this.bind_menu();
   },
   bind_menu: function () {
     const call = (ev) => {

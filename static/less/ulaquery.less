@@ -71,6 +71,7 @@ option {
 
 html {
   width: @html_width;
+  background: #ff0000;
 }
 
 @body_height: 800px;
@@ -86,6 +87,7 @@ body {
   // overflow: auto;
   margin: 0 auto 0 auto;
   background: @html_back;
+  background: #1c5dea;
   // overflow-y: auto;
   // overflow-x: auto;
   scrollbar-color: @scroll_bar1 @scroll_bar2;
@@ -157,7 +159,7 @@ div.menu_bar {
   width: 100%;
   min-height: @menu_height !important;
   max-height: @menu_height !important;
-
+  z-index: 100 !important;
   ul {
     display: flex;
     flex-direction: row;
@@ -348,12 +350,13 @@ div.menu_wnd {
 
 @ulaquery_height: @body_height;
 
-div.ulaquery {
+#ulaquery_id {
   box-sizing: border-box;
   height: @ulaquery_height;
   padding: 5px;
   margin: 5px;
-  border: 1px solid red;
+  background-color: #21ea21;
+  border: 1px dotted #010000;
 }
 
 @dict_form_height: calc(@ulaquery_height - 50px);

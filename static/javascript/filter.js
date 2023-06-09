@@ -42,7 +42,7 @@ var FormLemma = {
       this.wind.drag();
     }
     this.wind.setHtml(html);
-    this.show();
+    // this.show();
   },
   show: function (url) {
     if (!this.wind) return;
@@ -145,7 +145,7 @@ var Sigl = {
     }
     this.wind.setHtml(html);
     this.bind();
-    this.show();
+    // this.show();
   },
   show: function (url) {
     if (!this.wind) return;
@@ -254,7 +254,7 @@ var Funct = {
     }
     this.wind.setHtml(html);
     this.bind();
-    this.show();
+    // this.show();
   },
   show: function (url) {
     if (!this.wind) return;
@@ -373,7 +373,7 @@ var PosMsd = {
     this.wind.setHtml(html);
     this.bind_menu();
     this.bind_pos_msd();
-    this.show();
+    // this.show();
   },
   show: function (url) {
     if (!this.wind) return;
