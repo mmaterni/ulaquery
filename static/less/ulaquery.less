@@ -387,7 +387,7 @@ div.menu_bar {
   }
 }
 
-@li_width: 100px;
+@li_width: 80px;
 div.menu_wnd {
   box-sizing: border-box;
   width: 100%;
@@ -476,7 +476,7 @@ div.form_lemma {
         font-size: @fsize_07;
         input {
           width: 150px;
-          height: 20px;;
+          height: 20px;
         }
       }
     }
@@ -584,6 +584,196 @@ div.pos_msd {
               text-decoration: underline;
             }
           }
+        }
+      }
+    }
+  }
+}
+
+div.funct {
+  box-sizing: border-box;
+  border: 1px solid @wnd_border_color;
+  padding: 5px 5px 5px 0;
+  background: @wnd_back;
+
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  justify-content: flex-start;
+
+  div {
+    box-sizing: border-box;
+    margin-left: 5px;
+    ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      list-style: none;
+      li {
+        box-sizing: border-box;
+        max-height: 25px;
+        margin: 0;
+        display: flex;
+        padding: 2px 0 0 0;
+        a {
+          box-sizing: border-box;
+          display: block;
+          padding:2px 0 2px 0;
+          text-align: center;
+          background: darken(@wnd_back, -10%);
+          color: @wnd_color;
+          font-size: @fsize_07;
+          font-family: @fsans;
+          font-style: normal;
+          text-decoration: none;
+          border-width: 1px 1px 1px 1px;
+          border-color: @wnd_color;
+          border-style: solid;
+          border-radius: 6px;
+        }
+        a:hover {
+          font-style: italic;
+          background: @wnd_hover_back;
+          color: @wnd_hover_color;
+        }
+        a.select {
+          background: @wnd_select_back;
+          color: @wnd_select_color;
+          text-decoration: underline;
+        }
+        a.select:hover {
+          background: lighten(@wnd_select_back, 20%);
+          color: @wnd_select_color;
+          text-decoration: underline;
+        }
+        span{
+          background: darken(@wnd_back, 10%);
+          font-size: @fsize_07;
+          // font-weight: bold;
+          border-width: 1px 1px 1px 1px;
+          margin:0 0 2px 0;
+          border-color: @wnd_color;
+          border-style: solid;
+          text-align: center;
+        }
+      }
+      li.f {
+        a {
+          width: 150px;
+        }
+        span {
+          width: 150px;
+        }
+      }
+      li.l {
+        a {
+          width: 50px;
+        }
+        span {
+          width: 50px;
+        }
+      }
+      li.d {
+        a {
+          width: 50px;
+        }
+        span {
+          width: 50px;
+        }
+      }
+    }
+  }
+}
+
+div.sigl {
+  box-sizing: border-box;
+  border: 1px solid @wnd_border_color;
+  padding: 5px 5px 5px 0;
+  background: @wnd_back;
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  justify-content: flex-start;
+  div {
+    box-sizing: border-box;
+    margin-left: 5px;
+    ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      list-style: none;
+      li {
+        box-sizing: border-box;
+        max-height: 25px;
+        margin: 0;
+        display: flex;
+        padding: 2px 0 0 0;
+        a {
+          box-sizing: border-box;
+          display: block;
+          padding:2px 0 2px 0;
+          text-align: center;
+          background: darken(@wnd_back, -10%);
+          color: @wnd_color;
+          font-size: @fsize_07;
+          font-family: @fsans;
+          font-style: normal;
+          text-decoration: none;
+          border-width: 1px 1px 1px 1px;
+          border-color: @wnd_color;
+          border-style: solid;
+          border-radius: 6px;
+        }
+        a:hover {
+          font-style: italic;
+          background: @wnd_hover_back;
+          color: @wnd_hover_color;
+        }
+        a.select {
+          background: @wnd_select_back;
+          color: @wnd_select_color;
+          text-decoration: underline;
+        }
+        a.select:hover {
+          background: lighten(@wnd_select_back, 20%);
+          color: @wnd_select_color;
+          text-decoration: underline;
+        }
+        span{
+          background: darken(@wnd_back, 10%);
+          font-size: @fsize_07;
+          // font-weight: bold;
+          border-width: 1px 1px 1px 1px;
+          margin:0 0 2px 0;
+          border-color: @wnd_color;
+          border-style: solid;
+          text-align: center;
+        }
+      }
+      li.s {
+        a {
+          width: 50px;
+        }
+        span {
+          width: 50px;
+        }
+      }
+      li.l {
+        a {
+          width: 150px;
+        }
+        span {
+          width: 150px;
+        }
+      }
+      li.d {
+        a {
+          width: 50px;
+        }
+        span {
+          width: 50px;
         }
       }
     }

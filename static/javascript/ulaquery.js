@@ -34,11 +34,15 @@ function sleep(delay) {
 
 var show_windows = function () {
   FormLemma.show();
+  Funct.show();
+  Sigl.show();
   PosMsd.show();
 };
 
 var resetXY_windows = function () {
   FormLemma.resetXY();
+  Sigl.resetXY();
+  Funct.resetXY();
   PosMsd.resetXY();
 };
 
@@ -51,6 +55,8 @@ var UlaQuery = {
     await dm_.load_dict();
     await DictForm.open();
     await FormLemma.open();
+    await Sigl.open();
+    await Funct.open();
     await PosMsd.open();
     UaLog.setXY(-300, 0).setZ(11).new().log_show();
     wait_stop();
