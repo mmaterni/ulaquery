@@ -22,9 +22,9 @@ var FLT = {
   set_selected: function () {
 
     FormLemma.set_selected();
-    console.log(FormLemma.forma);
-    console.log(FormLemma.lemma);
-    console.log(FormLemma.etimo);
+    // console.log(FormLemma.forma);
+    // console.log(FormLemma.lemma);
+    // console.log(FormLemma.etimo);
 
     Sigl.set_selected();
     // console.log(Sigl.sigls);
@@ -37,8 +37,25 @@ var FLT = {
     // console.log(Funct.dates);
 
     PosMsd.set_selected();
-    console.log(JSON.stringify(PosMsd.msd_attrs, indent = 4));
-
+    // console.log(JSON.stringify(PosMsd.msd_attrs, indent = 4));
+    const js = {
+      "forma": FormLemma.forma,
+      "lemma": FormLemma.lemma,
+      "etimo": FormLemma.etimo,
+      "sigl": {
+        "sigls": Sigl.sigls,
+        "locts": Sigl.locts,
+        "datets": Sigl.datets
+      },
+      "funct": {
+        "functs": Funct.functs,
+        "locs": Funct.locs,
+        "dates": Funct.dates
+      },
+      "msd": PosMsd.msd_attrs
+    }
+    const s = JSON.stringify(js, indent = 5);
+    console.log(s);
   }
 };
 
