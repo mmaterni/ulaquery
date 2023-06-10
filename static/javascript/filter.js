@@ -18,6 +18,21 @@ var FLT = {
     Sigl.resetXY();
     Funct.resetXY();
     PosMsd.resetXY();
+  },
+  set_selected: function () {
+    // FormLemma.set_selected();
+    Sigl.set_selected();
+    Funct.set_selected();
+    // PosMsd.set_selected();
+
+    console.log("Sigl");
+    console.log(Sigl.sigls);
+    console.log(Sigl.locts);
+    console.log(Sigl.datets);
+    console.log("Funct");
+    console.log(Funct.functs);
+    console.log(Funct.locs);
+    console.log(Funct.dates);
   }
 };
 
@@ -96,6 +111,9 @@ var FormLemma = {
 var Sigl = {
   id: 'sigl_id',
   wind: null,
+  sigls: [],
+  locts: [],
+  datets: [],
   load: async function (url) {
     try {
       const resp = await fetch(url, {
@@ -116,13 +134,13 @@ var Sigl = {
   open: async function () {
     const jt = UaJth();
     const rows = await this.load(`cfg/exp_loc_dat.csv`);
-    const sigls = [];
-    const locts = [];
-    const datets = [];
+    const sgs = [];
+    const lcs = [];
+    const dts = [];
     for (row of rows) {
-      sigls.push(row[0]);
-      locts.push(row[2]);
-      datets.push(row[3]);
+      sgs.push(row[0]);
+      lcs.push(row[2]);
+      dts.push(row[3]);
     }
     jt.append(`
     <div class="menu_wnd">
@@ -132,26 +150,26 @@ var Sigl = {
        <span class="tiptextb">Reset All Field Selected</span>
      </a>
     </li>
-    <li><a>Due</a></li>
+    <li><a onclick="Sigl.set_selected()">Confirm</a></li>
     <li><a onclick="Sigl.hide()" href="#">Close</a></li>  
     </ul>
     </div>
     <div class="sigl">`);
     jt.append("<div><ul>")
     jt.append(`<li class="s"><span>Sigl.</span></li> `);
-    for (let row of sigls)
+    for (let row of sgs)
       jt.append(`<li class="s"><a>${row}</a></li> `);
     jt.append(`</ul></div>`);
 
     jt.append("<div><ul>")
     jt.append(`<li class="l"><span>Loc.T.</span></li> `);
-    for (let row of locts)
+    for (let row of lcs)
       jt.append(`<li class="l"><a>${row}</a></li> `);
     jt.append(`</ul></div>`);
 
     jt.append("<div><ul>")
     jt.append(`<li class="d"><span>Date T.</span></li> `);
-    for (let row of datets)
+    for (let row of dts)
       jt.append(`<li class="d"><a>${row}</a></li> `);
     jt.append(`</ul></div>`);
 
@@ -202,6 +220,22 @@ var Sigl = {
     for (let a of attrs) {
       a.classList.remove("select");
     }
+  },
+  set_selected: function () {
+    const fn = (ats) => {
+      const arr = Array.from(ats);
+      const lst = arr.filter(a => a.classList.contains("select")).map(a => a.innerHTML);
+      return lst;
+    };
+    // sigle settate
+    let attrs = this.wind.w.querySelectorAll("div.sigl li.s a");
+    this.sigls = fn(attrs);
+    // localit+ testo settate 
+    attrs = this.wind.w.querySelectorAll("div.sigl li.l a");
+    this.locts = fn(attrs);
+    // date testo settate
+    attrs = this.wind.w.querySelectorAll("div.sigl li.d a");
+    this.datets = fn(attrs);
   }
 };
 
@@ -209,6 +243,9 @@ var Sigl = {
 var Funct = {
   id: 'funct_id',
   wind: null,
+  functs: [],
+  locs: [],
+  dates: [],
   load: async function (url) {
     try {
       const resp = await fetch(url, {
@@ -228,18 +265,17 @@ var Funct = {
   },
   open: async function () {
     const jt = UaJth();
-    const funcs = await this.load(`cfg/funct.csv`);
-    const langs = await this.load(`cfg/lang.csv`);
-    const ldatas = await this.load(`cfg/ldata.csv`);
+    const fs = await this.load(`cfg/funct.csv`);
+    const ls = await this.load(`cfg/lang.csv`);
+    const ds = await this.load(`cfg/ldata.csv`);
     jt.append(`
     <div class="menu_wnd">
     <ul>
     <li>
     <a class="tipb" onclick="Funct.unselect()" href="#">Reset
-       <span class="tiptextb">Reset All Field Selected</span>
-     </a>
+       <span class="tiptextb">Reset All Field Selected</span>  </a>
     </li>
-    <li><a>Due</a></li>
+    <li><a onclick="Funct.set_selected()">Confirm</a></li>
     <li><a onclick="Funct.hide()"  href="#">Close</a></li>  
     </ul>
     </div>
@@ -247,19 +283,19 @@ var Funct = {
 
     jt.append("<div><ul>")
     jt.append(`<li class="f"><span>Func</span></li> `);
-    for (let row of funcs)
+    for (let row of fs)
       jt.append(`<li class="f"><a>${row}</a></li> `);
     jt.append(`</ul></div>`);
 
     jt.append("<div><ul>")
     jt.append(`<li class="l"><span>Lang</span></li> `);
-    for (let row of langs)
+    for (let row of ls)
       jt.append(`<li class="l"><a>${row}</a></li> `);
     jt.append(`</ul></div>`);
 
     jt.append("<div><ul>")
     jt.append(`<li class="d"><span>Date</span></li> `);
-    for (let row of ldatas)
+    for (let row of ds)
       jt.append(`<li class="d"><a>${row}</a></li> `);
     jt.append(`</ul></div>`);
 
@@ -312,6 +348,23 @@ var Funct = {
       a.classList.remove("select");
     }
   },
+  set_selected: function () {
+    const fn = (ats) => {
+      const arr = Array.from(ats);
+      const lst = arr.filter(a => a.classList.contains("select")).map(a => a.innerHTML);
+      return lst;
+    };
+    // fuct settate
+    let attrs = this.wind.w.querySelectorAll("div.funct li.f a");
+    this.functs = fn(attrs);
+    // locali settate 
+    attrs = this.wind.w.querySelectorAll("div.funct li.l a");
+    this.locs = fn(attrs);
+    // date  settate
+    attrs = this.wind.w.querySelectorAll("div.funct li.d a");
+    this.dates = fn(attrs);
+  }
+
 };
 
 var PosMsd = {

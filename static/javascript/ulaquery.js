@@ -51,6 +51,10 @@ const menu = function () {
       <a class="tipr" onclick="FLT.resetXY()" ref="#" >Relocate
       <span class="tiptextr">Relocate Window Filetr</span> </a>
     </li>
+    <li class="h">
+      <a class="tipr" onclick="FLT.set_selected()" ref="#" >Selected
+      <span class="tiptextr">Set All Fileds Selected</span> </a>
+    </li>
   </ul>
 </li>
   
@@ -119,6 +123,8 @@ var UlaQuery = {
     await PosMsd.open();   
     UaLog.setXY(-3, 0).setZ(11).new();
     wait_stop();
+
+    FLT.show();
   },
   open_menu: async function () {
     const html = menu();
