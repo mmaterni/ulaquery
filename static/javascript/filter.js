@@ -20,19 +20,22 @@ var FLT = {
     PosMsd.resetXY();
   },
   set_selected: function () {
-    // FormLemma.set_selected();
-    Sigl.set_selected();
-    Funct.set_selected();
-    // PosMsd.set_selected();
 
-    console.log("Sigl");
-    console.log(Sigl.sigls);
-    console.log(Sigl.locts);
-    console.log(Sigl.datets);
-    console.log("Funct");
-    console.log(Funct.functs);
-    console.log(Funct.locs);
-    console.log(Funct.dates);
+    // FormLemma.set_selected();
+    // Sigl.set_selected();
+    // console.log("Sigl");
+    // console.log(Sigl.sigls);
+    // console.log(Sigl.locts);
+    // console.log(Sigl.datets);
+
+    // Funct.set_selected();
+    // console.log("Funct");
+    // console.log(Funct.functs);
+    // console.log(Funct.locs);
+    // console.log(Funct.dates);
+
+    PosMsd.set_selected();
+
   }
 };
 
@@ -402,7 +405,7 @@ var PosMsd = {
        <span class="tiptextb">Reset All Field Selected</span>
      </a>
     </li>
-    <li><a>Due</a></li>
+    <li><a onclick="PosMsd.set_selected()">Confirm</a></li>
     <li><a onclick="PosMsd.hide()"  href="#">Close</a></li>  
     </ul>
     </div>
@@ -415,15 +418,18 @@ var PosMsd = {
       const msd = row[2]
       jt1.reset();
       jt1.append(`<li><div><ul>`)
+
       if (row[0] != pos) {
         pos = row[0];
         jt1.append(`<li class="p"><span>${pos}</span></li>`);
       }
       else
         jt1.append(`<li class="e"></li>`);
+
       jt1.append(`<li class="m"><span>${msd}</span></li>`);
       for (let x of attrs)
         jt1.append(`<li class="a"><a>${x}</a></li>`);
+
       jt1.append(`</ul></div></li>`)
       const h = jt1.html()
       jt0.append(`${h}`);
@@ -475,6 +481,24 @@ var PosMsd = {
         else
           t.classList.add("select");
       });
+    }
+  },
+  set_selected: function () {
+    const rows = [];
+    const lims = Array.from(this.wind.w.querySelectorAll("div.pos_msd li.m"));
+    // let lims = Array.from(nds);
+    for (const m of lims) {
+      const lias = Array.from(m.parentElement.querySelectorAll("li.a a.select"));
+      const row = []
+      for (const la of lias) {
+        const h = la.innerHTML;
+        row.push(h)
+      }
+      if (row.length > 0)
+        rows.push(row)
+    }
+    for (row of rows) {
+      console.log(row)
     }
   }
 };
