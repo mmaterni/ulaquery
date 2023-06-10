@@ -21,20 +21,23 @@ var FLT = {
   },
   set_selected: function () {
 
-    // FormLemma.set_selected();
-    // Sigl.set_selected();
-    // console.log("Sigl");
+    FormLemma.set_selected();
+    console.log(FormLemma.forma);
+    console.log(FormLemma.lemma);
+    console.log(FormLemma.etimo);
+
+    Sigl.set_selected();
     // console.log(Sigl.sigls);
     // console.log(Sigl.locts);
     // console.log(Sigl.datets);
 
-    // Funct.set_selected();
-    // console.log("Funct");
+    Funct.set_selected();
     // console.log(Funct.functs);
     // console.log(Funct.locs);
     // console.log(Funct.dates);
 
     PosMsd.set_selected();
+    console.log(JSON.stringify(PosMsd.msd_attrs, indent = 4));
 
   }
 };
@@ -44,6 +47,9 @@ var FLT = {
 var FormLemma = {
   id: 'form_lemma_id',
   wind: null,
+  forma: '',
+  lemma: '',
+  etimo: '',
   open: async function () {
     const jt = UaJth();
     jt.append(`
@@ -54,7 +60,7 @@ var FormLemma = {
        <span class="tiptextb">Reset All Field Selected</span>
      </a>
     </li>
-    <li><a>Due</a></li>
+    <li><a onclick="FormLemma.set_selected()">Confirm</a></li>
     <li><a  onclick="FormLemma.hide()" href="#">Close</a></li>  
     </ul>
     </div>
@@ -107,6 +113,12 @@ var FormLemma = {
     for (let a of attrs) {
       a.value = '';
     }
+  },
+  set_selected: function () {
+    let fle = this.wind.w.querySelector("div.form_lemma");
+    this.forma = fle.querySelector('input[name="forma"]').value;
+    this.lemma = fle.querySelector('input[name="lemma"]').value;
+    this.etimo = fle.querySelector('input[name="etimo"]').value;
   }
 };
 
@@ -373,6 +385,7 @@ var Funct = {
 var PosMsd = {
   id: 'pos_msd_id',
   wind: null,
+  msd_attrs: {},
   load: async function () {
     const url = `cfg/pos_msd.csv`;
     try {
@@ -486,19 +499,19 @@ var PosMsd = {
   set_selected: function () {
     const rows = [];
     const lims = Array.from(this.wind.w.querySelectorAll("div.pos_msd li.m"));
-    // let lims = Array.from(nds);
     for (const m of lims) {
+      const msd = m.querySelector("span").innerHTML;
       const lias = Array.from(m.parentElement.querySelectorAll("li.a a.select"));
-      const row = []
+      const row = [];
       for (const la of lias) {
         const h = la.innerHTML;
         row.push(h)
       }
       if (row.length > 0)
-        rows.push(row)
+        rows.push([msd].concat(row));
     }
-    for (row of rows) {
-      console.log(row)
-    }
+    this.msd_attrs = {};
+    for (row of rows)
+      this.msd_attrs[row[0]] = row.slice(1);
   }
 };
