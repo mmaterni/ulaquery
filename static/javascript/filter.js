@@ -3,6 +3,7 @@
 const top_filter = 40;
 
 var VS = {
+
   forma: '',
   lemma: '',
   etimo: '',
@@ -16,7 +17,19 @@ var VS = {
     locs: [],
     dates: []
   },
-  msd_attrs: []
+  msd_attrs: [],
+  unselect: function () {
+    this.forma = '';
+    this.lemma = '';
+    this.etimo = '';
+    this.sigl.sigls = [];
+    this.sigl.locts = [];
+    this.sigl.datets = [];
+    this.funct.functs = [];
+    this.funct.locs = [];
+    this.funct.dates = [];
+    this.msd_attrs = [];
+  }
 }
 
 var FLT = {
@@ -38,12 +51,12 @@ var FLT = {
     Funct.resetXY();
     PosMsd.resetXY();
   },
-  set_selected: function () {
+  select: function () {
 
-    FormLemma.set_selected();
-    Sigl.set_selected();
-    Funct.set_selected();
-    PosMsd.set_selected();
+    FormLemma.select();
+    Sigl.select();
+    Funct.select();
+    PosMsd.select();
 
     VS.forma = FormLemma.forma;
     VS.lemma = FormLemma.lemma;
@@ -60,6 +73,16 @@ var FLT = {
     VS.msd_attrs = PosMsd.msd_attrs;
 
     Where.open();
+    Where.show();
+  },
+  unselect: function () {
+    FormLemma.unselect();
+    Sigl.unselect();
+    Funct.unselect();
+    PosMsd.unselect();
+    VS.unselect();
+    Where.open();
+    Where.show();
   }
 };
 
@@ -124,7 +147,7 @@ var Where = {
       this.wind.drag();
     }
     this.wind.setHtml(html);
-    this.wind.show();
+    // this.wind.show();
   },
   show: function (url) {
     if (!this.wind) return;
@@ -143,18 +166,6 @@ var Where = {
     this.wind.reset();
     this.setXY();
     this.show();
-  },
-  unselect: function () {
-    // const attrs = this.wind.w.querySelectorAll(`div.form_lemma input`);
-    // for (let a of attrs) {
-    //   a.value = '';
-    // }
-  },
-  set_selected: function () {
-    // let fle = this.wind.w.querySelector("div.form_lemma");
-    // this.forma = fle.querySelector('input[name="forma"]').value;
-    // this.lemma = fle.querySelector('input[name="lemma"]').value;
-    // this.etimo = fle.querySelector('input[name="etimo"]').value;
   }
 };
 
@@ -171,12 +182,11 @@ var FormLemma = {
     <div class="menu_wnd">
     <ul>
     <li>
-    <a class="tipb" onclick="FormLemma.unselect()" href="#">Reset
+    <a class="tipb" onclick="FormLemma.unselect()" href="#">Unselect
        <span class="tiptextb">Reset All Field Selected</span>
      </a>
     </li>
-    <li><a onclick="FormLemma.set_selected()">Confirm</a></li>
-    <li><a  onclick="FormLemma.hide()" href="#">Close</a></li>  
+    <li><a  onclick="FormLemma.hide()" href="#">X</a></li>  
     </ul>
     </div>
     
@@ -229,7 +239,7 @@ var FormLemma = {
       a.value = '';
     }
   },
-  set_selected: function () {
+  select: function () {
     let fle = this.wind.w.querySelector("div.form_lemma");
     this.forma = fle.querySelector('input[name="forma"]').value;
     this.lemma = fle.querySelector('input[name="lemma"]').value;
@@ -276,12 +286,11 @@ var Sigl = {
     <div class="menu_wnd">
     <ul>
     <li>
-    <a class="tipb" onclick="Sigl.unselect()" href="#">Reset
-       <span class="tiptextb">Reset All Field Selected</span>
+    <a class="tipb" onclick="Sigl.unselect()" href="#">Unselect
+       <span class="tiptextb">Unselect All Field Selected</span>
      </a>
     </li>
-    <li><a onclick="Sigl.set_selected()">Confirm</a></li>
-    <li><a onclick="Sigl.hide()" href="#">Close</a></li>  
+    <li><a onclick="Sigl.hide()" href="#">X</a></li>  
     </ul>
     </div>
     <div class="sigl">`);
@@ -351,7 +360,7 @@ var Sigl = {
       a.classList.remove("select");
     }
   },
-  set_selected: function () {
+  select: function () {
     const fn = (ats) => {
       const arr = Array.from(ats);
       const lst = arr.filter(a => a.classList.contains("select")).map(a => a.innerHTML);
@@ -402,11 +411,10 @@ var Funct = {
     <div class="menu_wnd">
     <ul>
     <li>
-    <a class="tipb" onclick="Funct.unselect()" href="#">Reset
-       <span class="tiptextb">Reset All Field Selected</span>  </a>
+    <a class="tipb" onclick="Funct.unselect()" href="#">Unselect
+       <span class="tiptextb">Unselect All Field Selected</span>  </a>
     </li>
-    <li><a onclick="Funct.set_selected()">Confirm</a></li>
-    <li><a onclick="Funct.hide()"  href="#">Close</a></li>  
+    <li><a onclick="Funct.hide()"  href="#">X</a></li>  
     </ul>
     </div>
     <div class="funct">`);
@@ -478,7 +486,7 @@ var Funct = {
       a.classList.remove("select");
     }
   },
-  set_selected: function () {
+  select: function () {
     const fn = (ats) => {
       const arr = Array.from(ats);
       const lst = arr.filter(a => a.classList.contains("select")).map(a => a.innerHTML);
@@ -529,12 +537,11 @@ var PosMsd = {
     <div class="menu_wnd">
     <ul>
     <li>
-    <a class="tipb" onclick="PosMsd.unselect()" href="#">Reset
-       <span class="tiptextb">Reset All Field Selected</span>
+    <a class="tipb" onclick="PosMsd.unselect()" href="#">nselect
+       <span class="tiptextb">Unselect All Field Selected</span>
      </a>
     </li>
-    <li><a onclick="PosMsd.set_selected()">Confirm</a></li>
-    <li><a onclick="PosMsd.hide()"  href="#">Close</a></li>  
+    <li><a onclick="PosMsd.hide()"  href="#">X</a></li>  
     </ul>
     </div>
     <div class="pos_msd">
@@ -610,7 +617,7 @@ var PosMsd = {
       });
     }
   },
-  set_selected: function () {
+  select: function () {
     const rows = [];
     const lims = Array.from(this.wind.w.querySelectorAll("div.pos_msd li.m"));
     let pos = '';
@@ -630,7 +637,6 @@ var PosMsd = {
         rows.push([pm].concat(row));
       }
     }
-
     this.msd_attrs = {};
     for (let row of rows)
       this.msd_attrs[row[0]] = row.slice(1);
