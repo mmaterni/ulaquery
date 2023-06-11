@@ -6,6 +6,7 @@ var DictForm = {
   tr_selected: null,
   wind: null,
   open: async function () {
+    const sp="         ";
     const menu = `
 <div class="menu_wnd" >
 <ul>
@@ -33,6 +34,7 @@ var DictForm = {
 <a class="cmd" href="#">Help
 </a>
 </li>
+<li>${sp}</li>
 <li><a  href="javascript:DictForm.hide()">Close</a></li>
 <li></li>
 </ul>

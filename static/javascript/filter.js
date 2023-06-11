@@ -41,22 +41,9 @@ var FLT = {
   set_selected: function () {
 
     FormLemma.set_selected();
-    // console.log(FormLemma.forma);
-    // console.log(FormLemma.lemma);
-    // console.log(FormLemma.etimo);
-
     Sigl.set_selected();
-    // console.log(Sigl.sigls);
-    // console.log(Sigl.locts);
-    // console.log(Sigl.datets);
-
     Funct.set_selected();
-    // console.log(Funct.functs);
-    // console.log(Funct.locs);
-    // console.log(Funct.dates);
-
     PosMsd.set_selected();
-    // console.log(JSON.stringify(PosMsd.msd_attrs, indent = 4));
 
     VS.forma = FormLemma.forma;
     VS.lemma = FormLemma.lemma;
@@ -72,11 +59,6 @@ var FLT = {
 
     VS.msd_attrs = PosMsd.msd_attrs;
 
-    // console.log(VS);
-
-
-    // const s = JSON.stringify(js, indent = 5);
-    // console.log(s);
     Where.open();
   }
 };
@@ -130,7 +112,6 @@ var Where = {
 
     for (let k in VS.msd_attrs) {
       const row = VS.msd_attrs[k];
-      console.log(k, row);
       const h = rh(row);
       jt.append(fh(k, h));
     }
@@ -632,16 +613,22 @@ var PosMsd = {
   set_selected: function () {
     const rows = [];
     const lims = Array.from(this.wind.w.querySelectorAll("div.pos_msd li.m"));
+    let pos = '';
     for (const m of lims) {
+      const pr = m.parentElement;
+      const p = pr.querySelector("li.p span");
+      if (!!p) pos = p.innerHTML;
       const msd = m.querySelector("span").innerHTML;
-      const lias = Array.from(m.parentElement.querySelectorAll("li.a a.select"));
+      const lias = Array.from(pr.querySelectorAll("li.a a.select"));
       const row = [];
       for (const la of lias) {
         const h = la.innerHTML;
         row.push(h)
       }
-      if (row.length > 0)
-        rows.push([msd].concat(row));
+      if (row.length > 0) {
+        const pm = `${pos.toLowerCase()}_${msd}`;
+        rows.push([pm].concat(row));
+      }
     }
 
     this.msd_attrs = {};
