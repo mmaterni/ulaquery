@@ -40,7 +40,6 @@
   border: 3px solid red !important;
 }
 
-
 html,
 body,
 div,
@@ -479,7 +478,7 @@ div.form_lemma {
         font-size: @fsize_07;
         font-weight: bold;
         padding: 0 5px 5px 0;
-        margin-right: 5px;
+        margin-right: ;
         width: 70px;
       }
       div.i {
@@ -791,9 +790,10 @@ div.sigl {
 }
 
 div.where {
-  box-sizing: border-box;
-  border: 1px solid @wnd_border_color;
-  padding: 5px 0 5px 5px;
+  // box-sizing: border-box;
+  // border: 1px solid @wnd_border_color;
+  padding: 0;
+  margin: 0;
   background: @wnd_back;
   ul {
     margin: 0;
@@ -802,36 +802,40 @@ div.where {
     border-bottom: 1px solid @wnd_border_color;
     li {
       box-sizing: border-box;
-      height: 25px !important;
+      // height: 25px !important;
       background: darken(@wnd_back, 5%);
       color: @wnd_color;
-      padding: 0 0 0 4px;
+      padding: 0;
       margin: 0;
-      border-width: 1px 0 0 1px;
+      border-width: 1px 1px 0 1px;
       border-style: solid;
       border-color: @wnd_border_color;
+      background: blueviolet;
+      height: 25px !important;
+      display: flex;
+      align-items: stretch;
       div {
-        display: inline-block;
-        font-size: @fsize_07 !important;
-        font-weight: normal ;
-        padding: 0;
-        margin: 0;
+        font-size: @fsize_07;
       }
       div.l {
         background: darken(@wnd_back, 10%);
+        // background: red;
         box-sizing: border-box;
-        padding: 0 5px 5px 0;
-        margin-right: 5px;
-        width: 160px;
-        border-width: 1px 1px 0 0;
+        padding: 4px 0 0 4px;
+        width: 170px;
+        border-width: 0 1px 0 0;
         border-style: solid;
         border-color: @wnd_border_color;
-        }
+      }
       div.v {
-        min-width: 300px;
-        background: lighten(@wnd_back, 10%);
+        box-sizing: border-box;
+        width: 270px;
+        background: lighten(@wnd_back, 0%);
+        // background: #00ff00;
+        padding: 2px 0 2px 4px;
         div {
-          padding: 0 9px 0 9px;
+          display: inline-block;
+          padding: 0 5px 0 5px;
           margin-right: 5px;
           background: lighten(@wnd_back, 20%);
           color: @wnd_color;

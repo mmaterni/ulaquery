@@ -44,6 +44,7 @@ var FLT = {
     Funct.show();
     Sigl.show();
     PosMsd.show();
+    Where.show();
   },
   resetXY: function () {
     FormLemma.resetXY();
@@ -115,11 +116,14 @@ var Where = {
     <div class="v">${v}</div>
     </li>`;
 
-    jt.append(fh("Forma", VS.forma));
-    jt.append(fh("Lemma", VS.lemma));
-    jt.append(fh("Etimo", VS.etimo));
+    let h = rh([VS.forma]);
+    jt.append(fh("Forma", h));
+    h = rh([VS.lemma]);
+    jt.append(fh("Lemma", h));
+    h = rh([VS.etimo]);
+    jt.append(fh("Etimo", h));
 
-    let h = rh(VS.sigl.sigls);
+    h = rh(VS.sigl.sigls);
     jt.append(fh("Sigl", h));
     h = rh(VS.sigl.locts);
     jt.append(fh("Loc.", h));
@@ -140,6 +144,7 @@ var Where = {
     }
 
     jt.append("</ul></div>")
+    console.log(jt.text());
     const html = jt.html();
     if (!this.wind) {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
@@ -158,8 +163,8 @@ var Where = {
     this.wind.hide(this.id);
   },
   setXY: function () {
-    const left = 100;
-    const top = 100;
+    const left = 5;
+    const top = top_filter + 390;
     this.wind.setXY(left, top, -1);
   },
   resetXY: function () {
@@ -332,7 +337,7 @@ var Sigl = {
   },
   setXY: function () {
     const left = 5;
-    const top = top_filter + 120;
+    const top = top_filter + 150;
     this.wind.setXY(left, top, -1);
   },
   resetXY: function () {

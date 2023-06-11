@@ -56,7 +56,7 @@ const menu = function () {
 </li>
 
 <li class="h">
-<a class="tipr" onclick="FLT.selected()" ref="#" >Selected
+<a class="tipr" onclick="FLT.select()" ref="#" >Select
 <span class="tiptextr">Set All Fileds Selected</span> </a>
 </li>
 
