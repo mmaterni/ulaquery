@@ -1,12 +1,10 @@
 // jshint esversion: 11
-// release 24-04-2022
+"use strict"
 
-
-// const nodrag_tds = ['input', 'select', 'a'];
-const nodrag_tds = ['input'];
+const nodrag_tds = ['input', 'select', 'a'];
 const nodrag_cls = "nodrag";
 
-var UaDrag = function (e) {
+function UaDrag(e) {
     const drag = function (element) {
         let pos1 = 0,
             pos2 = 0,
@@ -30,7 +28,7 @@ var UaDrag = function (e) {
 
         const elementDrag = function (e) {
             e = e || window.event;
-            //e.stopImmediatePropagation();
+            // e.stopImmediatePropagation();
             e.preventDefault();
             pos1 = pos3 - e.clientX;
             pos2 = pos4 - e.clientY;

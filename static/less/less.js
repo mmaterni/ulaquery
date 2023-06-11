@@ -1345,7 +1345,7 @@ function mylog(x, y) { }
                             var e, t, n, i, s = [],
                             l = !1; if (!("." !== o.currentChar() && "#" !== o.currentChar() || o.peek(/^[^{]*\}/)))
                                 if (o.save(), t = o.$re(/^([#.](?:[\w-]|\\(?:[A-Fa-f0-9]{1,6} ?|[^A-Fa-f0-9]))+)\s*\(/)) {
-                                    e = t[1]; var u = this.args(!1); if (s = u.args, l = u.variadic, !o.$char(")")) return void o.restore("Missing closing ')'"); if (o.commentStore.length = 0, o.$str("when") && (i = a(r.conditions, "expected condition")), n = r.block()) return o.forget(), new Ie.mixin.Definition(e, s, n, i, l);
+                                    e = t[1]; var u = this.args(!1); if (s = u.args, l = u.variadic, !o.$char(")")) return void o.restore("Missing closing ')'"); if (o.commentStore.length = 0, o.$str("when") && (i = a(r.Where, "expected condition")), n = r.block()) return o.forget(), new Ie.mixin.Definition(e, s, n, i, l);
                                     o.restore()
                                 } else o.restore()
                         }, ruleLookups: function () { var e, t = []; if ("[" === o.currentChar()) { for (; ;) { if (o.save(), !(e = this.lookupValue()) && "" !== e) { o.restore(); break } t.push(e), o.forget() } return t.length > 0 ? t : void 0 } }, lookupValue: function () {
@@ -1361,7 +1361,7 @@ function mylog(x, y) { }
                         } if (">" === e || "+" === e || "~" === e || "|" === e || "^" === e) { for (o.i++, "^" === e && "^" === o.currentChar() && (e = "^^", o.i++); o.isWhitespace();) o.i++; return new Ie.Combinator(e) } return o.isWhitespace(-1) ? new Ie.Combinator(" ") : new Ie.Combinator(null)
                     }, selector: function (e) {
                         var t, n, r, l, u, c, h, f = o.i; for (e = !1 !== e;
-                            (e && (n = this.extend()) || e && (c = o.$str("when")) || (l = this.element())) && (c ? h = a(this.conditions, "expected condition") : h ? s("CSS guard can only be used at the end of selector") : n ? u = u ? u.concat(n) : n : (u && s("Extend can only be used at the end of selector"), r = o.currentChar(), t ? t.push(l) : t = [l], l = null), "{" !== r && "}" !== r && ";" !== r && "," !== r && ")" !== r);); if (t) return new Ie.Selector(t, u, h, f, i);
+                            (e && (n = this.extend()) || e && (c = o.$str("when")) || (l = this.element())) && (c ? h = a(this.Where, "expected condition") : h ? s("CSS guard can only be used at the end of selector") : n ? u = u ? u.concat(n) : n : (u && s("Extend can only be used at the end of selector"), r = o.currentChar(), t ? t.push(l) : t = [l], l = null), "{" !== r && "}" !== r && ";" !== r && "," !== r && ")" !== r);); if (t) return new Ie.Selector(t, u, h, f, i);
                         u && s("Extend must be used to extend a selector, it cannot be used on its own")
                     }, selectors: function () {
                         for (var e, t;
@@ -1476,7 +1476,7 @@ function mylog(x, y) { }
                             for (r = o.isWhitespace(-1);
                                 (n = o.$re(/^[-+]\s+/) || !r && (o.$char("+") || o.$char("-"))) && (t = this.multiplication());) e.parensInOp = !0, t.parensInOp = !0, i = new Ie.Operation(n, [i || e, t], r), r = o.isWhitespace(-1); return i || e
                         }
-                    }, conditions: function () { var e, t, n, i = o.i; if (e = this.condition(!0)) { for (; o.peek(/^,\s*(not\s*)?\(/) && o.$char(",") && (t = this.condition(!0));) n = new Ie.Condition("or", n || e, t, i); return n || e } }, condition: function (e) {
+                    }, Where: function () { var e, t, n, i = o.i; if (e = this.condition(!0)) { for (; o.peek(/^,\s*(not\s*)?\(/) && o.$char(",") && (t = this.condition(!0));) n = new Ie.Condition("or", n || e, t, i); return n || e } }, condition: function (e) {
                         var t, n, i; if (t = this.conditionAnd(e)) {
                             if (n = o.$str("or")) {
                                 if (!(i = this.condition(e))) return;
