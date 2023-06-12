@@ -44,7 +44,7 @@ var FLT = {
     Funct.show();
     Sigl.show();
     PosMsd.show();
-    Where.show();
+    // Where.show();
   },
   resetXY: function () {
     FormLemma.resetXY();
@@ -243,6 +243,7 @@ var FormLemma = {
     for (let a of attrs) {
       a.value = '';
     }
+    FLT.select();
   },
   select: function () {
     let fle = this.wind.w.querySelector("div.form_lemma");
@@ -364,6 +365,7 @@ var Sigl = {
     for (let a of attrs) {
       a.classList.remove("select");
     }
+    FLT.select();
   },
   select: function () {
     const fn = (ats) => {
@@ -490,6 +492,7 @@ var Funct = {
     for (let a of attrs) {
       a.classList.remove("select");
     }
+    FLT.select();
   },
   select: function () {
     const fn = (ats) => {
@@ -607,6 +610,7 @@ var PosMsd = {
     for (let a of attrs) {
       a.classList.remove("select");
     }
+    FLT.select();
   },
   bind: function () {
     const attrs = this.wind.w.querySelectorAll("div.pos_msd li.a a");
