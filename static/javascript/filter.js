@@ -98,9 +98,18 @@ var Where = {
 <li></li>
 <li><a onclick="Where.hide()" href="#">X</a></li>  
 </ul>
-</div>
+// </div>
 `);
     jt.append('<div class="where"><ul>');
+
+    const fh0 = (l, v) => `
+    <li>
+    <div class="l" >${l}</div>
+    <div class="v"><div>${v}</div></div>
+    </li>`;
+    jt.append(fh0("Forma", VS.forma));
+    jt.append(fh0("Lemma", VS.lemma));
+    jt.append(fh0("Etimo", VS.etimo));
 
     const jr = UaJth();
     const rh = (arr) => {
@@ -109,21 +118,12 @@ var Where = {
         jr.append(`<div>${x}</div>`)
       return jr.html();
     };
-
     const fh = (l, v) => `
     <li>
     <div class="l" >${l}</div>
     <div class="v">${v}</div>
     </li>`;
-
-    let h = rh([VS.forma]);
-    jt.append(fh("Forma", h));
-    h = rh([VS.lemma]);
-    jt.append(fh("Lemma", h));
-    h = rh([VS.etimo]);
-    jt.append(fh("Etimo", h));
-
-    h = rh(VS.sigl.sigls);
+    let h = rh(VS.sigl.sigls);
     jt.append(fh("Sigl", h));
     h = rh(VS.sigl.locts);
     jt.append(fh("Loc.", h));
@@ -144,7 +144,7 @@ var Where = {
     }
 
     jt.append("</ul></div>")
-    console.log(jt.text());
+    // console.log(jt.text());
     const html = jt.html();
     if (!this.wind) {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
@@ -164,7 +164,7 @@ var Where = {
   },
   setXY: function () {
     const left = 5;
-    const top = top_filter + 390;
+    const top = top_filter + 420;
     this.wind.setXY(left, top, -1);
   },
   resetXY: function () {

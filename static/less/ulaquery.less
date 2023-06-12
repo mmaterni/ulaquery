@@ -803,17 +803,18 @@ div.where {
     li {
       box-sizing: border-box;
       // height: 25px !important;
-      background: darken(@wnd_back, 5%);
+      background: darken(@wnd_back, 0%);
       color: @wnd_color;
       padding: 0;
       margin: 0;
       border-width: 1px 1px 0 1px;
       border-style: solid;
       border-color: @wnd_border_color;
-      background: blueviolet;
+      // background: blueviolet;
       height: 25px !important;
       display: flex;
       align-items: stretch;
+      flex-wrap:nowrap;
       div {
         font-size: @fsize_07;
       }
@@ -821,26 +822,27 @@ div.where {
         background: darken(@wnd_back, 10%);
         box-sizing: border-box;
         padding: 4px 0 0 4px;
-        width: 170px;
+        width: 150px;
         border-width: 0 1px 0 0;
         border-style: solid;
         border-color: @wnd_border_color;
       }
       div.v {
         box-sizing: border-box;
-        width: 270px;
+        min-width:300px;
         background: lighten(@wnd_back, 0%);
         padding: 2px 0 2px 4px;
         div {
           display: inline-block;
           padding: 0 5px 0 5px;
+          margin-top: 2px;
           margin-right: 5px;
-          background: lighten(@wnd_back, 20%);
+          background: lighten(@wnd_back, 30%);
           color: @wnd_color;
           font-size: @fsize_07;
           font-family: @fsans;
           font-style: normal;
-          border: 1px solid @wnd_color;
+          // border: 1px solid @wnd_color;
           border-radius: 6px;
         }
       }
