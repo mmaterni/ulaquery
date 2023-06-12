@@ -8,7 +8,6 @@
       dict_rows: [],
       load_dict: async function () {
         const url = `ula_data/data_export/dictionary.ula.csv`;
-        console.log(url);
         try {
           const resp = await fetch(url, {
             method: 'GET',
