@@ -4,14 +4,10 @@
 
   // var dm_ = (function () {
   ; (function () {
-    const DIR_ULA_DATA = `ula_data`;
-    const DIR_DATA_EXP = `${DIR_ULA_DATA}/data_export`;
-    const DICT_FORM_PATH = `${DIR_DATA_EXP}/dictionary.ula.csv`;
-
     const DM = {
       dict_rows: [],
       load_dict: async function () {
-        const url = `${DICT_FORM_PATH}`;
+        const url = `ula_data/data_export/dictionary.ula.csv`;
         console.log(url);
         try {
           const resp = await fetch(url, {
@@ -24,7 +20,7 @@
           const data = await resp.text();
           const rows = data.trim().split("\n");
           this.dict_rows = rows.map((x) => x.trim().split("|"));
-          
+
           // AAA rimuove dallindice 60 alla fine
           // this.dict_rows.splice(60);
 
@@ -63,13 +59,13 @@
         const idx_date_t = row.findIndex((e, i) => i > idx_loc_t && e.startsWith("DAT"));
 
         // FORMA|KEY|LEMMA|ETIMO
-        const columns_fl = row.slice(0, 4);       
+        const columns_fl = row.slice(0, 4);
         //POS| gender|number|case|degree|deterType|MWEs|pronType|person|verbForm|mood|tense|voice|property|adpType|advType|advType2|numType|partType|
-        const columns_pm = row.slice(6,7).concat(row.slice(8, idx_sigl));
+        const columns_pm = row.slice(6, 7).concat(row.slice(8, idx_sigl));
         // g|p|v|
-        const columns_sigl = row.slice(idx_sigl,idx_loc_t);
+        const columns_sigl = row.slice(idx_sigl, idx_loc_t);
         // LOC.1|LOC.2|LOC.3|LOC.4|
-        const columns_loc_t = row.slice(idx_loc_t,idx_date_t);
+        const columns_loc_t = row.slice(idx_loc_t, idx_date_t);
         // g|p|v|
         const columns_date_t = row.slice(idx_date_t);
 
