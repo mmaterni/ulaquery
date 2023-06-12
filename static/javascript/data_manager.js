@@ -12,6 +12,7 @@
       dict_rows: [],
       load_dict: async function () {
         const url = `${DICT_FORM_PATH}`;
+        console.log(url);
         try {
           const resp = await fetch(url, {
             method: 'GET',
