@@ -4,7 +4,7 @@
 
   // var dm_ = (function () {
   ; (function () {
-    const DIR_ULA_DATA = `/ula_data`;
+    const DIR_ULA_DATA = `ula_data`;
     const DIR_DATA_EXP = `${DIR_ULA_DATA}/data_export`;
     const DICT_FORM_PATH = `${DIR_DATA_EXP}/dictionary.ula.csv`;
 
