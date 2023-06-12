@@ -279,7 +279,7 @@ var Sigl = {
   },
   open: async function () {
     const jt = UaJth();
-    const rows = await this.load(`cfg/exp_loc_dat.csv`);
+    const rows = await this.load(`static/cfg/exp_loc_dat.csv`);
     const sgs = [];
     const lcs = [];
     const dts = [];
@@ -411,9 +411,9 @@ var Funct = {
   },
   open: async function () {
     const jt = UaJth();
-    const fs = await this.load(`cfg/funct.csv`);
-    const ls = await this.load(`cfg/lang.csv`);
-    const ds = await this.load(`cfg/ldata.csv`);
+    const fs = await this.load(`static/cfg/funct.csv`);
+    const ls = await this.load(`static/cfg/lang.csv`);
+    const ds = await this.load(`static/cfg/ldata.csv`);
     jt.append(`
     <div class="menu_wnd">
     <ul>
@@ -518,7 +518,7 @@ var PosMsd = {
   wind: null,
   msd_attrs: {},
   load: async function () {
-    const url = `cfg/pos_msd.csv`;
+    const url = `static/cfg/pos_msd.csv`;
     try {
       const resp = await fetch(url, {
         method: 'GET',
