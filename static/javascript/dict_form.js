@@ -5,7 +5,7 @@ var DictForm = {
   id: "dict_form.id",
   tr_selected: null,
   wind: null,
-  open: async function () {
+  build: async function () {
     const sp="         ";
     const menu = `
 <div class="menu_wnd" >

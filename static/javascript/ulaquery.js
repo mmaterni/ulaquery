@@ -41,7 +41,7 @@ const menu = function () {
 <ul class="v">
 
 <li class="h">
-<a class="tipr" onclick="FLT.show()" href="#">Open
+<a class="tipr" onclick="FLT.show()" href="#">build
 <span class="tiptextr">Opoen Window FIlter</span></a>
 </li>
 
@@ -73,7 +73,7 @@ const menu = function () {
 <ul class="v">
 
 <li class="h">
-<a class="tipr" onclick="Where.show()" href="#">Open
+<a class="tipr" onclick="Where.show()" href="#">build
 <span class="tiptextr">Opoen Window Conditions</span></a>
 </li>
 
@@ -90,7 +90,7 @@ const menu = function () {
 <ul class="v">
 
 <li class="h">
-<a class="tipr" onclick="DictForm.show()" href="#">Open
+<a class="tipr" onclick="DictForm.show()" href="#">build
 <span class="tiptextr">Opoen Window Dictionary</span></a>
 </li>
 
@@ -149,19 +149,19 @@ var UlaQuery = {
     wait_start();
     await sleep(100);
     await dm_.load_dict();
-    await this.open_menu();
-    await DictForm.open();
-    await FormLemma.open();
-    await Sigl.open();
-    await Funct.open();
-    await PosMsd.open(); 
-    Where.open();  
+    await this.build_menu();
+    await DictForm.build();
+    await FormLemma.build();
+    await Sigl.build();
+    await Funct.build();
+    await PosMsd.build(); 
+    Where.build();  
     UaLog.setXY(-3, 0).setZ(11).new();
     wait_stop();
 
     // FLT.show();
   },
-  open_menu: async function () {
+  build_menu: async function () {
     const html = menu();
     document.getElementById("ulaquery_id").innerHTML = html;
   }

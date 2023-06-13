@@ -73,7 +73,7 @@ var FLT = {
 
     VS.msd_attrs = PosMsd.msd_attrs;
 
-    Where.open();
+    Where.build();
     Where.show();
   },
   unselect: function () {
@@ -82,7 +82,7 @@ var FLT = {
     Funct.unselect();
     PosMsd.unselect();
     VS.unselect();
-    Where.open();
+    Where.build();
     Where.show();
   }
 };
@@ -90,7 +90,7 @@ var FLT = {
 var Where = {
   id: 'Where_id',
   wind: null,
-  open: function () {
+  build: function () {
     const jt = UaJth();
     jt.append(`
 <div class="menu_wnd">
@@ -181,7 +181,7 @@ var FormLemma = {
   forma: '',
   lemma: '',
   etimo: '',
-  open: async function () {
+  build: async function () {
     const jt = UaJth();
     jt.append(`
     <div class="menu_wnd">
@@ -277,7 +277,7 @@ var Sigl = {
       throw error;
     }
   },
-  open: async function () {
+  build: async function () {
     const jt = UaJth();
     const rows = await this.load(`static/cfg/exp_loc_dat.csv`);
     const sgs = [];
@@ -409,7 +409,7 @@ var Funct = {
       throw error;
     }
   },
-  open: async function () {
+  build: async function () {
     const jt = UaJth();
     const fs = await this.load(`static/cfg/funct.csv`);
     const ls = await this.load(`static/cfg/lang.csv`);
@@ -535,7 +535,7 @@ var PosMsd = {
       throw error;
     }
   },
-  open: async function () {
+  build: async function () {
     const rows = await this.load();
     // elimina la riga di intestazione
     rows.shift()
