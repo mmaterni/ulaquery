@@ -35,7 +35,7 @@ var DictForm = {
 </a>
 </li>
 <li>${sp}</li>
-<li><a  href="javascript:DictForm.hide()">Close</a></li>
+<li><a  href="javascript:DictForm.hide()">X</a></li>
 <li></li>
 </ul>
 </div>
