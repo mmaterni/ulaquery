@@ -41,13 +41,18 @@ const menu = function () {
 <ul class="v">
 
 <li class="h">
-<a class="tipr" onclick="FLT.show()" href="#">build
+<a class="tipr" onclick="FLT.open()" href="#">Show All
 <span class="tiptextr">Opoen Window FIlter</span></a>
 </li>
 
 <li class="h">
-<a class="tipr" onclick="FLT.hide()" ref="#">Close
+<a class="tipr" onclick="FLT.hide()" ref="#">Hide
 <span class="tiptextr">Close Windows Filetr</span> </a>
+</li>
+
+<li class="h">
+<a class="tipr" onclick="FLT.show()" href="#">SHow
+<span class="tiptextr">Opoen Window Filter Active</span></a>
 </li>
 
 <li class="h">
@@ -55,87 +60,55 @@ const menu = function () {
 <span class="tiptextr">Relocate Window Filetr</span> </a>
 </li>
 
-<li class="h">
-<a class="tipr" onclick="FLT.select()" ref="#" >Select
-<span class="tiptextr">Set All Fileds Selected</span> </a>
-</li>
-
-<li class="h">
-<a class="tipr" onclick="FLT.unselect()" ref="#" >Unselect
-<span class="tiptextr">Unselect All Fileds</span> </a>
-</li>
 
 </ul>
 </li>
   
 <li class="v">
-<a href="#">Where</a>
-<ul class="v">
-
-<li class="h">
-<a class="tipr" onclick="Where.show()" href="#">build
-<span class="tiptextr">Opoen Window Conditions</span></a>
+<a class="tipr" onclick="FLT.select()" ref="#" >Select
+<span class="tiptextr">Set All Fileds Selected</span> </a>
 </li>
 
-<li class="h">
-<a class="tipr" onclick="Where.hide()" ref="#">Close
-<span class="tiptextr">Close Windows Conditions</span> </a>
+<li class="v">
+<a class="tipr" onclick="FLT.unselect()" ref="#" >Unselect
+<span class="tiptextr">Unselect All Fileds</span> </a>
 </li>
 
-</ul>
-</li>
 
 <li class="v">
 <a href="#">Dictionary</a>
 <ul class="v">
+<li class="h"><a class="tipr" onclick="DictForm.show()" href="#">Show
+<span class="tiptextr">Opoen Window Dictionary</span></a></li>
 
-<li class="h">
-<a class="tipr" onclick="DictForm.show()" href="#">build
-<span class="tiptextr">Opoen Window Dictionary</span></a>
-</li>
+<li class="h"><a class="tipr" onclick="DictForm.hide()" href="#" >Hide
+<span class="tiptextr">Close Window Dictionary</span> </a></li>
 
-<li class="h">
-<a class="tipr" onclick="DictForm.hide()" href="#" >Close
-<span class="tiptextr">Close Window Dictionary</span> </a>
-</li>
-
-<li class="h">
-<a class="tipr" onclick="DictForm.resetXY()" href="#">Relocate
-<span class="tiptextr">Relocate Window Dictionary</span> </a>
-</li>
-
+<li class="h"><a class="tipr" onclick="DictForm.resetXY()" href="#">Relocate
+<span class="tiptextr">Relocate Window Dictionary</span> </a></li>
 </ul>
 </li>
 
 <li class="v">
 <a href="#">Utils</a>
 <ul class="v">
-
 <li class="h">
   <a class="cmd tipr" cmd="show_store" href="#">Show Store
   <span class="tiptextr">Show LocalStore</span></a>
 </li>
-
 <li class="h">
   <a class="cmd tipr" cmd="clear_store" href="#">Clean Store
   <span class="tiptextr">Clean LocalStore</span></a>
 </li>
-
 </ul>
 </li>
 
-<li class="v">
-<a class="cmd" cmd="help" href="#">Help</a>
-</li>
+<li class="v"><a class="cmd" cmd="help" href="#">Help</a></li>
 
-<li class="v">
-<a class="tipb" onclick="cmd_log_toggle()" href="#">Log
-<span class="tiptextb">Toggle Log</span></a>
-</li>
+<li class="v"><a class="tipb" onclick="cmd_log_toggle()" href="#">Log
+<span class="tiptextb">Toggle Log</span></a></li>
 
-<li class="v">
-  <a onclick="cmd_close()" href="#" >close</a>
-</li>
+<li class="v"><a onclick="cmd_close()" href="#" >close</a></li>
 
 </ul>
 </div>

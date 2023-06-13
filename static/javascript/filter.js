@@ -18,6 +18,21 @@ var VS = {
     dates: []
   },
   msd_attrs: [],
+  select: function () {
+    VS.forma = FormLemma.forma;
+    VS.lemma = FormLemma.lemma;
+    VS.etimo = FormLemma.etimo;
+
+    VS.sigl.sigls = Sigl.sigls;
+    VS.sigl.locts = Sigl.locts;
+    VS.sigl.datets = Sigl.datets;
+
+    VS.funct.functs = Funct.functs;
+    VS.funct.locs = Funct.locs;
+    VS.funct.dates = Funct.dates;
+
+    VS.msd_attrs = PosMsd.msd_attrs;
+  },
   unselect: function () {
     this.forma = '';
     this.lemma = '';
@@ -33,46 +48,40 @@ var VS = {
 }
 
 var FLT = {
-  hide: function () {
-    FormLemma.hide();
-    Funct.hide();
-    Sigl.hide();
-    PosMsd.hide();
+  open: function () {
+    FormLemma.open();
+    Funct.open();
+    Sigl.open();
+    PosMsd.open();
+    Where.open();
   },
   show: function () {
     FormLemma.show();
     Funct.show();
     Sigl.show();
     PosMsd.show();
-    // Where.show();
+    Where.show();
+  },
+  hide: function () {
+    FormLemma.hide();
+    Funct.hide();
+    Sigl.hide();
+    PosMsd.hide();
+    Where.hide();
   },
   resetXY: function () {
     FormLemma.resetXY();
     Sigl.resetXY();
     Funct.resetXY();
     PosMsd.resetXY();
+    Where.resetXY();
   },
   select: function () {
-
     FormLemma.select();
     Sigl.select();
     Funct.select();
     PosMsd.select();
-
-    VS.forma = FormLemma.forma;
-    VS.lemma = FormLemma.lemma;
-    VS.etimo = FormLemma.etimo;
-
-    VS.sigl.sigls = Sigl.sigls;
-    VS.sigl.locts = Sigl.locts;
-    VS.sigl.datets = Sigl.datets;
-
-    VS.funct.functs = Funct.functs;
-    VS.funct.locs = Funct.locs;
-    VS.funct.dates = Funct.dates;
-
-    VS.msd_attrs = PosMsd.msd_attrs;
-
+    VS.select();
     Where.build();
     Where.show();
   },
@@ -90,13 +99,14 @@ var FLT = {
 var Where = {
   id: 'Where_id',
   wind: null,
+  isActive: false,
   build: function () {
     const jt = UaJth();
     jt.append(`
 <div class="menu_wnd">
 <ul>
 <li></li>
-<li><a onclick="Where.hide()" href="#">X</a></li>  
+<li><a onclick="Where.close()" href="#">X</a></li>  
 </ul>
 // </div>
 `);
@@ -152,15 +162,27 @@ var Where = {
       this.wind.drag();
     }
     this.wind.setHtml(html);
-    // this.wind.show();
+  },
+
+  close: function () {
+    if (!this.wind) return;
+    this.wind.hide(this.id);
+    this.isActive = false;
+  },
+  open: function () {
+    if (!this.wind) return;
+    this.wind.show();
+    this.isActive = true;
   },
   show: function (url) {
     if (!this.wind) return;
-    this.wind.show();
+    if (this.isActive)
+      this.wind.show();
   },
   hide: function () {
     if (!this.wind) return;
-    this.wind.hide(this.id);
+    if (this.isActive)
+      this.wind.hide(this.id);
   },
   setXY: function () {
     const left = 5;
@@ -170,7 +192,7 @@ var Where = {
   resetXY: function () {
     this.wind.reset();
     this.setXY();
-    this.show();
+    this.open();
   }
 };
 
@@ -181,6 +203,7 @@ var FormLemma = {
   forma: '',
   lemma: '',
   etimo: '',
+  isActive: false,
   build: async function () {
     const jt = UaJth();
     jt.append(`
@@ -188,10 +211,10 @@ var FormLemma = {
     <ul>
     <li>
     <a class="tipb" onclick="FormLemma.unselect()" href="#">Unselect
-       <span class="tiptextb">Reset All Field Selected</span>
+       <span class="tiptextb">Reset Fields Selected</span>
      </a>
     </li>
-    <li><a  onclick="FormLemma.hide()" href="#">X</a></li>  
+    <li><a  onclick="FormLemma.close()" href="#">X</a></li>  
     </ul>
     </div>
     
@@ -220,13 +243,25 @@ var FormLemma = {
     }
     this.wind.setHtml(html);
   },
-  show: function (url) {
+  close: function () {
+    if (!this.wind) return;
+    this.wind.hide(this.id);
+    this.isActive = false;
+  },
+  open: function () {
     if (!this.wind) return;
     this.wind.show();
+    this.isActive = true;
+  },
+  show: function (url) {
+    if (!this.wind) return;
+    if (this.isActive)
+      this.wind.show();
   },
   hide: function () {
     if (!this.wind) return;
-    this.wind.hide(this.id);
+    if (this.isActive)
+      this.wind.hide(this.id);
   },
   setXY: function () {
     const left = 4;
@@ -236,7 +271,7 @@ var FormLemma = {
   resetXY: function () {
     this.wind.reset();
     this.setXY();
-    this.show();
+    this.open();
   },
   unselect: function () {
     const attrs = this.wind.w.querySelectorAll(`div.form_lemma input`);
@@ -260,11 +295,13 @@ var Sigl = {
   sigls: [],
   locts: [],
   datets: [],
+  isActive: false,
   load: async function (url) {
     try {
       const resp = await fetch(url, {
         method: 'GET',
         headers: { "Content-Type": "text/plain;charset=UTF-8" },
+        cache:"default"
       });
       if (!resp.ok) {
         throw new Error(`Erroe:${resp.status} ${resp.statusText}`);
@@ -293,10 +330,10 @@ var Sigl = {
     <ul>
     <li>
     <a class="tipb" onclick="Sigl.unselect()" href="#">Unselect
-       <span class="tiptextb">Unselect All Field Selected</span>
+       <span class="tiptextb">Unselect Field Selected</span>
      </a>
     </li>
-    <li><a onclick="Sigl.hide()" href="#">X</a></li>  
+    <li><a onclick="Sigl.close()" href="#">X</a></li>  
     </ul>
     </div>
     <div class="sigl">`);
@@ -328,13 +365,26 @@ var Sigl = {
     this.wind.setHtml(html);
     this.bind();
   },
-  show: function (url) {
+
+  close: function () {
+    if (!this.wind) return;
+    this.wind.hide(this.id);
+    this.isActive = false;
+  },
+  open: function () {
     if (!this.wind) return;
     this.wind.show();
+    this.isActive = true;
+  },
+  show: function (url) {
+    if (!this.wind) return;
+    if (this.isActive)
+      this.wind.show();
   },
   hide: function () {
     if (!this.wind) return;
-    this.wind.hide(this.id);
+    if (this.isActive)
+      this.wind.hide(this.id);
   },
   setXY: function () {
     const left = 5;
@@ -344,7 +394,7 @@ var Sigl = {
   resetXY: function () {
     this.wind.reset();
     this.setXY();
-    this.show();
+    this.open();
   },
   bind: function () {
     const attrs = this.wind.w.querySelectorAll("div.sigl li a");
@@ -392,11 +442,13 @@ var Funct = {
   functs: [],
   locs: [],
   dates: [],
+  isActive: false,
   load: async function (url) {
     try {
       const resp = await fetch(url, {
         method: 'GET',
         headers: { "Content-Type": "text/plain;charset=UTF-8" },
+        cache:"default"
       });
       if (!resp.ok) {
         throw new Error(`Erroe:${resp.status} ${resp.statusText}`);
@@ -419,9 +471,9 @@ var Funct = {
     <ul>
     <li>
     <a class="tipb" onclick="Funct.unselect()" href="#">Unselect
-       <span class="tiptextb">Unselect All Field Selected</span>  </a>
+       <span class="tiptextb">Unselect Fields Selected</span>  </a>
     </li>
-    <li><a onclick="Funct.hide()"  href="#">X</a></li>  
+    <li><a onclick="Funct.close()"  href="#">X</a></li>  
     </ul>
     </div>
     <div class="funct">`);
@@ -454,13 +506,25 @@ var Funct = {
     this.wind.setHtml(html);
     this.bind();
   },
-  show: function (url) {
+  close: function () {
+    if (!this.wind) return;
+    this.wind.hide(this.id);
+    this.isActive = false;
+  },
+  open: function () {
     if (!this.wind) return;
     this.wind.show();
+    this.isActive = true;
+  },
+  show: function (url) {
+    if (!this.wind) return;
+    if (this.isActive)
+      this.wind.show();
   },
   hide: function () {
     if (!this.wind) return;
-    this.wind.hide(this.id);
+    if (this.isActive)
+      this.wind.hide(this.id);
   },
   setXY: function () {
     const left = 300;;
@@ -470,7 +534,7 @@ var Funct = {
   resetXY: function () {
     this.wind.reset();
     this.setXY();
-    this.show();
+    this.open();
   },
   bind: function () {
     const attrs = this.wind.w.querySelectorAll("div.funct li a");
@@ -510,11 +574,11 @@ var Funct = {
     attrs = this.wind.w.querySelectorAll("div.funct li.d a");
     this.dates = fn(attrs);
   }
-
 };
 
 var PosMsd = {
   id: 'pos_msd_id',
+  isActive: false,
   wind: null,
   msd_attrs: {},
   load: async function () {
@@ -523,6 +587,7 @@ var PosMsd = {
       const resp = await fetch(url, {
         method: 'GET',
         headers: { "Content-Type": "text/plain;charset=UTF-8" },
+        cache:"default"
       });
       if (!resp.ok) {
         throw new Error(`Erroe:${resp.status} ${resp.statusText}`);
@@ -546,10 +611,10 @@ var PosMsd = {
     <ul>
     <li>
     <a class="tipb" onclick="PosMsd.unselect()" href="#">nselect
-       <span class="tiptextb">Unselect All Field Selected</span>
+       <span class="tiptextb">Unselect Fields Selected</span>
      </a>
     </li>
-    <li><a onclick="PosMsd.hide()"  href="#">X</a></li>  
+    <li><a onclick="PosMsd.close()"  href="#">X</a></li>  
     </ul>
     </div>
     <div class="pos_msd">
@@ -587,13 +652,25 @@ var PosMsd = {
     this.wind.setHtml(html);
     this.bind();
   },
-  show: function (url) {
+  close: function () {
+    if (!this.wind) return;
+    this.wind.hide(this.id);
+    this.isActive = false;
+  },
+  open: function () {
     if (!this.wind) return;
     this.wind.show();
+    this.isActive = true;
+  },
+  show: function (url) {
+    if (!this.wind) return;
+    if (this.isActive)
+      this.wind.show();
   },
   hide: function () {
     if (!this.wind) return;
-    this.wind.hide(this.id);
+    if (this.isActive)
+      this.wind.hide(this.id);
   },
   setXY: function () {
     const left = 600;
@@ -603,14 +680,7 @@ var PosMsd = {
   resetXY: function () {
     this.wind.reset();
     this.setXY();
-    this.show();
-  },
-  unselect: function () {
-    const attrs = this.wind.w.querySelectorAll("div.pos_msd li.a a");
-    for (let a of attrs) {
-      a.classList.remove("select");
-    }
-    FLT.select();
+    this.open();
   },
   bind: function () {
     const attrs = this.wind.w.querySelectorAll("div.pos_msd li.a a");
@@ -649,5 +719,12 @@ var PosMsd = {
     this.msd_attrs = {};
     for (let row of rows)
       this.msd_attrs[row[0]] = row.slice(1);
+  },
+  unselect: function () {
+    const attrs = this.wind.w.querySelectorAll("div.pos_msd li.a a");
+    for (let a of attrs) {
+      a.classList.remove("select");
+    }
+    FLT.select();
   }
 };

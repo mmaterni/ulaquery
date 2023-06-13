@@ -1,5 +1,6 @@
-// jshint esversion: 11
-// release 25-04-22
+// release 13-06-23
+
+"use strict"
 
 var UaWindowAdm = {
     ws: {},
@@ -182,7 +183,7 @@ var UaWindowAdm = {
             },
             close: function () {
                 this.w.style.display = "none";
-                this.w.innerHTML = 'block'; 
+                this.w.innerHTML = 'block';
                 return this;
             },
             remove: function () {

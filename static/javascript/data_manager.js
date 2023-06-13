@@ -11,7 +11,8 @@
         try {
           const resp = await fetch(url, {
             method: 'GET',
-            headers: { "Content-Type": "text/plain;charset=UTF-8" }
+            headers: { "Content-Type": "text/plain;charset=UTF-8" },
+            cache: "default"
           });
           if (!resp.ok) {
             throw new Error(`Erroe:${resp.status} ${resp.statusText}`);
