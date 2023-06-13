@@ -78,7 +78,7 @@ const menu = function () {
 <li class="v">
 <a href="#">Dictionary</a>
 <ul class="v">
-<li class="h"><a class="tipr" onclick="DictForm.show()" href="#">Show
+<li class="h"><a class="tipr" onclick="DictForm.build_all()" href="#">Show
 <span class="tiptextr">Opoen Window Dictionary</span></a></li>
 
 <li class="h"><a class="tipr" onclick="DictForm.hide()" href="#" >Hide
@@ -123,7 +123,7 @@ var UlaQuery = {
     await sleep(100);
     await dm_.load_dict();
     await this.build_menu();
-    await DictForm.build();
+    // await DictForm.build_all();
     await FormLemma.build();
     await Sigl.build();
     await Funct.build();

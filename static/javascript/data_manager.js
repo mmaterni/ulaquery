@@ -1,11 +1,10 @@
 "use strict"
 
-
-
   // var dm_ = (function () {
   ; (function () {
     const DM = {
       dict_rows: [],
+      rows: [],
       load_dict: async function () {
         const url = `ula_data/data_export/dictionary.ula.csv`;
         try {
