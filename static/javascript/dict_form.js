@@ -8,11 +8,12 @@ var DictForm = {
   wind: null,
   rows: [],
   open: function () {
-    this.build();
+    this.build(dm_.dict_rows);
     this.show();
   },
-  build: async function () {
-    this.rows = dm_.dict_rows;
+  build: async function (rows) {
+    this.rows = rows;
+    const heads = dm_.dict_heads;
     const sp = "         ";
     const menu = `
 <div class="menu_wnd" >
@@ -51,14 +52,13 @@ var DictForm = {
     let jt = UaJth();
     jt.append(menu);
     const forms_len = 8;
-    const heads = this.rows[0];
     const head_form = heads.slice(0, forms_len);
     const head_msd = heads.slice(forms_len);
     // console.log(heads);
     // console.log(head_form);
-    console.log(head_msd);
+    // console.log(head_msd);
     // elimina la prima riga
-    this.rows.shift();
+    // this.rows.shift();
 
     // head
     jt.append(`<table class='dict'><thead><tr>`);

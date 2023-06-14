@@ -40,18 +40,15 @@
  33: DATE.0
  34: DATE.1
  35: DATE.2
- 
   */
-
-
-
 
 
   // var dm_ = (function () {
   ; (function () {
     const DM = {
       dict_rows: [],
-      rows: [],
+      dic_heads: [],
+      where_vallues: [],
       load_dict: async function () {
         const url = `ula_data/data_export/dictionary.ula.csv`;
         try {
@@ -66,9 +63,13 @@
           const data = await resp.text();
           const rows = data.trim().split("\n");
           this.dict_rows = rows.map((x) => x.trim().split("|"));
+          this.dict_heads = this.dict_rows[0];
+          this.dict_rows.shift();
+
 
           // AAA rimuove dallindice 60 alla fine
           // this.dict_rows.splice(60);
+
         } catch (error) {
           alert(`Errror:${url}\n ${error}`);
           throw error;
@@ -90,13 +91,13 @@
         // console.log("date_t", columns_date_t);
         // console.log(row);
       },
-      findIndices: (values) => {
+      findIndices: () => {
         const rl = this.dict_rows.length;
         const indices = [];
         for (let i = 0; i < rl; i++) {
           const row = this.dict_rows[i];
           let ok = true;
-          for (const [j, vs] of values)
+          for (const [j, vs] of this.where_values)
             if (!vs.includes(row[j])) {
               ok = false;
               break;
@@ -105,14 +106,30 @@
         }
         return indices;
       },
-      findRows: function (values) {
-        const idxs = this.findIndices(values);
+      findRows: function () {
+        const idxs = this.findIndices();
         const rows = [];
         for (const i of idxs)
           rows.push(this.dict_rows[i]);
         return rows;
+      },
+      resetWhereValues: function () {
+        this.where_values = [];
+      },
+      setWhereValues: function (vs) {
+        // [[i,['a','',..]],..]
+        //   values = [
+        //     [6, ['masc', 'sing']],
+        //     [0, ['p']],
+        //     [3, ['x', 'y', 'z']]
+        // ];
+        this.where_values = vs;
+      },
+      pusWhereValues: function (i, ...args) {
+        const vs = Array.from(args);
+        const r = [i, vs];
+        this.where_vallues.push(r)
       }
-
     };
 
     window.dm_ = DM;
