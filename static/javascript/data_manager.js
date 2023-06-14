@@ -1,6 +1,65 @@
 "use strict"
 
   /*
+  POS|pos_name|msd_name|attrs
+NOUN|noun|gender|Masc,Fem,Neut
+NOUN|noun|number|Sing,Plur
+NOUN|noun|case|Nom,Acc
+
+PROPN|properNoun|gender|Masc,Fem,Neut
+PROPN|properNoun|number|Sing,Plur
+PROPN|properNoun|case|Nom,Acc
+
+ADJ|adjective|gender|Masc,Fem,Neut
+ADJ|adjective|number|Sing,Plur
+ADJ|adjective|case|Nom,Acc
+ADJ|adjective|degree|Pos,Cmp,Sup,Abs
+
+DET|determiner|deterType|ArtDef,ArtIndef,Poss,Rel,Dem,Neg,Ind,Int,Exc
+DET|determiner|gender|Masc,Fem,Neut
+DET|determiner|number|Sing,Plur
+DET|determiner|case|Nom,Acc
+DET|determiner|MWEs|MWEs
+
+PRON|pronoun|pronType|Prs,Poss,Rel,Dem,Neg,Ind,Int
+PRON|pronoun|person|1,2,3
+PRON|pronoun|gender|Masc,Fem,Neut
+PRON|pronoun|number|Sing,Plur
+PRON|pronoun|case|Nom,Acc
+PRON|pronoun|MWEs|MWEs
+
+VERB|verb|verbForm|Fin,Ind
+VERB|verb|mood|Inf,Part,Ger,Ind,Imp,Cnd,Sub
+VERB|verb|tense|Past,Pres,Fut,Imp
+VERB|verb|voice|Act,Pass,Rfl
+VERB|verb|property|Intr,Trans
+VERB|verb|person|1,2,3
+VERB|verb|number|Sing,Plur
+VERB|verb|gender|Masc,Fem,Neut
+VERB|verb|MWEs|MWEs
+
+ADP|adposition|adpType|PrepS,PrepArt
+ADP|adposition|MWEs|MWEs
+
+ADV|adverb|advType|Man,Loc,Tim,Deg,Freq
+ADV|adverb|advType2|Dem,Ind,Neg,Int,Tot
+ADV|adverb|degree|Pos,Cmp,Sup,Abs
+ADV|adverb|MWEs|MWEs
+
+CCONJ|coordinating conjunction|MWEs|MWEs
+
+SCONJ|subordinating conjunction|MWEs|MWEs
+
+NUM|numeral|numType|Card,Ord
+
+PART|particle|partType|Pos,Neg,Int,Exc,Verb
+
+INTJ|interjection||
+
+
+X|other||
+-|del||
+
  0: FORMA
  1: KEY
  2: LEMMA
@@ -91,7 +150,7 @@
         // console.log("date_t", columns_date_t);
         // console.log(row);
       },
-      findIndices: () => {
+      findIndices: function () {
         const rl = this.dict_rows.length;
         const indices = [];
         for (let i = 0; i < rl; i++) {
@@ -113,10 +172,10 @@
           rows.push(this.dict_rows[i]);
         return rows;
       },
-      resetWhereValues: function () {
+      resetWhere: function () {
         this.where_values = [];
       },
-      setWhereValues: function (vs) {
+      setWhere: function (vs) {
         // [[i,['a','',..]],..]
         //   values = [
         //     [6, ['masc', 'sing']],
@@ -125,7 +184,7 @@
         // ];
         this.where_values = vs;
       },
-      pusWhereValues: function (i, ...args) {
+      pusWhere: function (i, ...args) {
         const vs = Array.from(args);
         const r = [i, vs];
         this.where_vallues.push(r)

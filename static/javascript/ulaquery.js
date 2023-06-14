@@ -86,6 +86,10 @@ const menu = function () {
 
 <li class="h"><a class="tipr" onclick="DictForm.resetXY()" href="#">Relocate
 <span class="tiptextr">Relocate Window Dictionary</span> </a></li>
+
+<li class="h"><a class="tipr" onclick="DictForm.select()" href="#">Select
+<span class="tiptextr">/span> </a></li>
+
 </ul>
 </li>
 

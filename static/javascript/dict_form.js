@@ -7,6 +7,21 @@ var DictForm = {
   tr_selected: null,
   wind: null,
   rows: [],
+  select: function () {
+    let vs = [
+      [6, ['verb']],
+      [16, ['Ind']],
+      [15, ['1']]
+    ];
+     vs = [
+      [6, ['verb']],
+      [15, ['1']]
+    ];
+    dm_.setWhere(vs);
+    const rows = dm_.findRows();
+    this.build(rows);
+    this.show();
+  },
   open: function () {
     this.build(dm_.dict_rows);
     this.show();
@@ -38,6 +53,7 @@ var DictForm = {
 <span class="tiptextb">Scroll Right</span>
 </a>
 </li>
+
 <li>
 <a class="cmd" href="#">Help
 </a>
