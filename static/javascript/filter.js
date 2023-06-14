@@ -14,7 +14,7 @@ var VS = {
   },
   funct: {
     functs: [],
-    locs: [],
+    langs: [],
     dates: []
   },
   msd_attrs: [],
@@ -28,7 +28,7 @@ var VS = {
     VS.sigl.datets = Sigl.datets;
 
     VS.funct.functs = Funct.functs;
-    VS.funct.locs = Funct.locs;
+    VS.funct.langs = Funct.langs;
     VS.funct.dates = Funct.dates;
 
     VS.msd_attrs = PosMsd.msd_attrs;
@@ -41,7 +41,7 @@ var VS = {
     this.sigl.locts = [];
     this.sigl.datets = [];
     this.funct.functs = [];
-    this.funct.locs = [];
+    this.funct.langs = [];
     this.funct.dates = [];
     this.msd_attrs = [];
   }
@@ -108,18 +108,19 @@ var FLT = {
 
   dm_.resetQueryConditions();
 
-  // dm_.addQueryCondition(0, [VS.forma]);
-  // dm_.addQueryCondition(1, [VS.lemma]);
-  // dm_.addQueryCondition(2, [VS.etimo]);
+  dm_.addQueryCondition(0, [VS.forma]);
+  dm_.addQueryCondition(1, [VS.lemma]);
+  dm_.addQueryCondition(2, [VS.etimo]);
 
-  // dm_.addQueryCondition(26, VS.sigl.sigls);
-  // dm_.addQueryCondition(27, VS.sigl.locts);
-  // dm_.addQueryCondition(28, VS.sigl.datets);
+  // gestire le opzioni su colonna singola
+  dm_.addQueryCondition(26, VS.sigl.sigls);
+  dm_.addQueryCondition(27, VS.sigl.locts);
+  dm_.addQueryCondition(28, VS.sigl.datets);
   
-  // dm_.addQueryCondition(7, VS.funct.functs);
-  // // FIXME locs 0> langs
-  // dm_.addQueryCondition(27, VS.funct.locs);
-  // dm_.addQueryCondition(28, VS.funct.dates);
+  dm_.addQueryCondition(7, VS.funct.functs);
+  // FIXME langs 0> langs
+  dm_.addQueryCondition(27, VS.funct.langs);
+  dm_.addQueryCondition(28, VS.funct.dates);
 
   // dm_.addQueryCondition(28, VS.msd_attrs);
 
@@ -180,7 +181,7 @@ var Where = {
 
     h = rh(VS.funct.functs);
     jt.append(fh("Funct", h));
-    h = rh(VS.funct.locs);
+    h = rh(VS.funct.langs);
     jt.append(fh("Loc.", h));
     h = rh(VS.funct.dates);
     jt.append(fh("Date", h));
@@ -478,7 +479,7 @@ var Funct = {
   id: 'funct_id',
   wind: null,
   functs: [],
-  locs: [],
+  langs: [],
   dates: [],
   isActive: false,
   load: async function (url) {
@@ -607,7 +608,7 @@ var Funct = {
     this.functs = fn(attrs);
     // locali settate 
     attrs = this.wind.w.querySelectorAll("div.funct li.l a");
-    this.locs = fn(attrs);
+    this.langs = fn(attrs);
     // date  settate
     attrs = this.wind.w.querySelectorAll("div.funct li.d a");
     this.dates = fn(attrs);
