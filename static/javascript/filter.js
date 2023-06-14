@@ -37,12 +37,15 @@ var VS = {
     this.forma = '';
     this.lemma = '';
     this.etimo = '';
+    
     this.sigl.sigls = [];
     this.sigl.locts = [];
     this.sigl.datets = [];
+
     this.funct.functs = [];
     this.funct.langs = [];
     this.funct.dates = [];
+
     this.msd_attrs = [];
   }
 }
@@ -118,7 +121,6 @@ var FLT = {
   dm_.addQueryCondition(28, VS.sigl.datets);
   
   dm_.addQueryCondition(7, VS.funct.functs);
-  // FIXME langs 0> langs
   dm_.addQueryCondition(27, VS.funct.langs);
   dm_.addQueryCondition(28, VS.funct.dates);
 
@@ -446,6 +448,7 @@ var Sigl = {
           t.classList.remove("select");
         else
           t.classList.add("select");
+        FLT.select();
       });
     }
   },
@@ -587,6 +590,7 @@ var Funct = {
           t.classList.remove("select");
         else
           t.classList.add("select");
+        FLT.select();
       });
     }
   },
@@ -732,6 +736,7 @@ var PosMsd = {
           t.classList.remove("select");
         else
           t.classList.add("select");
+        FLT.select();
       });
     }
   },
