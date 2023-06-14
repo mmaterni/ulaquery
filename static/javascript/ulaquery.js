@@ -78,7 +78,7 @@ const menu = function () {
 <li class="v">
 <a href="#">Dictionary</a>
 <ul class="v">
-<li class="h"><a class="tipr" onclick="DictForm.build_all()" href="#">Show
+<li class="h"><a class="tipr" onclick="DictForm.open()" href="#">Open
 <span class="tiptextr">Opoen Window Dictionary</span></a></li>
 
 <li class="h"><a class="tipr" onclick="DictForm.hide()" href="#" >Hide

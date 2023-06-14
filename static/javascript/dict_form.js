@@ -1,22 +1,18 @@
 "use strict"
 
+
+
 var DictForm = {
   id: "dict_form.id",
   tr_selected: null,
   wind: null,
   rows: [],
-  build_all: function () {
-    this.rows = dm_.dict_rows;
-    this.build();
-    this.show();
-  },
-  build_slect: function () {
-    // AAA implmnetare selexct
-    this.rows = dm_.dict_rows.slice(0, 100);
+  open: function () {
     this.build();
     this.show();
   },
   build: async function () {
+    this.rows = dm_.dict_rows;
     const sp = "         ";
     const menu = `
 <div class="menu_wnd" >
@@ -58,6 +54,9 @@ var DictForm = {
     const heads = this.rows[0];
     const head_form = heads.slice(0, forms_len);
     const head_msd = heads.slice(forms_len);
+    // console.log(heads);
+    // console.log(head_form);
+    console.log(head_msd);
     // elimina la prima riga
     this.rows.shift();
 
