@@ -134,7 +134,7 @@ X|other||
           throw error;
         }
       },
-      set_dict_columns: function (row) {
+      setDictColumns: function (row) {
         // const idx_sigl = row.findIndex((e, i) => i > 20 && e.length == 1);
         // const idx_loc_t = row.findIndex((e, i) => i > idx_sigl && e.startsWith("LOC"));
         // const idx_date_t = row.findIndex((e, i) => i > idx_loc_t && e.startsWith("DAT"));
@@ -172,10 +172,10 @@ X|other||
           rows.push(this.dict_rows[i]);
         return rows;
       },
-      resetWhere: function () {
+      resetQueryConditions: function () {
         this.where_values = [];
       },
-      setWhere: function (vs) {
+      setQueryConditions: function (vs) {
         // [[i,['a','',..]],..]
         //   values = [
         //     [6, ['masc', 'sing']],
@@ -184,11 +184,15 @@ X|other||
         // ];
         this.where_values = vs;
       },
-      pusWhere: function (i, ...args) {
-        const vs = Array.from(args);
-        const r = [i, vs];
-        this.where_vallues.push(r)
+      addQueryCondition: function (column,values) {
+        const r = [column, values];
+        this.where_values.push(r)
       }
+      // xaddQueryCondition: function (i, ...args) {
+      //   const vs = Array.from(args);
+      //   const r = [i, vs];
+      //   this.where_values.push(r)
+      // }
     };
 
     window.dm_ = DM;

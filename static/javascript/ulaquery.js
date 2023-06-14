@@ -60,7 +60,6 @@ const menu = function () {
 <span class="tiptextr">Relocate Window Filetr</span> </a>
 </li>
 
-
 </ul>
 </li>
   
@@ -74,6 +73,10 @@ const menu = function () {
 <span class="tiptextr">Unselect All Fileds</span> </a>
 </li>
 
+<li class="v">
+<a class="tipr" onclick="FLT.setWhere()" ref="#" >set where
+<span class="tiptextr"></span> </a>
+</li>
 
 <li class="v">
 <a href="#">Dictionary</a>

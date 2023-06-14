@@ -93,7 +93,45 @@ var FLT = {
     VS.unselect();
     Where.build();
     Where.show();
+  },
+  setWhere: function () {
+
+    const log = function () {
+      for (const r of dm_.where_values) {
+        const vs = r[1].join(", ");
+        console.log(r[0],vs);
+    }
+  };
+
+  console.log("setWheere");
+  this.select();
+
+  dm_.resetQueryConditions();
+
+  // dm_.addQueryCondition(0, [VS.forma]);
+  // dm_.addQueryCondition(1, [VS.lemma]);
+  // dm_.addQueryCondition(2, [VS.etimo]);
+
+  // dm_.addQueryCondition(26, VS.sigl.sigls);
+  // dm_.addQueryCondition(27, VS.sigl.locts);
+  // dm_.addQueryCondition(28, VS.sigl.datets);
+  
+  // dm_.addQueryCondition(7, VS.funct.functs);
+  // // FIXME locs 0> langs
+  // dm_.addQueryCondition(27, VS.funct.locs);
+  // dm_.addQueryCondition(28, VS.funct.dates);
+
+  // dm_.addQueryCondition(28, VS.msd_attrs);
+
+// AAA trovare numero colonna da k
+  for (let k in VS.msd_attrs) {
+    const row = VS.msd_attrs[k];
+    dm_.addQueryCondition(100, row);
+  // console.log(k,row)
   }
+  log();
+
+}
 };
 
 var Where = {
@@ -301,7 +339,7 @@ var Sigl = {
       const resp = await fetch(url, {
         method: 'GET',
         headers: { "Content-Type": "text/plain;charset=UTF-8" },
-        cache:"default"
+        cache: "default"
       });
       if (!resp.ok) {
         throw new Error(`Erroe:${resp.status} ${resp.statusText}`);
@@ -448,7 +486,7 @@ var Funct = {
       const resp = await fetch(url, {
         method: 'GET',
         headers: { "Content-Type": "text/plain;charset=UTF-8" },
-        cache:"default"
+        cache: "default"
       });
       if (!resp.ok) {
         throw new Error(`Erroe:${resp.status} ${resp.statusText}`);
@@ -587,7 +625,7 @@ var PosMsd = {
       const resp = await fetch(url, {
         method: 'GET',
         headers: { "Content-Type": "text/plain;charset=UTF-8" },
-        cache:"default"
+        cache: "default"
       });
       if (!resp.ok) {
         throw new Error(`Erroe:${resp.status} ${resp.statusText}`);
