@@ -15,7 +15,7 @@ var DictForm = {
     ];
      vs = [
       [6, ['verb']],
-      [15, ['1']]
+      [15, ['2']]
     ];
     dm_.setWhere(vs);
     const rows = dm_.findRows();
@@ -27,7 +27,7 @@ var DictForm = {
     this.show();
   },
   build: async function (rows) {
-    this.rows = rows;
+    // collegamento con dm_ per nomi colonne
     const heads = dm_.dict_heads;
     const sp = "         ";
     const menu = `
@@ -84,12 +84,12 @@ var DictForm = {
     for (const x of head_msd) jt.append(h, x.toUpperCase())
     jt.append(`</tr></thead><tbody>`);
     // rowa
-    const le = this.rows.length;
+    const le = rows.length;
     const r0 = (d) => `<td>${d}</td>`;
     const r1 = (d) => `<td class="m">${d}</td>`;
-    const ler = this.rows[0].length;
+    const ler = rows[0].length;
     for (let i = 0; i < le; i++) {
-      const row = this.rows[i];
+      const row = rows[i];
       jt.append("<tr>")
       jt.append(r0, i);
       for (let i = 0; i < forms_len; i++) jt.append(r0, row[i])
