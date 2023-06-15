@@ -398,8 +398,11 @@ var Sigl = {
     for (const row of rows) {
       sgs.push(row[0]);
       lcs.push(row[2]);
-      dts.push(row[3]);
+      if (dts.indexOf(row[3]) < 0)
+        dts.push(row[3]);
     }
+    // const dts = arr.filter((e, i, arr) => arr.indexOf(e) === i);
+
     jt.append(`
     <div class="menu_wnd">
     <ul>
@@ -413,6 +416,7 @@ var Sigl = {
     </div>
     <div class="sigl">`);
     jt.append("<div><ul>")
+
     jt.append(`<li class="s"><span>Sigl.</span></li> `);
     for (let row of sgs)
       jt.append(`<li class="s"><a>${row}</a></li> `);
@@ -515,25 +519,19 @@ var Sigl = {
     let arr0 = this.wind.w.querySelectorAll("div.sigl li.s a");
     let arr1 = selecteds(arr0);
     this.sigls = smear(arr0, arr1);
-    // let attrs = this.wind.w.querySelectorAll("div.sigl li.s a");
-    // this.sigls = selecteds(attrs);
     console.log(1, this.sigls);
 
     // localit+ testo settate 
-    arr0 = this.wind.w.querySelectorAll("div.sigl li.l a"); 
+    arr0 = this.wind.w.querySelectorAll("div.sigl li.l a");
     arr1 = selecteds(arr0);
     this.locts = smear(arr0, arr1);
     console.log(2, this.locts);
-    // attrs = this.wind.w.querySelectorAll("div.sigl li.l a");
-    // this.locts = selecteds(attrs);
 
     // date testo settate
-    arr0 = this.wind.w.querySelectorAll("div.sigl li.d a"); 
+    arr0 = this.wind.w.querySelectorAll("div.sigl li.d a");
     arr1 = selecteds(arr0);
     this.datets = smear(arr0, arr1);
     console.log(3, this.datets);
-    // attrs = this.wind.w.querySelectorAll("div.sigl li.d a");
-    // this.datets = selecteds(attrs);
   }
 };
 
