@@ -141,13 +141,11 @@ var FLT = {
     D_M.addQueryCondition(5, VS.funct.dates);
 
 
-    // AAA trovare numero colonna da k
-    // for (let k in VS.msd_attrs) {
-    //   const row = VS.msd_attrs[k];
-    //   D_M.addQueryCondition(100, row);
-    //   // console.log(k,row)
-    // }
-    log();
+    for (let row of VS.msd_attrs) {
+      // let p, m = row[0].split('_');
+      console.log(row);
+    }
+    // log();
 
   }
 };
@@ -811,12 +809,14 @@ var PosMsd = {
       }
       if (row.length > 0) {
         const pm = `${pos.toLowerCase()}_${msd}`;
-        rows.push([pm].concat(row));
+        row.unshift(pm)
+        rows.push(row);
       }
     }
-    this.msd_attrs = {};
-    for (let row of rows)
-      this.msd_attrs[row[0]] = row.slice(1);
+    this.msd_attrs = rows;
+    // this.msd_attrs = {};
+    // for (let row of rows)
+    //   this.msd_attrs[row[0]] = row.slice(1);
   },
   unselect: function () {
     const attrs = this.wind.w.querySelectorAll("div.pos_msd li.a a");
