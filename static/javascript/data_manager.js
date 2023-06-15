@@ -109,6 +109,12 @@ X|other||
       dict_rows: [],
       dic_heads: [],
       where_vallues: [],
+      idx_from_sigl: 0,
+      idx_to_sigl: 0,
+      idx_from_loc_t: 0,
+      idx_to_loc_t: 0,
+      idx_from_date_t: 0,
+      idx_to_dte_t: 0,
       load_dict: async function () {
         const url = `ula_data/data_export/dictionary.ula.csv`;
         try {
@@ -158,15 +164,15 @@ X|other||
         const cols_loc_t = row.slice(this.idx_from_loc_t, this.idx_from_date_t);
         const cols_date_t = row.slice(this.idx_from_date_t, this.idx_to_date_t);
 
-        console.log("form_lemma", cols_forma_lemma);
-        console.log("lang", cols_lang);
-        console.log("date", cols_date);
-        console.log("funct", cols_funct);
-        console.log("pps_msd", cols_pos_msd);
-        console.log("sigl", cols_sigl);
-        console.log("loc_t", cols_loc_t);
-        console.log("date_t", cols_date_t);
-        console.log(row);
+        // console.log("form_lemma", cols_forma_lemma);
+        // console.log("lang", cols_lang);
+        // console.log("date", cols_date);
+        // console.log("funct", cols_funct);
+        // console.log("pps_msd", cols_pos_msd);
+        // console.log("sigl", cols_sigl);
+        // console.log("loc_t", cols_loc_t);
+        // console.log("date_t", cols_date_t);
+        // console.log(row);
       },
       findIndices: function () {
         const rl = this.dict_rows.length;

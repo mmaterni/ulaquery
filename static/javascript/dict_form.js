@@ -83,6 +83,7 @@ var DictForm = {
     for (const x of head_form) jt.append(h, x.toUpperCase());
     for (const x of head_msd) jt.append(h, x.toUpperCase())
     jt.append(`</tr></thead><tbody>`);
+
     // rowa
     const le = rows.length;
     const r0 = (d) => `<td>${d}</td>`;
