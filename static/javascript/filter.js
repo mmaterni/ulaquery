@@ -116,7 +116,22 @@ var FLT = {
     d_M.addQueryCondition(2, [VS.etimo]);
 
     // gestire le opzioni su colonna singola
-    d_M.addQueryCondition(26, VS.sigl.sigls);
+    // #distribuisce le sigle di riga nella lista delle sigle del corpus
+    // row_sigls = [x if x in sigls else '' for x in self.head_sigls]
+
+    // const smear = function (arr0, arr1) {
+    //   let arr2 = new Array(arr0.length).fill('');
+    //   for (let i = 0; i < arr0.length; i++)
+    //     if (arr1.includes(arr0[i]))
+    //       arr2[i] = arr0[i];
+    //   return arr2;
+    // }
+
+
+    // const arr = smear(D_M.cols_sigl, VS.sigl.sigls);
+    // for (let i = 0; i < arr.length; i++)
+    //   d_M.addQueryCondition(26 + i, [arr[i]]);
+
     d_M.addQueryCondition(27, VS.sigl.locts);
     d_M.addQueryCondition(28, VS.sigl.datets);
 
@@ -340,9 +355,9 @@ var FormLemma = {
         call();
       });
       // a.addEventListener("blur", (ev) => {
-      a.addEventListener("mouseleave", (ev) => {
-        call();
-      });
+      // a.addEventListener("mouseleave", (ev) => {
+      //   call();
+      // });
     }
 
   }
@@ -479,20 +494,46 @@ var Sigl = {
     FLT.select();
   },
   select: function () {
-    const fn = (ats) => {
+
+    const smear = (a0, arh1) => {
+      const arr0 = Array.from(a0);
+      const arh0 = arr0.map((x) => x.innerHTML);
+      let arr2 = new Array(arr0.length).fill('');
+      for (let i = 0; i < arh0.length; i++)
+        if (arh1.includes(arh0[i]))
+          arr2[i] = arh0[i];
+      return arr2;
+    }
+
+    const selecteds = (ats) => {
       const arr = Array.from(ats);
       const lst = arr.filter(a => a.classList.contains("select")).map(a => a.innerHTML);
       return lst;
     };
+
     // sigle settate
-    let attrs = this.wind.w.querySelectorAll("div.sigl li.s a");
-    this.sigls = fn(attrs);
+    let arr0 = this.wind.w.querySelectorAll("div.sigl li.s a");
+    let arr1 = selecteds(arr0);
+    this.sigls = smear(arr0, arr1);
+    // let attrs = this.wind.w.querySelectorAll("div.sigl li.s a");
+    // this.sigls = selecteds(attrs);
+    console.log(1, this.sigls);
+
     // localit+ testo settate 
-    attrs = this.wind.w.querySelectorAll("div.sigl li.l a");
-    this.locts = fn(attrs);
+    arr0 = this.wind.w.querySelectorAll("div.sigl li.l a"); 
+    arr1 = selecteds(arr0);
+    this.locts = smear(arr0, arr1);
+    console.log(2, this.locts);
+    // attrs = this.wind.w.querySelectorAll("div.sigl li.l a");
+    // this.locts = selecteds(attrs);
+
     // date testo settate
-    attrs = this.wind.w.querySelectorAll("div.sigl li.d a");
-    this.datets = fn(attrs);
+    arr0 = this.wind.w.querySelectorAll("div.sigl li.d a"); 
+    arr1 = selecteds(arr0);
+    this.datets = smear(arr0, arr1);
+    console.log(3, this.datets);
+    // attrs = this.wind.w.querySelectorAll("div.sigl li.d a");
+    // this.datets = selecteds(attrs);
   }
 };
 

@@ -155,15 +155,11 @@ X|other||
         this.idx_to_loc_t = this.idx_from_date_t
         this.idx_to_dte_t = row.length;
 
-        const cols_forma_lemma = row.slice(0, 4);
-        const cols_lang = row.slice(4, 5);
-        const cols_date = row.slice(5, 6);
-        const cols_funct = row.slice(7, 8);
-        const cols_pos_msd = row.slice(6, 7).concat(row.slice(8, this.idx_from_sigl));
-        const cols_sigl = row.slice(this.idx_from_sigl, this.idx_from_loc_t);
-        const cols_loc_t = row.slice(this.idx_from_loc_t, this.idx_from_date_t);
-        const cols_date_t = row.slice(this.idx_from_date_t, this.idx_to_date_t);
-
+        // const cols_forma_lemma = row.slice(0, 4);
+        // const cols_lang = row.slice(4, 5);
+        // const cols_date = row.slice(5, 6);
+        // const cols_funct = row.slice(7, 8);
+        // const cols_pos_msd = row.slice(6, 7).concat(row.slice(8, this.idx_from_sigl));
         // console.log("form_lemma", cols_forma_lemma);
         // console.log("lang", cols_lang);
         // console.log("date", cols_date);
