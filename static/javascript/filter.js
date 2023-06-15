@@ -499,8 +499,8 @@ var Sigl = {
   },
   select: function () {
 
-    const smear = (a0, arh1) => {
-      const arr0 = Array.from(a0);
+    const smear = (lst, arh1) => {
+      const arr0 = Array.from(lst);
       const arh0 = arr0.map((x) => x.innerHTML);
       let arr2 = new Array(arr0.length).fill('');
       for (let i = 0; i < arh0.length; i++)
@@ -511,8 +511,7 @@ var Sigl = {
 
     const selecteds = (ats) => {
       const arr = Array.from(ats);
-      const lst = arr.filter(a => a.classList.contains("select")).map(a => a.innerHTML);
-      return lst;
+      return arr.filter(a => a.classList.contains("select")).map(a => a.innerHTML);
     };
 
     // sigle settate
