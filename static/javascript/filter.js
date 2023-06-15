@@ -37,7 +37,7 @@ var VS = {
     this.forma = '';
     this.lemma = '';
     this.etimo = '';
-    
+
     this.sigl.sigls = [];
     this.sigl.locts = [];
     this.sigl.datets = [];
@@ -102,39 +102,39 @@ var FLT = {
     const log = function () {
       for (const r of dm_.where_values) {
         const vs = r[1].join(", ");
-        console.log(r[0],vs);
+        console.log(r[0], vs);
+      }
+    };
+
+    console.log("setWheere");
+    this.select();
+
+    dm_.resetQueryConditions();
+
+    dm_.addQueryCondition(0, [VS.forma]);
+    dm_.addQueryCondition(1, [VS.lemma]);
+    dm_.addQueryCondition(2, [VS.etimo]);
+
+    // gestire le opzioni su colonna singola
+    dm_.addQueryCondition(26, VS.sigl.sigls);
+    dm_.addQueryCondition(27, VS.sigl.locts);
+    dm_.addQueryCondition(28, VS.sigl.datets);
+
+    dm_.addQueryCondition(7, VS.funct.functs);
+    dm_.addQueryCondition(27, VS.funct.langs);
+    dm_.addQueryCondition(28, VS.funct.dates);
+
+    // dm_.addQueryCondition(28, VS.msd_attrs);
+
+    // AAA trovare numero colonna da k
+    for (let k in VS.msd_attrs) {
+      const row = VS.msd_attrs[k];
+      dm_.addQueryCondition(100, row);
+      // console.log(k,row)
     }
-  };
+    log();
 
-  console.log("setWheere");
-  this.select();
-
-  dm_.resetQueryConditions();
-
-  dm_.addQueryCondition(0, [VS.forma]);
-  dm_.addQueryCondition(1, [VS.lemma]);
-  dm_.addQueryCondition(2, [VS.etimo]);
-
-  // gestire le opzioni su colonna singola
-  dm_.addQueryCondition(26, VS.sigl.sigls);
-  dm_.addQueryCondition(27, VS.sigl.locts);
-  dm_.addQueryCondition(28, VS.sigl.datets);
-  
-  dm_.addQueryCondition(7, VS.funct.functs);
-  dm_.addQueryCondition(27, VS.funct.langs);
-  dm_.addQueryCondition(28, VS.funct.dates);
-
-  // dm_.addQueryCondition(28, VS.msd_attrs);
-
-// AAA trovare numero colonna da k
-  for (let k in VS.msd_attrs) {
-    const row = VS.msd_attrs[k];
-    dm_.addQueryCondition(100, row);
-  // console.log(k,row)
   }
-  log();
-
-}
 };
 
 var Where = {
@@ -283,6 +283,7 @@ var FormLemma = {
       this.wind.drag();
     }
     this.wind.setHtml(html);
+    this.bind();
   },
   close: function () {
     if (!this.wind) return;
@@ -326,6 +327,24 @@ var FormLemma = {
     this.forma = fle.querySelector('input[name="forma"]').value;
     this.lemma = fle.querySelector('input[name="lemma"]').value;
     this.etimo = fle.querySelector('input[name="etimo"]').value;
+  },
+  bind: function () {
+    const attrs = this.wind.w.querySelectorAll("div.form_lemma input");
+
+    const call = () => {
+      FLT.select();
+    };
+
+    for (let a of attrs) {
+      a.addEventListener("change", (ev) => {
+        call();
+      });
+      // a.addEventListener("blur", (ev) => {
+      a.addEventListener("mouseleave", (ev) => {
+        call();
+      });
+    }
+
   }
 };
 
