@@ -128,8 +128,8 @@ var UlaQuery = {
   open: async function () {
     wait_start();
     await sleep(100);
-    await d_M.load_dict();
-    await this.build_menu();
+    await D_M.load_dict();
+    await this.builD_Menu();
     // await DictForm.build_all();
     await FormLemma.build();
     await Sigl.build();
@@ -141,7 +141,7 @@ var UlaQuery = {
 
     // FLT.show();
   },
-  build_menu: async function () {
+  builD_Menu: async function () {
     const html = menu();
     document.getElementById("ulaquery_id").innerHTML = html;
   }

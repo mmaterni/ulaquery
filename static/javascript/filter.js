@@ -100,7 +100,7 @@ var FLT = {
   setWhere: function () {
 
     const log = function () {
-      for (const r of d_M.where_values) {
+      for (const r of D_M.where_values) {
         const vs = r[1].join(", ");
         console.log(r[0], vs);
       }
@@ -109,44 +109,41 @@ var FLT = {
     // console.log("setWheere");
     this.select();
 
-    d_M.resetQueryConditions();
+    D_M.resetQueryConditions();
 
-    d_M.addQueryCondition(0, [VS.forma]);
-    d_M.addQueryCondition(1, [VS.lemma]);
-    d_M.addQueryCondition(2, [VS.etimo]);
+    D_M.addQueryCondition(0, [VS.forma]);
+    D_M.addQueryCondition(1, [VS.lemma]);
+    D_M.addQueryCondition(2, [VS.etimo]);
 
-    // gestire le opzioni su colonna singola
-    // #distribuisce le sigle di riga nella lista delle sigle del corpus
-    // row_sigls = [x if x in sigls else '' for x in self.head_sigls]
+    //gestione sigle,locts e dats per colonno valore
+    // si/no per colonna. / 
+    let i0 = 26;
+    let i1 = i0 + VS.sigl.sigls.length;
+    for (let i = i0; i < i1; i++)
+      D_M.addQueryCondition(i, [VS.sigl.sigls[i]]);
 
-    // const smear = function (arr0, arr1) {
-    //   let arr2 = new Array(arr0.length).fill('');
-    //   for (let i = 0; i < arr0.length; i++)
-    //     if (arr1.includes(arr0[i]))
-    //       arr2[i] = arr0[i];
-    //   return arr2;
-    // }
+    i0 = i1;
+    i1 = i0 + VS.sigl.locts.length;
+    for (let i = i0; i < i1; i++)
+      D_M.addQueryCondition(i, [VS.sigl.locts[i]]);
 
+    i0 = i1;
+    i1 = i0 + VS.sigl.datets.length;
+    for (let i = i0; i < i1; i++)
+      D_M.addQueryCondition(i, [VS.sigl.datets[i]]);
 
-    // const arr = smear(D_M.cols_sigl, VS.sigl.sigls);
-    // for (let i = 0; i < arr.length; i++)
-    //   d_M.addQueryCondition(26 + i, [arr[i]]);
+   // gestionde delle colonne con valori mltipli 
+    D_M.addQueryCondition(7, VS.funct.functs);
+    D_M.addQueryCondition(4, VS.funct.langs);
+    D_M.addQueryCondition(5, VS.funct.dates);
 
-    d_M.addQueryCondition(27, VS.sigl.locts);
-    d_M.addQueryCondition(28, VS.sigl.datets);
-
-    d_M.addQueryCondition(7, VS.funct.functs);
-    d_M.addQueryCondition(27, VS.funct.langs);
-    d_M.addQueryCondition(28, VS.funct.dates);
-
-    // d_M.addQueryCondition(28, VS.msd_attrs);
 
     // AAA trovare numero colonna da k
-    for (let k in VS.msd_attrs) {
-      const row = VS.msd_attrs[k];
-      d_M.addQueryCondition(100, row);
-      // console.log(k,row)
-    }
+    // for (let k in VS.msd_attrs) {
+    //   const row = VS.msd_attrs[k];
+    //   D_M.addQueryCondition(100, row);
+    //   // console.log(k,row)
+    // }
     log();
 
   }
@@ -518,19 +515,16 @@ var Sigl = {
     let arr0 = this.wind.w.querySelectorAll("div.sigl li.s a");
     let arr1 = selecteds(arr0);
     this.sigls = smear(arr0, arr1);
-    console.log(1, this.sigls);
 
     // localit+ testo settate 
     arr0 = this.wind.w.querySelectorAll("div.sigl li.l a");
     arr1 = selecteds(arr0);
     this.locts = smear(arr0, arr1);
-    console.log(2, this.locts);
 
     // date testo settate
     arr0 = this.wind.w.querySelectorAll("div.sigl li.d a");
     arr1 = selecteds(arr0);
     this.datets = smear(arr0, arr1);
-    console.log(3, this.datets);
   }
 };
 

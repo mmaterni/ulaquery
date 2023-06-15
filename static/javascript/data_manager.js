@@ -103,7 +103,7 @@ X|other||
   */
 
 
-  // var d_M = (function () {
+  // var D_M = (function () {
   ; (function () {
     const DM = {
       dict_rows: [],
@@ -208,14 +208,9 @@ X|other||
         const r = [column, values];
         this.where_values.push(r)
       }
-      // xaddQueryCondition: function (i, ...args) {
-      //   const vs = Array.from(args);
-      //   const r = [i, vs];
-      //   this.where_values.push(r)
-      // }
     };
 
-    window.d_M = DM;
+    window.D_M = DM;
   }).call(this);
 
 /*

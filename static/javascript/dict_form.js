@@ -17,18 +17,18 @@ var DictForm = {
       [6, ['verb']],
       [15, ['2']]
     ];
-    d_M.setWhere(vs);
-    const rows = d_M.findRows();
+    D_M.setWhere(vs);
+    const rows = D_M.findRows();
     this.build(rows);
     this.show();
   },
   open: function () {
-    this.build(d_M.dict_rows);
+    this.build(D_M.dict_rows);
     this.show();
   },
   build: async function (rows) {
-    // collegamento con d_M per nomi colonne
-    const heads = d_M.dict_heads;
+    // collegamento con D_M per nomi colonne
+    const heads = D_M.dict_heads;
     const sp = "         ";
     const menu = `
 <div class="menu_wnd" >
@@ -69,10 +69,10 @@ var DictForm = {
     jt.append(menu);
     const forms_len = 8;
     const head_form = heads.slice(0, forms_len);
-    const head_msd = heads.slice(forms_len);
+    const heaD_Msd = heads.slice(forms_len);
     // console.log(heads);
     // console.log(head_form);
-    // console.log(head_msd);
+    // console.log(heaD_Msd);
     // elimina la prima riga
     // this.rows.shift();
 
@@ -81,7 +81,7 @@ var DictForm = {
     let h = (d) => `<th><span>${d}</span></th>`;
     jt.append(h, "N.");
     for (const x of head_form) jt.append(h, x.toUpperCase());
-    for (const x of head_msd) jt.append(h, x.toUpperCase())
+    for (const x of heaD_Msd) jt.append(h, x.toUpperCase())
     jt.append(`</tr></thead><tbody>`);
 
     // rowa

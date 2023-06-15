@@ -2066,13 +2066,13 @@ class _ImportRedirect(object):
         })
         sys.meta_path.append(self)
 
-    def find_module(self, fullname, path=None):
+    def finD_Module(self, fullname, path=None):
         if '.' not in fullname: return
         packname = fullname.rsplit('.', 1)[0]
         if packname != self.name: return
         return self
 
-    def load_module(self, fullname):
+    def loaD_Module(self, fullname):
         if fullname in sys.modules: return sys.modules[fullname]
         modname = fullname.rsplit('.', 1)[1]
         realname = self.impmask % modname
@@ -2355,7 +2355,7 @@ class ConfigDict(dict):
         #: Keys of values copied from the source (values we do not own)
         self._virtual_keys = set()
 
-    def load_module(self, path, squash=True):
+    def loaD_Module(self, path, squash=True):
         """Load values from a Python module.
 
            Example modue ``config.py``::
@@ -2367,9 +2367,9 @@ class ConfigDict(dict):
 
 
            >>> c = ConfigDict()
-           >>> c.load_module('config')
+           >>> c.loaD_Module('config')
            {DEBUG: True, 'SQLITE.DB': 'memory'}
-           >>> c.load_module("config", False)
+           >>> c.loaD_Module("config", False)
            {'DEBUG': True, 'SQLITE': {'DB': 'memory'}}
 
            :param squash: If true (default), dictionary values are assumed to
