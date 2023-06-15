@@ -125,7 +125,7 @@ X|other||
           this.dict_rows = rows.map((x) => x.trim().split("|"));
           this.dict_heads = this.dict_rows[0];
           this.dict_rows.shift();
-
+          this.setColumns();
 
           // AAA rimuove dallindice 60 alla fine
           // this.dict_rows.splice(60);
@@ -135,20 +135,29 @@ X|other||
           throw error;
         }
       },
-      setDictColumns: function (row) {
-        // const idx_sigl = row.findIndex((e, i) => i > 20 && e.length == 1);
-        // const idx_loc_t = row.findIndex((e, i) => i > idx_sigl && e.startsWith("LOC"));
-        // const idx_date_t = row.findIndex((e, i) => i > idx_loc_t && e.startsWith("DAT"));
-        // const columns_fl = row.slice(0, 4);
-        // const columns_pm = row.slice(6, 7).concat(row.slice(8, idx_sigl));
-        // const columns_sigl = row.slice(idx_sigl, idx_loc_t);
-        // const columns_loc_t = row.slice(idx_loc_t, idx_date_t);
-        // const columns_date_t = row.slice(idx_date_t);
-        // console.log("fl", columns_fl);
-        // console.log("pm", columns_pm);
-        // console.log("sigl", columns_sigl);
-        // console.log("loc_t", columns_loc_t);
-        // console.log("date_t", columns_date_t);
+      setColumns: function () {
+        const row = this.dict_heads;
+        const idx_sigl = row.findIndex((e, i) => i > 20 && e.length == 1);
+        const idx_loc_t = row.findIndex((e, i) => i > idx_sigl && e.startsWith("LOC"));
+        const idx_date_t = row.findIndex((e, i) => i > idx_loc_t && e.startsWith("DAT"));
+
+        const cols_forma_lemma = row.slice(0, 4);
+        const cols_lang = row.slice(4, 5);
+        const cols_date = row.slice(5, 6);
+        const cols_funct = row.slice(7, 8);
+        const cols_pos_msd = row.slice(6, 7).concat(row.slice(8, idx_sigl));
+        const cols_sigl = row.slice(idx_sigl, idx_loc_t);
+        const cols_loc_t = row.slice(idx_loc_t, idx_date_t);
+        const cols_date_t = row.slice(idx_date_t);
+
+        console.log("form_lemma", cols_forma_lemma);
+        console.log("lang", cols_lang);
+        console.log("date", cols_date);
+        console.log("funct", cols_funct);
+        console.log("pps_msd", cols_pos_msd);
+        console.log("sigl", cols_sigl);
+        console.log("loc_t", cols_loc_t);
+        console.log("date_t", cols_date_t);
         // console.log(row);
       },
       findIndices: function () {
@@ -185,7 +194,7 @@ X|other||
         // ];
         this.where_values = vs;
       },
-      addQueryCondition: function (column,values) {
+      addQueryCondition: function (column, values) {
         const r = [column, values];
         this.where_values.push(r)
       }
