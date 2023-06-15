@@ -128,7 +128,7 @@ var UlaQuery = {
   open: async function () {
     wait_start();
     await sleep(100);
-    await dm_.load_dict();
+    await d_M.load_dict();
     await this.build_menu();
     // await DictForm.build_all();
     await FormLemma.build();

@@ -100,7 +100,7 @@ var FLT = {
   setWhere: function () {
 
     const log = function () {
-      for (const r of dm_.where_values) {
+      for (const r of d_M.where_values) {
         const vs = r[1].join(", ");
         console.log(r[0], vs);
       }
@@ -109,27 +109,27 @@ var FLT = {
     console.log("setWheere");
     this.select();
 
-    dm_.resetQueryConditions();
+    d_M.resetQueryConditions();
 
-    dm_.addQueryCondition(0, [VS.forma]);
-    dm_.addQueryCondition(1, [VS.lemma]);
-    dm_.addQueryCondition(2, [VS.etimo]);
+    d_M.addQueryCondition(0, [VS.forma]);
+    d_M.addQueryCondition(1, [VS.lemma]);
+    d_M.addQueryCondition(2, [VS.etimo]);
 
     // gestire le opzioni su colonna singola
-    dm_.addQueryCondition(26, VS.sigl.sigls);
-    dm_.addQueryCondition(27, VS.sigl.locts);
-    dm_.addQueryCondition(28, VS.sigl.datets);
+    d_M.addQueryCondition(26, VS.sigl.sigls);
+    d_M.addQueryCondition(27, VS.sigl.locts);
+    d_M.addQueryCondition(28, VS.sigl.datets);
 
-    dm_.addQueryCondition(7, VS.funct.functs);
-    dm_.addQueryCondition(27, VS.funct.langs);
-    dm_.addQueryCondition(28, VS.funct.dates);
+    d_M.addQueryCondition(7, VS.funct.functs);
+    d_M.addQueryCondition(27, VS.funct.langs);
+    d_M.addQueryCondition(28, VS.funct.dates);
 
-    // dm_.addQueryCondition(28, VS.msd_attrs);
+    // d_M.addQueryCondition(28, VS.msd_attrs);
 
     // AAA trovare numero colonna da k
     for (let k in VS.msd_attrs) {
       const row = VS.msd_attrs[k];
-      dm_.addQueryCondition(100, row);
+      d_M.addQueryCondition(100, row);
       // console.log(k,row)
     }
     log();

@@ -103,7 +103,7 @@ X|other||
   */
 
 
-  // var dm_ = (function () {
+  // var d_M = (function () {
   ; (function () {
     const DM = {
       dict_rows: [],
@@ -196,7 +196,7 @@ X|other||
       // }
     };
 
-    window.dm_ = DM;
+    window.d_M = DM;
   }).call(this);
 
 /*

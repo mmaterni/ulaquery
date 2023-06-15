@@ -17,18 +17,18 @@ var DictForm = {
       [6, ['verb']],
       [15, ['2']]
     ];
-    dm_.setWhere(vs);
-    const rows = dm_.findRows();
+    d_M.setWhere(vs);
+    const rows = d_M.findRows();
     this.build(rows);
     this.show();
   },
   open: function () {
-    this.build(dm_.dict_rows);
+    this.build(d_M.dict_rows);
     this.show();
   },
   build: async function (rows) {
-    // collegamento con dm_ per nomi colonne
-    const heads = dm_.dict_heads;
+    // collegamento con d_M per nomi colonne
+    const heads = d_M.dict_heads;
     const sp = "         ";
     const menu = `
 <div class="menu_wnd" >
