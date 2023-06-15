@@ -106,7 +106,7 @@ var FLT = {
       }
     };
 
-    console.log("setWheere");
+    // console.log("setWheere");
     this.select();
 
     d_M.resetQueryConditions();

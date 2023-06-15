@@ -46,4 +46,4 @@ const filterIndices = (rows, values) => {
 
 setValues(0, 'a', 'b', 'c');
 setValues(6, 'pippo');
-console.log(ls);
+// console.log(ls);

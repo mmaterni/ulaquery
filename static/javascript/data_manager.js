@@ -137,18 +137,26 @@ X|other||
       },
       setColumns: function () {
         const row = this.dict_heads;
-        const idx_sigl = row.findIndex((e, i) => i > 20 && e.length == 1);
-        const idx_loc_t = row.findIndex((e, i) => i > idx_sigl && e.startsWith("LOC"));
-        const idx_date_t = row.findIndex((e, i) => i > idx_loc_t && e.startsWith("DAT"));
+
+        // posizine iniziale e finale di
+        // sigle, loc_t.date_t
+        this.idx_from_sigl = row.findIndex((e, i) => i > 20 && e.length == 1);
+        this.idx_from_loc_t = row.findIndex((e, i) =>
+          i > this.idx_from_sigl && e.startsWith("LOC"));
+        this.idx_to_sigl = this.idx_from_loc
+        this.idx_from_date_t = row.findIndex((e, i) =>
+          i > this.idx_from_loc_t && e.startsWith("DAT"));
+        this.idx_to_loc_t = this.idx_from_date_t
+        this.idx_to_dte_t = row.length;
 
         const cols_forma_lemma = row.slice(0, 4);
         const cols_lang = row.slice(4, 5);
         const cols_date = row.slice(5, 6);
         const cols_funct = row.slice(7, 8);
-        const cols_pos_msd = row.slice(6, 7).concat(row.slice(8, idx_sigl));
-        const cols_sigl = row.slice(idx_sigl, idx_loc_t);
-        const cols_loc_t = row.slice(idx_loc_t, idx_date_t);
-        const cols_date_t = row.slice(idx_date_t);
+        const cols_pos_msd = row.slice(6, 7).concat(row.slice(8, this.idx_from_sigl));
+        const cols_sigl = row.slice(this.idx_from_sigl, this.idx_from_loc_t);
+        const cols_loc_t = row.slice(this.idx_from_loc_t, this.idx_from_date_t);
+        const cols_date_t = row.slice(this.idx_from_date_t, this.idx_to_date_t);
 
         console.log("form_lemma", cols_forma_lemma);
         console.log("lang", cols_lang);
@@ -158,7 +166,7 @@ X|other||
         console.log("sigl", cols_sigl);
         console.log("loc_t", cols_loc_t);
         console.log("date_t", cols_date_t);
-        // console.log(row);
+        console.log(row);
       },
       findIndices: function () {
         const rl = this.dict_rows.length;
