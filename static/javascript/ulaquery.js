@@ -74,7 +74,7 @@ const menu = function () {
 </li>
 
 <li class="v">
-<a class="tipr" onclick="FLT.setWhere())" ref="#" >set where
+<a class="tipr" onclick="FLT.setWhere()" ref="#" >set where
 <span class="tiptextr"></span> </a>
 </li>
 
