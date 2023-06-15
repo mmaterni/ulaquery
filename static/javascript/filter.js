@@ -100,9 +100,12 @@ var FLT = {
   setWhere: function () {
 
     const log = function () {
-      for (const r of D_M.where_values) {
-        const vs = r[1].join(", ");
-        console.log(r[0], vs);
+      // console.log(typeof D_M.where_values);
+      const arr = Array.from(D_M.where_values);
+      // console.log(arr);
+      for (const r of arr) {
+        // const vs = r[1].join(", ");
+        console.log(r[0], r[1]);
       }
     };
 
@@ -117,22 +120,22 @@ var FLT = {
 
     //gestione sigle,locts e dats per colonno valore
     // si/no per colonna. / 
+    let les = VS.sigl.sigls.length;
     let i0 = 26;
-    let i1 = i0 + VS.sigl.sigls.length;
-    for (let i = i0; i < i1; i++)
-      D_M.addQueryCondition(i, [VS.sigl.sigls[i]]);
+    for (let i = 0; i < les; i++)
+      D_M.addQueryCondition(i + i0, [VS.sigl.sigls[i]]);
 
-    i0 = i1;
-    i1 = i0 + VS.sigl.locts.length;
-    for (let i = i0; i < i1; i++)
-      D_M.addQueryCondition(i, [VS.sigl.locts[i]]);
+    let lel = VS.sigl.locts.length;
+    let i1 = i0 + les;
+    for (let i = 0; i < lel; i++)
+      D_M.addQueryCondition(i + i1, [VS.sigl.locts[i]]);
 
-    i0 = i1;
-    i1 = i0 + VS.sigl.datets.length;
-    for (let i = i0; i < i1; i++)
-      D_M.addQueryCondition(i, [VS.sigl.datets[i]]);
+    let led = VS.sigl.datets.length;
+    let i2 = i1 + lel;
+    for (let i = 0; i < led; i++)
+      D_M.addQueryCondition(i + i2, [VS.sigl.datets[i]]);
 
-   // gestionde delle colonne con valori mltipli 
+    // gestionde delle colonne con valori mltipli 
     D_M.addQueryCondition(7, VS.funct.functs);
     D_M.addQueryCondition(4, VS.funct.langs);
     D_M.addQueryCondition(5, VS.funct.dates);

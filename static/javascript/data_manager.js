@@ -89,17 +89,18 @@ X|other||
  25: partType
  
  26: g
- 27: p
- 28: v
+ 27: h
+ 28: p
+ 29: v
  
- 29: LOC.1
- 30: LOC.2
- 31: LOC.3
- 32: LOC.4
+30: LOC.1
+ 31: LOC.2
+ 32: LOC.3
+ 33: LOC.4
  
- 33: DATE.0
- 34: DATE.1
- 35: DATE.2
+ 35: DATE.0
+ 35: DATE.1
+ 36: DATE.2
   */
 
 
