@@ -110,6 +110,7 @@ X|other||
       dict_rows: [],
       dic_heads: [],
       where_vallues: [],
+
       idx_from_sigl: 0,
       idx_to_sigl: 0,
       idx_from_loc_t: 0,
@@ -161,6 +162,7 @@ X|other||
         // const cols_date = row.slice(5, 6);
         // const cols_funct = row.slice(7, 8);
         // const cols_pos_msd = row.slice(6, 7).concat(row.slice(8, this.idx_from_sigl));
+        
         // console.log("form_lemma", cols_forma_lemma);
         // console.log("lang", cols_lang);
         // console.log("date", cols_date);

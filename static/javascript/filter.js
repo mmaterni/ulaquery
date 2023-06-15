@@ -140,10 +140,14 @@ var FLT = {
     D_M.addQueryCondition(4, VS.funct.langs);
     D_M.addQueryCondition(5, VS.funct.dates);
 
-
+    const cols = D_M.dict_heads.map(x => x.toLowerCase());
     for (let row of VS.msd_attrs) {
-      // let p, m = row[0].split('_');
-      console.log(row);
+      const xy = row[0].split("_");
+      const pos = xy[0];
+      const msd = xy[1].toLowerCase();
+      const attrs = row.slice(1);
+      const c=cols.indexOf(msd);
+      console.log(msd,c);
     }
     // log();
 
