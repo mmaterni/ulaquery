@@ -100,28 +100,33 @@ var FLT = {
   setWhere: function () {
 
     const log = function () {
-      // console.log(typeof D_M.where_values);
       const arr = Array.from(D_M.where_values);
-      // console.log(arr);
-      for (const r of arr) {
-        // const vs = r[1].join(", ");
-        console.log(r[0], r[1]);
-      }
+      for (const r of arr)
+        if (r[1].length > 0)
+          console.log(r[0], r[1]);
     };
 
-    // console.log("setWheere");
     this.select();
+
+    const FORMA = 0,
+      LEMMA = 1,
+      ETIMO = 2,
+      SIGL = 26,
+      POS = 6,
+      FUNCT = 7,
+      LANG = 4,
+      DATE = 5;
 
     D_M.resetQueryConditions();
 
-    D_M.addQueryCondition(0, [VS.forma]);
-    D_M.addQueryCondition(1, [VS.lemma]);
-    D_M.addQueryCondition(2, [VS.etimo]);
+    D_M.addQueryCondition(FORMA, [VS.forma]);
+    D_M.addQueryCondition(LEMMA, [VS.lemma]);
+    D_M.addQueryCondition(ETIMO, [VS.etimo]);
 
     //gestione sigle,locts e dats per colonno valore
     // si/no per colonna. / 
     let les = VS.sigl.sigls.length;
-    let i0 = 26;
+    let i0 = SIGL;
     for (let i = 0; i < les; i++)
       D_M.addQueryCondition(i + i0, [VS.sigl.sigls[i]]);
 
@@ -136,20 +141,24 @@ var FLT = {
       D_M.addQueryCondition(i + i2, [VS.sigl.datets[i]]);
 
     // gestionde delle colonne con valori mltipli 
-    D_M.addQueryCondition(7, VS.funct.functs);
-    D_M.addQueryCondition(4, VS.funct.langs);
-    D_M.addQueryCondition(5, VS.funct.dates);
+    D_M.addQueryCondition(FUNCT, VS.funct.functs);
+    D_M.addQueryCondition(LANG, VS.funct.langs);
+    D_M.addQueryCondition(DATE, VS.funct.dates);
 
-    const cols = D_M.dict_heads.map(x => x.toLowerCase());
+    let pos_arr = [];
     for (let row of VS.msd_attrs) {
       const xy = row[0].split("_");
       const pos = xy[0];
       const msd = xy[1].toLowerCase();
       const attrs = row.slice(1);
-      const c=cols.indexOf(msd);
-      console.log(msd,c);
+      const col = D_M.map_columns[msd];
+      D_M.addQueryCondition(col, attrs);
+      if (pos_arr.indexOf(pos) < 0)
+        pos_arr.push(pos);
     }
-    // log();
+    D_M.addQueryCondition(POS, pos_arr);
+
+    log();
 
   }
 };
