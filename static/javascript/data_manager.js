@@ -204,7 +204,7 @@ X|other||
 
         for (let i = 0; i < dle; i++) {
           const row = this.dict_rows[i].map(x => x.toLowerCase());
-          console.log(row);
+          // console.log(row);
           let ok = true;
 
           let s = js.forma[1];
