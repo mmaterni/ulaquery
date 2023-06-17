@@ -100,8 +100,8 @@ var FLT = {
   },
   query: function () {
     this.select();
-    D_M.setQueryConditions();
-    const rows = D_M.findRows();
+    const js = D_M.setQueryConditions();
+    const rows = D_M.findRows(js);
     DictForm.build(rows);
     DictForm.show();
   }

@@ -203,9 +203,10 @@ X|other||
         }
         return indices;
       },
-      findIndices: function () {
+      findIndices: function (js) {
 
-        const match = function (ptrn, str) {
+        const match = (ptrn, str) => {
+          if (ptrn == "") return true;
           const esc = ptrn.replace(/([.*+?^=!:${}()|[\]/\\])/g, "\\$1");
           const rgx = esc.replace(/\\\*/g, ".*");
           const p = rgx.replace(/\\\?/g, ".");
@@ -216,8 +217,32 @@ X|other||
         const indices = [];
         const dle = this.dict_rows.length;
         for (let i = 0; i < dle; i++) {
-          // const row = this.dict_rows[i];
+          const row = this.dict_rows[i];
           let ok = true;
+
+          let c = js.forma[0];
+          let s = js.forma[1];
+          let v = row[c];
+          ok = match(s, v);
+          if (!ok) break;
+
+          c = js.lemma[0];
+          s = js.lemma[1];
+          v = row[c];
+          ok = match(s, v);
+          if (!ok) break;
+
+          c = js.etimo[0];
+          s = js.etimo[1];
+          v = row[c];
+          ok = match(s, v);
+          if (!ok) break;
+
+
+
+
+
+
 
           if (ok) indices.push(i);
         }
@@ -236,13 +261,6 @@ X|other||
         const r = [column, values];
         this.where_values.push(r)
       },
-      // [[i,['a','',..]],..]
-      //   values = [
-      //     [6, ['masc', 'sing']],
-      //     [0, ['p']],
-      //     [3, ['x', 'y', 'z']]
-      // ];
-
       setQueryConditions: function () {
         const js = {
           "forma": [],//[col,str]
