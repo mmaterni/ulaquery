@@ -371,7 +371,7 @@ div.dict_form {
   overflow-y: scroll;
   overflow-x: scroll;
   // padding-left: 5px;
-
+  // AAA controllare table.dict
   table {
     box-sizing: border-box;
     width: 100%;
@@ -386,7 +386,7 @@ div.dict_form {
       position: sticky;
       tr {
         th {
-          background: darken(@head_back,-10%);
+          background: darken(@head_back, -10%);
           color: @head_color;
           max-height: @dict_row_height;
           min-height: @dict_row_height;
@@ -813,7 +813,7 @@ div.where {
       height: 25px !important;
       display: flex;
       align-items: stretch;
-      flex-wrap:nowrap;
+      flex-wrap: nowrap;
       div {
         font-size: @fsize_07;
       }
@@ -828,7 +828,7 @@ div.where {
       }
       div.v {
         box-sizing: border-box;
-        min-width:300px;
+        min-width: 300px;
         background: lighten(@wnd_back, 0%);
         padding: 2px 0 2px 4px;
         div {
@@ -843,6 +843,96 @@ div.where {
           font-style: normal;
           // border: 1px solid @wnd_color;
           border-radius: 6px;
+        }
+      }
+    }
+  }
+}
+
+@rstt_form_height: calc(@ulaquery_height - 50px);
+@rstt_form_width: @html_width;
+@rstt_row_height: 25px;
+@rstt_col_width: 30px;
+
+div.rstt_form {
+  box-sizing: border-box;
+  height: @rstt_form_height;
+  // width: @rstt_form_width !important;
+  min-width: @rstt_form_width !important;
+  max-width: @rstt_form_width !important;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  // padding-left: 5px;
+
+  table {
+    box-sizing: border-box;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: block;
+    table-layout: fixed;
+    margin-left: 5px;
+    thead {
+      z-index: 1;
+      top: 0;
+      position: sticky;
+      tr {
+        th {
+          background: darken(@head_back, -10%);
+          color: @head_color;
+          max-height: @rstt_row_height;
+          min-height: @rstt_row_height;
+          min-width: @rstt_col_width;
+          span {
+            box-sizing: border-box;
+            display: block;
+            width: 100% !important;
+            padding: 0 5px 0 5px;
+            border-width: 2px 1px 1px 0;
+            border-style: solid;
+            border-color: @cell_border_color;
+            text-align: center;
+            font-size: @fsize_07;
+            font-family: @fsans;
+            font-weight: normal;
+          }
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          background: @cell_back;
+          color: @cell_color;
+          text-align: left;
+          padding: 0 5px 0 5px;
+          font-size: @fsize_07;
+          font-family: @fsans;
+          font-weight: normal;
+          border-width: 0 1px 1px 0;
+          border-style: solid;
+          border-color: @cell_border_color;
+          max-height: @rstt_row_height;
+          min-height: @rstt_row_height;
+          min-width: @rstt_col_width;
+        }
+        td.m {
+          background: lighten(@cell_back, 20%);
+        }
+      }
+      tr:nth-child(odd) {
+        td {
+          background: lighten(@cell_back, 10%);
+        }
+        td.m {
+          background: lighten(@cell_back, 30%);
+        }
+      }
+
+      tr:hover {
+        td {
+          background: @cell_hover_back;
+          color: @cell_hover_color;
         }
       }
     }
