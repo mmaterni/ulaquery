@@ -201,9 +201,10 @@ X|other||
 
         const indices = [];
         const dle = this.dict_rows.length;
+
         for (let i = 0; i < dle; i++) {
           const row = this.dict_rows[i].map(x => x.toLowerCase());
-
+          console.log(row);
           let ok = true;
 
           let s = js.forma[1];
@@ -211,24 +212,24 @@ X|other||
             const c = js.forma[0];
             const v = row[c];
             ok = match(s, v);
-            if (!ok) break;
           }
+          if (!ok) continue;
 
           s = js.lemma[1];
           if (s != '') {
             const c = js.lemma[0];
             const v = row[c];
             const ok = match(s, v);
-            if (!ok) break;
           }
+          if (!ok) continue;
 
           s = js.etimo[1];
           if (s != '') {
             const c = js.etimo[0];
             const v = row[c];
             ok = match(s, v);
-            if (!ok) break;
           }
+          if (!ok) continue;
 
           //SIGL
           for (const cs of js.sigls) {
@@ -240,7 +241,7 @@ X|other||
               break;
             }
           }
-          if (!ok) break;
+          if (!ok) continue;
 
           for (const cs of js.locts) {
             const c = cs[0];
@@ -251,7 +252,7 @@ X|other||
               break;
             }
           }
-          if (!ok) break;
+          if (!ok) continue;
 
           for (const cs of js.datets) {
             const c = cs[0];
@@ -262,7 +263,7 @@ X|other||
               break;
             }
           }
-          if (!ok) break;
+          if (!ok) continue;
 
           let arr = js.functs[1];
           if (arr.length > 0) {
@@ -270,10 +271,9 @@ X|other||
             const v = row[c];
             if (!arr.includes(v)) {
               ok = false;
-              break;
             }
           }
-          if (!ok) break;
+          if (!ok) continue;
 
           arr = js.langs[1];
           if (arr.length > 0) {
@@ -281,10 +281,9 @@ X|other||
             const v = row[c];
             if (!arr.includes(v)) {
               ok = false;
-              break;
             }
           }
-          if (!ok) break;
+          if (!ok) continue;
 
           arr = js.dates[1];
           if (arr.length > 0) {
@@ -292,10 +291,9 @@ X|other||
             const v = row[c];
             if (!arr.includes(v)) {
               ok = false;
-              break;
             }
           }
-          if (!ok) break;
+          if (!ok) continue;
 
 
           arr = js.pos[1];
@@ -304,10 +302,9 @@ X|other||
             const v = row[c];
             if (!arr.includes(v)) {
               ok = false;
-              break;
             }
           }
-          if (!ok) break;
+          if (!ok) continue;
 
           arr = js.msd_attrs;
           if (arr.length > 0)
@@ -320,11 +317,13 @@ X|other||
                 break;
               }
             }
-          if (!ok) break;
+          if (!ok) continue;
 
-
-          if (ok) indices.push(i);
+            // console.log(row);
+          if (ok)
+            indices.push(i);
         }
+
         return indices;
       },
       findRows: function (js) {
@@ -414,7 +413,7 @@ X|other||
 
         // console.log(js);
         const s = JSON.stringify(js, null, 4);
-        console.log(s);
+        // console.log(s);
         return js;
       },
 
