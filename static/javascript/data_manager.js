@@ -231,6 +231,13 @@ X|other||
         const r = [column, values];
         this.where_values.push(r)
       },
+      // [[i,['a','',..]],..]
+      //   values = [
+      //     [6, ['masc', 'sing']],
+      //     [0, ['p']],
+      //     [3, ['x', 'y', 'z']]
+      // ];
+
       setQueryConditions: function () {
 
         const log = () => {
