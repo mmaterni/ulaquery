@@ -133,17 +133,20 @@ var Where = {
     jt.append(fh0("Etimo", VS.etimo));
 
     const jr = UaJth();
+
     const rh = (arr) => {
       jr.reset();
       for (const x of arr)
         jr.append(`<div>${x}</div>`)
       return jr.html();
     };
+
     const fh = (l, v) => `
     <li>
     <div class="l" >${l}</div>
     <div class="v">${v}</div>
     </li>`;
+
     let h = rh(VS.sigl.sigls);
     jt.append(fh("Sigl", h));
     h = rh(VS.sigl.locts);
@@ -160,8 +163,10 @@ var Where = {
 
     for (let k in VS.msd_attrs) {
       const row = VS.msd_attrs[k];
-      const h = rh(row);
-      jt.append(fh(k, h));
+      const pm=row[0];;
+      const rs = row.slice(1);
+      const h = rh(rs);
+      jt.append(fh(pm, h));
     }
 
     jt.append("</ul></div>")

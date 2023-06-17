@@ -202,7 +202,8 @@ X|other||
         const indices = [];
         const dle = this.dict_rows.length;
         for (let i = 0; i < dle; i++) {
-          const row = this.dict_rows[i];
+          const row = this.dict_rows[i].map(x => x.toLowerCase());
+
           let ok = true;
 
           let s = js.forma[1];
@@ -397,6 +398,7 @@ X|other||
         let pos_arr = [];
         rs = []
         for (let row of VS.msd_attrs) {
+          row = row.map(x => x.toLowerCase());
           const xy = row[0].split("_");
           const pos = xy[0];
           const msd = xy[1].toLowerCase();
