@@ -64,18 +64,13 @@ const menu = function () {
 </li>
   
 <li class="v">
-<a class="tipr" onclick="FLT.select()" ref="#" >Select
-<span class="tiptextr">Set All Fileds Selected</span> </a>
-</li>
-
-<li class="v">
 <a class="tipr" onclick="FLT.unselect()" ref="#" >Unselect
 <span class="tiptextr">Unselect All Fileds</span> </a>
 </li>
 
 <li class="v">
-<a class="tipr" onclick="FLT.setWhere()" ref="#" >set where
-<span class="tiptextr"></span> </a>
+<a class="tipb" onclick="FLT.query()" ref="#" >Query
+<span class="tiptextb">Query Dictionary</span> </a>
 </li>
 
 <li class="v">
@@ -89,9 +84,6 @@ const menu = function () {
 
 <li class="h"><a class="tipr" onclick="DictForm.resetXY()" href="#">Relocate
 <span class="tiptextr">Relocate Window Dictionary</span> </a></li>
-
-<li class="h"><a class="tipr" onclick="DictForm.select()" href="#">Select
-<span class="tiptextr">/span> </a></li>
 
 </ul>
 </li>

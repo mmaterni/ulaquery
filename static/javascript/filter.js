@@ -97,7 +97,7 @@ var FLT = {
     Where.build();
     Where.show();
   },
-  setWhere: function () {
+  steWhereOptions: function () {
 
     const log = function () {
       const arr = Array.from(D_M.where_values);
@@ -106,7 +106,6 @@ var FLT = {
           console.log(r[0], r[1]);
     };
 
-    this.select();
 
     const FORMA = 0,
       LEMMA = 1,
@@ -158,8 +157,19 @@ var FLT = {
     }
     D_M.addQueryCondition(POS, pos_arr);
 
+    const arr = D_M.where_values.filter((r) => r[1].length > 0);
+    // console.log(arr);
+    D_M.where_values = arr;
+
     log();
 
+  },
+  query: function () {
+    this.select();
+    this.steWhereOptions();
+    const rows = D_M.findRows();
+    DictForm.build(rows);
+    DictForm.show();
   }
 };
 

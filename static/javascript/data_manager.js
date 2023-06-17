@@ -220,6 +220,7 @@ X|other||
         const r = [column, values];
         this.where_values.push(r)
       }
+    
     };
 
     window.D_M = DM;

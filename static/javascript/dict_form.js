@@ -7,21 +7,6 @@ var DictForm = {
   tr_selected: null,
   wind: null,
   rows: [],
-  select: function () {
-    let vs = [
-      [6, ['verb']],
-      [16, ['Ind']],
-      [15, ['1']]
-    ];
-     vs = [
-      [6, ['verb']],
-      [15, ['2']]
-    ];
-    D_M.setWhere(vs);
-    const rows = D_M.findRows();
-    this.build(rows);
-    this.show();
-  },
   open: function () {
     this.build(D_M.dict_rows);
     this.show();
