@@ -106,12 +106,20 @@ X|other||
 
   // var D_M = (function () {
   ; (function () {
+    const FORMA = 0,
+      LEMMA = 1,
+      ETIMO = 2,
+      SIGL = 26,
+      POS = 6,
+      FUNCT = 7,
+      LANG = 4,
+      DATE = 5;
     const DM = {
       dict_rows: [],
       dic_heads: [],
       columns: [],
       map_columns: {},
-      where_vallues: [],
+      where_values: [],
       // idx_from_sigl: 0,
       // idx_to_sigl: 0,
       // idx_from_loc_t: 0,
@@ -142,7 +150,7 @@ X|other||
           this.dict_rows.shift();
           this.setColumns();
 
-          // AAA rimuove dallindice 60 alla fine
+          // AAA per i Tests rimuove dallindice 60 alla fine
           // this.dict_rows.splice(60);
 
         } catch (error) {
@@ -205,22 +213,77 @@ X|other||
       resetQueryConditions: function () {
         this.where_values = [];
       },
-      setQueryConditions: function (vs) {
-        // [[i,['a','',..]],..]
-        //   values = [
-        //     [6, ['masc', 'sing']],
-        //     [0, ['p']],
-        //     [3, ['x', 'y', 'z']]
-        // ];
-        this.where_values = vs;
-      },
+      // [[i,['a','',..]],..]
+      //   values = [
+      //     [6, ['masc', 'sing']],
+      //     [0, ['p']],
+      //     [3, ['x', 'y', 'z']]
+      // ];
       addQueryCondition: function (column, values) {
         if (values.length == 1 && values[0] == '')
           values = [];
         const r = [column, values];
         this.where_values.push(r)
-      }
-    
+      },
+      setQueryConditions: function () {
+
+        const log = () => {
+          const arr = Array.from(this.where_values);
+          for (const r of arr)
+            if (r[1].length > 0)
+              console.log(r[0], r[1]);
+        };
+
+
+        this.resetQueryConditions();
+
+        this.addQueryCondition(FORMA, [VS.forma]);
+        this.addQueryCondition(LEMMA, [VS.lemma]);
+        this.addQueryCondition(ETIMO, [VS.etimo]);
+
+        //gestione sigle,locts e dats per colonno valore
+        // si/no per colonna. / 
+        let les = VS.sigl.sigls.length;
+        let i0 = SIGL;
+        for (let i = 0; i < les; i++)
+          this.addQueryCondition(i + i0, [VS.sigl.sigls[i]]);
+
+        let lel = VS.sigl.locts.length;
+        let i1 = i0 + les;
+        for (let i = 0; i < lel; i++)
+          this.addQueryCondition(i + i1, [VS.sigl.locts[i]]);
+
+        let led = VS.sigl.datets.length;
+        let i2 = i1 + lel;
+        for (let i = 0; i < led; i++)
+          this.addQueryCondition(i + i2, [VS.sigl.datets[i]]);
+
+        // gestionde delle colonne con valori mltipli 
+        this.addQueryCondition(FUNCT, VS.funct.functs);
+        this.addQueryCondition(LANG, VS.funct.langs);
+        this.addQueryCondition(DATE, VS.funct.dates);
+
+        let pos_arr = [];
+        for (let row of VS.msd_attrs) {
+          const xy = row[0].split("_");
+          const pos = xy[0];
+          const msd = xy[1].toLowerCase();
+          const attrs = row.slice(1);
+          const col = this.map_columns[msd];
+          this.addQueryCondition(col, attrs);
+          if (pos_arr.indexOf(pos) < 0)
+            pos_arr.push(pos);
+        }
+        this.addQueryCondition(POS, pos_arr);
+
+        const arr = this.where_values.filter((r) => r[1].length > 0);
+        // console.log(arr);
+        this.where_values = arr;
+
+        log();
+
+      },
+
     };
 
     window.D_M = DM;

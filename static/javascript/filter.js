@@ -85,6 +85,7 @@ var FLT = {
     Funct.select();
     PosMsd.select();
     VS.select();
+
     Where.build();
     Where.show();
   },
@@ -97,76 +98,9 @@ var FLT = {
     Where.build();
     Where.show();
   },
-  steWhereOptions: function () {
-
-    const log = function () {
-      const arr = Array.from(D_M.where_values);
-      for (const r of arr)
-        if (r[1].length > 0)
-          console.log(r[0], r[1]);
-    };
-
-
-    const FORMA = 0,
-      LEMMA = 1,
-      ETIMO = 2,
-      SIGL = 26,
-      POS = 6,
-      FUNCT = 7,
-      LANG = 4,
-      DATE = 5;
-
-    D_M.resetQueryConditions();
-
-    D_M.addQueryCondition(FORMA, [VS.forma]);
-    D_M.addQueryCondition(LEMMA, [VS.lemma]);
-    D_M.addQueryCondition(ETIMO, [VS.etimo]);
-
-    //gestione sigle,locts e dats per colonno valore
-    // si/no per colonna. / 
-    let les = VS.sigl.sigls.length;
-    let i0 = SIGL;
-    for (let i = 0; i < les; i++)
-      D_M.addQueryCondition(i + i0, [VS.sigl.sigls[i]]);
-
-    let lel = VS.sigl.locts.length;
-    let i1 = i0 + les;
-    for (let i = 0; i < lel; i++)
-      D_M.addQueryCondition(i + i1, [VS.sigl.locts[i]]);
-
-    let led = VS.sigl.datets.length;
-    let i2 = i1 + lel;
-    for (let i = 0; i < led; i++)
-      D_M.addQueryCondition(i + i2, [VS.sigl.datets[i]]);
-
-    // gestionde delle colonne con valori mltipli 
-    D_M.addQueryCondition(FUNCT, VS.funct.functs);
-    D_M.addQueryCondition(LANG, VS.funct.langs);
-    D_M.addQueryCondition(DATE, VS.funct.dates);
-
-    let pos_arr = [];
-    for (let row of VS.msd_attrs) {
-      const xy = row[0].split("_");
-      const pos = xy[0];
-      const msd = xy[1].toLowerCase();
-      const attrs = row.slice(1);
-      const col = D_M.map_columns[msd];
-      D_M.addQueryCondition(col, attrs);
-      if (pos_arr.indexOf(pos) < 0)
-        pos_arr.push(pos);
-    }
-    D_M.addQueryCondition(POS, pos_arr);
-
-    const arr = D_M.where_values.filter((r) => r[1].length > 0);
-    // console.log(arr);
-    D_M.where_values = arr;
-
-    log();
-
-  },
   query: function () {
     this.select();
-    this.steWhereOptions();
+    D_M.setQueryConditions();
     const rows = D_M.findRows();
     DictForm.build(rows);
     DictForm.show();
@@ -375,6 +309,7 @@ var FormLemma = {
       a.addEventListener("change", (ev) => {
         call();
       });
+      // TODO controllo input evnet
       // a.addEventListener("blur", (ev) => {
       // a.addEventListener("mouseleave", (ev) => {
       //   call();

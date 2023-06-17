@@ -64,8 +64,8 @@ const menu = function () {
 </li>
   
 <li class="v">
-<a class="tipr" onclick="FLT.unselect()" ref="#" >Unselect
-<span class="tiptextr">Unselect All Fileds</span> </a>
+<a class="tipb" onclick="FLT.unselect()" ref="#" >Unselect
+<span class="tiptextb">Unselect All Fileds</span> </a>
 </li>
 
 <li class="v">

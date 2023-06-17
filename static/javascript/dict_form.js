@@ -73,7 +73,7 @@ var DictForm = {
     const le = rows.length;
     const r0 = (d) => `<td>${d}</td>`;
     const r1 = (d) => `<td class="m">${d}</td>`;
-    const ler = rows[0].length;
+    const ler = rows.length > 0 ? rows[0].length : 0;
     for (let i = 0; i < le; i++) {
       const row = rows[i];
       jt.append("<tr>")
