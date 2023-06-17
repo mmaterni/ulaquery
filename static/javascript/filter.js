@@ -884,11 +884,14 @@ var ResultSet = {
       rst.push(s);
     }
 
-
-    const ler = rows.length > 0 ? rows[0].length : 0;
+    let row_rst = [];
+    if (rows.length > 0) {
+      row_rst = resultRow(rows[0])
+    }
+    const ler = row_rst.length;
 
     for (let i = 0; i < lers; i++) {
-      const row = rows[i];
+      const row = resultRow(rows[i]);
       jt.append("<tr>")
       jt.append(r0, i);
       for (let i = 0; i < forms_len; i++) jt.append(r0, row[i])
