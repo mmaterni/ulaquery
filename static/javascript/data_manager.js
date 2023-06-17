@@ -188,9 +188,24 @@ X|other||
         // console.log("date_t", cols_date_t);
         // console.log(row);
       },
-      findIndices: function () {
+      xfindIndices: function () {
         const rl = this.dict_rows.length;
         const indices = [];
+        for (let i = 0; i < rl; i++) {
+          const row = this.dict_rows[i];
+          let ok = true;
+          for (const [j, vs] of this.where_values)
+            if (!vs.includes(row[j])) {
+              ok = false;
+              break;
+            }
+          if (ok) indices.push(i);
+        }
+        return indices;
+      },
+      findIndices: function () {
+        const indices = [];
+        const rl = this.dict_rows.length;
         for (let i = 0; i < rl; i++) {
           const row = this.dict_rows[i];
           let ok = true;
@@ -210,15 +225,6 @@ X|other||
           rows.push(this.dict_rows[i]);
         return rows;
       },
-      resetQueryConditions: function () {
-        this.where_values = [];
-      },
-      // [[i,['a','',..]],..]
-      //   values = [
-      //     [6, ['masc', 'sing']],
-      //     [0, ['p']],
-      //     [3, ['x', 'y', 'z']]
-      // ];
       addQueryCondition: function (column, values) {
         if (values.length == 1 && values[0] == '')
           values = [];
@@ -234,9 +240,10 @@ X|other||
               console.log(r[0], r[1]);
         };
 
+        this.where_values = [];
 
-        this.resetQueryConditions();
 
+        // gestione opzioni inpput forma,lemma,etimo
         this.addQueryCondition(FORMA, [VS.forma]);
         this.addQueryCondition(LEMMA, [VS.lemma]);
         this.addQueryCondition(ETIMO, [VS.etimo]);
@@ -263,6 +270,7 @@ X|other||
         this.addQueryCondition(LANG, VS.funct.langs);
         this.addQueryCondition(DATE, VS.funct.dates);
 
+        // gestone filtro POS MSD attrs
         let pos_arr = [];
         for (let row of VS.msd_attrs) {
           const xy = row[0].split("_");
