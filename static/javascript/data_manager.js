@@ -204,16 +204,21 @@ X|other||
         return indices;
       },
       findIndices: function () {
+
+        const match = function (ptrn, str) {
+          const esc = ptrn.replace(/([.*+?^=!:${}()|[\]/\\])/g, "\\$1");
+          const rgx = esc.replace(/\\\*/g, ".*");
+          const p = rgx.replace(/\\\?/g, ".");
+          const regex = new RegExp(`^${p}$`);
+          return regex.test(str);
+        }
+
         const indices = [];
-        const rl = this.dict_rows.length;
-        for (let i = 0; i < rl; i++) {
-          const row = this.dict_rows[i];
+        const dle = this.dict_rows.length;
+        for (let i = 0; i < dle; i++) {
+          // const row = this.dict_rows[i];
           let ok = true;
-          for (const [j, vs] of this.where_values)
-            if (!vs.includes(row[j])) {
-              ok = false;
-              break;
-            }
+
           if (ok) indices.push(i);
         }
         return indices;
@@ -239,63 +244,80 @@ X|other||
       // ];
 
       setQueryConditions: function () {
+        const js = {
+          "forma": [],//[col,str]
+          "lemma": [],
+          "etimo": [],
 
-        const log = () => {
-          const arr = Array.from(this.where_values);
-          for (const r of arr)
-            if (r[1].length > 0)
-              console.log(r[0], r[1]);
-        };
+          "sigls": [],//[[col0,str0],[col1,str1], ..]
+          "locts": [],
+          "datets": [],
 
-        this.where_values = [];
+          "functs": [],//[col,[str0,str1,..] ]
+          "langs": [],
+          "dates": [],
 
+          "pos": [], //[col,[str0,str1,..]]
 
+          "msd_attrs": []  //[col0,[str0,str1,..],[col1,[s0,s1,..],..]]
+        }
         // gestione opzioni inpput forma,lemma,etimo
-        this.addQueryCondition(FORMA, [VS.forma]);
-        this.addQueryCondition(LEMMA, [VS.lemma]);
-        this.addQueryCondition(ETIMO, [VS.etimo]);
-
-        //gestione sigle,locts e dats per colonno valore
-        // si/no per colonna. / 
+        js.forma = [FORMA, VS.forma];
+        js.lemma = [LEMMA, VS.lemma];
+        js.etimo = [ETIMO, VS.etimo];
+        // sigls
         let les = VS.sigl.sigls.length;
         let i0 = SIGL;
-        for (let i = 0; i < les; i++)
-          this.addQueryCondition(i + i0, [VS.sigl.sigls[i]]);
-
+        let rs = [];
+        for (let i = 0; i < les; i++) {
+          const r = [i + i0, VS.sigl.sigls[i]];
+          rs.push(r);
+        }
+        js.sigls = rs;
+        // locts
         let lel = VS.sigl.locts.length;
         let i1 = i0 + les;
-        for (let i = 0; i < lel; i++)
-          this.addQueryCondition(i + i1, [VS.sigl.locts[i]]);
-
+        rs = [];
+        for (let i = 0; i < lel; i++) {
+          const r = [i + i1, VS.sigl.locts[i]];
+          rs.push(r);
+        }
+        js.locts = rs;
+        // datets 
         let led = VS.sigl.datets.length;
         let i2 = i1 + lel;
-        for (let i = 0; i < led; i++)
-          this.addQueryCondition(i + i2, [VS.sigl.datets[i]]);
-
-        // gestionde delle colonne con valori mltipli 
-        this.addQueryCondition(FUNCT, VS.funct.functs);
-        this.addQueryCondition(LANG, VS.funct.langs);
-        this.addQueryCondition(DATE, VS.funct.dates);
+        rs = [];
+        for (let i = 0; i < led; i++) {
+          const r = [i + i2, VS.sigl.datets[i]];
+          rs.push(r);
+        }
+        js.datets = rs;
+        // functs,langs,dates
+        js.functs = [FUNCT, VS.funct.functs];
+        js.langs = [LANG, VS.funct.langs];
+        js.dates = [DATE, VS.funct.dates];
 
         // gestone filtro POS MSD attrs
         let pos_arr = [];
+        rs = []
         for (let row of VS.msd_attrs) {
           const xy = row[0].split("_");
           const pos = xy[0];
           const msd = xy[1].toLowerCase();
           const attrs = row.slice(1);
           const col = this.map_columns[msd];
-          this.addQueryCondition(col, attrs);
+          const r = [col, attrs]
+          rs.push(r);
           if (pos_arr.indexOf(pos) < 0)
             pos_arr.push(pos);
         }
-        this.addQueryCondition(POS, pos_arr);
+        js.pos = [POS, pos_arr]
+        js.msd_attrs = rs;
 
-        const arr = this.where_values.filter((r) => r[1].length > 0);
-        // console.log(arr);
-        this.where_values = arr;
+        console.log(js);
+        const s = JSON.stringify(js, null, 4);
+        console.log(s);
 
-        log();
 
       },
 
