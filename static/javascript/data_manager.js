@@ -188,21 +188,6 @@ X|other||
         // console.log("date_t", cols_date_t);
         // console.log(row);
       },
-      xfindIndices: function () {
-        const rl = this.dict_rows.length;
-        const indices = [];
-        for (let i = 0; i < rl; i++) {
-          const row = this.dict_rows[i];
-          let ok = true;
-          for (const [j, vs] of this.where_values)
-            if (!vs.includes(row[j])) {
-              ok = false;
-              break;
-            }
-          if (ok) indices.push(i);
-        }
-        return indices;
-      },
       findIndices: function (js) {
 
         const match = (ptrn, str) => {
@@ -220,36 +205,129 @@ X|other||
           const row = this.dict_rows[i];
           let ok = true;
 
-          let c = js.forma[0];
           let s = js.forma[1];
-          let v = row[c];
-          ok = match(s, v);
-          if (!ok) break;
+          if (s != '') {
+            const c = js.forma[0];
+            const v = row[c];
+            ok = match(s, v);
+            if (!ok) break;
+          }
 
-          c = js.lemma[0];
           s = js.lemma[1];
-          v = row[c];
-          ok = match(s, v);
-          if (!ok) break;
+          if (s != '') {
+            const c = js.lemma[0];
+            const v = row[c];
+            const ok = match(s, v);
+            if (!ok) break;
+          }
 
-          c = js.etimo[0];
           s = js.etimo[1];
-          v = row[c];
-          ok = match(s, v);
+          if (s != '') {
+            const c = js.etimo[0];
+            const v = row[c];
+            ok = match(s, v);
+            if (!ok) break;
+          }
+
+          //SIGL
+          for (const cs of js.sigls) {
+            const c = cs[0];
+            const s = cs[1];
+            const v = row[c];
+            if (s != '' && s != v) {
+              ok = false;
+              break;
+            }
+          }
+          if (!ok) break;
+
+          for (const cs of js.locts) {
+            const c = cs[0];
+            const s = cs[1];
+            const v = row[c];
+            if (s != '' && s != v) {
+              ok = false;
+              break;
+            }
+          }
+          if (!ok) break;
+
+          for (const cs of js.datets) {
+            const c = cs[0];
+            const s = cs[1];
+            const v = row[c];
+            if (s != '' && s != v) {
+              ok = false;
+              break;
+            }
+          }
+          if (!ok) break;
+
+          let arr = js.functs[1];
+          if (arr.length > 0) {
+            const c = js.functs[0];
+            const v = row[c];
+            if (!arr.includes(v)) {
+              ok = false;
+              break;
+            }
+          }
+          if (!ok) break;
+
+          arr = js.langs[1];
+          if (arr.length > 0) {
+            const c = js.langs[0];
+            const v = row[c];
+            if (!arr.includes(v)) {
+              ok = false;
+              break;
+            }
+          }
+          if (!ok) break;
+
+          arr = js.dates[1];
+          if (arr.length > 0) {
+            const c = js.dates[0];
+            const v = row[c];
+            if (!arr.includes(v)) {
+              ok = false;
+              break;
+            }
+          }
           if (!ok) break;
 
 
+          arr = js.pos[1];
+          if (arr.length > 0) {
+            const c = js.pos[0];
+            const v = row[c];
+            if (!arr.includes(v)) {
+              ok = false;
+              break;
+            }
+          }
+          if (!ok) break;
 
-
-
+          arr = js.msd_attrs;
+          if (arr.length > 0)
+            for (const css of arr) {
+              const c = css[0];
+              const ss = css[1];
+              const v = row[c];
+              if (!ss.includes(v)) {
+                ok = false;
+                break;
+              }
+            }
+          if (!ok) break;
 
 
           if (ok) indices.push(i);
         }
         return indices;
       },
-      findRows: function () {
-        const idxs = this.findIndices();
+      findRows: function (js) {
+        const idxs = this.findIndices(js);
         const rows = [];
         for (const i of idxs)
           rows.push(this.dict_rows[i]);
@@ -332,11 +410,10 @@ X|other||
         js.pos = [POS, pos_arr]
         js.msd_attrs = rs;
 
-        console.log(js);
+        // console.log(js);
         const s = JSON.stringify(js, null, 4);
         console.log(s);
-
-
+        return js;
       },
 
     };
