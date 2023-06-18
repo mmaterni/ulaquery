@@ -798,10 +798,8 @@ var PosMsd = {
 };
 
 var ResultSet = {
-  id: "resultsetid",
-  tr_selected: null,
+  id: "resultset_id",
   wind: null,
-  rows: [],
   build: async function (rows) {
     const sp = "         ";
     const menu = `

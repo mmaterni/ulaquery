@@ -854,7 +854,7 @@ div.where {
 @rstt_row_height: 25px;
 @rstt_col_width: 30px;
 
-div.rstt_form {
+div.resultset {
   box-sizing: border-box;
   height: @rstt_form_height;
   // width: @rstt_form_width !important;
@@ -916,19 +916,12 @@ div.rstt_form {
           min-height: @rstt_row_height;
           min-width: @rstt_col_width;
         }
-        td.m {
-          background: lighten(@cell_back, 20%);
-        }
       }
       tr:nth-child(odd) {
         td {
           background: lighten(@cell_back, 10%);
         }
-        td.m {
-          background: lighten(@cell_back, 30%);
-        }
       }
-
       tr:hover {
         td {
           background: @cell_hover_back;
