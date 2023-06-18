@@ -62,7 +62,8 @@ var DictForm = {
     // this.rows.shift();
 
     // head
-    jt.append(`<table class='dict'><thead><tr>`);
+    // FIXME jt.append(`<table class='dict'><thead><tr>`);
+    jt.append(`<table><thead><tr>`);
     let h = (d) => `<th><span>${d}</span></th>`;
     jt.append(h, "N.");
     for (const x of head_form) jt.append(h, x.toUpperCase());

@@ -846,65 +846,25 @@ var ResultSet = {
     let jt = UaJth();
     jt.append(menu);
 
-    const heads = D_M.dict_heads;
-    const forms_len = 8;
-    const head_form = heads.slice(0, forms_len);
-    const heaD_Msd = heads.slice(forms_len);
-    // console.log(heads);
-    // console.log(head_form);
-    // console.log(heaD_Msd);
-    // elimina la prima riga
-    // this.rows.shift();
-
     // head
+    const heads = D_M.rslt_heads;
     jt.append(`<table><thead><tr>`);
     let h = (d) => `<th><span>${d}</span></th>`;
     jt.append(h, "N.");
-    for (const x of head_form) jt.append(h, x.toUpperCase());
-    for (const x of heaD_Msd) jt.append(h, x.toUpperCase())
+    for (const x of heads) jt.append(h, x.toUpperCase());
     jt.append(`</tr></thead><tbody>`);
 
     // rowa
-    const lers = rows.length;
-    const r0 = (d) => `<td>${d}</td>`;
-    const r1 = (d) => `<td class="m">${d}</td>`;
-
-    const resulRow = (r) => {
-      const r0 = r.slice(0, 8);
-      let rst = Array.from(r0);
-      // attrs
-      let arr = r.slice(8, 26);
-      let s = arr.filter(x => x !== '').join(',');
-      rst.push(s);
-      // sigls
-      arr = r.slice(26, 30);
-      s = arr.filter(x => x !== '').join(',');
-      rst.push(s);
-      // locts
-      arr = r.slice(30, 35);
-      s = arr.filter(x => x !== '').join(',');
-      rst.push(s);
-      // datets
-      alls = r.slice(35);
-      s = arr.filter(x => x !== '').join(',');
-      rst.push(s);
-    }
-
-    let row_rst = [];
-    if (rows.length > 0) {
-      row_rst = resultRow(rows[0])
-    }
-    const ler = row_rst.length;
-
+    const lers = D_M.rslt_rows.length;
+    const rh = (d) => `<td>${d}</td>`;
     for (let i = 0; i < lers; i++) {
-      const row = resultRow(rows[i]);
+      const row = this.rslt_rows[i];
       jt.append("<tr>")
-      jt.append(r0, i);
-      for (let i = 0; i < forms_len; i++) jt.append(r0, row[i])
-      for (let i = forms_len; i < ler; i++) jt.append(r1, row[i])
+      jt.append(rh, i);
+      for (const f of row)
+        jt.append(rh, f);
       jt.append("</tr>")
     }
-
     jt.append(`</tbody></table></div>`);
 
     const html = jt.html();
