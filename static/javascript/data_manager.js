@@ -106,15 +106,8 @@ X|other||
 
   // var D_M = (function () {
   ; (function () {
-    const
-      FORMA = 0,
-      LEMMA = 1,
-      ETIMO = 2,
-      SIGL = 26,
-      POS = 6,
-      FUNCT = 7,
-      LANG = 4,
-      DATE = 5;
+    const FORMA = 0, LEMMA = 1, ETIMO = 2, SIGL = 26,
+      POS = 6, FUNCT = 7, LANG = 4, DATE = 5;
 
     const DM = {
       dict_rows: [],
@@ -330,7 +323,7 @@ X|other||
 
         return indices;
       },
-      findRows: function (js) {
+      findDictRows: function (js) {
         const idxs = this.findIndices(js);
         const rows = [];
         for (const i of idxs)

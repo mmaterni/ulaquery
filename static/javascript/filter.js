@@ -101,7 +101,7 @@ var FLT = {
   query: function () {
     this.select();
     const js = D_M.setQueryConditions();
-    const rows = D_M.findRows(js);
+    const rows = D_M.findDictRows(js);
     // AAA ResultSet
     DictForm.build(rows);
     DictForm.show();
