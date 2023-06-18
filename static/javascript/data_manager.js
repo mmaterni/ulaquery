@@ -93,12 +93,12 @@ X|other||
  28: p
  29: v
  
-30: LOC.1
+ 30: LOC.1
  31: LOC.2
  32: LOC.3
  33: LOC.4
  
- 35: DATE.0
+ 34: DATE.0
  35: DATE.1
  36: DATE.2
   */
@@ -106,7 +106,8 @@ X|other||
 
   // var D_M = (function () {
   ; (function () {
-    const FORMA = 0,
+    const
+      FORMA = 0,
       LEMMA = 1,
       ETIMO = 2,
       SIGL = 26,
@@ -114,18 +115,14 @@ X|other||
       FUNCT = 7,
       LANG = 4,
       DATE = 5;
+
     const DM = {
       dict_rows: [],
-      dic_heads: [],
-      columns: [],
+      dict_heads: [],
       map_columns: {},
       where_values: [],
-      // idx_from_sigl: 0,
-      // idx_to_sigl: 0,
-      // idx_from_loc_t: 0,
-      // idx_to_loc_t: 0,
-      // idx_from_date_t: 0,
-      // idx_to_dte_t: 0,
+
+
       load_dict: async function () {
         const url = `ula_data/data_export/dictionary.ula.csv`;
         try {
@@ -139,44 +136,62 @@ X|other||
           }
           const data = await resp.text();
           const rows = data.trim().split("\n");
+
           this.dict_rows = rows.map((x) => x.trim().split("|"));
           this.dict_heads = this.dict_rows[0];
-          this.columns = D_M.dict_heads.map(x => x.toLowerCase());
-          this.map_columns = this.columns.reduce((acc, element, index) => {
+          columns = D_M.dict_heads.map(x => x.toLowerCase());
+          this.map_columns = columns.reduce((acc, element, index) => {
             acc[element] = index;
             return acc;
           }, {});
 
+
+
+          this.dictToResultSet();
           this.dict_rows.shift();
-          this.setColumns();
-
-          // AAA per i Tests rimuove dallindice 60 alla fine
-          // this.dict_rows.splice(60);
-
+          // this.setColumns();
         } catch (error) {
           alert(`Errror:${url}\n ${error}`);
           throw error;
         }
       },
+      dictToResultSet: function () {
+        const dict2rslt = (r) => {
+          const r0 = r.slice(0, 8);
+          let rst = Array.from(r0);
+          // attrs
+          let arr = r.slice(8, 26);
+          let s = arr.filter(x => x !== '').join(',');
+          rst.push(s);
+          // sigls
+          arr = r.slice(26, 30);
+          s = arr.filter(x => x !== '').join(',');
+          rst.push(s);
+          // locts
+          arr = r.slice(30, 35);
+          s = arr.filter(x => x !== '').join(',');
+          rst.push(s);
+          // datets
+          alls = r.slice(35);
+          s = arr.filter(x => x !== '').join(',');
+          rst.push(s);
+        }
+
+      },
       setColumns: function () {
-        // const row = this.dict_heads;
+        const row = this.dict_heads;
 
-        // posizine iniziale e finale di
-        // sigle, loc_t.date_t
-        // this.idx_from_sigl = row.findIndex((e, i) => i > 20 && e.length == 1);
-        // this.idx_from_loc_t = row.findIndex((e, i) =>
-        //   i > this.idx_from_sigl && e.startsWith("LOC"));
-        // this.idx_to_sigl = this.idx_from_loc
-        // this.idx_from_date_t = row.findIndex((e, i) =>
-        //   i > this.idx_from_loc_t && e.startsWith("DAT"));
-        // this.idx_to_loc_t = this.idx_from_date_t
-        // this.idx_to_dte_t = row.length;
+        i0_attrs = 8;
+        i0_sigls = row.findIndex((e, i) => i > 20 && e.length == 1);
+        i0_locts = row.findIndex((e, i) => i > i0_sigls && e.startsWith("LOC"));
+        i0_datets = row.findIndex((e, i) => i > i0_locts && e.startsWith("DAT"));
 
-        // const cols_forma_lemma = row.slice(0, 4);
-        // const cols_lang = row.slice(4, 5);
-        // const cols_date = row.slice(5, 6);
-        // const cols_funct = row.slice(7, 8);
-        // const cols_pos_msd = row.slice(6, 7).concat(row.slice(8, this.idx_from_sigl));
+        const cols_fmle = row.slice(0, i0_attrs);
+        const cols_attrs = row.slice(i0_attrs, i0_sigls);
+        const cols_sigls = row.slice(i0_sigls, i0_locts);
+        const cols_locts = row.slice(i0_locts, i0_datets);
+        const cols_datets = row.slice(i0_datets);
+
 
         // console.log("form_lemma", cols_forma_lemma);
         // console.log("lang", cols_lang);
@@ -319,7 +334,7 @@ X|other||
             }
           if (!ok) continue;
 
-            // console.log(row);
+          // console.log(row);
           if (ok)
             indices.push(i);
         }
