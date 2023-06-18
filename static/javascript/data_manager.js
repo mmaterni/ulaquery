@@ -121,6 +121,7 @@ X|other||
       dict_heads: [],
       map_columns: {},
       where_values: [],
+
       rslt_rows: [],
       rslt_heads: [],
 
@@ -140,13 +141,13 @@ X|other||
 
           this.dict_rows = rows.map((x) => x.trim().split("|"));
           this.dict_heads = this.dict_rows[0];
-          const columns = D_M.dict_heads.map(x => x.toLowerCase());
+          const columns = this.dict_heads.map(x => x.toLowerCase());
           this.map_columns = columns.reduce((acc, element, index) => {
             acc[element] = index;
             return acc;
           }, {});
-          this.dict_rows.shift();
           this.dictToResultSet();
+          this.dict_rows.shift();
         } catch (error) {
           alert(`Errror:${url}\n ${error}`);
           throw error;
@@ -161,29 +162,31 @@ X|other||
 
         // intestazione resultset
         this.rslt_heads = this.dict_heads.slice(0, i0_attrs);
+        this.rslt_heads.push("MSD");
         this.rslt_heads.push("SIGL.");
         this.rslt_heads.push("LOC.");
         this.rslt_heads.push("DATE");
 
         const dict2rslt = (r) => {
           const r0 = r.slice(0, i0_attrs);
-          let rst = Array.from(r0);
+          let row = Array.from(r0);
           // attrs
           let arr = r.slice(i0_attrs, i0_sigls);
           let s = arr.filter(x => x !== '').join(',');
-          rst.push(s);
+          row.push(s);
           // sigls
           arr = r.slice(i0_sigls, i0_locts);
           s = arr.filter(x => x !== '').join(',');
-          rst.push(s);
+          row.push(s);
           // locts
           arr = r.slice(i0_locts, i0_datets);
           s = arr.filter(x => x !== '').join(',');
-          rst.push(s);
+          row.push(s);
           // datets
           arr = r.slice(i0_datets);
           s = arr.filter(x => x !== '').join(',');
-          rst.push(s);
+          row.push(s);
+          return row;
         }
         this.rslt_rows = [];
         for (const row of this.dict_rows) {
