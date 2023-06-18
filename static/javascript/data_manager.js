@@ -137,8 +137,8 @@ X|other||
             acc[element] = index;
             return acc;
           }, {});
-          this.dictToResultSet();
           this.dict_rows.shift();
+          this.dictToResultSet();
         } catch (error) {
           alert(`Errror:${url}\n ${error}`);
           throw error;

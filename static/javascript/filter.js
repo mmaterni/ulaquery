@@ -802,10 +802,6 @@ var ResultSet = {
   tr_selected: null,
   wind: null,
   rows: [],
-  open: function () {
-    this.build(D_M.dict_rows);
-    this.show();
-  },
   build: async function (rows) {
     const sp = "         ";
     const menu = `
@@ -858,7 +854,7 @@ var ResultSet = {
     const lers = D_M.rslt_rows.length;
     const rh = (d) => `<td>${d}</td>`;
     for (let i = 0; i < lers; i++) {
-      const row = this.rslt_rows[i];
+      const row = rows[i];
       jt.append("<tr>")
       jt.append(rh, i);
       for (const f of row)
