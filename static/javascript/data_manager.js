@@ -119,9 +119,7 @@ X|other||
     const DM = {
       dict_rows: [],
       dict_heads: [],
-      map_columns: {},
-      // where_values: [],
-
+      dict_map_columns: {},
       rslt_rows: [],
       rslt_heads: [],
 
@@ -142,7 +140,7 @@ X|other||
           this.dict_rows = rows.map((x) => x.trim().split("|"));
           this.dict_heads = this.dict_rows[0];
           const columns = this.dict_heads.map(x => x.toLowerCase());
-          this.map_columns = columns.reduce((acc, element, index) => {
+          this.dict_map_columns = columns.reduce((acc, element, index) => {
             acc[element] = index;
             return acc;
           }, {});
@@ -402,7 +400,7 @@ X|other||
           const pos = xy[0];
           const msd = xy[1].toLowerCase();
           const attrs = row.slice(1);
-          const col = this.map_columns[msd];
+          const col = this.dict_map_columns[msd];
           const r = [col, attrs]
           rs.push(r);
           if (pos_arr.indexOf(pos) < 0)
