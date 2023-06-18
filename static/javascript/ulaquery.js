@@ -69,15 +69,19 @@ const menu = function () {
 </li>
 
 <li class="v">
-<a class="tipb" onclick="FLT.query()" ref="#" >Query
-<span class="tiptextb">Query Dictionary</span> </a>
+<a class="tipb" onclick="FLT.queryRslt()" ref="#" >Query
+<span class="tiptextb">Open Query ResultSet</span> </a>
 </li>
 
 <li class="v">
 <a href="#">Dictionary</a>
 <ul class="v">
+
 <li class="h"><a class="tipr" onclick="DictForm.open()" href="#">Open
-<span class="tiptextr">Opoen Window Dictionary</span></a></li>
+<span class="tiptextr">Opoen All Dictionary</span></a></li>
+
+<li class="h"><a class="tipr" onclick="FLT.queryDict()" ref="#" >Select
+<span class="tiptextr">Open Selected Dictionary</span> </a></li>
 
 <li class="h"><a class="tipr" onclick="DictForm.hide()" href="#" >Hide
 <span class="tiptextr">Close Window Dictionary</span> </a></li>

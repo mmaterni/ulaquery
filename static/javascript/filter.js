@@ -98,11 +98,17 @@ var FLT = {
     Where.build();
     Where.show();
   },
-  query: function () {
+  queryRslt: function () {
+    this.select();
+    const js = D_M.setQueryConditions();
+    const rows = D_M.findRsltRows(js);
+    ResultSet.build(rows);
+    ResultSet.show();
+  },
+  queryDict: function () {
     this.select();
     const js = D_M.setQueryConditions();
     const rows = D_M.findDictRows(js);
-    // AAA ResultSet
     DictForm.build(rows);
     DictForm.show();
   }
