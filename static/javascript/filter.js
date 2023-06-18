@@ -79,13 +79,15 @@ var FLT = {
     PosMsd.resetXY();
     Where.resetXY();
   },
-  select: function () {
+  querySelect: function () {
     FormLemma.select();
     Sigl.select();
     Funct.select();
     PosMsd.select();
     VS.select();
-
+  },
+  select: function () {
+    this.queryRslt();
     Where.build();
     Where.show();
   },
@@ -99,14 +101,14 @@ var FLT = {
     Where.show();
   },
   queryRslt: function () {
-    this.select();
+    this.querySelect();
     const js = D_M.setQueryConditions();
     const rows = D_M.findRsltRows(js);
     ResultSet.build(rows);
     ResultSet.show();
   },
   queryDict: function () {
-    this.select();
+    this.querySelect();
     const js = D_M.setQueryConditions();
     const rows = D_M.findDictRows(js);
     DictForm.build(rows);
@@ -849,7 +851,7 @@ var ResultSet = {
     jt.append(`</tr></thead><tbody>`);
 
     // rowa
-    const lers = D_M.rslt_rows.length;
+    const lers = rows.length;
     const rh = (d) => `<td>${d}</td>`;
     for (let i = 0; i < lers; i++) {
       const row = rows[i];

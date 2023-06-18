@@ -325,6 +325,7 @@ X|other||
       },
       findRsltRows: function (js) {
         const idxs = this.findIndices(js);
+        console.log(idxs);
         const rows = [];
         for (const i of idxs)
           rows.push(this.rslt_rows[i]);
@@ -332,6 +333,7 @@ X|other||
       },
       findDictRows: function (js) {
         const idxs = this.findIndices(js);
+        console.log(idxs);
         const rows = [];
         for (const i of idxs)
           rows.push(this.dict_rows[i]);
