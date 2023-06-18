@@ -120,7 +120,7 @@ X|other||
       dict_rows: [],
       dict_heads: [],
       map_columns: {},
-      where_values: [],
+      // where_values: [],
 
       rslt_rows: [],
       rslt_heads: [],
@@ -193,7 +193,6 @@ X|other||
           const r = dict2rslt(row);
           this.rslt_rows.push(r);
         }
-
       },
       findIndices: function (js) {
 
@@ -340,12 +339,6 @@ X|other||
           rows.push(this.dict_rows[i]);
         return rows;
       },
-      addQueryCondition: function (column, values) {
-        if (values.length == 1 && values[0] == '')
-          values = [];
-        const r = [column, values];
-        this.where_values.push(r)
-      },
       setQueryConditions: function () {
         const js = {
           "forma": [],//[col,str]
@@ -419,11 +412,10 @@ X|other||
         js.msd_attrs = rs;
 
         // console.log(js);
-        const s = JSON.stringify(js, null, 4);
+        // const s = JSON.stringify(js, null, 4);
         // console.log(s);
         return js;
-      },
-
+      }
     };
 
     window.D_M = DM;
