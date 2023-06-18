@@ -265,6 +265,7 @@ var FormLemma = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
+      // AAA this.wind.setZ(100);
     }
     this.wind.setHtml(html);
     this.bind();
