@@ -121,7 +121,8 @@ X|other||
       dict_heads: [],
       map_columns: {},
       where_values: [],
-
+      rslt_rows: [],
+      rslt_heads: [],
 
       load_dict: async function () {
         const url = `ula_data/data_export/dictionary.ula.csv`;
@@ -139,69 +140,57 @@ X|other||
 
           this.dict_rows = rows.map((x) => x.trim().split("|"));
           this.dict_heads = this.dict_rows[0];
-          columns = D_M.dict_heads.map(x => x.toLowerCase());
+          const columns = D_M.dict_heads.map(x => x.toLowerCase());
           this.map_columns = columns.reduce((acc, element, index) => {
             acc[element] = index;
             return acc;
           }, {});
-
-
-
-          this.dictToResultSet();
           this.dict_rows.shift();
-          // this.setColumns();
+          this.dictToResultSet();
         } catch (error) {
           alert(`Errror:${url}\n ${error}`);
           throw error;
         }
       },
       dictToResultSet: function () {
+        const row = this.dict_heads;
+        const i0_attrs = 8;
+        const i0_sigls = row.findIndex((e, i) => i > 20 && e.length == 1);
+        const i0_locts = row.findIndex((e, i) => i > i0_sigls && e.startsWith("LOC"));
+        const i0_datets = row.findIndex((e, i) => i > i0_locts && e.startsWith("DAT"));
+
+        // intestazione resultset
+        this.rslt_heads = this.dict_heads.slice(0, i0_attrs);
+        this.rslt_heads.push("SIGL.");
+        this.rslt_heads.push("LOC.");
+        this.rslt_heads.push("DATE");
+
         const dict2rslt = (r) => {
-          const r0 = r.slice(0, 8);
+          const r0 = r.slice(0, i0_attrs);
           let rst = Array.from(r0);
           // attrs
-          let arr = r.slice(8, 26);
+          let arr = r.slice(i0_attrs, i0_sigls);
           let s = arr.filter(x => x !== '').join(',');
           rst.push(s);
           // sigls
-          arr = r.slice(26, 30);
+          arr = r.slice(i0_sigls, i0_locts);
           s = arr.filter(x => x !== '').join(',');
           rst.push(s);
           // locts
-          arr = r.slice(30, 35);
+          arr = r.slice(i0_locts, i0_datets);
           s = arr.filter(x => x !== '').join(',');
           rst.push(s);
           // datets
-          alls = r.slice(35);
+          arr = r.slice(i0_datets);
           s = arr.filter(x => x !== '').join(',');
           rst.push(s);
         }
+        this.rslt_rows = [];
+        for (const row of this.dict_rows) {
+          const r = dict2rslt(row);
+          this.rslt_rows.push(r);
+        }
 
-      },
-      setColumns: function () {
-        const row = this.dict_heads;
-
-        i0_attrs = 8;
-        i0_sigls = row.findIndex((e, i) => i > 20 && e.length == 1);
-        i0_locts = row.findIndex((e, i) => i > i0_sigls && e.startsWith("LOC"));
-        i0_datets = row.findIndex((e, i) => i > i0_locts && e.startsWith("DAT"));
-
-        const cols_fmle = row.slice(0, i0_attrs);
-        const cols_attrs = row.slice(i0_attrs, i0_sigls);
-        const cols_sigls = row.slice(i0_sigls, i0_locts);
-        const cols_locts = row.slice(i0_locts, i0_datets);
-        const cols_datets = row.slice(i0_datets);
-
-
-        // console.log("form_lemma", cols_forma_lemma);
-        // console.log("lang", cols_lang);
-        // console.log("date", cols_date);
-        // console.log("funct", cols_funct);
-        // console.log("pps_msd", cols_pos_msd);
-        // console.log("sigl", cols_sigl);
-        // console.log("loc_t", cols_loc_t);
-        // console.log("date_t", cols_date_t);
-        // console.log(row);
       },
       findIndices: function (js) {
 
