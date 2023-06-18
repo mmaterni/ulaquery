@@ -62,7 +62,6 @@ var DictForm = {
     // this.rows.shift();
 
     // head
-    // FIXME jt.append(`<table class='dict'><thead><tr>`);
     jt.append(`<table><thead><tr>`);
     let h = (d) => `<th><span>${d}</span></th>`;
     jt.append(h, "N.");

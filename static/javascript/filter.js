@@ -324,7 +324,6 @@ var FormLemma = {
       a.addEventListener("change", (ev) => {
         call();
       });
-      // TODO controllo input evnet
       // a.addEventListener("blur", (ev) => {
       a.addEventListener("mouseleave", (ev) => {
         call();
