@@ -87,7 +87,7 @@ var FLT = {
     VS.select();
   },
   select: function () {
-    this.queryRslt();
+    this.querySelect();
     Where.build();
     Where.show();
   },
@@ -325,9 +325,9 @@ var FormLemma = {
       });
       // TODO controllo input evnet
       // a.addEventListener("blur", (ev) => {
-      // a.addEventListener("mouseleave", (ev) => {
-      //   call();
-      // });
+      a.addEventListener("mouseleave", (ev) => {
+        call();
+      });
     }
 
   }
