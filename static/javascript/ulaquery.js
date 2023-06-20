@@ -1,5 +1,16 @@
 "use strict"
 
+function test() {
+  alert("test");
+  try {
+    console.log(XX);
+    alert(XX);
+  }
+  catch (errore) {
+    alert(errore);
+  }
+}
+
 function cmd_close() {
   if (confirm("Chiudi Applicazione ?")) window.close();
 };
@@ -8,11 +19,11 @@ function cmd_log_toggle() {
   UaLog.toggle();
 };
 
-function cmd_log (...args) {
+function cmd_log(...args) {
   UaLog.log(...args);
 };
 
-function cmd_log_show(...args){
+function cmd_log_show(...args) {
   UaLog.log_show(...args);
 };
 
@@ -111,6 +122,7 @@ const menu = function () {
 <li class="v"><a class="tipb" onclick="cmd_log_toggle()" href="#">Log
 <span class="tiptextb">Toggle Log</span></a></li>
 
+<li class="v"><a onclick="test()" href="#" >?</a></li>
 <li class="v"><a onclick="cmd_close()" href="#" >close</a></li>
 
 </ul>
@@ -130,8 +142,8 @@ var UlaQuery = {
     await FormLemma.build();
     await Sigl.build();
     await Funct.build();
-    await PosMsd.build(); 
-    Where.build();  
+    await PosMsd.build();
+    Where.build();
     UaLog.setXY(-3, 0).setZ(11).new();
     wait_stop();
 
