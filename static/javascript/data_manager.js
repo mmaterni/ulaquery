@@ -202,7 +202,6 @@ X|other||
 
         for (let i = 0; i < dle; i++) {
           const row = this.dict_rows[i].map(x => x.toLowerCase());
-          // console.log(row);
           let ok = true;
 
           let s = js.forma[1];
@@ -326,7 +325,7 @@ X|other||
       },
       findRsltRows: function (js) {
         const idxs = this.findIndices(js);
-        console.log(idxs);
+        // console.log(idxs);
         const rows = [];
         for (const i of idxs)
           rows.push(this.rslt_rows[i]);
@@ -334,7 +333,7 @@ X|other||
       },
       findDictRows: function (js) {
         const idxs = this.findIndices(js);
-        console.log(idxs);
+        // console.log(idxs);
         const rows = [];
         for (const i of idxs)
           rows.push(this.dict_rows[i]);
@@ -389,10 +388,12 @@ X|other||
           rs.push(r);
         }
         js.datets = rs;
-        // functs,langs,dates
+        // functs
         js.functs = [FUNCT, VS.funct.functs];
-        js.langs = [LANG, VS.funct.langs];
-        js.dates = [DATE, VS.funct.dates];
+
+        // angs,dates
+        js.langs = [LANG, VS.lang_date.langs];
+        js.dates = [DATE, VS.lang_date.dates];
 
         // gestone filtro POS MSD attrs
         let pos_arr = [];

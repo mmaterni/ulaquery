@@ -1,4 +1,4 @@
-// "use strict"
+"use strict"
 
 const top_filter = 35;
 
@@ -21,7 +21,7 @@ const pos_msd_top = top_filter;
 const pos_msd_left = 670;
 
 
-VS = {
+const VS = {
   forma: '',
   lemma: '',
   etimo: '',
@@ -208,7 +208,6 @@ var Where = {
     }
 
     jt.append("</ul></div>")
-    // console.log(jt.text());
     const html = jt.html();
     if (!this.wind) {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
@@ -764,7 +763,7 @@ var LangDate = {
       const lst = arr.filter(a => a.classList.contains("select")).map(a => a.innerHTML);
       return lst;
     };
-    attrs = this.wind.w.querySelectorAll("div.lang_date li.l a");
+    let attrs = this.wind.w.querySelectorAll("div.lang_date li.l a");
     this.langs = fn(attrs);
     attrs = this.wind.w.querySelectorAll("div.lang_date li.d a");
     this.dates = fn(attrs);
