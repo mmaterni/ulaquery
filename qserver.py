@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import os
+# import os
 import argparse
 from bottle import Bottle
 from bottle import request, static_file
@@ -9,7 +9,6 @@ from bottle import request, static_file
 app = Bottle()
 
 ROOT_PATH = '.'
-
 
 def prn_params(rqs):
     print("===============")
@@ -47,11 +46,11 @@ def request_data(rqs):
 
 @app.route('/', method='GET')
 def hello():
-    # prn_params(request)
-    # pars = request_params(request)
-    # print("hello")
-    # print(request.url)
-    # print(pars)
+    prn_params(request)
+    pars = request_params(request)
+    print("hello")
+    print(request.url)
+    print(pars)
     return static_file("index.html", root=ROOT_PATH)
 
 
@@ -59,11 +58,11 @@ def hello():
 def server_static(filepath):
     if 'favicon' in filepath:
         return
-    # prn_params(request)
-    # pars = request_params(request)
-    # print("server_static")
-    # print(request.url)
-    # print(pars)
+    prn_params(request)
+    pars = request_params(request)
+    print("server_static")
+    print(request.url)
+    print(pars)
     # n = os.path.basename(filepath)
     # lst = n.split('.')
     # ok = False
@@ -141,6 +140,8 @@ if __name__ == '__main__':
     ROOT_PATH = args.root
     print(f"{ip} {port} {ROOT_PATH}")
     if args.debug == '1':
+        app.run(host=ip, port=port, quiet=False, reload=False)
+    elif args.debug == '2':
         app.run(host=ip, port=port, debug=True, quiet=False, reload=False)
     else:
         print("Hit Ctrl-C to quit.")
