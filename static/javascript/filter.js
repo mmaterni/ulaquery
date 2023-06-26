@@ -2,23 +2,23 @@
 
 const top_filter = 35;
 
-const where_top = top_filter;
+const where_top = top_filter + 420;
 const where_left = 5;
 
-const form_lemma_top = top_filter + 420;
+const form_lemma_top = top_filter;
 const form_lemma_left = 3;
 
 const sigl_top = top_filter + 150;
 const sigl_left = 5;
 
 const funct_top = top_filter;
-const funct_left = 270;
+const funct_left = 490;
 
 const lang_date_top = top_filter;
 const lang_date_left = 300;
 
 const pos_msd_top = top_filter;
-const pos_msd_left = 600;
+const pos_msd_left = 670;
 
 
 VS = {
@@ -33,7 +33,7 @@ VS = {
   funct: {
     functs: [],
   },
-  lang_date:{
+  lang_date: {
     langs: [],
     dates: []
   },
