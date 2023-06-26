@@ -48,6 +48,7 @@ VS = {
     VS.sigl.datets = Sigl.datets;
 
     VS.funct.functs = Funct.functs;
+
     VS.lang_date.langs = LangDate.langs;
     VS.lang_date.dates = LangDate.dates;
 
@@ -63,6 +64,7 @@ VS = {
     this.sigl.datets = [];
 
     this.funct.functs = [];
+
     this.lang_date.langs = [];
     this.lang_date.dates = [];
 
@@ -107,6 +109,7 @@ var FLT = {
     FormLemma.select();
     Sigl.select();
     Funct.select();
+    LangDate.select();
     PosMsd.select();
     VS.select();
   },
@@ -190,6 +193,7 @@ var Where = {
 
     h = rh(VS.funct.functs);
     jt.append(fh("Funct", h));
+
     h = rh(VS.lang_date.langs);
     jt.append(fh("Lang.", h));
     h = rh(VS.lang_date.dates);
@@ -616,7 +620,6 @@ var Funct = {
         ev.preventDefault();
         ev.stopImmediatePropagation();
         const t = ev.target;
-        // const t = ev.currentTarget;
         if (t.classList.contains("select"))
           t.classList.remove("select");
         else
@@ -638,15 +641,8 @@ var Funct = {
       const lst = arr.filter(a => a.classList.contains("select")).map(a => a.innerHTML);
       return lst;
     };
-    // fuct settate
     let attrs = this.wind.w.querySelectorAll("div.funct li.f a");
     this.functs = fn(attrs);
-    // // locali settate 
-    // attrs = this.wind.w.querySelectorAll("div.funct li.l a");
-    // this.langs = fn(attrs);
-    // // date  settate
-    // attrs = this.wind.w.querySelectorAll("div.funct li.d a");
-    // this.dates = fn(attrs);
   }
 };
 
@@ -682,13 +678,13 @@ var LangDate = {
     <div class="menu_wnd">
     <ul>
     <li>
-    <a class="tipb" onclick="Funct.unselect()" href="#">Unselect
+    <a class="tipb" onclick="LangDate.unselect()" href="#">Unselect
        <span class="tiptextb">Unselect Fields Selected</span>  </a>
     </li>
     <li><a onclick="LangDate.close()"  href="#">X</a></li>  
     </ul>
     </div>
-    <div class="funct">`); //AAA
+    <div class="lang_date">`);
 
     jt.append("<div><ul>")
     jt.append(`<li class="l"><span>Lang</span></li> `);
@@ -741,43 +737,37 @@ var LangDate = {
     this.open();
   },
   bind: function () {
-    // const attrs = this.wind.w.querySelectorAll("div.funct li a");
-    // for (let a of attrs) {
-    //   a.addEventListener("click", (ev) => {
-    //     ev.preventDefault();
-    //     ev.stopImmediatePropagation();
-    //     const t = ev.target;
-    //     // const t = ev.currentTarget;
-    //     if (t.classList.contains("select"))
-    //       t.classList.remove("select");
-    //     else
-    //       t.classList.add("select");
-    //     FLT.select();
-    //   });
-    // }
+    const attrs = this.wind.w.querySelectorAll("div.lang_date li a");
+    for (let a of attrs) {
+      a.addEventListener("click", (ev) => {
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        const t = ev.target;
+        if (t.classList.contains("select"))
+          t.classList.remove("select");
+        else
+          t.classList.add("select");
+        FLT.select();
+      });
+    }
   },
   unselect: function () {
-    // const attrs = this.wind.w.querySelectorAll("div.funct li a");
-    // for (let a of attrs) {
-    //   a.classList.remove("select");
-    // }
-    // FLT.select();
+    const attrs = this.wind.w.querySelectorAll("div.lang_date li a");
+    for (let a of attrs) {
+      a.classList.remove("select");
+    }
+    FLT.select();
   },
   select: function () {
-    // const fn = (ats) => {
-    //   const arr = Array.from(ats);
-    //   const lst = arr.filter(a => a.classList.contains("select")).map(a => a.innerHTML);
-    //   return lst;
-    // };
-    // // fuct settate
-    // let attrs = this.wind.w.querySelectorAll("div.funct li.f a");
-    // this.functs = fn(attrs);
-    // // locali settate 
-    // attrs = this.wind.w.querySelectorAll("div.funct li.l a");
-    // this.langs = fn(attrs);
-    // // date  settate
-    // attrs = this.wind.w.querySelectorAll("div.funct li.d a");
-    // this.dates = fn(attrs);
+    const fn = (ats) => {
+      const arr = Array.from(ats);
+      const lst = arr.filter(a => a.classList.contains("select")).map(a => a.innerHTML);
+      return lst;
+    };
+    attrs = this.wind.w.querySelectorAll("div.lang_date li.l a");
+    this.langs = fn(attrs);
+    attrs = this.wind.w.querySelectorAll("div.lang_date li.d a");
+    this.dates = fn(attrs);
   }
 };
 

@@ -673,20 +673,91 @@ div.funct {
           width: 150px;
         }
       }
-      li.l {
+    }
+  }
+}
+
+div.lang_date {
+  box-sizing: border-box;
+  border: 1px solid @wnd_border_color;
+  padding: 5px 5px 5px 0;
+  background: @wnd_back;
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  justify-content: flex-start;
+
+  div {
+    box-sizing: border-box;
+    margin-left: 5px;
+    ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      list-style: none;
+      li {
+        box-sizing: border-box;
+        max-height: 25px;
+        margin: 0;
+        display: flex;
+        padding: 2px 0 0 0;
         a {
-          width: 50px;
+          box-sizing: border-box;
+          display: block;
+          padding: 2px 0 2px 0;
+          text-align: center;
+          background: darken(@wnd_back, -10%);
+          color: @wnd_color;
+          font-size: @fsize_07;
+          font-family: @fsans;
+          font-style: normal;
+          text-decoration: none;
+          border-width: 1px 1px 1px 1px;
+          border-color: @wnd_color;
+          border-style: solid;
+          border-radius: 6px;
+        }
+        a:hover {
+          font-style: italic;
+          background: @wnd_hover_back;
+          color: @wnd_hover_color;
+        }
+        a.select {
+          background: @wnd_select_back;
+          color: @wnd_select_color;
+          text-decoration: underline;
+        }
+        a.select:hover {
+          background: lighten(@wnd_select_back, 20%);
+          color: @wnd_select_color;
+          text-decoration: underline;
         }
         span {
-          width: 50px;
+          background: darken(@wnd_back, 10%);
+          font-size: @fsize_07;
+          // font-weight: bold;
+          border-width: 1px 1px 1px 1px;
+          margin: 0 0 2px 0;
+          border-color: @wnd_color;
+          border-style: solid;
+          text-align: center;
+        }
+      }
+      li.l {
+        a {
+          width: 70px;
+        }
+        span {
+          width: 70px;
         }
       }
       li.d {
         a {
-          width: 50px;
+          width: 70px;
         }
         span {
-          width: 50px;
+          width: 70px;
         }
       }
     }
