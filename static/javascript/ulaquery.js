@@ -62,7 +62,7 @@ const menu = function () {
 </li>
 
 <li class="h">
-<a class="tipr" onclick="FLT.show()" href="#">SHow
+<a class="tipr" onclick="FLT.show()" href="#">Show
 <span class="tiptextr">Opoen Window Filter Active</span></a>
 </li>
 
@@ -130,11 +130,18 @@ const menu = function () {
 `;
   return h.replace(/\s+|\[rn]/g, " ");
 }
+let TEXT_ID = null;
+let QUERY_ID = null;
 
 var UlaQuery = {
   id: "ulaquery_id",
   open: async function () {
     wait_start();
+    
+    QUERY_ID = document.getElementById("ulaquery_id");
+    TEXT_ID = document.getElementById("text_id");
+    TEXT_ID.style.display = 'none';
+
     await sleep(100);
     await D_M.load_dict();
     await this.builD_Menu();
@@ -142,12 +149,15 @@ var UlaQuery = {
     await FormLemma.build();
     await Sigl.build();
     await Funct.build();
+    await LangDate.build();
     await PosMsd.build();
     Where.build();
     UaLog.setXY(-3, 0).setZ(11).new();
-    wait_stop();
 
-    // FLT.show();
+    // AAA
+    FLT.open();
+
+    wait_stop();
   },
   builD_Menu: async function () {
     const html = menu();

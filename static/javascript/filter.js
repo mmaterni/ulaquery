@@ -1,9 +1,27 @@
-"use strict"
+// "use strict"
 
-const top_filter = 40;
+const top_filter = 35;
 
-var VS = {
+const where_top = top_filter;
+const where_left = 5;
 
+const form_lemma_top = top_filter + 420;
+const form_lemma_left = 3;
+
+const sigl_top = top_filter + 150;
+const sigl_left = 5;
+
+const funct_top = top_filter;
+const funct_left = 270;
+
+const lang_date_top = top_filter;
+const lang_date_left = 300;
+
+const pos_msd_top = top_filter;
+const pos_msd_left = 600;
+
+
+VS = {
   forma: '',
   lemma: '',
   etimo: '',
@@ -14,6 +32,8 @@ var VS = {
   },
   funct: {
     functs: [],
+  },
+  lang_date:{
     langs: [],
     dates: []
   },
@@ -28,8 +48,8 @@ var VS = {
     VS.sigl.datets = Sigl.datets;
 
     VS.funct.functs = Funct.functs;
-    VS.funct.langs = Funct.langs;
-    VS.funct.dates = Funct.dates;
+    VS.lang_date.langs = LangDate.langs;
+    VS.lang_date.dates = LangDate.dates;
 
     VS.msd_attrs = PosMsd.msd_attrs;
   },
@@ -43,8 +63,8 @@ var VS = {
     this.sigl.datets = [];
 
     this.funct.functs = [];
-    this.funct.langs = [];
-    this.funct.dates = [];
+    this.lang_date.langs = [];
+    this.lang_date.dates = [];
 
     this.msd_attrs = [];
   }
@@ -54,6 +74,7 @@ var FLT = {
   open: function () {
     FormLemma.open();
     Funct.open();
+    LangDate.open();
     Sigl.open();
     PosMsd.open();
     Where.open();
@@ -61,6 +82,7 @@ var FLT = {
   show: function () {
     FormLemma.show();
     Funct.show();
+    LangDate.show();
     Sigl.show();
     PosMsd.show();
     Where.show();
@@ -68,6 +90,7 @@ var FLT = {
   hide: function () {
     FormLemma.hide();
     Funct.hide();
+    lANGlOC.hide();
     Sigl.hide();
     PosMsd.hide();
     Where.hide();
@@ -76,6 +99,7 @@ var FLT = {
     FormLemma.resetXY();
     Sigl.resetXY();
     Funct.resetXY();
+    lANGlOC.resetXY();
     PosMsd.resetXY();
     Where.resetXY();
   },
@@ -95,6 +119,7 @@ var FLT = {
     FormLemma.unselect();
     Sigl.unselect();
     Funct.unselect();
+    LangDate.unselect();
     PosMsd.unselect();
     VS.unselect();
     Where.build();
@@ -165,9 +190,9 @@ var Where = {
 
     h = rh(VS.funct.functs);
     jt.append(fh("Funct", h));
-    h = rh(VS.funct.langs);
-    jt.append(fh("Loc.", h));
-    h = rh(VS.funct.dates);
+    h = rh(VS.lang_date.langs);
+    jt.append(fh("Lang.", h));
+    h = rh(VS.lang_date.dates);
     jt.append(fh("Date", h));
 
     for (let k in VS.msd_attrs) {
@@ -210,9 +235,9 @@ var Where = {
       this.wind.hide(this.id);
   },
   setXY: function () {
-    const left = 5;
-    const top = top_filter + 420;
-    this.wind.setXY(left, top, -1);
+    // const left = 5;
+    // const top = top_filter + 420;
+    this.wind.setXY(where_left, where_top, -1);
   },
   resetXY: function () {
     this.wind.reset();
@@ -291,9 +316,9 @@ var FormLemma = {
       this.wind.hide(this.id);
   },
   setXY: function () {
-    const left = 4;
-    const top = top_filter;
-    this.wind.setXY(left, top, -1);
+    // const left = 4;
+    // const top = top_filter;
+    this.wind.setXY(form_lemma_left, form_lemma_top, -1);
   },
   resetXY: function () {
     this.wind.reset();
@@ -436,9 +461,9 @@ var Sigl = {
       this.wind.hide(this.id);
   },
   setXY: function () {
-    const left = 5;
-    const top = top_filter + 150;
-    this.wind.setXY(left, top, -1);
+    // const left = 5;
+    // const top = top_filter + 150;
+    this.wind.setXY(sigl_left, sigl_top, -1);
   },
   resetXY: function () {
     this.wind.reset();
@@ -506,6 +531,128 @@ var Funct = {
   id: 'funct_id',
   wind: null,
   functs: [],
+  isActive: false,
+  load: async function (url) {
+    try {
+      const resp = await fetch(url, {
+        method: 'GET',
+        headers: { "Content-Type": "text/plain;charset=UTF-8" },
+        cache: "default"
+      });
+      if (!resp.ok) {
+        throw new Error(`Erroe:${resp.status} ${resp.statusText}`);
+      }
+      const data = await resp.text();
+      const rows = data.trim().split("\n");
+      return rows.filter((x) => x != '-');
+    } catch (error) {
+      alert(`Errror:${url}\n ${error}`);
+      throw error;
+    }
+  },
+  build: async function () {
+    const jt = UaJth();
+    const fs = await this.load(`static/cfg/funct.csv`);
+    jt.append(`
+    <div class="menu_wnd">
+    <ul>
+    <li>
+    <a class="tipb" onclick="Funct.unselect()" href="#">Unselect
+       <span class="tiptextb">Unselect Fields Selected</span>  </a>
+    </li>
+    <li><a onclick="Funct.close()"  href="#">X</a></li>  
+    </ul>
+    </div>
+    <div class="funct">`);
+
+    jt.append("<div><ul>")
+    jt.append(`<li class="f"><span>Func</span></li> `);
+    for (let row of fs)
+      jt.append(`<li class="f"><a>${row}</a></li> `);
+    jt.append(`</ul></div>`);
+
+    jt.append("</div>")
+    const html = jt.html();
+    if (!this.wind) {
+      this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
+      this.setXY();
+      this.wind.drag();
+    }
+    this.wind.setHtml(html);
+    this.bind();
+  },
+  close: function () {
+    if (!this.wind) return;
+    this.wind.hide(this.id);
+    this.isActive = false;
+  },
+  open: function () {
+    if (!this.wind) return;
+    this.wind.show();
+    this.isActive = true;
+  },
+  show: function (url) {
+    if (!this.wind) return;
+    if (this.isActive)
+      this.wind.show();
+  },
+  hide: function () {
+    if (!this.wind) return;
+    if (this.isActive)
+      this.wind.hide(this.id);
+  },
+  setXY: function () {
+    this.wind.setXY(funct_left, funct_top, -1);
+  },
+  resetXY: function () {
+    this.wind.reset();
+    this.setXY();
+    this.open();
+  },
+  bind: function () {
+    const attrs = this.wind.w.querySelectorAll("div.funct li a");
+    for (let a of attrs) {
+      a.addEventListener("click", (ev) => {
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        const t = ev.target;
+        // const t = ev.currentTarget;
+        if (t.classList.contains("select"))
+          t.classList.remove("select");
+        else
+          t.classList.add("select");
+        FLT.select();
+      });
+    }
+  },
+  unselect: function () {
+    const attrs = this.wind.w.querySelectorAll("div.funct li a");
+    for (let a of attrs) {
+      a.classList.remove("select");
+    }
+    FLT.select();
+  },
+  select: function () {
+    const fn = (ats) => {
+      const arr = Array.from(ats);
+      const lst = arr.filter(a => a.classList.contains("select")).map(a => a.innerHTML);
+      return lst;
+    };
+    // fuct settate
+    let attrs = this.wind.w.querySelectorAll("div.funct li.f a");
+    this.functs = fn(attrs);
+    // // locali settate 
+    // attrs = this.wind.w.querySelectorAll("div.funct li.l a");
+    // this.langs = fn(attrs);
+    // // date  settate
+    // attrs = this.wind.w.querySelectorAll("div.funct li.d a");
+    // this.dates = fn(attrs);
+  }
+};
+
+var LangDate = {
+  id: 'langdate_id',
+  wind: null,
   langs: [],
   dates: [],
   isActive: false,
@@ -529,7 +676,6 @@ var Funct = {
   },
   build: async function () {
     const jt = UaJth();
-    const fs = await this.load(`static/cfg/funct.csv`);
     const ls = await this.load(`static/cfg/lang.csv`);
     const ds = await this.load(`static/cfg/ldata.csv`);
     jt.append(`
@@ -539,16 +685,10 @@ var Funct = {
     <a class="tipb" onclick="Funct.unselect()" href="#">Unselect
        <span class="tiptextb">Unselect Fields Selected</span>  </a>
     </li>
-    <li><a onclick="Funct.close()"  href="#">X</a></li>  
+    <li><a onclick="LangDate.close()"  href="#">X</a></li>  
     </ul>
     </div>
-    <div class="funct">`);
-
-    jt.append("<div><ul>")
-    jt.append(`<li class="f"><span>Func</span></li> `);
-    for (let row of fs)
-      jt.append(`<li class="f"><a>${row}</a></li> `);
-    jt.append(`</ul></div>`);
+    <div class="funct">`); //AAA
 
     jt.append("<div><ul>")
     jt.append(`<li class="l"><span>Lang</span></li> `);
@@ -593,9 +733,7 @@ var Funct = {
       this.wind.hide(this.id);
   },
   setXY: function () {
-    const left = 300;;
-    const top = top_filter;
-    this.wind.setXY(left, top, -1);
+    this.wind.setXY(lang_date_left, lang_date_top, -1);
   },
   resetXY: function () {
     this.wind.reset();
@@ -603,43 +741,43 @@ var Funct = {
     this.open();
   },
   bind: function () {
-    const attrs = this.wind.w.querySelectorAll("div.funct li a");
-    for (let a of attrs) {
-      a.addEventListener("click", (ev) => {
-        ev.preventDefault();
-        ev.stopImmediatePropagation();
-        const t = ev.target;
-        // const t = ev.currentTarget;
-        if (t.classList.contains("select"))
-          t.classList.remove("select");
-        else
-          t.classList.add("select");
-        FLT.select();
-      });
-    }
+    // const attrs = this.wind.w.querySelectorAll("div.funct li a");
+    // for (let a of attrs) {
+    //   a.addEventListener("click", (ev) => {
+    //     ev.preventDefault();
+    //     ev.stopImmediatePropagation();
+    //     const t = ev.target;
+    //     // const t = ev.currentTarget;
+    //     if (t.classList.contains("select"))
+    //       t.classList.remove("select");
+    //     else
+    //       t.classList.add("select");
+    //     FLT.select();
+    //   });
+    // }
   },
   unselect: function () {
-    const attrs = this.wind.w.querySelectorAll("div.funct li a");
-    for (let a of attrs) {
-      a.classList.remove("select");
-    }
-    FLT.select();
+    // const attrs = this.wind.w.querySelectorAll("div.funct li a");
+    // for (let a of attrs) {
+    //   a.classList.remove("select");
+    // }
+    // FLT.select();
   },
   select: function () {
-    const fn = (ats) => {
-      const arr = Array.from(ats);
-      const lst = arr.filter(a => a.classList.contains("select")).map(a => a.innerHTML);
-      return lst;
-    };
-    // fuct settate
-    let attrs = this.wind.w.querySelectorAll("div.funct li.f a");
-    this.functs = fn(attrs);
-    // locali settate 
-    attrs = this.wind.w.querySelectorAll("div.funct li.l a");
-    this.langs = fn(attrs);
-    // date  settate
-    attrs = this.wind.w.querySelectorAll("div.funct li.d a");
-    this.dates = fn(attrs);
+    // const fn = (ats) => {
+    //   const arr = Array.from(ats);
+    //   const lst = arr.filter(a => a.classList.contains("select")).map(a => a.innerHTML);
+    //   return lst;
+    // };
+    // // fuct settate
+    // let attrs = this.wind.w.querySelectorAll("div.funct li.f a");
+    // this.functs = fn(attrs);
+    // // locali settate 
+    // attrs = this.wind.w.querySelectorAll("div.funct li.l a");
+    // this.langs = fn(attrs);
+    // // date  settate
+    // attrs = this.wind.w.querySelectorAll("div.funct li.d a");
+    // this.dates = fn(attrs);
   }
 };
 
@@ -740,9 +878,9 @@ var PosMsd = {
       this.wind.hide(this.id);
   },
   setXY: function () {
-    const left = 600;
-    const top = top_filter;
-    this.wind.setXY(left, top, -1);
+    // const left = 600;
+    // const top = top_filter;
+    this.wind.setXY(pos_msd_left, pos_msd_top, -1);
   },
   resetXY: function () {
     this.wind.reset();
