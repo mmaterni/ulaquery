@@ -92,7 +92,7 @@ var FLT = {
   hide: function () {
     FormLemma.hide();
     Funct.hide();
-    lANGlOC.hide();
+    LangDate.hide();
     Sigl.hide();
     PosMsd.hide();
     Where.hide();
@@ -101,7 +101,7 @@ var FLT = {
     FormLemma.resetXY();
     Sigl.resetXY();
     Funct.resetXY();
-    lANGlOC.resetXY();
+    LangDate.resetXY();
     PosMsd.resetXY();
     Where.resetXY();
   },
