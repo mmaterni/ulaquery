@@ -4,21 +4,27 @@ const top_filter = 35;
 
 const where_top = top_filter + 420;
 const where_left = 5;
+const where_z = 10;
 
 const form_lemma_top = top_filter;
 const form_lemma_left = 3;
+const form_lemma_z = 0;
 
 const sigl_top = top_filter + 150;
 const sigl_left = 5;
+const sigl_z = 8;
 
 const funct_top = top_filter;
 const funct_left = 490;
+const funct_z = 7;
 
 const lang_date_top = top_filter;
 const lang_date_left = 300;
+const lang_date_z = 6;
 
 const pos_msd_top = top_filter;
 const pos_msd_left = 670;
+const pos_msd_z = 5;
 
 
 const VS = {
@@ -293,7 +299,7 @@ var FormLemma = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
-      // AAA this.wind.setZ(100);
+      this.wind.setZ(form_lemma_z);
     }
     this.wind.setHtml(html);
     this.bind();
@@ -319,8 +325,6 @@ var FormLemma = {
       this.wind.hide(this.id);
   },
   setXY: function () {
-    // const left = 4;
-    // const top = top_filter;
     this.wind.setXY(form_lemma_left, form_lemma_top, -1);
   },
   resetXY: function () {

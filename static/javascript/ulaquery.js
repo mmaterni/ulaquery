@@ -152,7 +152,7 @@ var UlaQuery = {
     await LangDate.build();
     await PosMsd.build();
     Where.build();
-    UaLog.setXY(-3, 0).setZ(11).new();
+    UaLog.setXY(-3, 0).setZ(999).new();
 
     // AAA
     FLT.open();
