@@ -8,7 +8,7 @@ const where_z = 10;
 
 const form_lemma_top = top_filter;
 const form_lemma_left = 3;
-const form_lemma_z = 0;
+const form_lemma_z = 9;
 
 const sigl_top = top_filter + 150;
 const sigl_left = 5;
@@ -26,6 +26,9 @@ const pos_msd_top = top_filter;
 const pos_msd_left = 670;
 const pos_msd_z = 5;
 
+const result_set_top = top_filter;
+const result_set_left = 5;
+const result_set_z = 11;
 
 const VS = {
   forma: '',
@@ -219,6 +222,7 @@ var Where = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
+      this.wind.setZ(where_z);
     }
     this.wind.setHtml(html);
   },
@@ -244,8 +248,6 @@ var Where = {
       this.wind.hide(this.id);
   },
   setXY: function () {
-    // const left = 5;
-    // const top = top_filter + 420;
     this.wind.setXY(where_left, where_top, -1);
   },
   resetXY: function () {
@@ -442,11 +444,11 @@ var Sigl = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
+      this.wind.setZ(sigl_z);
     }
     this.wind.setHtml(html);
     this.bind();
   },
-
   close: function () {
     if (!this.wind) return;
     this.wind.hide(this.id);
@@ -468,8 +470,6 @@ var Sigl = {
       this.wind.hide(this.id);
   },
   setXY: function () {
-    // const left = 5;
-    // const top = top_filter + 150;
     this.wind.setXY(sigl_left, sigl_top, -1);
   },
   resetXY: function () {
@@ -584,6 +584,7 @@ var Funct = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
+      this.wind.setZ(funct_z);
     }
     this.wind.setHtml(html);
     this.bind();
@@ -707,6 +708,7 @@ var LangDate = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
+      this.wind.setZ(lang_date_z);
     }
     this.wind.setHtml(html);
     this.bind();
@@ -846,6 +848,7 @@ var PosMsd = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
+      this.wind.setZ(pos_msd_z);
     }
     this.wind.setHtml(html);
     this.bind();
@@ -999,6 +1002,7 @@ var ResultSet = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
+      this.wind.setZ(result_set_z);
     }
     this.wind.hide();
     this.wind.setHtml(html);
@@ -1015,9 +1019,7 @@ var ResultSet = {
     this.wind.hide(this.id);
   },
   setXY: function () {
-    const left = 5;
-    const top = 50;
-    this.wind.setXY(left, top, -1);
+    this.wind.setXY(result_set_left, result_set_top, -1);
   },
   resetXY: function () {
     this.wind.reset();

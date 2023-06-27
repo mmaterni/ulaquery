@@ -89,6 +89,7 @@ var DictForm = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
+      this.wind.setZ(11);
     }
     this.wind.hide();
     this.wind.setHtml(html);
@@ -106,7 +107,7 @@ var DictForm = {
   },
   setXY: function () {
     const left = 5;
-    const top = 50;
+    const top = 35;
     this.wind.setXY(left, top, -1);
   },
   resetXY: function () {
