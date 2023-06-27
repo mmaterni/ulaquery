@@ -953,6 +953,11 @@ var PosMsd = {
 var ResultSet = {
   id: "resultset_id",
   wind: null,
+  open: async function () {
+    const rows = D_M.allRsltRows();
+    ResultSet.build(rows);
+    ResultSet.show();
+  },
   build: async function (rows) {
     const sp = "         ";
     const menu = `

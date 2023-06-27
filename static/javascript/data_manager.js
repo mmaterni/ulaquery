@@ -322,9 +322,15 @@ X|other||
 
         return indices;
       },
+      allRsltRows: function () {
+        const le = this.dict_rows.length;
+        const rows = [];
+        for (let i = 0; i < le; i++)
+          rows.push(this.rslt_rows[i]);
+        return rows;
+      },
       findRsltRows: function (js) {
         const idxs = this.findIndices(js);
-        // console.log(idxs);
         const rows = [];
         for (const i of idxs)
           rows.push(this.rslt_rows[i]);
@@ -332,7 +338,6 @@ X|other||
       },
       findDictRows: function (js) {
         const idxs = this.findIndices(js);
-        // console.log(idxs);
         const rows = [];
         for (const i of idxs)
           rows.push(this.dict_rows[i]);

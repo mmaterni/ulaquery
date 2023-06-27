@@ -63,7 +63,6 @@ const menu = function () {
 <a class="tipr" onclick="FLT.show()" href="#">Show
 <span class="tiptextr">Opoen Window Filter Active</span></a>
 </li>
-
 </ul>
 </li>
   
@@ -73,26 +72,28 @@ const menu = function () {
 </li>
 
 <li class="v">
-<a class="tipb" onclick="FLT.queryRslt()" ref="#" >Query
-<span class="tiptextb">Open Query ResultSet</span> </a>
+<a class="tipb" onclick="Where.testQuery()" ref="#" >Test Query
+<span class="tiptextb">Display Number of Results/span> </a>
+</li>
+
+
+<li class="v">
+<a href="#">Selected Rows</a>
+<ul class="v">
+<li class="h"><a class="tipr" onclick="FLT.queryDict()" href="#">Dictionary
+<span class="tiptextr">SHow Selected Dictionary</span></a></li>
+<li class="h"><a class="tipr" onclick="FLT.queryRslt()" ref="#" >ResulSet
+<span class="tiptextr">Show Selected ResultSet</span> </a></li>
+</ul>
 </li>
 
 <li class="v">
-<a href="#">Dictionary</a>
+<a href="#">All Rows</a>
 <ul class="v">
-
-<li class="h"><a class="tipr" onclick="DictForm.open()" href="#">Open
-<span class="tiptextr">Opoen All Dictionary</span></a></li>
-
-<li class="h"><a class="tipr" onclick="FLT.queryDict()" ref="#" >Select
-<span class="tiptextr">Open Selected Dictionary</span> </a></li>
-
-<li class="h"><a class="tipr" onclick="DictForm.hide()" href="#" >Hide
-<span class="tiptextr">Close Window Dictionary</span> </a></li>
-
-<li class="h"><a class="tipr" onclick="DictForm.resetXY()" href="#">Relocate
-<span class="tiptextr">Relocate Window Dictionary</span> </a></li>
-
+<li class="h"><a class="tipr" onclick="DictForm.open()" href="#">Dictionary
+<span class="tiptextr">Show All Dictionary</span></a></li>
+<li class="h"><a class="tipr" onclick="ResultSet.open()" href="#">ResultSet
+<span class="tiptextr">Show All ResultSet</span></a></li>
 </ul>
 </li>
 
