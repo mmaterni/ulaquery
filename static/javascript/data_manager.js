@@ -199,7 +199,6 @@ X|other||
 
         const indices = [];
         const dle = this.dict_rows.length;
-
         for (let i = 0; i < dle; i++) {
           const row = this.dict_rows[i].map(x => x.toLowerCase());
           let ok = true;
@@ -361,6 +360,7 @@ X|other||
         js.forma = [FORMA, VS.forma];
         js.lemma = [LEMMA, VS.lemma];
         js.etimo = [ETIMO, VS.etimo];
+
         // sigls
         let les = VS.sigl.sigls.length;
         let i0 = SIGL;
@@ -370,6 +370,7 @@ X|other||
           rs.push(r);
         }
         js.sigls = rs;
+
         // locts
         let lel = VS.sigl.locts.length;
         let i1 = i0 + les;
@@ -379,6 +380,7 @@ X|other||
           rs.push(r);
         }
         js.locts = rs;
+
         // datets 
         let led = VS.sigl.datets.length;
         let i2 = i1 + lel;
@@ -388,6 +390,7 @@ X|other||
           rs.push(r);
         }
         js.datets = rs;
+
         // functs
         js.functs = [FUNCT, VS.funct.functs];
 
@@ -413,10 +416,8 @@ X|other||
         js.pos = [POS, pos_arr]
         js.msd_attrs = rs;
 
-        // console.log(js);
-        // const s = JSON.stringify(js, null, 4);
-        // console.log(s);
-        return js;
+        let s = JSON.stringify(js).toLowerCase();
+        return JSON.parse(s);
       }
     };
 

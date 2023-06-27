@@ -174,7 +174,7 @@ var Where = {
     <div class="sl" >${l}</div>
     <div class="sv num">${v}</div>
     </li>`;
-    jt.append(fhslc("Select", "0"));
+    jt.append(fhslc("Select", ""));
 
     const fh0 = (l, v) => `
     <li>
