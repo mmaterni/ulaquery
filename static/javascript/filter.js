@@ -2,7 +2,7 @@
 
 const top_filter = 35;
 
-const where_top = top_filter + 420;
+const where_top = top_filter + 380;
 const where_left = 5;
 const where_z = 10;
 
@@ -10,7 +10,7 @@ const form_lemma_top = top_filter;
 const form_lemma_left = 3;
 const form_lemma_z = 9;
 
-const sigl_top = top_filter + 150;
+const sigl_top = top_filter + 130;
 const sigl_left = 5;
 const sigl_z = 8;
 
@@ -162,12 +162,19 @@ var Where = {
     jt.append(`
 <div class="menu_wnd">
 <ul>
-<li></li>
+<li><a onclick="Where.testQuery()" href="#">Test</a></li>  
 <li><a onclick="Where.close()" href="#">X</a></li>  
 </ul>
-// </div>
+ </div>
 `);
     jt.append('<div class="where"><ul>');
+
+    const fhslc = (l, v) => `
+    <li>
+    <div class="sl" >${l}</div>
+    <div class="sv num">${v}</div>
+    </li>`;
+    jt.append(fhslc("Select", "0"));
 
     const fh0 = (l, v) => `
     <li>
@@ -195,8 +202,10 @@ var Where = {
 
     let h = rh(VS.sigl.sigls);
     jt.append(fh("Sigl", h));
+
     h = rh(VS.sigl.locts);
     jt.append(fh("Loc.", h));
+
     h = rh(VS.sigl.datets);
     jt.append(fh("Date", h));
 
@@ -226,7 +235,6 @@ var Where = {
     }
     this.wind.setHtml(html);
   },
-
   close: function () {
     if (!this.wind) return;
     this.wind.hide(this.id);
@@ -254,7 +262,18 @@ var Where = {
     this.wind.reset();
     this.setXY();
     this.open();
-  }
+  },
+  testQuery: function () {
+    FLT.querySelect();
+    const js = D_M.setQueryConditions();
+    const idxs = D_M.findIndices(js);
+    const n = idxs.length;
+    const e = this.wind.w.querySelector(`div.where li div.num`);
+    e.innerHTML = `${n}`;
+    // ResultSet.build(rows);
+    // ResultSet.show();
+  },
+
 };
 
 
