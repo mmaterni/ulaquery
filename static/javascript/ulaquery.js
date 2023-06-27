@@ -52,23 +52,16 @@ const menu = function () {
 <ul class="v">
 
 <li class="h">
-<a class="tipr" onclick="FLT.open()" href="#">Show All
+<a class="tipr" onclick="FLT.resetXY()" href="#">Open
 <span class="tiptextr">Opoen Window FIlter</span></a>
 </li>
-
 <li class="h">
 <a class="tipr" onclick="FLT.hide()" ref="#">Hide
 <span class="tiptextr">Close Windows Filetr</span> </a>
 </li>
-
 <li class="h">
 <a class="tipr" onclick="FLT.show()" href="#">Show
 <span class="tiptextr">Opoen Window Filter Active</span></a>
-</li>
-
-<li class="h">
-<a class="tipr" onclick="FLT.resetXY()" ref="#" >Relocate
-<span class="tiptextr">Relocate Window Filetr</span> </a>
 </li>
 
 </ul>
@@ -155,7 +148,7 @@ var UlaQuery = {
     UaLog.setXY(-3, 0).setZ(999).new();
 
     // AAA
-    FLT.open();
+    // FLT.open();
 
     wait_stop();
   },

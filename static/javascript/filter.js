@@ -270,8 +270,6 @@ var Where = {
     const n = idxs.length;
     const e = this.wind.w.querySelector(`div.where li div.num`);
     e.innerHTML = `${n}`;
-    // ResultSet.build(rows);
-    // ResultSet.show();
   },
 
 };
