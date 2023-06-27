@@ -82,7 +82,9 @@ const VS = {
 }
 
 var FLT = {
+  visible: false,
   open: function () {
+    this.visible = true;
     FormLemma.open();
     Funct.open();
     LangDate.open();
@@ -91,6 +93,7 @@ var FLT = {
     Where.open();
   },
   show: function () {
+    this.visible = true;
     FormLemma.show();
     Funct.show();
     LangDate.show();
@@ -99,6 +102,7 @@ var FLT = {
     Where.show();
   },
   hide: function () {
+    this.visible = false;
     FormLemma.hide();
     Funct.hide();
     LangDate.hide();
