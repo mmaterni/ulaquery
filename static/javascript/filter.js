@@ -111,6 +111,7 @@ var FLT = {
     Where.hide();
   },
   resetXY: function () {
+    this.visible = true;
     FormLemma.resetXY();
     Sigl.resetXY();
     Funct.resetXY();
@@ -118,7 +119,7 @@ var FLT = {
     PosMsd.resetXY();
     Where.resetXY();
   },
-  querySelect: function () {
+  getAllSelected: function () {
     FormLemma.select();
     Sigl.select();
     Funct.select();
@@ -127,7 +128,7 @@ var FLT = {
     VS.select();
   },
   select: function () {
-    this.querySelect();
+    this.getAllSelected();
     Where.build();
     Where.show();
   },
@@ -142,14 +143,18 @@ var FLT = {
     Where.show();
   },
   queryRslt: function () {
-    this.querySelect();
+    if (this.visible) {
+      this.hide();
+      this.visible = true;
+    }
+    this.getAllSelected();
     const js = D_M.setQueryConditions();
     const rows = D_M.findRsltRows(js);
     ResultSet.build(rows);
     ResultSet.show();
   },
   queryDict: function () {
-    this.querySelect();
+    this.getAllSelected();
     const js = D_M.setQueryConditions();
     const rows = D_M.findDictRows(js);
     DictForm.build(rows);
@@ -268,7 +273,7 @@ var Where = {
     this.open();
   },
   testQuery: function () {
-    FLT.querySelect();
+    FLT.getAllSelected();
     const js = D_M.setQueryConditions();
     const idxs = D_M.findIndices(js);
     const n = idxs.length;
@@ -1043,6 +1048,9 @@ var ResultSet = {
   hide: function () {
     if (!this.wind) return;
     this.wind.hide(this.id);
+    if (FLT.visible) {
+      FLT.show();
+    }
   },
   setXY: function () {
     this.wind.setXY(result_set_left, result_set_top, -1);
