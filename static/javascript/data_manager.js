@@ -116,6 +116,7 @@ X|other||
       dict_map_columns: {},
       rslt_rows: [],
       rslt_heads: [],
+      row_eof="##",
 
       load_dict: async function () {
         const url = `ula_data/data_export/dictionary.ula.csv`;
@@ -139,6 +140,7 @@ X|other||
             return acc;
           }, {});
           this.dict_rows.shift();
+          // setta l'arry di righe del result set
           this.dictToResultSet();
         } catch (error) {
           alert(`Errror:${url}\n ${error}`);
@@ -423,6 +425,30 @@ X|other||
 
         let s = JSON.stringify(js).toLowerCase();
         return JSON.parse(s);
+      },
+      load__tokens: async function (token_name) {
+        const url = `ula_data/data_export/${token_name}`;
+        try {
+          const resp = await fetch(url, {
+            method: 'GET',
+            headers: { "Content-Type": "text/plain;charset=UTF-8" },
+            cache: "default"
+          });
+          if (!resp.ok) {
+            throw new Error(`Erroe:${resp.status} ${resp.statusText}`);
+          }
+          const data = await resp.text();
+          const rows = data.trim().split("\n");
+          return rows.map((item) => item.split("|"));          
+        } catch (error) {
+          alert(`Errror:${url}\n ${error}`);
+          throw error;
+        }
+      },
+      tokensToRows:function(){
+        // const arr_input=[["e00","e01"],["e10","e11"]["e20","e21"],["##","##"],[["e40","e41"],..]]
+        // const arr1_output=[["e00","e10","e20"],["e40","e50"],..]
+        // const arr1_output=[["e01","e11","e21"],["e41","e51"],..]
       }
     };
 
@@ -444,3 +470,89 @@ uso:
 my.name1(...);
 my.name2(,,)
 */
+
+
+async function saveArray(array, key) {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open("database", 1);
+
+    request.onerror = function (event) {
+      console.error("Errore nell'apertura del database");
+      resolve(false);
+    };
+
+    request.onupgradeneeded = function (event) {
+      const db = event.target.result;
+      db.createObjectStore("store");
+    };
+
+    request.onsuccess = function (event) {
+      const db = event.target.result;
+      const transaction = db.transaction(["store"], "readwrite");
+      const objectStore = transaction.objectStore("store");
+      const putRequest = objectStore.put(array, key);
+
+      putRequest.onerror = function (event) {
+        console.error("Errore durante il salvataggio nell'IndexedDB");
+        resolve(false);
+      };
+
+      putRequest.onsuccess = function (event) {
+        console.log("Array salvato nell'IndexedDB");
+        resolve(true);
+      };
+    };
+  });
+}
+
+async function readArray(key) {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open("database", 1);
+
+    request.onerror = function (event) {
+      console.error("Errore nell'apertura del database");
+      resolve([]);
+    };
+
+    request.onsuccess = function (event) {
+      const db = event.target.result;
+      const transaction = db.transaction(["store"], "readonly");
+      const objectStore = transaction.objectStore("store");
+      const getRequest = objectStore.get(key);
+
+      getRequest.onerror = function (event) {
+        console.error("Errore durante la lettura dall'IndexedDB");
+        resolve([]);
+      };
+
+      getRequest.onsuccess = function (event) {
+        const array = event.target.result;
+        resolve(array || []);
+      };
+    };
+  });
+}
+
+// Esempio di utilizzo
+// const array1 = ["elemento1", "elemento2", "elemento3"];
+// const array2 = ["elemento4", "elemento5", "elemento6"];
+
+// const key1 = 1;
+// const key2 = "myArray";
+
+// async function main() {
+//     const saveResult1 = await saveArray(array1, key1);
+//     console.log("Salvataggio array1 riuscito:", saveResult1);
+
+//     const saveResult2 = await saveArray(array2, key2);
+//     console.log("Salvataggio array2 riuscito:", saveResult2);
+
+//     const readResult1 = await readArray(key1);
+//     console.log("Array1 letto:", readResult1);
+
+//     const readResult2 = await readArray(key2);
+//     console.log("Array2 letto:", readResult2);
+// }
+
+// main();
+
