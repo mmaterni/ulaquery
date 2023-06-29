@@ -1086,9 +1086,8 @@ var ResultSet = {
       let t = ev.target;
       while (t && t.tagName !== 'TR')
         t = t.parentNode;
-      let h = t.innerHTML;
-      console.log(t);
-      console.log(h);
+      const td = t.querySelectorAll("td")[3];
+      const formakey = td.innerHTML;
     });
   },
 
