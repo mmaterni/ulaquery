@@ -1037,11 +1037,12 @@ var ResultSet = {
     }
     this.wind.hide();
     this.wind.setHtml(html);
+    this.bind();
   },
   show: async function (url) {
     if (!this.wind) return;
     wait_start();
-    await sleep(10);
+    await sleep(1);
     this.wind.show();
     wait_stop();
   },
@@ -1076,5 +1077,19 @@ var ResultSet = {
   scroll_right: function () {
     const e = this.wind.w.querySelector("div.resultset");
     e.scrollLeft = e.scrollWidth;
-  }
+  },
+  bind: function () {
+    const a = this.wind.w.querySelector("div.resultset");
+    a.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+      let t = ev.target;
+      while (t && t.tagName !== 'TR')
+        t = t.parentNode;
+      let h = t.innerHTML;
+      console.log(t);
+      console.log(h);
+    });
+  },
+
 };

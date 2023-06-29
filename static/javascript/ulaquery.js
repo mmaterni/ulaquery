@@ -131,13 +131,14 @@ var UlaQuery = {
   id: "ulaquery_id",
   open: async function () {
     wait_start();
-    
+
     QUERY_ID = document.getElementById("ulaquery_id");
     TEXT_ID = document.getElementById("text_id");
     TEXT_ID.style.display = 'none';
 
     await sleep(100);
     await D_M.load_dict();
+    await D_M.load_tokens();
     await this.builD_Menu();
     // await DictForm.build_all();
     await FormLemma.build();
@@ -152,6 +153,10 @@ var UlaQuery = {
     // FLT.open();
 
     wait_stop();
+
+    // const memoryInfo = performance.memory();
+    // console.log(memoryInfo.usedJSHeapSize);
+
   },
   builD_Menu: async function () {
     const html = menu();

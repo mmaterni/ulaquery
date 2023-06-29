@@ -116,8 +116,8 @@ X|other||
       dict_map_columns: {},
       rslt_rows: [],
       rslt_heads: [],
-      row_eof="##",
-
+      row_eof: "##",
+      token_list: {},
       load_dict: async function () {
         const url = `ula_data/data_export/dictionary.ula.csv`;
         try {
@@ -426,7 +426,7 @@ X|other||
         let s = JSON.stringify(js).toLowerCase();
         return JSON.parse(s);
       },
-      load__tokens: async function (token_name) {
+      load_token_csv: async function (token_name) {
         const url = `ula_data/data_export/${token_name}`;
         try {
           const resp = await fetch(url, {
@@ -439,13 +439,39 @@ X|other||
           }
           const data = await resp.text();
           const rows = data.trim().split("\n");
-          return rows.map((item) => item.split("|"));          
+          // forma|key|sigla ritoena l'array delle
+          return rows.map((item) => item.split("|")[1]);
         } catch (error) {
           alert(`Errror:${url}\n ${error}`);
           throw error;
         }
       },
-      tokensToRows:function(){
+      load_tokens: async function (token_name) {
+        const url = `ula_data/data_export/token_list.txt`;
+        try {
+          const resp = await fetch(url, {
+            method: 'GET',
+            headers: { "Content-Type": "text/plain;charset=UTF-8" },
+            cache: "default"
+          });
+          if (!resp.ok) {
+            throw new Error(`Erroe:${resp.status} ${resp.statusText}`);
+          }
+          const data = await resp.text();
+          const names = data.trim().split("\n");
+          this.token_list = {};
+          for (const name of names) {
+            const arr = await this.load_token_csv(name);
+            // eps19.g.ula.csv => eps0.g
+            const key = name.split('.').slice(0, 2).join('.')
+            this.token_list[key] = arr;
+          }
+        } catch (error) {
+          alert(`Errror:${url}\n ${error}`);
+          throw error;
+        }
+      },
+      tokensToRows: function () {
         // const arr_input=[["e00","e01"],["e10","e11"]["e20","e21"],["##","##"],[["e40","e41"],..]]
         // const arr1_output=[["e00","e10","e20"],["e40","e50"],..]
         // const arr1_output=[["e01","e11","e21"],["e41","e51"],..]
@@ -471,7 +497,7 @@ my.name1(...);
 my.name2(,,)
 */
 
-
+/*
 async function saveArray(array, key) {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open("database", 1);
@@ -532,7 +558,7 @@ async function readArray(key) {
     };
   });
 }
-
+*/
 // Esempio di utilizzo
 // const array1 = ["elemento1", "elemento2", "elemento3"];
 // const array2 = ["elemento4", "elemento5", "elemento6"];
