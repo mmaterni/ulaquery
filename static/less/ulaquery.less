@@ -329,7 +329,10 @@ div.menu_wnd {
       min-width: @li_width;
       a {
         display: block;
+        min-height: @menu_height !important;
+        max-height: @menu_height !important;
         padding: 0 5px 0 5px;
+        margin-right:  2px !important;
         box-sizing: border-box;
         text-align: center;
         text-decoration: none;
@@ -1043,7 +1046,7 @@ div.select_text {
 
   div {
     box-sizing: border-box;
-    margin-left: 5px;
+    margin:0 auto 0 auto;
     ul {
       display: flex;
       flex-direction: column;
@@ -1052,7 +1055,6 @@ div.select_text {
       list-style: none;
       li {
         box-sizing: border-box;
-        max-height: 25px;
         margin: 0;
         display: flex;
         padding: 2px 0 0 0;
@@ -1097,6 +1099,11 @@ div.select_text {
           text-align: center;
         }
       }
+      li.h {
+        span {
+          width: 150px;
+        }
+      }
       li.a {
         a {
           width: 150px;
@@ -1108,4 +1115,3 @@ div.select_text {
     }
   }
 }
-

@@ -149,7 +149,7 @@ var SelectText = {
         let jt = UaJth();
         jt.append(menu);
         jt.append("<div><ul>")
-        jt.append(`<li><span>Select Text</span></li> `);
+        jt.append(`<li class="h"><span>Select Text</span></li> `);
         for (let row of rows)
             jt.append(`<li class="a"><a>${row}</a></li> `);
         jt.append(`</ul></div>`);
