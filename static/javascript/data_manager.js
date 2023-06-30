@@ -488,10 +488,10 @@ X|other||
           const a = arr[i];
           console.log(i, a);
         }
-        this.tokenIndexsToRow(idxs, arr);
+        // this.tokenIndexsToRow(idxs, arr);
         return idxs;
       },
-      tokenIndexsToRow: function (indexs, arr) {
+      findContextRow: function (indexs, arr) {
 
         const leftIndexOf = function (arr, element, from) {
           for (let i = from; i >= 0; i--)
@@ -507,9 +507,9 @@ X|other||
           const row = arr.slice(i0, ir);
           rows.push(row);
         }
-        for (const row of rows)
-          console.log(row);
-
+        // for (const row of rows)
+        //   console.log(row);
+        return rows;
       }
     };
 
