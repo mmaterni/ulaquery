@@ -1115,3 +1115,86 @@ div.select_text {
     }
   }
 }
+
+@context_form_height: calc(@ulaquery_height - 50px);
+@context_form_width: @html_width;
+@context_row_height: 25px;
+@context_col_width: 30px;
+
+div.context {
+  box-sizing: border-box;
+  height: @context_form_height;
+  // width: @rstt_form_width !important;
+  min-width: @context_form_width !important;
+  max-width: @context_form_width !important;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  // padding-left: 5px;
+
+  table {
+    box-sizing: border-box;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: block;
+    table-layout: fixed;
+    margin-left: 5px;
+    thead {
+      z-index: 1;
+      top: 0;
+      position: sticky;
+      tr {
+        th {
+          background: darken(@head_back, -10%);
+          color: @head_color;
+          max-height: @context_row_height;
+          min-height: @context_row_height;
+          min-width: @context_col_width;
+          span {
+            box-sizing: border-box;
+            display: block;
+            width: 100% !important;
+            padding: 0 5px 0 5px;
+            border-width: 2px 1px 1px 0;
+            border-style: solid;
+            border-color: @cell_border_color;
+            text-align: center;
+            font-size: @fsize_07;
+            font-family: @fsans;
+            font-weight: normal;
+          }
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          background: @cell_back;
+          color: @cell_color;
+          text-align: left;
+          padding: 0 5px 0 5px;
+          font-size: @fsize_07;
+          font-family: @fsans;
+          font-weight: normal;
+          border-width: 0 1px 1px 0;
+          border-style: solid;
+          border-color: @cell_border_color;
+          max-height: @context_row_height;
+          min-height: @context_row_height;
+          min-width: @context_col_width;
+        }
+      }
+      tr:nth-child(odd) {
+        td {
+          background: lighten(@cell_back, 10%);
+        }
+      }
+      tr:hover {
+        td {
+          background: @cell_hover_back;
+          color: @cell_hover_color;
+        }
+      }
+    }
+  }
+}
