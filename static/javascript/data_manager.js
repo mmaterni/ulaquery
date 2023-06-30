@@ -119,6 +119,7 @@ X|other||
       rslt_heads: [],
       row_eof: "##",
       token_list: {},
+      token_selected:[],
       load_dict: async function () {
         const url = `ula_data/data_export/dictionary.ula.csv`;
         try {

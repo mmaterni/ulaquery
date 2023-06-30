@@ -73,9 +73,13 @@ const menu = function () {
 
 <li class="v">
 <a class="tipb" onclick="Where.testQuery()" ref="#" >Test Query
-<span class="tiptextb">Display Number of Results/span> </a>
+<span class="tiptextb">Display Number of Results</span> </a>
 </li>
 
+<li class="v">
+<a class="tipb" onclick="SelectText.open()" ref="#" >Slect Text
+<span class="tiptextb">Slect Text For SHow in Context</span> </a>
+</li>
 
 <li class="v">
 <a href="#">Selected Rows</a>
