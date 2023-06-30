@@ -1086,8 +1086,10 @@ var ResultSet = {
       let t = ev.target;
       while (t && t.tagName !== 'TR')
         t = t.parentNode;
-      const td = t.querySelectorAll("td")[3];
+      const td = t.querySelectorAll("td")[2];
       const formakey = td.innerHTML;
+      const idxs = D_M.findTokenIndices(formakey);
+      // console.log(idxs);
     });
   },
 
