@@ -332,7 +332,7 @@ div.menu_wnd {
         min-height: @menu_height !important;
         max-height: @menu_height !important;
         padding: 0 5px 0 5px;
-        margin-right:  2px !important;
+        margin-right: 2px !important;
         box-sizing: border-box;
         text-align: center;
         text-decoration: none;
@@ -1046,7 +1046,7 @@ div.select_text {
 
   div {
     box-sizing: border-box;
-    margin:0 auto 0 auto;
+    margin: 0 auto 0 auto;
     ul {
       display: flex;
       flex-direction: column;
@@ -1116,85 +1116,108 @@ div.select_text {
   }
 }
 
-@context_form_height: calc(@ulaquery_height - 50px);
-@context_form_width: @html_width;
+@context_height: 400px;
+@context_width: 600px;
 @context_row_height: 25px;
 @context_col_width: 30px;
-
 div.context {
-  box-sizing: border-box;
-  height: @context_form_height;
-  // width: @rstt_form_width !important;
-  min-width: @context_form_width !important;
-  max-width: @context_form_width !important;
+  .b0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  min-height: @context_height;
+  max-height: @context_height;
+  text-align: left;
+  line-height: 1;
   overflow-y: scroll;
-  overflow-x: scroll;
-  // padding-left: 5px;
+  overflow-x: auto;
+  // scrollbar-color: @cmd_back @head_back;
 
-  table {
-    box-sizing: border-box;
-    width: 100%;
-    border-spacing: 0;
-    border-collapse: collapse;
-    display: block;
-    table-layout: fixed;
-    margin-left: 5px;
-    thead {
-      z-index: 1;
-      top: 0;
-      position: sticky;
-      tr {
-        th {
-          background: darken(@head_back, -10%);
-          color: @head_color;
-          max-height: @context_row_height;
-          min-height: @context_row_height;
-          min-width: @context_col_width;
-          span {
-            box-sizing: border-box;
-            display: block;
-            width: 100% !important;
-            padding: 0 5px 0 5px;
-            border-width: 2px 1px 1px 0;
-            border-style: solid;
-            border-color: @cell_border_color;
-            text-align: center;
-            font-size: @fsize_07;
-            font-family: @fsans;
-            font-weight: normal;
-          }
-        }
+  div.row {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex: auto;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    div.n {
+      cursor: pointer;
+      // min-width: @row_num_width;
+      // max-width: @row_num_width;
+      text-align: right;
+      border-width: 0 0 1px 0;
+      border-style: solid;
+      border-color: red;
+      // font-size: @font_num;
+      font-family: @fserif;
+      font-weight: normal;
+      padding: 5px 5px 3px 0;
+      margin: 0;
+      // background: @cmd_back;
+      // color: @cmd_color;
+    }
+
+    div.text {
+      background: @cell_back;
+      color: @cell_color;
+      // min-width: @text_row_width;
+      // max-width: @text_row_width;
+      border-width: 0 1px 1px 1px;
+      border-style: solid;
+      // border-color: lighten(@row_border_color, 40%);
+      // font-size: @font_text;
+      font-family: "Times New Roman", Times, serif;
+      font-weight: normal;
+      text-align: left;
+      white-space: nowrap;
+      // line-height: normal;
+      margin: 0;
+      padding: 5px 0 0 5px !important;
+
+      span {
+        margin: 0 5px 0 5px;
+        padding: 0 5px 0 5px;
+        // background: @token_back;
+      }
+
+      span.t {
+        // color: @token_color;
+      }
+
+      span.l {
+        // color: @token_color2;
       }
     }
-    tbody {
-      tr {
-        td {
-          background: @cell_back;
-          color: @cell_color;
-          text-align: left;
-          padding: 0 5px 0 5px;
-          font-size: @fsize_07;
-          font-family: @fsans;
-          font-weight: normal;
-          border-width: 0 1px 1px 0;
-          border-style: solid;
-          border-color: @cell_border_color;
-          max-height: @context_row_height;
-          min-height: @context_row_height;
-          min-width: @context_col_width;
-        }
-      }
-      tr:nth-child(odd) {
-        td {
-          background: lighten(@cell_back, 10%);
-        }
-      }
-      tr:hover {
-        td {
-          background: @cell_hover_back;
-          color: @cell_hover_color;
-        }
-      }
+
+    div.select {
+      // background: @row_num_select_back;
+      text-decoration: underline;
+      text-align: left;
+    }
+  }
+
+  div.row:nth-child(odd) {
+    div.text {
+      // background: darken(@cell_back, 10%);
+    }
+  }
+
+  div.row:hover {
+    div.text {
+      // background: darken(@row_text_hover_back, 20%);
+    }
+
+    div.n {
+      // background: @cmd_hover_back;
+    }
+
+    div.n.select {
+      cursor: pointer;
+      font-style: italic;
+      text-decoration: underline;
+      text-align: left;
+      // background: @row_num_select_back;
     }
   }
 }

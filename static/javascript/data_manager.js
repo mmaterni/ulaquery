@@ -493,14 +493,15 @@ X|other||
         const indexs = this.findContextIndices(formakey, token_name);
         xlog(indexs);
         const arr = D_M.token_list[token_name];
-        const token_rows = [];
+        const text_rows = [];
         for (const i of indexs) {
           const i0 = leftIndexOf(arr, "##", i) + 1;
           const ir = arr.indexOf("##", i);
           const row = arr.slice(i0, ir);
-          token_rows.push(row);
+          const text_row=roe.join("&nbsp");
+          text_rows.push(text_row);
         }
-        return token_rows;
+        return text_rows;
       }
     };
 

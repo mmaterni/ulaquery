@@ -39,6 +39,13 @@ var Context = {
         for (const x of heads) jt.append(h, x.toUpperCase());
         jt.append(`</tr></thead><tbody>`);
 
+        let row_h = `
+        <div class='row table-row'>
+            <div class='n' >{row_n}</div>
+            <div class='text'>{row_text}</div>
+       </div>
+        `;
+    
         // rowa
         const lers = this.context_rows.length;
         const rh = (d) => `<td>${d}</td>`;
