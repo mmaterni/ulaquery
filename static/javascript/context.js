@@ -7,21 +7,18 @@ var Context = {
     open: function (formakey) {
         const token_name = "tr1.g";
         this.context_rows = D_M.findContextRows(formakey, token_name);
-        this.build();
+        this.build(formakey);
         this.show();
     },
-    build: function () {
-        const sp = "         ";
+    build: function (formakey) {
         const menu = `
   <div class="menu_wnd" >
   <ul>
   <li>
-  <a class="tipb" href="javascript:Context.scroll_top()">Top
+  <a class="tipb" href="javascript:Context.scroll_top()">Close All
   <span class="tiptextb">AA</span>
   </a>
-  </li>
-  
-  <li><a href="javascript:Context.hide()">XX</a></li>
+  </li> 
   <li><a href="javascript:Context.hide()">X</a></li>
   </ul>
   </div>
@@ -30,19 +27,17 @@ var Context = {
         let jt = UaJth();
         jt.append(menu);
 
-        let fh = (row_n,row_text)=>`
+        let fh = (row_n, row_text) => `
         <div>
             <span class='n' >${row_n}</span>
             <span class='text'>${row_text}</span>
        </div>
         `;
-
-        // rowa
         const lers = this.context_rows.length;
-        const rh = (d) => `<td>${d}</td>`;
         for (let i = 0; i < lers; i++) {
-            const row = this.context_rows[i];
-            jt.append(fh, i,row);
+            let row = this.context_rows[i];
+            row = row.replace(formakey, `<span>${formakey}</span>`)
+            jt.append(fh, i, row);
         }
         jt.append(`</tbody></table></div>`);
         const html = jt.html();

@@ -1117,18 +1117,17 @@ div.select_text {
 }
 
 div.context {
-  border-width: 1px 1px 1px 1px;
+  border-width: 2px;
   border-style: solid;
   border-color: @row_text_border_color;
   margin: 0;
   padding: 0;
-  min-height: 200px;
+  // min-height: 100px;
   max-height: 400px;
-  text-align: left;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: auto;
   scrollbar-color: @scroll_bar1 @scroll_bar2;
-
+  background: darken(@row_text_back, 20%);
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -1169,6 +1168,12 @@ div.context {
       padding-left: 5px;
       text-align: left;
       white-space: nowrap;
+      span {
+        font-weight: bold;
+        font-style: italic;
+        background: lighten(@row_text_back, 20%);
+        color: lighten(@color1, 5%);
+      }
     }
   }
 
@@ -1178,6 +1183,5 @@ div.context {
 
   div:hover {
     background: darken(@row_text_back, 15%);
-      // background: @row_text_hover_back;
   }
 }
