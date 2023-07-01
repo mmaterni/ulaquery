@@ -1,10 +1,10 @@
 "use strict"
 
 
-var ContextMgr = function () {
+var ContextMgr = function (key) {
     const context_z = 12;
     return {
-        id: "context_id",
+        id: `${key}context_id`,
         wind: null,
         context_rowsrows: [],
         open: function (formakey) {
@@ -18,18 +18,17 @@ var ContextMgr = function () {
   <div class="menu_wnd" >
   <ul>
   <li>
-  <a class="tipb" href="javascript:Context.scroll_top()">Close All
+  <a class="tipb" cmd="closeAll" href="#">Close All
   <span class="tiptextb">AA</span>
   </a>
   </li> 
-  <li><a href="javascript:Context.hide()">X</a></li>
+  <li><a href="#" cmd="close">X</a></li>
   </ul>
   </div>
   <div class="context">
   `;
             let jt = UaJth();
             jt.append(menu);
-
             let fh = (row_n, row_text) => `
         <div>
             <span class='n' >${row_n}</span>
@@ -42,12 +41,11 @@ var ContextMgr = function () {
                 const n = row[0];
                 let text = row.slice(1).join(" ");
                 text = text.replace(formakey, `<span>${formakey}</span>`)
-                // row = row.replace(formakey, `<span>${formakey}</span>`)
                 jt.append(fh, n, text);
             }
             jt.append(`</tbody></table></div>`);
             const html = jt.html();
-            xlog(jt.text());
+            // xlog(jt.text());
             if (!this.wind) {
                 this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
                 this.setXY();
@@ -75,6 +73,23 @@ var ContextMgr = function () {
             this.show();
         },
         bind: function () {
+            const m = this.wind.w.querySelector("div.menu_wnd");
+            m.addEventListener("click", (ev) => {
+                ev.preventDefault();
+                ev.stopImmediatePropagation();
+                const t = ev.target;
+                const cmd = t.getAttribute("cmd");
+                switch (cmd) {
+                    case "close":
+                        this.hide();
+                        break;
+                        case "closeAll":
+                            this.hide();
+                            break;
+                        default:
+                        // alert(cmd + ": command not found")
+                }
+            });
             const a = this.wind.w.querySelector("div.context");
             a.addEventListener("click", (ev) => {
                 ev.preventDefault();
