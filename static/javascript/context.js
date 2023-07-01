@@ -36,8 +36,11 @@ var Context = {
         const lers = this.context_rows.length;
         for (let i = 0; i < lers; i++) {
             let row = this.context_rows[i];
-            row = row.replace(formakey, `<span>${formakey}</span>`)
-            jt.append(fh, i, row);
+            const n = row[0];
+            let text = row.slice(1).join(" ");
+            text = text.replace(formakey,`<span>${formakey}</span>`)
+            // row = row.replace(formakey, `<span>${formakey}</span>`)
+            jt.append(fh, n, text);
         }
         jt.append(`</tbody></table></div>`);
         const html = jt.html();
