@@ -1116,22 +1116,18 @@ div.select_text {
   }
 }
 
-@context_height: 400px;
-@context_width: 600px;
-@context_row_height: 25px;
-@context_col_width: 30px;
 div.context {
   .b0;
-  left: 0;
   margin: 0;
   padding: 0;
-  min-height: @context_height;
-  max-height: @context_height;
+  background: #e6eb80;
+  min-height: 200px;
+  max-height: 400px;
   text-align: left;
   line-height: 1;
   overflow-y: scroll;
   overflow-x: auto;
-  // scrollbar-color: @cmd_back @head_back;
+  scrollbar-color: @scroll_bar1 @scroll_bar2;
 
   div.row {
     margin: 0;
@@ -1143,13 +1139,13 @@ div.context {
 
     div.n {
       cursor: pointer;
-      // min-width: @row_num_width;
-      // max-width: @row_num_width;
+      // min-width:35px;
+      // max-width: 35px;
       text-align: right;
       border-width: 0 0 1px 0;
       border-style: solid;
       border-color: red;
-      // font-size: @font_num;
+      font-size: @fsize_07;
       font-family: @fserif;
       font-weight: normal;
       padding: 5px 5px 3px 0;
@@ -1159,19 +1155,19 @@ div.context {
     }
 
     div.text {
-      background: @cell_back;
-      color: @cell_color;
-      // min-width: @text_row_width;
-      // max-width: @text_row_width;
+      background: @row_text_back;
+      color: @row_text_color;
+      // min-width: 35px;
+      // max-width: 35px;
       border-width: 0 1px 1px 1px;
       border-style: solid;
-      // border-color: lighten(@row_border_color, 40%);
-      // font-size: @font_text;
-      font-family: "Times New Roman", Times, serif;
+      border-color: @row_text_border_color;
+      font-size: @fsize_07;
+      font-family: @fserif;
       font-weight: normal;
       text-align: left;
       white-space: nowrap;
-      // line-height: normal;
+      line-height: normal;
       margin: 0;
       padding: 5px 0 0 5px !important;
 
@@ -1199,13 +1195,13 @@ div.context {
 
   div.row:nth-child(odd) {
     div.text {
-      // background: darken(@cell_back, 10%);
+      background: darken(@row_text_back, 10%);
     }
   }
 
   div.row:hover {
     div.text {
-      // background: darken(@row_text_hover_back, 20%);
+      background: darken(@row_text_hover_back, 20%);
     }
 
     div.n {

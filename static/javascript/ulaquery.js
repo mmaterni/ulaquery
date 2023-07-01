@@ -156,7 +156,7 @@ var UlaQuery = {
     UaLog.setXY(-3, 0).setZ(999).new();
 
     // AAA
-    FLT.open();
+    // FLT.open();
 
     wait_stop();
 

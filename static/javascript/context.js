@@ -17,13 +17,12 @@ var Context = {
   <ul>
   <li>
   <a class="tipb" href="javascript:Context.scroll_top()">Top
-  <span class="tiptextb">Scroll Top</span>
+  <span class="tiptextb">AA</span>
   </a>
   </li>
   
-  <li>${sp}</li>
+  <li><a href="javascript:Context.hide()">XX</a></li>
   <li><a href="javascript:Context.hide()">X</a></li>
-  <li></li>
   </ul>
   </div>
   <div class="context">
@@ -31,31 +30,19 @@ var Context = {
         let jt = UaJth();
         jt.append(menu);
 
-        // head
-        const heads = D_M.rslt_heads;
-        jt.append(`<table><thead><tr>`);
-        let h = (d) => `<th><span>${d}</span></th>`;
-        jt.append(h, "N.");
-        for (const x of heads) jt.append(h, x.toUpperCase());
-        jt.append(`</tr></thead><tbody>`);
-
-        let row_h = `
-        <div class='row table-row'>
-            <div class='n' >{row_n}</div>
-            <div class='text'>{row_text}</div>
+        let fh = (row_n,row_text)=>`
+        <div class='row'>
+            <div class='n' >${row_n}</div>
+            <div class='text'>${row_text}</div>
        </div>
         `;
-    
+
         // rowa
         const lers = this.context_rows.length;
         const rh = (d) => `<td>${d}</td>`;
         for (let i = 0; i < lers; i++) {
             const row = this.context_rows[i];
-            jt.append("<tr>")
-            jt.append(rh, i);
-            for (const f of row)
-                jt.append(rh, f);
-            jt.append("</tr>")
+            jt.append(fh, i,row);
         }
         jt.append(`</tbody></table></div>`);
         const html = jt.html();
@@ -78,7 +65,7 @@ var Context = {
         this.wind.hide(this.id);
     },
     setXY: function () {
-        this.wind.setXY(5, 35, -1);
+        this.wind.setXY(10, 79, -1);
     },
     resetXY: function () {
         this.wind.reset();

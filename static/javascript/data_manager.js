@@ -498,7 +498,7 @@ X|other||
           const i0 = leftIndexOf(arr, "##", i) + 1;
           const ir = arr.indexOf("##", i);
           const row = arr.slice(i0, ir);
-          const text_row=roe.join("&nbsp");
+          const text_row=row.join("&nbsp");
           text_rows.push(text_row);
         }
         return text_rows;
