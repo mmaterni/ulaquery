@@ -160,9 +160,6 @@ var UlaQuery = {
 
     wait_stop();
 
-    // const memoryInfo = performance.memory();
-    // console.log(memoryInfo.usedJSHeapSize);
-
   },
   builD_Menu: async function () {
     const html = menu();

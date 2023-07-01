@@ -319,7 +319,6 @@ X|other||
             }
           if (!ok) continue;
 
-          // console.log(row);
           if (ok)
             indices.push(i);
         }
@@ -501,8 +500,6 @@ X|other||
           const row = arr.slice(i0, ir);
           token_rows.push(row);
         }
-        // for (const row of rows)
-        //   console.log(row);
         return token_rows;
       }
     };

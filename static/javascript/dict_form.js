@@ -55,11 +55,6 @@ var DictForm = {
     const forms_len = 8;
     const head_form = heads.slice(0, forms_len);
     const heaD_Msd = heads.slice(forms_len);
-    // console.log(heads);
-    // console.log(head_form);
-    // console.log(heaD_Msd);
-    // elimina la prima riga
-    // this.rows.shift();
 
     // head
     jt.append(`<table><thead><tr>`);
