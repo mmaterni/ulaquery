@@ -31,9 +31,9 @@ var Context = {
         jt.append(menu);
 
         let fh = (row_n,row_text)=>`
-        <div class='row'>
-            <div class='n' >${row_n}</div>
-            <div class='text'>${row_text}</div>
+        <div>
+            <span class='n' >${row_n}</span>
+            <span class='text'>${row_text}</span>
        </div>
         `;
 
@@ -46,6 +46,7 @@ var Context = {
         }
         jt.append(`</tbody></table></div>`);
         const html = jt.html();
+        xlog(jt.text());
         if (!this.wind) {
             this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
             this.setXY();
@@ -65,7 +66,7 @@ var Context = {
         this.wind.hide(this.id);
     },
     setXY: function () {
-        this.wind.setXY(10, 79, -1);
+        this.wind.setXY(30, 79, -1);
     },
     resetXY: function () {
         this.wind.reset();
