@@ -119,7 +119,7 @@ X|other||
       rslt_heads: [],
       row_eof: "##",
       token_list: {},
-      token_selected:[],
+      token_selected: [],
       load_dict: async function () {
         const url = `ula_data/data_export/dictionary.ula.csv`;
         try {
@@ -473,25 +473,17 @@ X|other||
           throw error;
         }
       },
-      findTokenIndices: function (formakey) {
-        const ks = Object.keys(this.token_list);
-        const k0 = ks[0];
-        const arr = this.token_list[k0];
-        const idxs = arr.reduce((indexes, value, index) => {
+      findContextIndices: function (formakey, token_name) {
+        const arr = this.token_list[token_name];
+        const index_selectedes = arr.reduce((indexes, value, index) => {
           if (value === formakey) {
             indexes.push(index);
           }
           return indexes;
         }, []);
-        console.log(idxs);
-        for (const i of idxs) {
-          const a = arr[i];
-          console.log(i, a);
-        }
-        // this.tokenIndexsToRow(idxs, arr);
-        return idxs;
+        return index_selectedes;
       },
-      findContextRow: function (indexs, arr) {
+      findContextRows: function (formakey, token_name) {
 
         const leftIndexOf = function (arr, element, from) {
           for (let i = from; i >= 0; i--)
@@ -499,17 +491,19 @@ X|other||
               return i;
           return -1;
         }
-
-        const rows = [];
+        const indexs = this.findContextIndices(formakey, token_name);
+        xlog(indexs);
+        const arr = D_M.token_list[token_name];
+        const token_rows = [];
         for (const i of indexs) {
-          const i0 = leftIndexOf(arr, "##", i)+1;
+          const i0 = leftIndexOf(arr, "##", i) + 1;
           const ir = arr.indexOf("##", i);
           const row = arr.slice(i0, ir);
-          rows.push(row);
+          token_rows.push(row);
         }
         // for (const row of rows)
         //   console.log(row);
-        return rows;
+        return token_rows;
       }
     };
 

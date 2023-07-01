@@ -1,5 +1,7 @@
 "use strict"
 
+var xlog = console.log;
+
 function test() {
   alert("test");
   try {

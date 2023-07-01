@@ -136,8 +136,7 @@ var ResultSet = {
         t = t.parentNode;
       const td = t.querySelectorAll("td")[2];
       const formakey = td.innerHTML;
-      const idxs = D_M.findTokenIndices(formakey);
-      // console.log(idxs);
+      Context.open(formakey);
     });
   },
 

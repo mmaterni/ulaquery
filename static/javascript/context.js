@@ -1,14 +1,16 @@
 "use strict"
-
+const context_z = 12;
 var Context = {
     id: "context_id",
     wind: null,
-    open: async function () {
-        const rows = D_M.allRsltRows();
-        Context.build(rows);
-        Context.show();
+    context_rowsrows: [],
+    open: function (formakey) {
+        const token_name = "tr1.g";
+        this.context_rows = D_M.findContextRows(formakey, token_name);
+        this.build();
+        this.show();
     },
-    build: async function (rows) {
+    build: function () {
         const sp = "         ";
         const menu = `
   <div class="menu_wnd" >
@@ -24,7 +26,7 @@ var Context = {
   <li></li>
   </ul>
   </div>
-  <div class="resultset">
+  <div class="context">
   `;
         let jt = UaJth();
         jt.append(menu);
@@ -38,10 +40,10 @@ var Context = {
         jt.append(`</tr></thead><tbody>`);
 
         // rowa
-        const lers = rows.length;
+        const lers = this.context_rows.length;
         const rh = (d) => `<td>${d}</td>`;
         for (let i = 0; i < lers; i++) {
-            const row = rows[i];
+            const row = this.context_rows[i];
             jt.append("<tr>")
             jt.append(rh, i);
             for (const f of row)
@@ -49,59 +51,35 @@ var Context = {
             jt.append("</tr>")
         }
         jt.append(`</tbody></table></div>`);
-
         const html = jt.html();
         if (!this.wind) {
             this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
             this.setXY();
             this.wind.drag();
-            this.wind.setZ(result_set_z);
+            this.wind.setZ(context_z);
         }
         this.wind.hide();
         this.wind.setHtml(html);
         this.bind();
     },
-    show: async function (url) {
+    show: function (url) {
         if (!this.wind) return;
-        wait_start();
-        await sleep(1);
         this.wind.show();
-        wait_stop();
     },
     hide: function () {
         if (!this.wind) return;
         this.wind.hide(this.id);
-        if (FLT.visible) {
-            FLT.show();
-        }
     },
     setXY: function () {
-        this.wind.setXY(result_set_left, result_set_top, -1);
+        this.wind.setXY(5, 35, -1);
     },
     resetXY: function () {
         this.wind.reset();
         this.setXY();
         this.show();
     },
-    scroll_top: function () {
-        const x = this.wind.w;
-        const e = x.querySelector("div.resultset");
-        e.scrollTop = 0;
-    },
-    scroll_bottom: function () {
-        const e = this.wind.w.querySelector("div.resultset");
-        e.scrollTop = e.scrollHeight;
-    },
-    scroll_left: function () {
-        const e = this.wind.w.querySelector("div.resultset");
-        e.scrollLeft = 0;
-    },
-    scroll_right: function () {
-        const e = this.wind.w.querySelector("div.resultset");
-        e.scrollLeft = e.scrollWidth;
-    },
     bind: function () {
-        const a = this.wind.w.querySelector("div.resultset");
+        const a = this.wind.w.querySelector("div.context");
         a.addEventListener("click", (ev) => {
             ev.preventDefault();
             ev.stopImmediatePropagation();
@@ -110,7 +88,6 @@ var Context = {
             //   t = t.parentNode;
         });
     },
-
 };
 
 
