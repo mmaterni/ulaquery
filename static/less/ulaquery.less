@@ -154,7 +154,7 @@ input:active {
 
 @font_menu: @fsize_08;
 @menu_height: 25px;
-@menu_sub_top: 30px;
+@menu_sub_top: 27px;
 
 div.menu_bar {
   width: 100%;
@@ -184,7 +184,7 @@ div.menu_bar {
       a {
         display: block;
         min-height: @menu_height;
-        padding-top: 5px;
+        padding-top: 2px;
         line-height: 1;
         text-align: center;
         text-decoration: none;
@@ -297,12 +297,13 @@ div.menu_bar {
 }
 
 @li_width: 50px;
+@menu_wnd_height:22;
 div.menu_wnd {
   box-sizing: border-box;
   width: 100%;
-  min-height: @menu_height !important;
-  max-height: @menu_height !important;
-  border-width: 2px 2px 0 2px;
+  min-height: @menu_wnd_height !important;
+  max-height: @menu_wnd_height !important;
+  border-width: 1px 1px 0 1px;
   border-color: @menu_bck;
   border-style: solid;
   background: darken(@menu_base_back, 0%);
@@ -320,18 +321,14 @@ div.menu_wnd {
       margin-left: auto;
     }
 
-    li:nth-child(even) {
-      a {
-        background: lighten(@menu_bck, 10%);
-      }
-    }
     li {
       min-width: @li_width;
       a {
         display: block;
-        min-height: @menu_height !important;
-        max-height: @menu_height !important;
-        padding: 0 5px 0 5px;
+        line-height: 1;
+        padding: 2px 5px 0 5px;
+        min-height: @menu_wnd_height;
+        max-height: @menu_wnd_height;
         margin-right: 2px !important;
         box-sizing: border-box;
         text-align: center;
@@ -348,6 +345,12 @@ div.menu_wnd {
         text-decoration: underline;
       }
     }
+    li:nth-child(even) {
+      a {
+        background: lighten(@menu_bck, 10%);
+      }
+    }
+
   }
 }
 
