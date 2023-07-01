@@ -87,6 +87,6 @@ var UaJth = function () {
     html(linesep) {
       const s = this.text(linesep);
       return s.replace(/\s+|\[rn]/g, " ");
-    },
+    }
   };
 };

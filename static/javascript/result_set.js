@@ -136,7 +136,10 @@ var ResultSet = {
         t = t.parentNode;
       const td = t.querySelectorAll("td")[2];
       const formakey = td.innerHTML;
-      Context.open(formakey);
+
+      // Context.open(formakey);
+      const context = ContextMgr();
+      context.open(formakey);
     });
   },
 
