@@ -19,28 +19,37 @@ var TextMgr = {
 var ContextMgr = {
     names: [],
     objs: {},
-    left: 0,
     open: function (formakey) {
         let slcs = TextMgr.token_selected;
         if (slcs.length == 0) {
             SelectText.open();
         }
-        this.left = 0;
+        let left = 0;
+        const names = Object.keys(this.objs);
         for (const name of slcs) {
-            this.names.push(name);
-            const obj = this.create(name, this.left);
-            this.left += 300;
-            this.objs[name] = obj;
+            if (names.indexOf(name) < 0) {
+                this.names.push(name);
+                const obj = this.create(name, left);
+                this.objs[name] = obj;
+            }
+            left += 300;
+            const obj = this.objs[name];
             obj.open(formakey);
         }
     },
     closeAll: function () {
-        const vs = Object.values(this.objs);
-        for (const obj of vs)
+        const objs = Object.values(this.objs);
+        for (const obj of objs)
             obj.hide();
     },
-    create: function (name, left = 0) {
+    relocateAll: function () {
+        let names = TextMgr.token_selected;
+        for (const name of names)
+            this.objs[name].resetXY();
+    },
+    create: function (name, left) {
         const context_z = 12;
+
         const obj = {
             id: `${name}context_id`,
             name: name,
@@ -56,13 +65,18 @@ var ContextMgr = {
   <div class="menu_wnd" >
   <ul>
   <li><a class="tipb" cmd="unselect" href="#">Unselect
-  <span class="tiptextb">Close and Unselect Context</span>  </a>
+  <span class="tiptextb">Close and Unselect Context</span> </a>
   </li> 
-  <li><a class="tipb" cmd="closeAll" href="#">Close All
+
+  <li><a class="tipb" cmd="relocateAll" href="#">Relocate
+  <span class="tiptextb">Relocate All Context</span>  </a>
+  </li> 
+
+  <li><a class="tipb" cmd="closeAll" href="#">Close
   <span class="tiptextb">Close All Context</span>  </a>
   </li> 
-  <li><a href="#" cmd="close">X</a></li>
-  </ul>
+
+  <li><a href="#" cmd="close">X</a></li> </ul>
   </div>
   <div class="context">
   `;
@@ -104,7 +118,7 @@ var ContextMgr = {
                 this.wind.hide(this.id);
             },
             setXY: function () {
-                this.wind.setXY(30 + left, 79, -1);
+                this.wind.setXY(30 + left, 70, -1);
             },
             resetXY: function () {
                 this.wind.reset();
@@ -127,6 +141,9 @@ var ContextMgr = {
                             break;
                         case "unselect":
                             SelectText.unselectOfName(this.name);
+                            break;
+                        case "relocateAll":
+                            ContextMgr.relocateAll();
                             break;
                         default:
                         // alert(cmd + ": command not found")
@@ -222,12 +239,6 @@ var SelectText = {
         });
     },
     unselectOfName: function (name) {
-        // const nds = this.wind.w.querySelectorAll(`div.select_text li.a a.select`);
-        // const arr = Array.from(nds);
-        // const a = arr.find((e) => {
-        //     return e.textContent === name;
-        // });
-        // const name = a.innerHTML;
         const i = TextMgr.token_selected.indexOf(name);
         TextMgr.token_selected.splice(i, 1);
         const obj = ContextMgr.objs[name];
@@ -239,7 +250,8 @@ var SelectText = {
         const attrs = this.wind.w.querySelectorAll("div.select_text li a");
         for (let a of attrs)
             a.classList.remove("select");
-        TxtMgr.token_selected = [];
+        TextMgr.token_selected = [];
+        ContextMgr.closeAll();
     },
     select: function () {
         let elems = this.wind.w.querySelectorAll("div.select_text li a");
