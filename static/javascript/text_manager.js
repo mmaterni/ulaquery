@@ -111,8 +111,7 @@ var ContextMgr = {
             },
             hide: function () {
                 if (!this.wind) return;
-                //AAA this.wind.hide(this.id);
-                this.wind.hide(this.id);
+                this.wind.hide();
             },
             setXY: function () {
                 this.wind.setXY(30 + left, 50 + top, -1);
@@ -208,7 +207,6 @@ var SelectText = {
     },
     hide: function () {
         if (!this.wind) return;
-        // AAA this.wind.hide(this.id);
         this.wind.hide();
     },
     setXY: function () {

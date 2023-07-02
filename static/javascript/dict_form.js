@@ -98,7 +98,7 @@ var DictForm = {
   },
   hide: function () {
     if (!this.wind) return;
-    this.wind.hide(this.id);
+    this.wind.hide();
   },
   setXY: function () {
     const left = 5;

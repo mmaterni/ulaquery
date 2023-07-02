@@ -97,7 +97,7 @@ var ResultSet = {
   },
   hide: function () {
     if (!this.wind) return;
-    this.wind.hide(this.id);
+    this.wind.hide();
     if (FLT.visible) {
       FLT.show();
     }

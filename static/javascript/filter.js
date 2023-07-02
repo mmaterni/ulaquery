@@ -242,7 +242,7 @@ var Where = {
   },
   close: function () {
     if (!this.wind) return;
-    this.wind.hide(this.id);
+    this.wind.hide();
     this.isActive = false;
   },
   open: function () {
@@ -258,7 +258,7 @@ var Where = {
   hide: function () {
     if (!this.wind) return;
     if (this.isActive)
-      this.wind.hide(this.id);
+      this.wind.hide();
   },
   setXY: function () {
     this.wind.setXY(where_left, where_top, -1);
@@ -330,7 +330,7 @@ var FormLemma = {
   },
   close: function () {
     if (!this.wind) return;
-    this.wind.hide(this.id);
+    this.wind.hide();
     this.isActive = false;
   },
   open: function () {
@@ -346,7 +346,7 @@ var FormLemma = {
   hide: function () {
     if (!this.wind) return;
     if (this.isActive)
-      this.wind.hide(this.id);
+      this.wind.hide();
   },
   setXY: function () {
     this.wind.setXY(form_lemma_left, form_lemma_top, -1);
@@ -473,7 +473,7 @@ var Sigl = {
   },
   close: function () {
     if (!this.wind) return;
-    this.wind.hide(this.id);
+    this.wind.hide();
     this.isActive = false;
   },
   open: function () {
@@ -489,7 +489,7 @@ var Sigl = {
   hide: function () {
     if (!this.wind) return;
     if (this.isActive)
-      this.wind.hide(this.id);
+      this.wind.hide();
   },
   setXY: function () {
     this.wind.setXY(sigl_left, sigl_top, -1);
@@ -613,7 +613,7 @@ var Funct = {
   },
   close: function () {
     if (!this.wind) return;
-    this.wind.hide(this.id);
+    this.wind.hide();
     this.isActive = false;
   },
   open: function () {
@@ -629,7 +629,7 @@ var Funct = {
   hide: function () {
     if (!this.wind) return;
     if (this.isActive)
-      this.wind.hide(this.id);
+      this.wind.hide(s);
   },
   setXY: function () {
     this.wind.setXY(funct_left, funct_top, -1);
@@ -737,7 +737,7 @@ var LangDate = {
   },
   close: function () {
     if (!this.wind) return;
-    this.wind.hide(this.id);
+    this.wind.hide();
     this.isActive = false;
   },
   open: function () {
@@ -753,7 +753,7 @@ var LangDate = {
   hide: function () {
     if (!this.wind) return;
     if (this.isActive)
-      this.wind.hide(this.id);
+      this.wind.hide();
   },
   setXY: function () {
     this.wind.setXY(lang_date_left, lang_date_top, -1);
@@ -877,7 +877,7 @@ var PosMsd = {
   },
   close: function () {
     if (!this.wind) return;
-    this.wind.hide(this.id);
+    this.wind.hide();
     this.isActive = false;
   },
   open: function () {
@@ -893,7 +893,7 @@ var PosMsd = {
   hide: function () {
     if (!this.wind) return;
     if (this.isActive)
-      this.wind.hide(this.id);
+      this.wind.hide();
   },
   setXY: function () {
     // const left = 600;
