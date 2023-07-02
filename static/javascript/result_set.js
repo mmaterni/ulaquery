@@ -66,6 +66,7 @@ var ResultSet = {
     // rowa
     const lers = rows.length;
     const rh = (d) => `<td>${d}</td>`;
+    // AAA valutare l'uso di idx al posto di i
     for (let i = 0; i < lers; i++) {
       const row = rows[i];
       jt.append("<tr>")
@@ -136,10 +137,7 @@ var ResultSet = {
         t = t.parentNode;
       const td = t.querySelectorAll("td")[2];
       const formakey = td.innerHTML;
-
-      // Context.open(formakey);
-      const context = ContextMgr();
-      context.open(formakey);
+      ContextMgr.open(formakey);
     });
   },
 

@@ -1,20 +1,44 @@
 "use strict"
 
 
-var ContextMgr = function (key) {
-    const context_z = 12;
-    return {
-        id: `${key}context_id`,
-        wind: null,
-        context_rowsrows: [],
-        open: function (formakey) {
-            const token_name = "tr1.g";
-            this.context_rows = D_M.findContextRows(formakey, token_name);
-            this.build(formakey);
-            this.show();
-        },
-        build: function (formakey) {
-            const menu = `
+var ContextMgr = {
+    names: [],
+    objs: {},
+    open: function (formakey) {
+        // const tkks = Object.keys(D_M.token_list);
+        // xlog(tkks);
+        //   AAA posiziona correttamente selected
+        let slcs = D_M.token_selected;
+        if (slcs.length == 0) {
+            SelectText.open();
+        }
+        for (const s of slcs) {
+            const name = s.replace('.', '_');
+            this.names.push(name);
+            const obj = this.create(name);
+            this.objs[name] = obj;
+            obj.open(formakey);
+        }
+    },
+    closeAll: function () {
+        const vs = Object.values(this.objs);
+        for (const obj of vs)
+            obj.hide();
+    },
+    create: function (key) {
+        const context_z = 12;
+        const obj = {
+            id: `${key}context_id`,
+            wind: null,
+            context_rowsrows: [],
+            open: function (formakey) {
+                const token_name = "tr1.g";
+                this.context_rows = D_M.findContextRows(formakey, token_name);
+                this.build(formakey);
+                this.show();
+            },
+            build: function (formakey) {
+                const menu = `
   <div class="menu_wnd" >
   <ul>
   <li>
@@ -27,81 +51,81 @@ var ContextMgr = function (key) {
   </div>
   <div class="context">
   `;
-            let jt = UaJth();
-            jt.append(menu);
-            let fh = (row_n, row_text) => `
+                let jt = UaJth();
+                jt.append(menu);
+                let fh = (row_n, row_text) => `
         <div>
             <span class='n' >${row_n}</span>
             <span class='text'>${row_text}</span>
        </div>
         `;
-            const lers = this.context_rows.length;
-            for (let i = 0; i < lers; i++) {
-                let row = this.context_rows[i];
-                const n = row[0];
-                let text = row.slice(1).join(" ");
-                text = text.replace(formakey, `<span>${formakey}</span>`)
-                jt.append(fh, n, text);
-            }
-            jt.append(`</tbody></table></div>`);
-            const html = jt.html();
-            // xlog(jt.text());
-            if (!this.wind) {
-                this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
+                const lers = this.context_rows.length;
+                for (let i = 0; i < lers; i++) {
+                    let row = this.context_rows[i];
+                    const n = row[0];
+                    let text = row.slice(1).join(" ");
+                    text = text.replace(formakey, `<span>${formakey}</span>`)
+                    jt.append(fh, n, text);
+                }
+                jt.append(`</tbody></table></div>`);
+                const html = jt.html();
+                if (!this.wind) {
+                    this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
+                    this.setXY();
+                    this.wind.drag();
+                    this.wind.setZ(context_z);
+                }
+                this.wind.hide();
+                this.wind.setHtml(html);
+                this.bind();
+            },
+            show: function (url) {
+                if (!this.wind) return;
+                this.wind.show();
+            },
+            hide: function () {
+                if (!this.wind) return;
+                this.wind.hide(this.id);
+            },
+            setXY: function () {
+                this.wind.setXY(30, 79, -1);
+            },
+            resetXY: function () {
+                this.wind.reset();
                 this.setXY();
-                this.wind.drag();
-                this.wind.setZ(context_z);
-            }
-            this.wind.hide();
-            this.wind.setHtml(html);
-            this.bind();
-        },
-        show: function (url) {
-            if (!this.wind) return;
-            this.wind.show();
-        },
-        hide: function () {
-            if (!this.wind) return;
-            this.wind.hide(this.id);
-        },
-        setXY: function () {
-            this.wind.setXY(30, 79, -1);
-        },
-        resetXY: function () {
-            this.wind.reset();
-            this.setXY();
-            this.show();
-        },
-        bind: function () {
-            const m = this.wind.w.querySelector("div.menu_wnd");
-            m.addEventListener("click", (ev) => {
-                ev.preventDefault();
-                ev.stopImmediatePropagation();
-                const t = ev.target;
-                const cmd = t.getAttribute("cmd");
-                switch (cmd) {
-                    case "close":
-                        this.hide();
-                        break;
-                        case "closeAll":
+                this.show();
+            },
+            bind: function () {
+                const m = this.wind.w.querySelector("div.menu_wnd");
+                m.addEventListener("click", (ev) => {
+                    ev.preventDefault();
+                    ev.stopImmediatePropagation();
+                    const t = ev.target;
+                    const cmd = t.getAttribute("cmd");
+                    switch (cmd) {
+                        case "close":
                             this.hide();
+                            break;
+                        case "closeAll":
+                            ContextMgr.closeAll();
                             break;
                         default:
                         // alert(cmd + ": command not found")
-                }
-            });
-            const a = this.wind.w.querySelector("div.context");
-            a.addEventListener("click", (ev) => {
-                ev.preventDefault();
-                ev.stopImmediatePropagation();
-                // let t = ev.target;
-                // while (t && t.tagName !== 'TR')
-                //   t = t.parentNode;
-            });
-        },
-    };
-};
-
+                    }
+                });
+                const a = this.wind.w.querySelector("div.context");
+                a.addEventListener("click", (ev) => {
+                    ev.preventDefault();
+                    ev.stopImmediatePropagation();
+                    // let t = ev.target;
+                    // while (t && t.tagName !== 'TR')
+                    //   t = t.parentNode;
+                });
+            },
+        }
+        return obj;
+    }
+}
 
 var SelectText = {
     id: "select_text_id",

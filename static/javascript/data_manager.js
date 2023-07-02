@@ -491,7 +491,6 @@ X|other||
           return -1;
         }
         const indexs = this.findContextIndices(formakey, token_name);
-        xlog(indexs);
         const arr = D_M.token_list[token_name];
         const text_rows = [];
         for (const i of indexs) {
