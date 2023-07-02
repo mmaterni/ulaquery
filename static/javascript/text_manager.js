@@ -151,7 +151,7 @@ var ContextMgr = {
 var SelectText = {
     id: "select_text_id",
     wind: null,
-    // text_list: [],
+    z:20,
     open: async function () {
         this.build();
         this.show();
@@ -188,9 +188,8 @@ var SelectText = {
             this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
             this.setXY();
             this.wind.drag();
-            this.wind.setZ(11);
+            this.wind.setZ(this.z);
         }
-        // this.wind.hide();
         this.wind.setHtml(html);
         this.bind();
         this.selectDefault();
