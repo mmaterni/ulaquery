@@ -463,32 +463,6 @@ X|other||
           throw error;
         }
       },
-      // load_tokens: async function (token_name) {
-      //   const url = `ula_data/data_export/token_list.txt`;
-      //   try {
-      //     const resp = await fetch(url, {
-      //       method: 'GET',
-      //       headers: { "Content-Type": "text/plain;charset=UTF-8" },
-      //       cache: "default"
-      //     });
-      //     if (!resp.ok) {
-      //       throw new Error(`Erroe:${resp.status} ${resp.statusText}`);
-      //     }
-      //     const data = await resp.text();
-      //     const names = data.trim().split("\n");
-      //     this.token_list = {};
-
-      //     for (const file_name of names) {
-      //       const arr = await this.load_token_csv(file_name);
-      //       // eps19.g.ula.csv => eps0.g
-      //       const key = file_name.split('.').slice(0, 2).join('.')
-      //       this.token_list[key] = arr;
-      //     }
-      //   } catch (error) {
-      //     alert(`Errror:${url}\n ${error}`);
-      //     throw error;
-      //   }
-      // },
       findContextIndices: function (formakey, token_name) {
         const arr = TextMgr.token_list[token_name];
         const index_selectedes = arr.reduce((indexes, value, index) => {

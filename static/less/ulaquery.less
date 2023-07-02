@@ -297,7 +297,7 @@ div.menu_bar {
 }
 
 @li_width: 50px;
-@menu_wnd_height:22;
+@menu_wnd_height: 22;
 div.menu_wnd {
   box-sizing: border-box;
   width: 100%;
@@ -350,7 +350,6 @@ div.menu_wnd {
         background: lighten(@menu_bck, 10%);
       }
     }
-
   }
 }
 
@@ -1137,7 +1136,7 @@ div.context {
   justify-content: flex-start;
   align-items: stretch;
 
-  div {
+  div.rows {
     margin: 0;
     padding: 1px 5px 1px 0;
     min-width: 60px;
@@ -1163,7 +1162,7 @@ div.context {
       background: darken(@row_text_back, 15%);
       text-align: right;
       padding-right: 5px;
-      width:60px;
+      width: 60px;
       flex-shrink: 0;
     }
     span.text {
@@ -1186,5 +1185,14 @@ div.context {
 
   div:hover {
     background: darken(@row_text_back, 15%);
+  }
+  div.h {
+    text-align: center;
+    font-size: @fsize_08;
+    font-family: @fsans;
+    font-weight: bold;
+    background: darken(@row_text_back, 20%);
+    color: @row_text_color;
+    border-bottom: 1px solid @row_text_border_color;
   }
 }

@@ -42,10 +42,10 @@ var ContextMgr = {
         for (const obj of vs)
             obj.hide();
     },
-    create: function (key, left = 0) {
+    create: function (name, left = 0) {
         const context_z = 12;
         const obj = {
-            id: `${key}context_id`,
+            id: `${name}context_id`,
             wind: null,
             context_rowsrows: [],
             open: function (formakey) {
@@ -58,10 +58,11 @@ var ContextMgr = {
                 const menu = `
   <div class="menu_wnd" >
   <ul>
-  <li>
-  <a class="tipb" cmd="closeAll" href="#">Close All
-  <span class="tiptextb">AA</span>
-  </a>
+  <li><a class="tipb" cmd="unselects" href="#">Unselect
+  <span class="tiptextb">Close and Unselect Context</span>  </a>
+  </li> 
+  <li><a class="tipb" cmd="closeAll" href="#">Close All
+  <span class="tiptextb">Close All Context</span>  </a>
   </li> 
   <li><a href="#" cmd="close">X</a></li>
   </ul>
@@ -70,12 +71,13 @@ var ContextMgr = {
   `;
                 let jt = UaJth();
                 jt.append(menu);
+                jt.append(`<div class='h'>${name}</div> `);
                 let fh = (row_n, row_text) => `
-        <div>
-            <span class='n' >${row_n}</span>
-            <span class='text'>${row_text}</span>
-       </div>
-        `;
+<div class='rows'>
+   <span class='n' >${row_n}</span>
+   <span class='text'>${row_text}</span>
+</div>
+`;
                 const lers = this.context_rows.length;
                 for (let i = 0; i < lers; i++) {
                     let row = this.context_rows[i];
@@ -124,6 +126,9 @@ var ContextMgr = {
                             this.hide();
                             break;
                         case "closeAll":
+                            ContextMgr.closeAll();
+                            break;
+                        case "unselect":
                             ContextMgr.closeAll();
                             break;
                         default:
