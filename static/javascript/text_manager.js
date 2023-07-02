@@ -38,7 +38,6 @@ var ContextMgr = {
                 left = 0;
                 top = 400;
             }
-
             const obj = this.objs[name];
             obj.open(formakey);
         }
