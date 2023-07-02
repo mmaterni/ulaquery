@@ -2,16 +2,15 @@
 
 
 var TextMgr = {
-    text_list: [],
     token_list: {},
     token_selected: [],
     load: async function () {
-        this.text_list = await D_M.load_text_list();
-        for (const file_name of this.text_list) {
-            const arr = await D_M.load_token_csv(file_name);
-            // eps19.g.ula.csv => eps0.g
-            const key = file_name.split('.').slice(0, 2).join('.')
-            this.token_list[key] = arr;
+        const token_paths = await D_M.load_text_list();
+        for (const file_path of token_paths) {
+            const arr = await D_M.load_token_csv(file_path);
+            // eps19.g.ula.csv => eps0_g elimina il punto nel nome file
+            const token_name = file_path.split('.').slice(0, 2).join('_');
+            this.token_list[token_name] = arr;
         }
     }
 }
@@ -34,7 +33,7 @@ var ContextMgr = {
             const obj = this.create(name, this.left);
             this.left += 300;
             this.objs[name] = obj;
-            obj.open(formakey);
+            obj.open(name,formakey);
         }
     },
     closeAll: function () {
@@ -48,9 +47,9 @@ var ContextMgr = {
             id: `${name}context_id`,
             wind: null,
             context_rowsrows: [],
-            open: function (formakey) {
-                const token_name = "tr1.g";
-                this.context_rows = D_M.findContextRows(formakey, token_name);
+            open: function (name,formakey) {
+                // const token_name = "tr1.g";
+                this.context_rows = D_M.findContextRows(formakey,name);
                 this.build(formakey);
                 this.show();
             },
@@ -176,12 +175,12 @@ var SelectText = {
   </div>
   <div class="select_text">
   `;
-        const rows = Object.keys(TextMgr.token_list);
+        const tojen_names = Object.keys(TextMgr.token_list);
         let jt = UaJth();
         jt.append(menu);
         jt.append("<div><ul>")
         jt.append(`<li class="h"><span>Select Text</span></li> `);
-        for (let row of rows)
+        for (let row of tojen_names)
             jt.append(`<li class="a"><a>${row}</a></li> `);
         jt.append(`</ul></div>`);
         const html = jt.html();
