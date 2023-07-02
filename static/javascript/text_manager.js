@@ -1,13 +1,29 @@
 "use strict"
 
 
+var TextMgr = {
+    text_list: [],
+    token_list: {},
+    token_selected: [],
+    load: async function () {
+        this.text_list = await D_M.load_text_list();
+        for (const file_name of this.text_list) {
+            const arr = await D_M.load_token_csv(file_name);
+            // eps19.g.ula.csv => eps0.g
+            const key = file_name.split('.').slice(0, 2).join('.')
+            this.token_list[key] = arr;
+        }
+    }
+}
+
+
 var ContextMgr = {
     names: [],
     objs: {},
     left: 0,
     open: function (formakey) {
 
-        let slcs = D_M.token_selected;
+        let slcs = TextMgr.token_selected;
         if (slcs.length == 0) {
             SelectText.open();
         }
@@ -16,7 +32,7 @@ var ContextMgr = {
             const name = s.replace('.', '_');
             this.names.push(name);
             const obj = this.create(name, this.left);
-            this.left +=300;
+            this.left += 300;
             this.objs[name] = obj;
             obj.open(formakey);
         }
@@ -155,7 +171,7 @@ var SelectText = {
   </div>
   <div class="select_text">
   `;
-        const rows = Object.keys(D_M.token_list);
+        const rows = Object.keys(TextMgr.token_list);
         let jt = UaJth();
         jt.append(menu);
         jt.append("<div><ul>")
@@ -208,13 +224,13 @@ var SelectText = {
         const attrs = this.wind.w.querySelectorAll("div.select_text li a");
         for (let a of attrs)
             a.classList.remove("select");
-        D_M.token_selected = [];
+        TxtMgr.token_selected = [];
     },
     select: function () {
         let elems = this.wind.w.querySelectorAll("div.select_text li a");
         const arr = Array.from(elems);
         const lst = arr.filter(a => a.classList.contains("select")).map(a => a.innerHTML);
-        D_M.token_selected = lst;
+        TextMgr.token_selected = lst;
     },
     selectAll: function () {
         const attrs = this.wind.w.querySelectorAll("div.select_text li a");
@@ -227,7 +243,7 @@ var SelectText = {
     selectDefault: function () {
         const elms = this.wind.w.querySelectorAll("div.select_text li a");
         const arr = Array.from(elms);
-        const names = D_M.token_selected;
+        const names = TextMgr.token_selected;
         const slcs = arr.filter(e => names.indexOf(e.innerHTML) > -1);
         for (let e of slcs) {
             e.classList.remove("select");

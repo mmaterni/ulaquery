@@ -144,9 +144,11 @@ var UlaQuery = {
 
     await sleep(100);
     await D_M.load_dict();
-    await D_M.load_tokens();
+
+    // await D_M.load_tokens();
+    await TextMgr.load();
+
     await this.builD_Menu();
-    // await DictForm.build_all();
     await FormLemma.build();
     await Sigl.build();
     await Funct.build();
