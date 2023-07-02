@@ -78,7 +78,6 @@ var DictForm = {
       jt.append("</tr>")
     }
     jt.append(`</tbody></table></div>`);
-
     const html = jt.html();
     if (!this.wind) {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
@@ -88,6 +87,7 @@ var DictForm = {
     }
     this.wind.hide();
     this.wind.setHtml(html);
+    this.bind();
   },
   show: async function (url) {
     if (!this.wind) return;
@@ -126,7 +126,21 @@ var DictForm = {
   scroll_right: function () {
     const e = this.wind.w.querySelector("div.dict_form");
     e.scrollLeft = e.scrollWidth;
+  },
+  bind: function () {
+    const a = this.wind.w.querySelector("div.dict_form");
+    a.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+      let t = ev.target;
+      while (t && t.tagName !== 'TR')
+        t = t.parentNode;
+      const td = t.querySelectorAll("td")[2];
+      const formakey = td.innerHTML;
+      ContextMgr.open(formakey);
+    });
   }
+
 };
 
 
