@@ -21,7 +21,6 @@ var ContextMgr = {
     objs: {},
     left: 0,
     open: function (formakey) {
-
         let slcs = TextMgr.token_selected;
         if (slcs.length == 0) {
             SelectText.open();
@@ -33,7 +32,7 @@ var ContextMgr = {
             const obj = this.create(name, this.left);
             this.left += 300;
             this.objs[name] = obj;
-            obj.open(name,formakey);
+            obj.open(name, formakey);
         }
     },
     closeAll: function () {
@@ -45,11 +44,12 @@ var ContextMgr = {
         const context_z = 12;
         const obj = {
             id: `${name}context_id`,
+            name: name,
             wind: null,
             context_rowsrows: [],
-            open: function (name,formakey) {
+            open: function (name, formakey) {
                 // const token_name = "tr1.g";
-                this.context_rows = D_M.findContextRows(formakey,name);
+                this.context_rows = D_M.findContextRows(formakey, name);
                 this.build(formakey);
                 this.show();
             },
@@ -57,7 +57,7 @@ var ContextMgr = {
                 const menu = `
   <div class="menu_wnd" >
   <ul>
-  <li><a class="tipb" cmd="unselects" href="#">Unselect
+  <li><a class="tipb" cmd="unselect" href="#">Unselect
   <span class="tiptextb">Close and Unselect Context</span>  </a>
   </li> 
   <li><a class="tipb" cmd="closeAll" href="#">Close All
@@ -128,7 +128,7 @@ var ContextMgr = {
                             ContextMgr.closeAll();
                             break;
                         case "unselect":
-                            ContextMgr.closeAll();
+                            SelectText.unselectOfName(this.name);
                             break;
                         default:
                         // alert(cmd + ": command not found")
@@ -151,7 +151,7 @@ var ContextMgr = {
 var SelectText = {
     id: "select_text_id",
     wind: null,
-    text_list: [],
+    // text_list: [],
     open: async function () {
         this.build();
         this.show();
@@ -224,6 +224,20 @@ var SelectText = {
             this.select();
         });
     },
+    unselectOfName: function (name) {
+        // const nds = this.wind.w.querySelectorAll(`div.select_text li.a a.select`);
+        // const arr = Array.from(nds);
+        // const a = arr.find((e) => {
+        //     return e.textContent === name;
+        // });
+        // const name = a.innerHTML;
+        const i = TextMgr.token_selected.indexOf(name);
+        TextMgr.token_selected.splice(i, 1);
+        const obj = ContextMgr.objs[name];
+        obj.hide();
+        this.selectDefault();
+        this.open();
+    },
     unselect: function () {
         const attrs = this.wind.w.querySelectorAll("div.select_text li a");
         for (let a of attrs)
@@ -247,12 +261,12 @@ var SelectText = {
     selectDefault: function () {
         const elms = this.wind.w.querySelectorAll("div.select_text li a");
         const arr = Array.from(elms);
+        for (const e of arr)
+            e.classList.remove("select");
         const names = TextMgr.token_selected;
         const slcs = arr.filter(e => names.indexOf(e.innerHTML) > -1);
-        for (let e of slcs) {
-            e.classList.remove("select");
+        for (let e of slcs)
             e.classList.add("select");
-        }
         this.select();
     }
 
