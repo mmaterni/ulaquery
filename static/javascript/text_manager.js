@@ -26,13 +26,12 @@ var ContextMgr = {
             SelectText.open();
         }
         this.left = 0;
-        for (const s of slcs) {
-            const name = s.replace('.', '_');
+        for (const name of slcs) {
             this.names.push(name);
             const obj = this.create(name, this.left);
             this.left += 300;
             this.objs[name] = obj;
-            obj.open(name, formakey);
+            obj.open(formakey);
         }
     },
     closeAll: function () {
@@ -47,9 +46,8 @@ var ContextMgr = {
             name: name,
             wind: null,
             context_rowsrows: [],
-            open: function (name, formakey) {
-                // const token_name = "tr1.g";
-                this.context_rows = D_M.findContextRows(formakey, name);
+            open: function (formakey) {
+                this.context_rows = D_M.findContextRows(formakey, this.name);
                 this.build(formakey);
                 this.show();
             },
@@ -151,7 +149,7 @@ var ContextMgr = {
 var SelectText = {
     id: "select_text_id",
     wind: null,
-    z:20,
+    z: 20,
     open: async function () {
         this.build();
         this.show();
