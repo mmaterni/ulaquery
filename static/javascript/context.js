@@ -5,9 +5,7 @@ var ContextMgr = {
     names: [],
     objs: {},
     open: function (formakey) {
-        // const tkks = Object.keys(D_M.token_list);
-        // xlog(tkks);
-        //   AAA posiziona correttamente selected
+
         let slcs = D_M.token_selected;
         if (slcs.length == 0) {
             SelectText.open();
