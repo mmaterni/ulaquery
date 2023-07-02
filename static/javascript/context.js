@@ -4,16 +4,19 @@
 var ContextMgr = {
     names: [],
     objs: {},
+    left: 0,
     open: function (formakey) {
 
         let slcs = D_M.token_selected;
         if (slcs.length == 0) {
             SelectText.open();
         }
+        this.left = 0;
         for (const s of slcs) {
             const name = s.replace('.', '_');
             this.names.push(name);
-            const obj = this.create(name);
+            const obj = this.create(name, this.left);
+            this.left +=300;
             this.objs[name] = obj;
             obj.open(formakey);
         }
@@ -23,7 +26,7 @@ var ContextMgr = {
         for (const obj of vs)
             obj.hide();
     },
-    create: function (key) {
+    create: function (key, left = 0) {
         const context_z = 12;
         const obj = {
             id: `${key}context_id`,
@@ -86,7 +89,7 @@ var ContextMgr = {
                 this.wind.hide(this.id);
             },
             setXY: function () {
-                this.wind.setXY(30, 79, -1);
+                this.wind.setXY(30 + left, 79, -1);
             },
             resetXY: function () {
                 this.wind.reset();
