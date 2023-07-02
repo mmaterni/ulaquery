@@ -67,15 +67,6 @@ var ContextMgr = {
   <li><a class="tipb" cmd="unselect" href="#">Unselect
   <span class="tiptextb">Close and Unselect Context</span> </a>
   </li> 
-
-  <li><a class="tipb" cmd="relocateAll" href="#">Relocate
-  <span class="tiptextb">Relocate All Context</span>  </a>
-  </li> 
-
-  <li><a class="tipb" cmd="closeAll" href="#">Close
-  <span class="tiptextb">Close All Context</span>  </a>
-  </li> 
-
   <li><a href="#" cmd="close">X</a></li> </ul>
   </div>
   <div class="context">
@@ -137,14 +128,8 @@ var ContextMgr = {
                         case "close":
                             this.hide();
                             break;
-                        case "closeAll":
-                            ContextMgr.closeAll();
-                            break;
                         case "unselect":
                             SelectText.unselectOfName(this.name);
-                            break;
-                        case "relocateAll":
-                            ContextMgr.relocateAll();
                             break;
                         default:
                         // alert(cmd + ": command not found")
@@ -170,7 +155,10 @@ var SelectText = {
     z: 20,
     open: async function () {
         this.build();
-        // this.show();
+        this.show();
+    },
+    toggle: async function () {
+        this.build();
         this.wind.toggle();
     },
     build: async function () {
@@ -178,14 +166,12 @@ var SelectText = {
   <div class="menu_wnd" >
   <ul>
   <li>
-  <a class="tipb" href="javascript:SelectText.unselect()">Unselect
-  <span class="tiptextb">Unselect All Texts Selecteds</span>
-  </a>
+  <a class="tipb" href="javascript:SelectText.selectAll()">Select
+  <span class="tiptextb">Select All Texts</span> </a>
   </li>
   <li>
-  <a class="tipb" href="javascript:SelectText.selectAll()">Select
-  <span class="tiptextb">Select All Texts</span>
-  </a>
+  <a class="tipb" href="javascript:SelectText.unselect()">Unselect
+  <span class="tiptextb">Unselect All Texts Selecteds</span>  </a>
   </li>
   <li><a href="javascript:SelectText.hide()">X</a></li>
   </ul>

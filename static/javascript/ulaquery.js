@@ -67,7 +67,7 @@ const menu = function () {
 </li>
 <li class="h">
 <a class="tipr" onclick="FLT.unselect()" href="#">UnSelect
-<span class="tiptextr">UnSelect All Slect OptionsActive</span></a>
+<span class="tiptextr">UnSelect All Slect Options Active</span></a>
 </li>
 </ul>
 </li>
@@ -78,27 +78,48 @@ const menu = function () {
 </li>
 
 <li class="v">
-<a class="tipb" onclick="SelectText.open()" ref="#" >Slect Text
+<a class="tipb" onclick="SelectText.toggle()" ref="#" >Slect Text
 <span class="tiptextb">Slect Text For SHow in Context</span> </a>
 </li>
 
 <li class="v">
-<a href="#">Selected Rows</a>
+<a href="#">Context</a>
 <ul class="v">
-<li class="h"><a class="tipr" onclick="FLT.queryDict()" href="#">Dictionary
-<span class="tiptextr">SHow Selected Dictionary</span></a></li>
-<li class="h"><a class="tipr" onclick="FLT.queryRslt()" ref="#" >ResulSet
-<span class="tiptextr">Show Selected ResultSet</span> </a></li>
+
+<li class="h"">
+<a class="tipb" href="javascript:ContextMgr.relocateAll()">Relocate
+<span class="tiptextb">Relocat and Open All Context Selected</span></a>
+</li>
+<li class="h"">
+<a class="tipb" href="javascript:ContextMgr.closeAll()">Close All
+<span class="tiptextb">Close All Context</span></a>
+</li>
+
+</ul>
+</li>
+
+
+<li class="v">
+<a href="#">ReusltSet</a>
+<ul class="v">
+<li class="h"><a class="tipr" onclick="FLT.queryRslt()" ref="#" >Slection
+<span class="tiptextr">Show Selected ResultSet</span> </a>
+</li>
+<li class="h"><a class="tipr" onclick="ResultSet.open()" href="#">All
+<span class="tiptextr">Show All ResultSet</span></a>
+</li>
 </ul>
 </li>
 
 <li class="v">
-<a href="#">All Rows</a>
+<a href="#">Dictionary</a>
 <ul class="v">
-<li class="h"><a class="tipr" onclick="DictForm.open()" href="#">Dictionary
-<span class="tiptextr">Show All Dictionary</span></a></li>
-<li class="h"><a class="tipr" onclick="ResultSet.open()" href="#">ResultSet
-<span class="tiptextr">Show All ResultSet</span></a></li>
+<li class="h"><a class="tipr" onclick="FLT.queryDict()" href="#">Slection
+<span class="tiptextr">Show Selected Dictionary</span></a>
+</li>
+<li class="h"><a class="tipr" onclick="DictForm.open()" href="#">All 
+<span class="tiptextr">Show All Dictionary</span></a>
+</li>
 </ul>
 </li>
 
