@@ -25,14 +25,20 @@ var ContextMgr = {
             SelectText.open();
         }
         let left = 0;
+        let top = 0;
         const names = Object.keys(this.objs);
         for (const name of slcs) {
             if (names.indexOf(name) < 0) {
                 this.names.push(name);
-                const obj = this.create(name, left);
+                const obj = this.create(name, left, top);
                 this.objs[name] = obj;
             }
             left += 300;
+            if (left > 1190) {
+                left = 0;
+                top = 400;
+            }
+
             const obj = this.objs[name];
             obj.open(formakey);
         }
@@ -47,7 +53,7 @@ var ContextMgr = {
         for (const name of names)
             this.objs[name].resetXY();
     },
-    create: function (name, left) {
+    create: function (name, left, top) {
         const context_z = 12;
 
         const obj = {
@@ -110,7 +116,7 @@ var ContextMgr = {
                 this.wind.hide(this.id);
             },
             setXY: function () {
-                this.wind.setXY(30 + left, 70, -1);
+                this.wind.setXY(30 + left, 50 + top, -1);
             },
             resetXY: function () {
                 this.wind.reset();
