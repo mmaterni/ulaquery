@@ -65,14 +65,13 @@ const menu = function () {
 <a class="tipr" onclick="FLT.show()" href="#">Show
 <span class="tiptextr">Opoen Window Filter Active</span></a>
 </li>
+<li class="h">
+<a class="tipr" onclick="FLT.unselect()" href="#">UnSelect
+<span class="tiptextr">UnSelect All Slect OptionsActive</span></a>
+</li>
 </ul>
 </li>
   
-<li class="v">
-<a class="tipb" onclick="FLT.unselect()" ref="#" >Unselect
-<span class="tiptextb">Unselect All Fileds</span> </a>
-</li>
-
 <li class="v">
 <a class="tipb" onclick="Where.testQuery()" ref="#" >Test Query
 <span class="tiptextb">Display Number of Results</span> </a>

@@ -115,6 +115,7 @@ var ContextMgr = {
             },
             hide: function () {
                 if (!this.wind) return;
+                //AAA this.wind.hide(this.id);
                 this.wind.hide(this.id);
             },
             setXY: function () {
@@ -169,7 +170,8 @@ var SelectText = {
     z: 20,
     open: async function () {
         this.build();
-        this.show();
+        // this.show();
+        this.wind.toggle();
     },
     build: async function () {
         const menu = `
@@ -215,7 +217,8 @@ var SelectText = {
     },
     hide: function () {
         if (!this.wind) return;
-        this.wind.hide(this.id);
+        // AAA this.wind.hide(this.id);
+        this.wind.hide();
     },
     setXY: function () {
         this.wind.setCenterY(50, -1);
