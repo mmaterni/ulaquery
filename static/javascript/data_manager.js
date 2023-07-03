@@ -371,7 +371,6 @@
         }
       },
       findContextIndices: function (formakey, token_name) {
-        //AAA const rows = TextMgr.token_list[token_name];
         const rows = this.token_list[token_name];
         const indices = rows.reduce((indexes, row, index) => {
           if (row.indexOf(formakey) > -1) {

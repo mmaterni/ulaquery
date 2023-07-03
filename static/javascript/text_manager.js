@@ -48,7 +48,7 @@ var ContextMgr = {
             obj.hide();
     },
     relocateAll: function () {
-        let names = D_M.token_selected;//AAA
+        let names = D_M.token_selected;
         for (const name of names)
             this.objs[name].resetXY();
     },
@@ -182,13 +182,12 @@ var SelectText = {
   </div>
   <div class="select_text">
   `;
-        // AAA const tojen_names = Object.keys(TextMgr.token_list);
-        const tojen_names = Object.keys(D_M.token_list);
+        const token_names = Object.keys(D_M.token_list);
         let jt = UaJth();
         jt.append(menu);
         jt.append("<div><ul>")
         jt.append(`<li class="h"><span>Select Text</span></li> `);
-        for (let row of tojen_names)
+        for (let row of token_names)
             jt.append(`<li class="a"><a>${row}</a></li> `);
         jt.append(`</ul></div>`);
         const html = jt.html();
