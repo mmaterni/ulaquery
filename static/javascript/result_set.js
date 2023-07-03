@@ -68,13 +68,6 @@ var ResultSet = {
     jt.append(`</tr></thead><tbody>`);
 
     const rh = (d) => `<td>${d}</td>`;
-    // for (const row of rows) {
-    //   jt.append("<tr>")
-    //   jt.append(rh, row[0]);
-    //   for (const f of row.slice(1))
-    //     jt.append(rh, f);
-    //   jt.append("</tr>")
-    // }
     const lers = rows.length;
     for (let i = 0; i < lers; i++) {
       const row = rows[i];
