@@ -382,11 +382,11 @@
       },
       findContextRows: function (formakey, token_name) {
         const indexs = this.findContextIndices(formakey, token_name);
-        // const arr_token = TextMgr.token_list[token_name];
         const arr_token = this.token_list[token_name];
         const text_rows = [];
         for (const i of indexs) {
           const row = arr_token[i];
+          // setta il numero di riga originale
           row.unshift(`${i}`);
           text_rows.push(row);
         }

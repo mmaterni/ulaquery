@@ -1,20 +1,144 @@
 "use strict"
 
 
-// var TextMgr = {
-//     token_list: {},
-//     token_selected: [],
-//     load: async function () {
-//         const token_paths = await D_M.load_text_list();
-//         for (const file_path of token_paths) {
-//             const arr = await D_M.load_token_csv(file_path);
-//             // eps19.g.ula.csv => eps0_g elimina il punto nel nome file
-//             const token_name = file_path.split('.').slice(0, 2).join('_');
-//             this.token_list[token_name] = arr;
-//         }
-//     }
-// }
+var TextMgr = {
+    names: [],
+    objs: {},
+    open: function (name) {
+        const obj = this.objs[name];
+        obj.open();
+    },
+    openSelected: function () {
+        let slcs = D_M.token_selected;
+        if (slcs.length == 0) {
+            SelectText.open();
+        }
+        let left = 0;
+        let top = 0;
+        const names = Object.keys(this.objs);
+        for (const name of slcs) {
+            if (names.indexOf(name) < 0) {
+                this.names.push(name);
+                const obj = this.create(name, left, top);
+                this.objs[name] = obj;
+            }
+            left += 300;
+            const obj = this.objs[name];
+            obj.open();
+        }
+    },
+    closeAll: function () {
+        const objs = Object.values(this.objs);
+        for (const obj of objs)
+            obj.hide();
+    },
+    relocateAll: function () {
+        let names = D_M.token_selected;
+        for (const name of names)
+            this.objs[name].resetXY();
+    },
+    create: function (name, left, top) {
+        const context_z = 12;
 
+        const obj = {
+            id: `${name}text_id`,
+            name: name,
+            wind: null,
+            text_rows: [],
+            open: function () {
+                this.text_rows = D_M.token_list[this.name];
+                this.build();
+                this.show();
+            },
+            build: function () {
+                const menu = `
+  <div class="menu_wnd" >
+  <ul>
+  <li><a class="tipb" cmd="unselect" href="#">Unselect
+  <span class="tiptextb">Close and Unselect Text</span> </a>
+  </li> 
+  <li><a href="#" cmd="close">X</a></li> </ul>
+  </div>
+  <div class="text">
+  `;
+                let jt = UaJth();
+                jt.append(menu);
+                jt.append(`<div class='h'>${name}</div> `);
+                let fh = (row_n, row_text) => `
+<div class='rows'>
+   <span class='n' >${row_n}</span>
+   <span class='text'>${row_text}</span>
+</div>
+`;
+                const lers = this.text_rows.length;
+                for (let i = 0; i < lers; i++) {
+                    let row = this.text_rows[i];
+                    const n=i;
+                    let text = row.join(" ");
+                    // const n = row[0];
+                    // let text = row.slice(1).join(" ");
+                    // text = text.replace(formakey, `<span>${formakey}</span>`)
+                    jt.append(fh, n, text);
+                }
+                jt.append(`</tbody></table></div>`);
+                const html = jt.html();
+                if (!this.wind) {
+                    this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
+                    this.setXY();
+                    this.wind.drag();
+                    this.wind.setZ(context_z);
+                }
+                this.wind.hide();
+                this.wind.setHtml(html);
+                this.bind();
+            },
+            show: function (url) {
+                if (!this.wind) return;
+                this.wind.show();
+            },
+            hide: function () {
+                if (!this.wind) return;
+                this.wind.hide();
+            },
+            setXY: function () {
+                this.wind.setXY(10 + left, 30 + top, -1);
+            },
+            resetXY: function () {
+                this.wind.reset();
+                this.setXY();
+                this.show();
+            },
+            bind: function () {
+                const m = this.wind.w.querySelector("div.menu_wnd");
+                m.addEventListener("click", (ev) => {
+                    ev.preventDefault();
+                    ev.stopImmediatePropagation();
+                    const t = ev.target;
+                    const cmd = t.getAttribute("cmd");
+                    switch (cmd) {
+                        case "close":
+                            this.hide();
+                            break;
+                        case "unselect":
+                            SelectText.unselectOfName(this.name);
+                            break;
+                        default:
+                        // alert(cmd + ": command not found")
+                    }
+                });
+                const a = this.wind.w.querySelector("div.text");
+                a.addEventListener("click", (ev) => {
+                    ev.preventDefault();
+                    ev.stopImmediatePropagation();
+                    // let t = ev.target;
+                    // while (t && t.tagName !== 'TR')
+                    //   t = t.parentNode;
+                });
+            },
+        }
+        return obj;
+    }
+}
 
 var ContextMgr = {
     names: [],

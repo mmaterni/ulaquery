@@ -98,7 +98,6 @@ const menu = function () {
 </ul>
 </li>
 
-
 <li class="v">
 <a href="#">ReusltSet</a>
 <ul class="v">
@@ -123,24 +122,29 @@ const menu = function () {
 </ul>
 </li>
 
+
 <li class="v">
-<a href="#">Utils</a>
+<a href="#">Text</a>
 <ul class="v">
-<li class="h">
-  <a class="cmd tipr" cmd="show_store" href="#">Show Store
-  <span class="tiptextr">Show LocalStore</span></a>
+
+<li class="h"">
+<a class="tipb" href="javascript:TextMgr.openSelected()">Opene
+<span class="tiptextb">Open All Text Selected</span></a>
 </li>
-<li class="h">
-  <a class="cmd tipr" cmd="clear_store" href="#">Clean Store
-  <span class="tiptextr">Clean LocalStore</span></a>
+<li class="h"">
+<a class="tipb" href="javascript:TextMgr.relocateAll()">Relocate
+<span class="tiptextb">Relocat and Open All Text Selected</span></a>
 </li>
+<li class="h"">
+<a class="tipb" href="javascript:TextMgr.closeAll()">Close All
+<span class="tiptextb">Close All Text</span></a>
+</li>
+
 </ul>
 </li>
 
-<li class="v"><a class="cmd" cmd="help" href="#">Help</a></li>
 
-<li class="v"><a class="tipb" onclick="cmd_log_toggle()" href="#">Log
-<span class="tiptextb">Toggle Log</span></a></li>
+<li class="v"><a class="cmd" cmd="help" href="#">Help</a></li>
 
 <li class="v"><a onclick="test()" href="#" >?</a></li>
 <li class="v"><a onclick="cmd_close()" href="#" >close</a></li>
@@ -165,7 +169,6 @@ var UlaQuery = {
     await sleep(100);
     await D_M.load_dict();
     await D_M.load_tokens();
-    // await TextMgr.load();
     await this.builD_Menu();
     await FormLemma.build();
     await Sigl.build();
