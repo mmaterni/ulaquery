@@ -11,7 +11,7 @@ var ResultSet = {
   id: "resultset_id",
   wind: null,
   open: async function () {
-    const rows = D_M.allRsltRows();
+    const rows = D_M.rslt_rows;
     ResultSet.build(rows);
     ResultSet.show();
   },
@@ -67,10 +67,15 @@ var ResultSet = {
     for (const x of heads) jt.append(h, x.toUpperCase());
     jt.append(`</tr></thead><tbody>`);
 
-    // rowa
-    const lers = rows.length;
     const rh = (d) => `<td>${d}</td>`;
-    // AAA3 valutare l'uso di idx al posto di i
+    // for (const row of rows) {
+    //   jt.append("<tr>")
+    //   jt.append(rh, row[0]);
+    //   for (const f of row.slice(1))
+    //     jt.append(rh, f);
+    //   jt.append("</tr>")
+    // }
+    const lers = rows.length;
     for (let i = 0; i < lers; i++) {
       const row = rows[i];
       jt.append("<tr>")

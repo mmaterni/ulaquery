@@ -321,18 +321,12 @@ X|other||
 
         return indices;
       },
-      allRsltRows: function () {
-        const le = this.dict_rows.length;
-        const rows = [];
-        for (let i = 0; i < le; i++)
-          rows.push(this.rslt_rows[i]);
-        return rows;
-      },
       findRsltRows: function (js) {
         const idxs = this.findIndices(js);
         const rows = [];
         for (const i of idxs)
           rows.push(this.rslt_rows[i]);
+        // rows.push([i, ...this.rslt_rows[i]]);
         return rows;
       },
       findDictRows: function (js) {
@@ -340,6 +334,7 @@ X|other||
         const rows = [];
         for (const i of idxs)
           rows.push(this.dict_rows[i]);
+        // rows.push([i, ...this.rslt_rows[i]]);
         return rows;
       },
       setQueryConditions: function () {
@@ -423,28 +418,6 @@ X|other||
         let s = JSON.stringify(js).toLowerCase();
         return JSON.parse(s);
       },
-      //AAA load_token_csv: async function (token_name) {
-      //   const url = `ula_data/data_export/${token_name}`;
-      //   try {
-      //     const resp = await fetch(url, {
-      //       method: 'GET',
-      //       headers: { "Content-Type": "text/plain;charset=UTF-8" },
-      //       cache: "default"
-      //     });
-      //     if (!resp.ok) {
-      //       throw new Error(`Erroe:${resp.status} ${resp.statusText}`);
-      //     }
-      //     const data = await resp.text();
-      //     const tokens = data.trim().split("\n");
-      //     tokens.push('##|##');
-
-      //     // forma|key|sigla ritoena l'array di token
-      //     return tokens.map((item) => item.split("|")[1]);
-      //   } catch (error) {
-      //     alert(`Errror:${url}\n ${error}`);
-      //     throw error;
-      //   }
-      // },
       load_token_csv: async function (token_name) {
         const url = `ula_data/data_export/${token_name}`;
         try {
@@ -495,16 +468,6 @@ X|other||
           throw error;
         }
       },
-      //AAA findContextIndices: function (formakey, token_name) {
-      //   const arr = TextMgr.token_list[token_name];
-      //   const index_selectedes = arr.reduce((indexes, value, index) => {
-      //     if (value === formakey) {
-      //       indexes.push(index);
-      //     }
-      //     return indexes;
-      //   }, []);
-      //   return index_selectedes;
-      // },
       findContextIndices: function (formakey, token_name) {
         const rows = TextMgr.token_list[token_name];
         const indices = rows.reduce((indexes, row, index) => {
@@ -515,25 +478,6 @@ X|other||
         }, []);
         return indices;
       },
-      //AAA findContextRows: function (formakey, token_name) {
-      //   const leftIndexOf = function (arr, element, from) {
-      //     for (let i = from; i >= 0; i--)
-      //       if (arr[i] === element)
-      //         return i;
-      //     return -1;
-      //   }
-      //   const indexs = this.findContextIndices(formakey, token_name);
-      //   const arr = TextMgr.token_list[token_name];
-      //   const text_rows = [];
-      //   for (const i of indexs) {
-      //     const i0 = leftIndexOf(arr, "##", i) + 1;
-      //     const ir = arr.indexOf("##", i);
-      //     const row = arr.slice(i0, ir);
-      //     row.unshift(`${i}`);
-      //     text_rows.push(row);
-      //   }
-      //   return text_rows;
-      // },
       findContextRows: function (formakey, token_name) {
         const indexs = this.findContextIndices(formakey, token_name);
         const arr_token = TextMgr.token_list[token_name];

@@ -1,17 +1,11 @@
 
 "use strict"
 
+const array1 = [1, 2, 3];
+const array2 = [4, 5, 6];
 
-function removeLastDigitI(str) {
-  return !isNaN(str[str.length - 1]) ? str.slice(0, -1) : str;
-}
+let newArray = [...array1, ...array2];
+console.log(newArray);
 
-const name1="t5.g.ula.csv";
-const name2 = name1.split('.').slice(0,2).join('.')
-console.log(name1,name2);
-
-console.log(removeLastDigitI('pippo'));
-console.log(removeLastDigitI('pippo1'));
-console.log(removeLastDigitI('pippo21'));
-console.log(removeLastDigitI('p2ippo1'));
-console.log(removeLastDigitI('p2ippo'));
+newArray = [33, ...array2];
+console.log(newArray);
