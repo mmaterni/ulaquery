@@ -489,7 +489,6 @@ X|other||
         }
         return text_rows;
       }
-
     };
 
     window.D_M = DM;
