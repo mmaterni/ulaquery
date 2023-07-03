@@ -115,8 +115,8 @@ X|other||
       dict_rows: [],
       dict_heads: [],
       dict_map_columns: {},
-      rslt_rows: [],
-      rslt_heads: [],
+      dict_rsl_rows: [],
+      dict_rsl_heads: [],
       load_dict: async function () {
         const url = `ula_data/data_export/dictionary.ula.csv`;
         try {
@@ -154,11 +154,11 @@ X|other||
         const i0_datets = row.findIndex((e, i) => i > i0_locts && e.startsWith("DAT"));
 
         // intestazione resultset
-        this.rslt_heads = this.dict_heads.slice(0, i0_attrs);
-        this.rslt_heads.push("MSD");
-        this.rslt_heads.push("SIGL.");
-        this.rslt_heads.push("LOC.");
-        this.rslt_heads.push("DATE");
+        this.dict_rsl_heads = this.dict_heads.slice(0, i0_attrs);
+        this.dict_rsl_heads.push("MSD");
+        this.dict_rsl_heads.push("SIGL.");
+        this.dict_rsl_heads.push("LOC.");
+        this.dict_rsl_heads.push("DATE");
 
         const dict2rslt = (r) => {
           const r0 = r.slice(0, i0_attrs);
@@ -181,10 +181,10 @@ X|other||
           row.push(s);
           return row;
         }
-        this.rslt_rows = [];
+        this.dict_rsl_rows = [];
         for (const row of this.dict_rows) {
           const r = dict2rslt(row);
-          this.rslt_rows.push(r);
+          this.dict_rsl_rows.push(r);
         }
       },
       findIndices: function (js) {
@@ -325,8 +325,8 @@ X|other||
         const idxs = this.findIndices(js);
         const rows = [];
         for (const i of idxs)
-          rows.push(this.rslt_rows[i]);
-        // rows.push([i, ...this.rslt_rows[i]]);
+          rows.push(this.dict_rsl_rows[i]);
+        // rows.push([i, ...this.dict_rsl_rows[i]]);
         return rows;
       },
       findDictRows: function (js) {
@@ -334,7 +334,7 @@ X|other||
         const rows = [];
         for (const i of idxs)
           rows.push(this.dict_rows[i]);
-        // rows.push([i, ...this.rslt_rows[i]]);
+        // rows.push([i, ...this.dict_rsl_rows[i]]);
         return rows;
       },
       setQueryConditions: function () {

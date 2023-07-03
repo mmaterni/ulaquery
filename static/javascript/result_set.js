@@ -11,7 +11,7 @@ var ResultSet = {
   id: "resultset_id",
   wind: null,
   open: async function () {
-    const rows = D_M.rslt_rows;
+    const rows = D_M.dict_rsl_rows;
     ResultSet.build(rows);
     ResultSet.show();
   },
@@ -60,7 +60,7 @@ var ResultSet = {
     jt.append(menu);
 
     // head
-    const heads = D_M.rslt_heads;
+    const heads = D_M.dict_rsl_heads;
     jt.append(`<table><thead><tr>`);
     let h = (d) => `<th><span>${d}</span></th>`;
     jt.append(h, "N.");
