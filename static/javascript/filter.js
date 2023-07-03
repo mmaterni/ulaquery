@@ -146,15 +146,13 @@ var FLT = {
     this.getAllSelected();
     const js = D_M.setQueryConditions();
     const rows = D_M.findRsltRows(js);
-    ResultSet.build(rows);
-    ResultSet.show();
+    ResultSet.openSelected(rows);
   },
   queryDict: function () {
     this.getAllSelected();
     const js = D_M.setQueryConditions();
     const rows = D_M.findDictRows(js);
-    DictForm.build(rows);
-    DictForm.show();
+    DictForm.openSelected(rows);
   }
 };
 
@@ -629,7 +627,7 @@ var Funct = {
   hide: function () {
     if (!this.wind) return;
     if (this.isActive)
-      this.wind.hide(s);
+      this.wind.hide();
   },
   setXY: function () {
     this.wind.setXY(funct_left, funct_top, -1);

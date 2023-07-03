@@ -292,7 +292,6 @@ X|other||
           }
           if (!ok) continue;
 
-
           arr = js.pos[1];
           if (arr.length > 0) {
             const c = js.pos[0];
@@ -424,6 +423,28 @@ X|other||
         let s = JSON.stringify(js).toLowerCase();
         return JSON.parse(s);
       },
+      //AAA load_token_csv: async function (token_name) {
+      //   const url = `ula_data/data_export/${token_name}`;
+      //   try {
+      //     const resp = await fetch(url, {
+      //       method: 'GET',
+      //       headers: { "Content-Type": "text/plain;charset=UTF-8" },
+      //       cache: "default"
+      //     });
+      //     if (!resp.ok) {
+      //       throw new Error(`Erroe:${resp.status} ${resp.statusText}`);
+      //     }
+      //     const data = await resp.text();
+      //     const tokens = data.trim().split("\n");
+      //     tokens.push('##|##');
+
+      //     // forma|key|sigla ritoena l'array di token
+      //     return tokens.map((item) => item.split("|")[1]);
+      //   } catch (error) {
+      //     alert(`Errror:${url}\n ${error}`);
+      //     throw error;
+      //   }
+      // },
       load_token_csv: async function (token_name) {
         const url = `ula_data/data_export/${token_name}`;
         try {
@@ -437,28 +458,24 @@ X|other||
           }
           const data = await resp.text();
           const tokens = data.trim().split("\n");
-          // AAA//////////////////////
-          // tokens.push('##|##');
-          // let text_row = [];
-          // const text_rows = [];
-          // for (const item of tokens) {
-          //   const formakey = item.split('|')[1];
-          //   if (formakey !== "##") {
-          //     text_row.push(formakey);
-          //   } else {
-          //     text_rows.push(text_row);
-          //     text_row = [];
-          //   }
-          // }
-          // return text_rows;
-          // ////////////////////////
-          // forma|key|sigla ritoena l'array di token
-          return tokens.map((item) => item.split("|")[1]);
-      } catch(error) {
-        alert(`Errror:${url}\n ${error}`);
-        throw error;
-      }
-    },
+          tokens.push('##|##');
+          let text_row = [];
+          const text_rows = [];
+          for (const item of tokens) {
+            const formakey = item.split('|')[1];
+            if (formakey !== "##") {
+              text_row.push(formakey);
+            } else {
+              text_rows.push(text_row);
+              text_row = [];
+            }
+          }
+          return text_rows;
+        } catch (error) {
+          alert(`Errror:${url}\n ${error}`);
+          throw error;
+        }
+      },
       load_text_list: async function () {
         const url = `ula_data/data_export/token_list.txt`;
         try {
@@ -478,41 +495,60 @@ X|other||
           throw error;
         }
       },
-    findContextIndices: function (formakey, token_name) {
-      // AAA modifica della ricerca è per righe
-      const arr = TextMgr.token_list[token_name];
-      const index_selectedes = arr.reduce((indexes, value, index) => {
-        if (value === formakey) {
-          indexes.push(index);
+      //AAA findContextIndices: function (formakey, token_name) {
+      //   const arr = TextMgr.token_list[token_name];
+      //   const index_selectedes = arr.reduce((indexes, value, index) => {
+      //     if (value === formakey) {
+      //       indexes.push(index);
+      //     }
+      //     return indexes;
+      //   }, []);
+      //   return index_selectedes;
+      // },
+      findContextIndices: function (formakey, token_name) {
+        const rows = TextMgr.token_list[token_name];
+        const indices = rows.reduce((indexes, row, index) => {
+          if (row.indexOf(formakey) > -1) {
+            indexes.push(index);
+          }
+          return indexes;
+        }, []);
+        return indices;
+      },
+      //AAA findContextRows: function (formakey, token_name) {
+      //   const leftIndexOf = function (arr, element, from) {
+      //     for (let i = from; i >= 0; i--)
+      //       if (arr[i] === element)
+      //         return i;
+      //     return -1;
+      //   }
+      //   const indexs = this.findContextIndices(formakey, token_name);
+      //   const arr = TextMgr.token_list[token_name];
+      //   const text_rows = [];
+      //   for (const i of indexs) {
+      //     const i0 = leftIndexOf(arr, "##", i) + 1;
+      //     const ir = arr.indexOf("##", i);
+      //     const row = arr.slice(i0, ir);
+      //     row.unshift(`${i}`);
+      //     text_rows.push(row);
+      //   }
+      //   return text_rows;
+      // },
+      findContextRows: function (formakey, token_name) {
+        const indexs = this.findContextIndices(formakey, token_name);
+        const arr_token = TextMgr.token_list[token_name];
+        const text_rows = [];
+        for (const i of indexs) {
+          const row = arr_token[i];
+          row.unshift(`${i}`);
+          text_rows.push(row);
         }
-        return indexes;
-      }, []);
-      return index_selectedes;
-    },
-    findContextRows: function (formakey, token_name) {
-      // AAA XXX modifca tipo di array per i token
-      const leftIndexOf = function (arr, element, from) {
-        for (let i = from; i >= 0; i--)
-          if (arr[i] === element)
-            return i;
-        return -1;
+        return text_rows;
       }
-      const indexs = this.findContextIndices(formakey, token_name);
-      const arr = TextMgr.token_list[token_name];
-      // AAA modificato arr
-      const text_rows = [];
-      for (const i of indexs) {
-        const i0 = leftIndexOf(arr, "##", i) + 1;
-        const ir = arr.indexOf("##", i);
-        const row = arr.slice(i0, ir);
-        row.unshift(`${i}`);
-        text_rows.push(row);
-      }
-      return text_rows;
-    }
-  };
 
-window.D_M = DM;
+    };
+
+    window.D_M = DM;
   }).call(this);
 
 /*

@@ -11,6 +11,10 @@ var DictForm = {
     this.build(D_M.dict_rows);
     this.show();
   },
+  openSelected: function (rows) {
+    this.build(rows);
+    this.show();
+  },
   build: async function (rows) {
     // collegamento con D_M per nomi colonne
     const heads = D_M.dict_heads;

@@ -59,7 +59,7 @@ var ContextMgr = {
             id: `${name}context_id`,
             name: name,
             wind: null,
-            context_rowsrows: [],
+            context_rows: [],
             open: function (formakey) {
                 this.context_rows = D_M.findContextRows(formakey, this.name);
                 this.build(formakey);

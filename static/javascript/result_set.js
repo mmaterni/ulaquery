@@ -15,6 +15,10 @@ var ResultSet = {
     ResultSet.build(rows);
     ResultSet.show();
   },
+  openSelected: async function (rows) {
+    ResultSet.build(rows);
+    ResultSet.show();
+  },
   build: async function (rows) {
     const sp = "         ";
     const menu = `
@@ -66,7 +70,7 @@ var ResultSet = {
     // rowa
     const lers = rows.length;
     const rh = (d) => `<td>${d}</td>`;
-    // AAA valutare l'uso di idx al posto di i
+    // AAA3 valutare l'uso di idx al posto di i
     for (let i = 0; i < lers; i++) {
       const row = rows[i];
       jt.append("<tr>")
