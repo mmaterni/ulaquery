@@ -1,109 +1,6 @@
 
-/*
-POS|pos_name|msd_name|attrs
-NOUN|noun|gender|Masc,Fem,Neut
-NOUN|noun|number|Sing,Plur
-NOUN|noun|case|Nom,Acc
-
-PROPN|properNoun|gender|Masc,Fem,Neut
-PROPN|properNoun|number|Sing,Plur
-PROPN|properNoun|case|Nom,Acc
-
-ADJ|adjective|gender|Masc,Fem,Neut
-ADJ|adjective|number|Sing,Plur
-ADJ|adjective|case|Nom,Acc
-ADJ|adjective|degree|Pos,Cmp,Sup,Abs
-
-DET|determiner|deterType|ArtDef,ArtIndef,Poss,Rel,Dem,Neg,Ind,Int,Exc
-DET|determiner|gender|Masc,Fem,Neut
-DET|determiner|number|Sing,Plur
-DET|determiner|case|Nom,Acc
-DET|determiner|MWEs|MWEs
-
-PRON|pronoun|pronType|Prs,Poss,Rel,Dem,Neg,Ind,Int
-PRON|pronoun|person|1,2,3
-PRON|pronoun|gender|Masc,Fem,Neut
-PRON|pronoun|number|Sing,Plur
-PRON|pronoun|case|Nom,Acc
-PRON|pronoun|MWEs|MWEs
-
-VERB|verb|verbForm|Fin,Ind
-VERB|verb|mood|Inf,Part,Ger,Ind,Imp,Cnd,Sub
-VERB|verb|tense|Past,Pres,Fut,Imp
-VERB|verb|voice|Act,Pass,Rfl
-VERB|verb|property|Intr,Trans
-VERB|verb|person|1,2,3
-VERB|verb|number|Sing,Plur
-VERB|verb|gender|Masc,Fem,Neut
-VERB|verb|MWEs|MWEs
-
-ADP|adposition|adpType|PrepS,PrepArt
-ADP|adposition|MWEs|MWEs
-
-ADV|adverb|advType|Man,Loc,Tim,Deg,Freq
-ADV|adverb|advType2|Dem,Ind,Neg,Int,Tot
-ADV|adverb|degree|Pos,Cmp,Sup,Abs
-ADV|adverb|MWEs|MWEs
-
-CCONJ|coordinating conjunction|MWEs|MWEs
-
-SCONJ|subordinating conjunction|MWEs|MWEs
-
-NUM|numeral|numType|Card,Ord
-
-PART|particle|partType|Pos,Neg,Int,Exc,Verb
-
-INTJ|interjection||
-
-
-X|other||
--|del||
-
-0: FORMA
-1: KEY
-2: LEMMA
-3: ETIMO
-4: LANG
-5: DATE
-6: POS
-7: FUNCT
- 
-8: gender
-9: number
-10: case
-11: degree
-12: deterType
-13: MWEs
-14: pronType
-15: person
-16: verbForm
-17: mood
-18: tense
-19: voice
-20: property
-21: adpType
-22: advType
-23: advType2
-24: numType
-25: partType
- 
-26: g
-27: h
-28: p
-29: v
- 
-30: LOC.1
-31: LOC.2
-32: LOC.3
-33: LOC.4
- 
-34: DATE.0
-35: DATE.1
-36: DATE.2
-*/
 
 "use strict"
-
 
   // var D_M = (function () {
   ; (function () {
@@ -115,8 +12,13 @@ X|other||
       dict_rows: [],
       dict_heads: [],
       dict_map_columns: {},
+
       dict_rsl_rows: [],
       dict_rsl_heads: [],
+
+      token_list: {},
+      token_selected: [],
+
       load_dict: async function () {
         const url = `ula_data/data_export/dictionary.ula.csv`;
         try {
@@ -469,7 +371,8 @@ X|other||
         }
       },
       findContextIndices: function (formakey, token_name) {
-        const rows = TextMgr.token_list[token_name];
+        //AAA const rows = TextMgr.token_list[token_name];
+        const rows = this.token_list[token_name];
         const indices = rows.reduce((indexes, row, index) => {
           if (row.indexOf(formakey) > -1) {
             indexes.push(index);
@@ -480,7 +383,8 @@ X|other||
       },
       findContextRows: function (formakey, token_name) {
         const indexs = this.findContextIndices(formakey, token_name);
-        const arr_token = TextMgr.token_list[token_name];
+        // const arr_token = TextMgr.token_list[token_name];
+        const arr_token = this.token_list[token_name];
         const text_rows = [];
         for (const i of indexs) {
           const row = arr_token[i];
@@ -488,9 +392,18 @@ X|other||
           text_rows.push(row);
         }
         return text_rows;
+      },
+      load_tokens: async function () {
+        const token_paths = await D_M.load_text_list();
+        for (const file_path of token_paths) {
+          const arr = await D_M.load_token_csv(file_path);
+          // eps19.g.ula.csv => eps0_g elimina il punto nel nome file
+          const token_name = file_path.split('.').slice(0, 2).join('_');
+          this.token_list[token_name] = arr;
+        }
+
       }
     };
-
     window.D_M = DM;
   }).call(this);
 

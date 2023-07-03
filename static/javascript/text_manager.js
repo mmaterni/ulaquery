@@ -1,26 +1,26 @@
 "use strict"
 
 
-var TextMgr = {
-    token_list: {},
-    token_selected: [],
-    load: async function () {
-        const token_paths = await D_M.load_text_list();
-        for (const file_path of token_paths) {
-            const arr = await D_M.load_token_csv(file_path);
-            // eps19.g.ula.csv => eps0_g elimina il punto nel nome file
-            const token_name = file_path.split('.').slice(0, 2).join('_');
-            this.token_list[token_name] = arr;
-        }
-    }
-}
+// var TextMgr = {
+//     token_list: {},
+//     token_selected: [],
+//     load: async function () {
+//         const token_paths = await D_M.load_text_list();
+//         for (const file_path of token_paths) {
+//             const arr = await D_M.load_token_csv(file_path);
+//             // eps19.g.ula.csv => eps0_g elimina il punto nel nome file
+//             const token_name = file_path.split('.').slice(0, 2).join('_');
+//             this.token_list[token_name] = arr;
+//         }
+//     }
+// }
 
 
 var ContextMgr = {
     names: [],
     objs: {},
     open: function (formakey) {
-        let slcs = TextMgr.token_selected;
+        let slcs = D_M.token_selected;
         if (slcs.length == 0) {
             SelectText.open();
         }
@@ -48,7 +48,7 @@ var ContextMgr = {
             obj.hide();
     },
     relocateAll: function () {
-        let names = TextMgr.token_selected;
+        let names = D_M.token_selected;//AAA
         for (const name of names)
             this.objs[name].resetXY();
     },
@@ -182,7 +182,8 @@ var SelectText = {
   </div>
   <div class="select_text">
   `;
-        const tojen_names = Object.keys(TextMgr.token_list);
+        // AAA const tojen_names = Object.keys(TextMgr.token_list);
+        const tojen_names = Object.keys(D_M.token_list);
         let jt = UaJth();
         jt.append(menu);
         jt.append("<div><ul>")
@@ -231,8 +232,8 @@ var SelectText = {
         });
     },
     unselectOfName: function (name) {
-        const i = TextMgr.token_selected.indexOf(name);
-        TextMgr.token_selected.splice(i, 1);
+        const i = D_M.token_selected.indexOf(name);
+        D_M.token_selected.splice(i, 1);
         const obj = ContextMgr.objs[name];
         obj.hide();
         this.selectDefault();
@@ -242,14 +243,14 @@ var SelectText = {
         const attrs = this.wind.w.querySelectorAll("div.select_text li a");
         for (let a of attrs)
             a.classList.remove("select");
-        TextMgr.token_selected = [];
+        D_M.token_selected = [];
         ContextMgr.closeAll();
     },
     select: function () {
         let elems = this.wind.w.querySelectorAll("div.select_text li a");
         const arr = Array.from(elems);
         const lst = arr.filter(a => a.classList.contains("select")).map(a => a.innerHTML);
-        TextMgr.token_selected = lst;
+        D_M.token_selected = lst;
     },
     selectAll: function () {
         const attrs = this.wind.w.querySelectorAll("div.select_text li a");
@@ -264,7 +265,7 @@ var SelectText = {
         const arr = Array.from(elms);
         for (const e of arr)
             e.classList.remove("select");
-        const names = TextMgr.token_selected;
+        const names = D_M.token_selected;
         const slcs = arr.filter(e => names.indexOf(e.innerHTML) > -1);
         for (let e of slcs)
             e.classList.add("select");

@@ -1,5 +1,47 @@
 "use strict"
 
+/*
+0: FORMA
+1: KEY
+2: LEMMA
+3: ETIMO
+4: LANG
+5: DATE
+6: POS
+7: FUNCT
+8: gender
+9: number
+10: case
+11: degree
+12: deterType
+13: MWEs
+14: pronType
+15: person
+16: verbForm
+17: mood
+18: tense
+19: voice
+20: property
+21: adpType
+22: advType
+23: advType2
+24: numType
+25: partType
+ 
+26: g
+27: h
+28: p
+29: v
+ 
+30: LOC.1
+31: LOC.2
+32: LOC.3
+33: LOC.4
+ 
+34: DATE.0
+35: DATE.1
+36: DATE.2
+*/
 
 
 var DictForm = {
