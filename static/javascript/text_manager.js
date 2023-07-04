@@ -6,10 +6,17 @@
 <span class="arrow-right">&#8594;</span>
 <span class="arrow-left">&#8592;</span>
 
-triangle-up      &#9650;
-triangle-down    &#9660;
-triangle-right    &#9654;
-triangle-left     &#9664;
+triangle-up      
+&#9650;
+
+triangle-down    
+&#9660;
+
+triangle-right    
+&#9654;
+
+triangle-left     
+&#9664;
 
 
 */
