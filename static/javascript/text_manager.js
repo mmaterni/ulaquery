@@ -226,10 +226,6 @@ var ContextMgr = {
                 this.objs[name] = obj;
             }
             left += 300;
-            if (left > 1190) {
-                left = 0;
-                top = 400;
-            }
             const obj = this.objs[name];
             obj.open(formakey);
         }
@@ -321,7 +317,22 @@ var ContextMgr = {
                 SelectText.reset();
                 SelectText.update();
             },
+            hover: function () {
+                const names = D_M.token_selected;
+                for (const name of names) {
+                    if (name == this.name) continue;
+                    const obj = ContextMgr.objs[name];
+                    obj.wind.w.classList.remove("z-index-hover");
+                }
+                this.wind.w.classList.toggle("z-index-hover");
+            },
             bind: function () {
+                const t = this.wind.w.querySelector("div.context");
+                t.addEventListener("dblclick", (ev) => {
+                    ev.preventDefault();
+                    ev.stopImmediatePropagation();
+                    this.hover();
+                });
                 const m = this.wind.w.querySelector("div.menu_wnd");
                 m.addEventListener("click", (ev) => {
                     ev.preventDefault();
