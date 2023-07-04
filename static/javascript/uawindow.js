@@ -58,6 +58,7 @@ var UaWindowAdm = {
             this.remove(k);
         this.ws = {};
     },
+    // /////////////////
     newUaWindow: function (jqw) {
         let wnd = {
             initialize: function (w) {

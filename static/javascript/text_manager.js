@@ -38,13 +38,15 @@ var TextMgr = {
             this.objs[name].resetXY();
     },
     create: function (name, left, top) {
-        const context_z = 12;
 
         const obj = {
             id: `${name}text_id`,
             name: name,
             wind: null,
             text_rows: [],
+            z: 12,
+            z_default: 12,
+            z_hover: 50,
             open: function () {
                 this.text_rows = D_M.token_list[this.name];
                 this.build();
@@ -86,9 +88,6 @@ var TextMgr = {
                     let row = this.text_rows[i];
                     const n = i;
                     let text = row.join(" ");
-                    // const n = row[0];
-                    // let text = row.slice(1).join(" ");
-                    // text = text.replace(formakey, `<span>${formakey}</span>`)
                     jt.append(fh, n, text);
                 }
                 jt.append(`</tbody></table></div>`);
@@ -97,7 +96,7 @@ var TextMgr = {
                     this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
                     this.setXY();
                     this.wind.drag();
-                    this.wind.setZ(context_z);
+                    this.wind.setZ(this.z);
                 }
                 this.wind.hide();
                 this.wind.setHtml(html);
@@ -136,6 +135,12 @@ var TextMgr = {
                 SelectText.update();
             },
             bind: function () {
+                const t = this.wind.w.querySelector("div.text");
+                t.addEventListener("dblclick", (ev) => {
+                    ev.preventDefault();
+                    ev.stopImmediatePropagation();
+                    this.wind.w.classList.toggle("z-index-hover");
+                });
                 const m = this.wind.w.querySelector("div.menu_wnd");
                 m.addEventListener("click", (ev) => {
                     ev.preventDefault();
@@ -147,10 +152,10 @@ var TextMgr = {
                             this.hide();
                             break;
                         case "top":
-                            this.top();
+                            this.scroll_top();
                             break;
                         case "bottom":
-                            this.bottom();
+                            this.scroll_bottom();
                             break;
                         case "unselect":
                             this.unselect();
@@ -209,6 +214,7 @@ var ContextMgr = {
         for (const name of names)
             this.objs[name].resetXY();
     },
+    // //////////////////////////
     create: function (name, left, top) {
         const context_z = 12;
 
@@ -375,7 +381,8 @@ var SelectText = {
     },
     update: function () {
         if (!this.wind) return;
-        if (this.wind.isVisible()) this.wind.show();
+        if (this.wind.isVisible)
+            this.wind.show();
     },
     setXY: function () {
         this.wind.setXY(280, 30, -1);
