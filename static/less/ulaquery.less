@@ -345,6 +345,20 @@ div.menu_wnd {
         color: @menu_color;
         border-right: 1px solid @menu_border_bck;
       }
+      a.img {
+        display: block;
+        line-height: 0;
+        margin: 0;
+        padding: 0;
+        min-height: @menu_height;
+
+        img {
+          margin: 0;
+          padding: 0;
+          height: @menu_height;
+          width: 100%;
+        }
+      }
       a:hover {
         background: @menu_hover_bck;
         text-decoration: underline;
@@ -1208,10 +1222,10 @@ div.text {
   border-color: @line_text_border_color;
   margin: 0;
   padding: 0;
-  // min-height: 100px;
-  max-height: 750px;
-  overflow-y: auto;
-  overflow-x: auto;
+  height: 750px;
+  width: 400px;
+  overflow-y: scroll;
+  overflow-x: scroll;
   scrollbar-color: @scroll_bar1 @scroll_bar2;
   background: darken(@line_text_back, 20%);
   display: flex;
@@ -1277,3 +1291,10 @@ div.text {
 .z-index-hover {
   z-index: 9999 !important;
 }
+
+.arrow {
+  font-size: 25px;
+  font-weight: bold !important;
+  color:white !important;
+}
+

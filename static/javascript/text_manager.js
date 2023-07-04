@@ -1,5 +1,20 @@
 "use strict"
 
+/*
+<span class="arrow-up">&#8593;</span>
+<span class="arrow-down">&#8595;</span>
+<span class="arrow-right">&#8594;</span>
+<span class="arrow-left">&#8592;</span>
+
+triangle-up      &#9650;
+triangle-down    &#9660;
+triangle-right    &#9654;
+triangle-left     &#9664;
+
+
+*/
+
+
 
 var TextMgr = {
     names: [],
@@ -52,27 +67,27 @@ var TextMgr = {
                 this.build();
                 this.show();
             },
+
             build: function () {
                 const menu = `
-  <div class="menu_wnd" >
-  <ul>
-  <li>
-<a class="tipb" href="javascript:DictForm.scroll_top()">Top
-<span class="tiptextb">Scroll Top</span>
-</a>
-</li>
-<li>
-<a class="tipb" href="javascript:DictForm.scroll_bottom()">Bottom
-<span class="tiptextb">Scroll Bottom</span>
-</a>
+<div class="menu_wnd" >
+<ul>
+
+<li><a class="tipb arrow" cmd="top" href="#" >&#9650;
+<span class="tiptextb">Scroll Top</span></a>
 </li>
 
-  <li><a class="tipb" cmd="unselect" href="#">Unselect
-  <span class="tiptextb">Close and Unselect Text</span> </a>
-  </li> 
-  <li><a href="#" cmd="close">X</a></li> </ul>
-  </div>
-  <div class="text">
+<li><a class="tipb arrow" cmd="bottom" href="#" >&#9660;
+<span class="tiptextb">Scroll Bottom</span></a>
+</li>
+
+<li><a class="tipb" cmd="unselect" href="#">Unselect
+<span class="tiptextb">Close and Unselect Text</span> </a>
+</li> 
+
+<li><a href="#" cmd="close">X</a></li> </ul>
+</div>
+<div class="text">
   `;
                 let jt = UaJth();
                 jt.append(menu);

@@ -25,28 +25,28 @@ var ResultSet = {
 <div class="menu_wnd" >
 <ul>
 <li>
-<a class="tipb" href="javascript:ResultSet.scroll_top()">Top
+<a class="tipb arrow" href="javascript:ResultSet.scroll_top()">&#9650;
 <span class="tiptextb">Scroll Top</span>
 </a>
 </li>
 <li>
-<a class="tipb" href="javascript:ResultSet.scroll_bottom()">Bottom
+<a class="tipb arrow" href="javascript:ResultSet.scroll_bottom()">&#9660;
 <span class="tiptextb">Scroll Bottom</span>
 </a>
 </li>
 <li>
-<a class="tipb" href="javascript:ResultSet.scroll_left()">Left
+<a class="tipb arrow" href="javascript:ResultSet.scroll_left()">&#9664;
 <span class="tiptextb">Scroll Left</span>
 </a>
 </li>
 <li>
-<a class="tipb" href="javascript:ResultSet.scroll_right()">Right
+<a class="tipb arrow" href="javascript:ResultSet.scroll_right()">&#9654;
 <span class="tiptextb">Scroll Right</span>
 </a>
 </li>
 
 <li>
-<a class="cmd" href="#">Help
+<a class="cmd" href="#">?
 </a>
 </li>
 <li>${sp}</li>
