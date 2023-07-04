@@ -54,6 +54,17 @@ var TextMgr = {
                 const menu = `
   <div class="menu_wnd" >
   <ul>
+  <li>
+<a class="tipb" href="javascript:DictForm.scroll_top()">Top
+<span class="tiptextb">Scroll Top</span>
+</a>
+</li>
+<li>
+<a class="tipb" href="javascript:DictForm.scroll_bottom()">Bottom
+<span class="tiptextb">Scroll Bottom</span>
+</a>
+</li>
+
   <li><a class="tipb" cmd="unselect" href="#">Unselect
   <span class="tiptextb">Close and Unselect Text</span> </a>
   </li> 
@@ -73,7 +84,7 @@ var TextMgr = {
                 const lers = this.text_rows.length;
                 for (let i = 0; i < lers; i++) {
                     let row = this.text_rows[i];
-                    const n=i;
+                    const n = i;
                     let text = row.join(" ");
                     // const n = row[0];
                     // let text = row.slice(1).join(" ");
@@ -108,6 +119,22 @@ var TextMgr = {
                 this.setXY();
                 this.show();
             },
+            scroll_top: function () {
+                const x = this.wind.w;
+                const e = x.querySelector("div.text");
+                e.scrollTop = 0;
+            },
+            scroll_bottom: function () {
+                const e = this.wind.w.querySelector("div.text");
+                e.scrollTop = e.scrollHeight;
+            },
+            unselect: function () {
+                const i = D_M.token_selected.indexOf(name);
+                D_M.token_selected.splice(i, 1);
+                this.hide();
+                SelectText.reset();
+                SelectText.update();
+            },
             bind: function () {
                 const m = this.wind.w.querySelector("div.menu_wnd");
                 m.addEventListener("click", (ev) => {
@@ -119,8 +146,14 @@ var TextMgr = {
                         case "close":
                             this.hide();
                             break;
+                        case "top":
+                            this.top();
+                            break;
+                        case "bottom":
+                            this.bottom();
+                            break;
                         case "unselect":
-                            SelectText.unselectOfName(this.name);
+                            this.unselect();
                             break;
                         default:
                         // alert(cmd + ": command not found")
@@ -245,6 +278,13 @@ var ContextMgr = {
                 this.setXY();
                 this.show();
             },
+            unselect: function () {
+                const i = D_M.token_selected.indexOf(name);
+                D_M.token_selected.splice(i, 1);
+                this.hide();
+                SelectText.reset();
+                SelectText.update();
+            },
             bind: function () {
                 const m = this.wind.w.querySelector("div.menu_wnd");
                 m.addEventListener("click", (ev) => {
@@ -257,7 +297,7 @@ var ContextMgr = {
                             this.hide();
                             break;
                         case "unselect":
-                            SelectText.unselectOfName(this.name);
+                            this.unselect();
                             break;
                         default:
                         // alert(cmd + ": command not found")
@@ -323,7 +363,7 @@ var SelectText = {
         }
         this.wind.setHtml(html);
         this.bind();
-        this.selectDefault();
+        this.reset();
     },
     show: function (url) {
         if (!this.wind) return;
@@ -333,8 +373,12 @@ var SelectText = {
         if (!this.wind) return;
         this.wind.hide();
     },
+    update: function () {
+        if (!this.wind) return;
+        if (this.wind.isVisible()) this.wind.show();
+    },
     setXY: function () {
-        this.wind.setCenterY(50, -1);
+        this.wind.setXY(280, 30, -1);
     },
     resetXY: function () {
         this.wind.reset();
@@ -359,7 +403,7 @@ var SelectText = {
         D_M.token_selected.splice(i, 1);
         const obj = ContextMgr.objs[name];
         obj.hide();
-        this.selectDefault();
+        this.reset();
         this.open();
     },
     unselect: function () {
@@ -383,7 +427,7 @@ var SelectText = {
         }
         this.select();
     },
-    selectDefault: function () {
+    reset: function () {
         const elms = this.wind.w.querySelectorAll("div.select_text li a");
         const arr = Array.from(elms);
         for (const e of arr)

@@ -58,12 +58,12 @@ const menu = function () {
 <span class="tiptextr">Opoen Window FIlter</span></a>
 </li>
 <li class="h">
-<a class="tipr" onclick="FLT.hide()" ref="#">Hide
-<span class="tiptextr">Close Windows Filetr</span> </a>
-</li>
-<li class="h">
 <a class="tipr" onclick="FLT.show()" href="#">Show
 <span class="tiptextr">Opoen Window Filter Active</span></a>
+</li>
+<li class="h">
+<a class="tipr" onclick="FLT.hide()" ref="#">Hide
+<span class="tiptextr">Close Windows Filetr</span> </a>
 </li>
 <li class="h">
 <a class="tipr" onclick="FLT.unselect()" href="#">UnSelect
@@ -85,7 +85,6 @@ const menu = function () {
 <li class="v">
 <a href="#">Context</a>
 <ul class="v">
-
 <li class="h"">
 <a class="tipb" href="javascript:ContextMgr.relocateAll()">Relocate
 <span class="tiptextb">Relocat and Open All Context Selected</span></a>
@@ -94,7 +93,6 @@ const menu = function () {
 <a class="tipb" href="javascript:ContextMgr.closeAll()">Close All
 <span class="tiptextb">Close All Context</span></a>
 </li>
-
 </ul>
 </li>
 
@@ -121,14 +119,13 @@ const menu = function () {
 </li>
 </ul>
 </li>
-
-
 <li class="v">
+
 <a href="#">Text</a>
 <ul class="v">
 
 <li class="h"">
-<a class="tipb" href="javascript:TextMgr.openSelected()">Opene
+<a class="tipb" href="javascript:TextMgr.openSelected()">Open
 <span class="tiptextb">Open All Text Selected</span></a>
 </li>
 <li class="h"">
@@ -136,7 +133,7 @@ const menu = function () {
 <span class="tiptextb">Relocat and Open All Text Selected</span></a>
 </li>
 <li class="h"">
-<a class="tipb" href="javascript:TextMgr.closeAll()">Close All
+<a class="tipb" href="javascript:TextMgr.closeAll()">Close 
 <span class="tiptextb">Close All Text</span></a>
 </li>
 
