@@ -12,12 +12,12 @@ var ResultSet = {
   wind: null,
   open: async function () {
     const rows = D_M.dict_rsl_rows;
-    ResultSet.build(rows);
-    ResultSet.show();
+    this.build(rows);
+    this.show();
   },
   openSelected: async function (rows) {
-    ResultSet.build(rows);
-    ResultSet.show();
+    this.build(rows);
+    this.show();
   },
   build: async function (rows) {
     const sp = "         ";

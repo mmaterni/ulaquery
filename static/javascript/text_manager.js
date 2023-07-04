@@ -119,8 +119,7 @@ var TextMgr = {
                 this.show();
             },
             scroll_top: function () {
-                const x = this.wind.w;
-                const e = x.querySelector("div.text");
+                const e = this.wind.w.querySelector("div.text");
                 e.scrollTop = 0;
             },
             scroll_bottom: function () {
