@@ -1,5 +1,27 @@
 "use strict"
 
+/*
+<span class="arrow-up">&#8593;</span>
+<span class="arrow-down">&#8595;</span>
+<span class="arrow-right">&#8594;</span>
+<span class="arrow-left">&#8592;</span>
+
+triangle-up      
+&#9650;
+
+triangle-down    
+&#9660;
+
+triangle-right    
+&#9654;
+
+triangle-left     
+&#9664;
+
+
+*/
+
+
 var xlog = console.log;
 
 function test() {
