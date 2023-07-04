@@ -107,13 +107,11 @@ const menu = function () {
 <li class="v">
 <a href="#">Context</a>
 <ul class="v">
-<li class="h"">
-<a class="tipb" href="javascript:ContextMgr.relocateAll()">Relocate
-<span class="tiptextb">Relocat and Open All Context Selected</span></a>
+<li class="h""><a class="tipr" onclick="ContextMgr.relocateAll() href="#" >Relocate
+<span class="tiptextr">Relocat and Open All Context Selected</span></a>
 </li>
-<li class="h"">
-<a class="tipb" href="javascript:ContextMgr.closeAll()">Close All
-<span class="tiptextb">Close All Context</span></a>
+<li class="h""><a class="tipr" onclick="ContextMgr.closeAll()" href="#" >Close All
+<span class="tiptextr">Close All Context</span></a>
 </li>
 </ul>
 </li>
@@ -121,7 +119,7 @@ const menu = function () {
 <li class="v">
 <a href="#">ReusltSet</a>
 <ul class="v">
-<li class="h"><a class="tipr" onclick="FLT.queryRslt()" ref="#" >Slection
+<li class="h"><a class="tipr" onclick="FLT.queryRslt()" href="#" >Slection
 <span class="tiptextr">Show Selected ResultSet</span> </a>
 </li>
 <li class="h"><a class="tipr" onclick="ResultSet.open()" href="#">All
@@ -146,17 +144,14 @@ const menu = function () {
 <a href="#">Text</a>
 <ul class="v">
 
-<li class="h"">
-<a class="tipb" href="javascript:TextMgr.openSelected()">Open
-<span class="tiptextb">Open All Text Selected</span></a>
+<li class="h""><a class="tipr" href="javascript:TextMgr.openSelected()">Open
+<span class="tiptextr">Open All Text Selected</span></a>
 </li>
-<li class="h"">
-<a class="tipb" href="javascript:TextMgr.relocateAll()">Relocate
-<span class="tiptextb">Relocat and Open All Text Selected</span></a>
+<li class="h""><a class="tipr" href="javascript:TextMgr.relocateAll()">Relocate
+<span class="tiptextr">Relocat and Open All Text Selected</span></a>
 </li>
-<li class="h"">
-<a class="tipb" href="javascript:TextMgr.closeAll()">Close 
-<span class="tiptextb">Close All Text</span></a>
+<li class="h""><a class="tipr" href="javascript:TextMgr.closeAll()">Close 
+<span class="tiptextr">Close All Text</span></a>
 </li>
 
 </ul>
