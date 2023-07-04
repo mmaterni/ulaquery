@@ -151,7 +151,6 @@ const menu = function () {
 `;
   return h.replace(/\s+|\[rn]/g, " ");
 }
-let TEXT_ID = null;
 let QUERY_ID = null;
 
 var UlaQuery = {
@@ -160,9 +159,6 @@ var UlaQuery = {
     wait_start();
 
     QUERY_ID = document.getElementById("ulaquery_id");
-    TEXT_ID = document.getElementById("text_id");
-    TEXT_ID.style.display = 'none';
-
     await sleep(100);
     await D_M.load_dict();
     await D_M.load_tokens();
@@ -173,7 +169,7 @@ var UlaQuery = {
     await LangDate.build();
     await PosMsd.build();
     Where.build();
-    UaLog.setXY(-3, 0).setZ(999).new();
+    // UaLog.setXY(-3, 0).setZ(999).new();
 
     // FLT.open();
 

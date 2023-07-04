@@ -155,12 +155,21 @@ var TextMgr = {
                 SelectText.reset();
                 SelectText.update();
             },
+            hover: function () {
+                const names = D_M.token_selected;
+                for (const name of names) {
+                    if (name == this.name) continue;
+                    const obj = TextMgr.objs[name];
+                    obj.wind.w.classList.remove("z-index-hover");
+                }
+                this.wind.w.classList.toggle("z-index-hover");
+            },
             bind: function () {
                 const t = this.wind.w.querySelector("div.text");
                 t.addEventListener("dblclick", (ev) => {
                     ev.preventDefault();
                     ev.stopImmediatePropagation();
-                    this.wind.w.classList.toggle("z-index-hover");
+                    this.hover();
                 });
                 const m = this.wind.w.querySelector("div.menu_wnd");
                 m.addEventListener("click", (ev) => {

@@ -160,7 +160,7 @@ input:active {
 @font_menu: @fsize_08;
 @menu_height: 25px;
 @menu_sub_top: 27px;
-
+@menu_bar_z: 9998;
 div.menu_bar {
   width: 100%;
   min-height: @menu_height !important;
@@ -181,7 +181,7 @@ div.menu_bar {
     }
 
     li {
-      z-index: 98;
+      z-index: @menu_bar_z;
       position: relative;
       text-align: center;
       flex: 1;
@@ -231,8 +231,7 @@ div.menu_bar {
         top: @menu_sub_top;
         left: 0;
         width: 100%;
-        z-index: 99;
-
+        z-index: calc(@menu_bar_z+1);
         li {
           border-top: 1px solid @menu_border_bck;
           width: 150px;
@@ -1289,12 +1288,11 @@ div.text {
 }
 
 .z-index-hover {
-  z-index: 9999 !important;
+  z-index: 8999 !important;
 }
 
 .arrow {
   font-size: 25px;
   font-weight: bold !important;
-  color:white !important;
+  color: white !important;
 }
-
