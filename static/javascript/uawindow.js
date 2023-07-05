@@ -58,7 +58,7 @@ var UaWindowAdm = {
             this.remove(k);
         this.ws = {};
     },
-    getForGoup: function (attribute) {
+    getForGroup: function (attribute) {
         const wnds = Object.values(this.ws)
         return wnds.filter((x) => {
             return x.groups.indexOf(attribute) > -1

@@ -28,7 +28,7 @@ function test() {
   // alert("test");
   xlog("test")
   try {
-    const ws = UaWindowAdm.getForGoup("text");
+    const ws = UaWindowAdm.getForGroup("text");
     for (const wnd of ws) {
       wnd.hide();
     }

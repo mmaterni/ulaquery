@@ -134,16 +134,20 @@ var TextMgr = {
                 SelectText.update();
             },
             hover: function () {
-                const names = D_M.token_selected;
-                for (const name of names) {
-                    if (name == this.name) continue;
-                    const obj = TextMgr.objs[name];
-                    obj.wind.w.classList.remove("z-index-hover");
-                }
+                // const names = D_M.token_selected;
+                // for (const name of names) {
+                //     if (name == this.name) continue;
+                //     const obj = TextMgr.objs[name];
+                //     obj.wind.w.classList.remove("z-index-hover");
+                // }
+                const winds = UaWindowAdm.getForGroup("text");
+                for (const wind of winds)
+                    wind.w.classList.remove("z-index-hover");
                 this.wind.w.classList.toggle("z-index-hover");
             },
             bind: function () {
-                const t = this.wind.w.querySelector("div.text");
+                // const t = this.wind.w.querySelector("div.text");
+                const t = this.wind.w;
                 t.addEventListener("dblclick", (ev) => {
                     ev.preventDefault();
                     ev.stopImmediatePropagation();
@@ -467,6 +471,163 @@ var SelectText = {
             e.classList.add("select");
         this.select();
     }
-
 };
 
+// XXX FormLemmaMgr
+var FormLemmaMgr = {
+    names: [],
+    objs: {},
+    open: function (name) {
+        const obj = this.objs[name];
+        obj.open();
+    },
+    openSelected: function () {
+        let slcs = D_M.token_selected;
+        if (slcs.length == 0) {
+            SelectText.open();
+        }
+        let left = 0;
+        let top = 0;
+        const names = Object.keys(this.objs);
+        for (const name of slcs) {
+            if (names.indexOf(name) < 0) {
+                this.names.push(name);
+                const obj = this.create(name, left, top);
+                this.objs[name] = obj;
+            }
+            left += 300;
+            const obj = this.objs[name];
+            obj.open();
+        }
+    },
+    closeAll: function () {
+        const objs = Object.values(this.objs);
+        for (const obj of objs)
+            obj.hide();
+    },
+    relocateAll: function () {
+        let names = D_M.token_selected;
+        for (const name of names)
+            this.objs[name].resetXY();
+    },
+    create: function (name, left, top) {
+
+        const obj = {
+            id: `${name}formlemma_id`,
+            name: name,
+            wind: null,
+            text_rows: [],
+            z: 12,
+            z_default: 12,
+            z_hover: 50,
+            open: function () {
+                this.text_rows = D_M.token_list[this.name];
+                this.build();
+                this.show();
+            },
+
+            build: function () {
+                const menu = `
+<div class="menu_wnd" >
+<ul>
+
+<li><a class="tipb arrow" cmd="top" href="#" >&#9650;
+<span class="tiptextb">Scroll Top</span></a>
+</li>
+
+<li><a class="tipb arrow" cmd="bottom" href="#" >&#9660;
+<span class="tiptextb">Scroll Bottom</span></a>
+</li>
+
+<li><a href="#" cmd="close">X</a></li> </ul>
+</div>
+<div class="form_lemma">
+  `;
+                let jt = UaJth();
+                jt.append(menu);
+                jt.append(`<div class='h'>${name}</div> `);
+                let fh = (row_n, row_text) => `
+<div class='rows'>
+   <span class='n' >${row_n}</span>
+   <span class='text'>${row_text}</span>
+</div>
+`;
+                const lers = this.text_rows.length;
+                for (let i = 0; i < lers; i++) {
+                    let row = this.text_rows[i];
+                    const n = i;
+                    let text = row.join(" ");
+                    jt.append(fh, n, text);
+                }
+                jt.append(`</tbody></table></div>`);
+                const html = jt.html();
+                if (!this.wind) {
+                    this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
+                    this.setXY();
+                    this.wind.addGroup("form_lemma");
+                    this.wind.drag();
+                    this.wind.setZ(this.z);
+                }
+                this.wind.hide();
+                this.wind.setHtml(html);
+                this.bind();
+            },
+            show: function (url) {
+                if (!this.wind) return;
+                this.wind.show();
+            },
+            hide: function () {
+                if (!this.wind) return;
+                this.wind.hide();
+            },
+            setXY: function () {
+                this.wind.setXY(10 + left, 30 + top, -1);
+            },
+            resetXY: function () {
+                this.wind.reset();
+                this.setXY();
+                this.show();
+            },
+            hover: function () {
+                const names = D_M.token_selected;
+                for (const name of names) {
+                    if (name == this.name) continue;
+                    const obj = TextMgr.objs[name];
+                    obj.wind.w.classList.remove("z-index-hover");
+                }
+                this.wind.w.classList.toggle("z-index-hover");
+            },
+            bind: function () {
+                const t = this.wind.w.querySelector("div.text");
+                t.addEventListener("dblclick", (ev) => {
+                    ev.preventDefault();
+                    ev.stopImmediatePropagation();
+                    this.hover();
+                });
+                const m = this.wind.w.querySelector("div.menu_wnd");
+                m.addEventListener("click", (ev) => {
+                    ev.preventDefault();
+                    ev.stopImmediatePropagation();
+                    const t = ev.target;
+                    const cmd = t.getAttribute("cmd");
+                    switch (cmd) {
+                        case "close":
+                            this.hide();
+                            break;
+                        default:
+                        // alert(cmd + ": command not found")
+                    }
+                });
+                const a = this.wind.w.querySelector("div.text");
+                a.addEventListener("click", (ev) => {
+                    ev.preventDefault();
+                    ev.stopImmediatePropagation();
+                    // let t = ev.target;
+                    // while (t && t.tagName !== 'TR')
+                    //   t = t.parentNode;
+                });
+            },
+        }
+        return obj;
+    }
+}
