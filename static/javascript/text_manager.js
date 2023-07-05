@@ -3,27 +3,33 @@
 var TextMgr = {
     names: [],
     objs: {},
+    createObjs: function () {
+        const names = Object.keys(D_M.token_list);
+        let left = 0;
+        for (const name of names) {
+            const obj = this.new(name, left, 30);
+            this.objs[name] = obj;
+            this.names.push(name);
+            left += 300;
+        }
+    },
     open: function (name) {
+        alert('opern');
         const obj = this.objs[name];
         obj.open();
     },
     openSelected: function () {
+        const names = Object.keys(D_M.token_list);
         let slcs = D_M.token_selected;
         if (slcs.length == 0) {
             SelectText.open();
         }
-        let left = 0;
-        let top = 0;
-        const names = Object.keys(this.objs);
-        for (const name of slcs) {
-            if (names.indexOf(name) < 0) {
-                this.names.push(name);
-                const obj = this.create(name, left, top);
-                this.objs[name] = obj;
-            }
-            left += 300;
+        for (const name of names) {
             const obj = this.objs[name];
-            obj.open();
+            if (slcs.indexOf(name) > -1)
+                obj.open();
+            else
+                obj.hide()
         }
     },
     closeAll: function () {
@@ -36,9 +42,9 @@ var TextMgr = {
         for (const name of names)
             this.objs[name].resetXY();
     },
-    create: function (name, left, top) {
-
-        const obj = {
+    // ///////////////////////////77777777777777777
+    new: function (name, left, top) {
+        return {
             id: `${name}text_id`,
             name: name,
             wind: null,
@@ -144,7 +150,7 @@ var TextMgr = {
                     this.hover();
                 });
                 const t = this.wind.w.querySelector("div.text");
-                m.addEventListener("click", (ev) => {
+                t.addEventListener("click", (ev) => {
                     ev.preventDefault();
                     ev.stopImmediatePropagation();
                     const t = ev.target;
@@ -183,7 +189,6 @@ var TextMgr = {
                 });
             },
         }
-        return obj;
     }
 }
 
@@ -470,6 +475,8 @@ var SelectText = {
     }
 };
 
+
+
 // XXX FormLemmaMgr
 var FormLemmaMgr = {
     names: [],
@@ -477,25 +484,6 @@ var FormLemmaMgr = {
     open: function (name) {
         const obj = this.objs[name];
         obj.open();
-    },
-    openSelected: function () {
-        let slcs = D_M.token_selected;
-        if (slcs.length == 0) {
-            SelectText.open();
-        }
-        let left = 0;
-        let top = 0;
-        const names = Object.keys(this.objs);
-        for (const name of slcs) {
-            if (names.indexOf(name) < 0) {
-                this.names.push(name);
-                const obj = this.create(name, left, top);
-                this.objs[name] = obj;
-            }
-            left += 300;
-            const obj = this.objs[name];
-            obj.open();
-        }
     },
     closeAll: function () {
         const objs = Object.values(this.objs);
@@ -515,8 +503,11 @@ var FormLemmaMgr = {
             wind: null,
             text_rows: [],
             z: 12,
+            //   aaa
             open: function () {
                 this.text_rows = D_M.token_list[this.name];
+
+
                 this.build();
                 this.show();
             },
@@ -525,14 +516,6 @@ var FormLemmaMgr = {
                 const menu = `
 <div class="menu_wnd" >
 <ul>
-
-<li><a class="tipb arrow" cmd="top" href="#" >&#9650;
-<span class="tiptextb">Scroll Top</span></a>
-</li>
-
-<li><a class="tipb arrow" cmd="bottom" href="#" >&#9660;
-<span class="tiptextb">Scroll Bottom</span></a>
-</li>
 
 <li><a href="#" cmd="close">X</a></li> </ul>
 </div>

@@ -184,13 +184,11 @@ var UlaQuery = {
     await Funct.build();
     await LangDate.build();
     await PosMsd.build();
+    TextMgr.createObjs();
     Where.build();
-    // UaLog.setXY(-3, 0).setZ(999).new();
-
+     // UaLog.setXY(-3, 0).setZ(999).new();
     // FLT.open();
-
     wait_stop();
-
   },
   builD_Menu: async function () {
     const html = menu();
