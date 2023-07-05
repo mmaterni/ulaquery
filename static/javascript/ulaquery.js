@@ -30,9 +30,7 @@ function test() {
   try {
     const ws = UaWindowAdm.getForGoup("text");
     for (const wnd of ws) {
-      const id = wnd.getId()
-      xlog(id);
-      xlog(wnd.groups);
+      wnd.hide();
     }
   }
   catch (errore) {

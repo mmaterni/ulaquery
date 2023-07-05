@@ -385,6 +385,7 @@ var SelectText = {
             this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
             this.setXY();
             this.wind.addGroup("select_text");
+            this.wind.addGroup("text");
             this.wind.drag();
             this.wind.setZ(this.z);
         }
