@@ -25,10 +25,15 @@ triangle-left
 var xlog = console.log;
 
 function test() {
-  alert("test");
+  // alert("test");
+  xlog("test")
   try {
-    console.log(XX);
-    alert(XX);
+    const ws = UaWindowAdm.getForGoup("text");
+    for (const wnd of ws) {
+      const id = wnd.getId()
+      xlog(id);
+      xlog(wnd.groups);
+    }
   }
   catch (errore) {
     alert(errore);
@@ -143,7 +148,6 @@ const menu = function () {
 
 <a href="#">Text</a>
 <ul class="v">
-
 <li class="h""><a class="tipr" href="javascript:TextMgr.openSelected()">Open
 <span class="tiptextr">Open All Text Selected</span></a>
 </li>
@@ -153,14 +157,11 @@ const menu = function () {
 <li class="h""><a class="tipr" href="javascript:TextMgr.closeAll()">Close 
 <span class="tiptextr">Close All Text</span></a>
 </li>
-
 </ul>
 </li>
 
-
 <li class="v"><a class="cmd" cmd="help" href="#">Help</a></li>
-
-<li class="v"><a onclick="test()" href="#" >?</a></li>
+<li class="v"><a onclick="test()" href="#" >Test</a></li>
 <li class="v"><a onclick="cmd_close()" href="#" >close</a></li>
 
 </ul>

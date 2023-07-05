@@ -94,6 +94,7 @@ var TextMgr = {
                 if (!this.wind) {
                     this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
                     this.setXY();
+                    this.wind.addGroup("text");
                     this.wind.drag();
                     this.wind.setZ(this.z);
                 }
@@ -264,6 +265,7 @@ var ContextMgr = {
                 if (!this.wind) {
                     this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
                     this.setXY();
+                    this.wind.addGroup("context");
                     this.wind.drag();
                     this.wind.setZ(context_z);
                 }
@@ -382,6 +384,7 @@ var SelectText = {
         if (!this.wind) {
             this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
             this.setXY();
+            this.wind.addGroup("select_text");
             this.wind.drag();
             this.wind.setZ(this.z);
         }

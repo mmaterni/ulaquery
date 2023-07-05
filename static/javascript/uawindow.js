@@ -58,9 +58,16 @@ var UaWindowAdm = {
             this.remove(k);
         this.ws = {};
     },
-    // /////////////////
+    getForGoup: function (attribute) {
+        const wnds = Object.values(this.ws)
+        return wnds.filter((x) => {
+            return x.groups.indexOf(attribute) > -1
+        })
+    },
+    // /////////////////////////////////////////
     newUaWindow: function (jqw) {
         let wnd = {
+            groups: [],
             initialize: function (w) {
                 this.w = w;
                 this.wx = '0px';
@@ -69,6 +76,9 @@ var UaWindowAdm = {
                 this.firstShow = true;
                 this.pos = 0;
                 this.wz = 0;
+            },
+            addGroup: function (group) {
+                this.groups.push(group);
             },
             addClassStyle: function (className) {
                 if (!this.w.classList.contains(className))
@@ -107,7 +117,7 @@ var UaWindowAdm = {
             pos==0) => si posiziona ad ogni chiamata di show
                         sucessiva ad uno status hide (default)
             pos==-1)=> si posiziona solo alla prima chiamata di show
-
+ 
             x => 0      left=x
             x < 0       right=abs(x)
             */
