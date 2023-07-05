@@ -44,8 +44,6 @@ var TextMgr = {
             wind: null,
             text_rows: [],
             z: 12,
-            z_default: 12,
-            z_hover: 50,
             open: function () {
                 this.text_rows = D_M.token_list[this.name];
                 this.build();
@@ -134,24 +132,23 @@ var TextMgr = {
                 SelectText.update();
             },
             hover: function () {
-                // const names = D_M.token_selected;
-                // for (const name of names) {
-                //     if (name == this.name) continue;
-                //     const obj = TextMgr.objs[name];
-                //     obj.wind.w.classList.remove("z-index-hover");
-                // }
                 const winds = UaWindowAdm.getForGroup("text");
                 for (const wind of winds)
                     wind.w.classList.remove("z-index-hover");
                 this.wind.w.classList.toggle("z-index-hover");
             },
             bind: function () {
-                // const t = this.wind.w.querySelector("div.text");
-                const t = this.wind.w;
-                t.addEventListener("dblclick", (ev) => {
+                this.wind.w.addEventListener("dblclick", (ev) => {
                     ev.preventDefault();
                     ev.stopImmediatePropagation();
                     this.hover();
+                });
+                const t = this.wind.w.querySelector("div.text");
+                m.addEventListener("click", (ev) => {
+                    ev.preventDefault();
+                    ev.stopImmediatePropagation();
+                    const t = ev.target;
+                    xlog(t.innerHTML);
                 });
                 const m = this.wind.w.querySelector("div.menu_wnd");
                 m.addEventListener("click", (ev) => {
@@ -518,8 +515,6 @@ var FormLemmaMgr = {
             wind: null,
             text_rows: [],
             z: 12,
-            z_default: 12,
-            z_hover: 50,
             open: function () {
                 this.text_rows = D_M.token_list[this.name];
                 this.build();
