@@ -42,7 +42,7 @@ var TextMgr = {
         for (const name of names)
             this.objs[name].resetXY();
     },
-    // ///////////////////////////77777777777777777
+    // ///////////////////////////
     new: function (name, left, top) {
         return {
             id: `${name}text_id`,
@@ -55,7 +55,6 @@ var TextMgr = {
                 this.build();
                 this.show();
             },
-
             build: function () {
                 const menu = `
 <div class="menu_wnd" >
@@ -149,12 +148,17 @@ var TextMgr = {
                     ev.stopImmediatePropagation();
                     this.hover();
                 });
-                const t = this.wind.w.querySelector("div.text");
-                t.addEventListener("click", (ev) => {
+                const pr = this.wind.w.querySelector("div.text");
+                pr.addEventListener("click", (ev) => {
                     ev.preventDefault();
                     ev.stopImmediatePropagation();
-                    const t = ev.target;
-                    xlog(t.innerHTML);
+                    const tg = ev.target;
+                    const pr = tg.parentNode;
+                    let e = pr.querySelector("span.n");
+                    const n=e.innerHTML;
+                    e = pr.querySelector("span.text");
+                    const text=e.innerHTML;
+                    xlog(n,text);
                 });
                 const m = this.wind.w.querySelector("div.menu_wnd");
                 m.addEventListener("click", (ev) => {
