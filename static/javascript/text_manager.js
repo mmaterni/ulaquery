@@ -499,7 +499,7 @@ var SelectText = {
 
 const form_rows_top = 35;
 const form_rows_left = 50;
-const form_rows_z = 22;
+const form_rows_z = 9000;
 
 var FormRows = {
     id: "formrows_id",
