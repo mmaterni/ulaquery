@@ -333,8 +333,7 @@ var ContextMgr = {
                 this.wind.w.classList.toggle("z-index-hover");
             },
             bind: function () {
-                const t = this.wind.w.querySelector("div.context");
-                t.addEventListener("dblclick", (ev) => {
+                this.wind.w.addEventListener("dblclick", (ev) => {
                     ev.preventDefault();
                     ev.stopImmediatePropagation();
                     this.hover();
@@ -503,16 +502,16 @@ const form_rows_left = 50;
 const form_rows_z = 22;
 
 var FormRows = {
-  id: "formrows_id",
-  wind: null,
-  open: function (rows) {
-    // const rows = D_M.dict_rsl_rows;s
-    this.build(rows);
-    this.show();
-  },
-  build: function (rows) {
-    const sp = "         ";
-    const menu = `
+    id: "formrows_id",
+    wind: null,
+    open: function (rows) {
+        // const rows = D_M.dict_rsl_rows;s
+        this.build(rows);
+        this.show();
+    },
+    build: function (rows) {
+        const sp = "         ";
+        const menu = `
 <div class="menu_wnd" >
 <ul>
 
@@ -526,78 +525,79 @@ var FormRows = {
 </div>
 <div class="form_rows">
 `;
-    let jt = UaJth();
-    jt.append(menu);
+        let jt = UaJth();
+        jt.append(menu);
 
-    // head
-    const heads = D_M.dict_rsl_heads;
-    jt.append(`<table><thead><tr>`);
-    let h = (d) => `<th><span>${d}</span></th>`;
-    jt.append(h, "N.");
-    for (const x of heads) jt.append(h, x.toUpperCase());
-    jt.append(`</tr></thead><tbody>`);
+        // head
+        const heads = D_M.dict_rsl_heads;
+        jt.append(`<table><thead><tr>`);
+        let h = (d) => `<th><span>${d}</span></th>`;
+        jt.append(h, "N.");
+        for (const x of heads) jt.append(h, x.toUpperCase());
+        jt.append(`</tr></thead><tbody>`);
 
-    const rh = (d) => `<td>${d}</td>`;
-    const lers = rows.length;
-    const err = Array(heads.length).fill("")
-    err[1] = "Not Found";
-    for (let i = 0; i < lers; i++) {
-      const row = rows[i];
-      if (row.length > 1)
-        jt.append("<tr>")
-      else
-        jt.append('<tr class="err" >');
-      jt.append(rh, i);
-      if (row.length == 1) {
-        err[0] = row[0];
-        for (const f of err)
-          jt.append(rh, f);
-      }
-      else {
-        for (const f of row)
-          jt.append(rh, f);
-      }
-      jt.append("</tr>")
+        const rh = (d) => `<td>${d}</td>`;
+        const lers = rows.length;
+        const err = Array(heads.length).fill("")
+        err[1] = "Not Found";
+        for (let i = 0; i < lers; i++) {
+            const row = rows[i];
+            if (row.length > 1)
+                jt.append("<tr>")
+            else
+                jt.append('<tr class="err" >');
+            jt.append(rh, i);
+            if (row.length == 1) {
+                err[0] = row[0];
+                for (const f of err)
+                    jt.append(rh, f);
+            }
+            else {
+                for (const f of row)
+                    jt.append(rh, f);
+            }
+            jt.append("</tr>")
+        }
+        jt.append(`</tbody></table></div>`);
+
+        const html = jt.html();
+        if (!this.wind) {
+            this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
+            this.setXY();
+            this.wind.drag();
+            this.wind.setZ(form_rows_z);
+        }
+        this.wind.hide();
+        this.wind.setHtml(html);
+        this.bind();
+    },
+    show: function (url) {
+        if (!this.wind) return;
+        this.wind.show();
+    },
+    hide: function () {
+        if (!this.wind) return;
+        this.wind.hide();
+    },
+    setXY: function () {
+        this.wind.setXY(form_rows_left, form_rows_top, -1);
+    },
+    resetXY: function () {
+        this.wind.reset();
+        this.setXY();
+        this.show();
+    },
+    hover: function () {
+        this.wind.w.classList.toggle("z-index-hover-hover");
+    },
+    bind: function () {
+        // const a = this.wind.w.querySelector("div.form_rows");
+        // a.addEventListener("dblclick", (ev) => {
+        this.wind.w.addEventListener("dblclick", (ev) => {
+            ev.preventDefault();
+            ev.stopImmediatePropagation();
+            this.hover();
+        });
     }
-    jt.append(`</tbody></table></div>`);
-
-    const html = jt.html();
-    if (!this.wind) {
-      this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
-      this.setXY();
-      this.wind.drag();
-      this.wind.setZ(form_rows_z);
-    }
-    this.wind.hide();
-    this.wind.setHtml(html);
-    this.bind();
-  },
-  show: function (url) {
-    if (!this.wind) return;
-    this.wind.show();
-  },
-  hide: function () {
-    if (!this.wind) return;
-    this.wind.hide();
-  },
-  setXY: function () {
-    this.wind.setXY(form_rows_left, form_rows_top, -1);
-  },
-  resetXY: function () {
-    this.wind.reset();
-    this.setXY();
-    this.show();
-  },
-  hover: function () {
-    this.wind.w.classList.toggle("z-index-hover-hover");
-  },
-  bind: function () {
-    const a = this.wind.w.querySelector("div.form_rows");
-    a.addEventListener("dblclick", (ev) => {
-      ev.preventDefault();
-      ev.stopImmediatePropagation();
-      this.hover();
-    });
-  }
 };
 
