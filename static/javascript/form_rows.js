@@ -17,34 +17,13 @@ var FormRows = {
     const menu = `
 <div class="menu_wnd" >
 <ul>
-<li>
-<a class="tipb arrow" href="javascript:FormRows.scroll_top()">&#9650;
-<span class="tiptextb">Scroll Top</span>
-</a>
-</li>
-<li>
-<a class="tipb arrow" href="javascript:FormRows.scroll_bottom()">&#9660;
-<span class="tiptextb">Scroll Bottom</span>
-</a>
-</li>
-<li>
-<a class="tipb arrow" href="javascript:FormRows.scroll_left()">&#9664;
-<span class="tiptextb">Scroll Left</span>
-</a>
-</li>
-<li>
-<a class="tipb arrow" href="javascript:FormRows.scroll_right()">&#9654;
-<span class="tiptextb">Scroll Right</span>
-</a>
-</li>
 
 <li>
 <a class="cmd" href="#">?
 </a>
 </li>
-<li>${sp}</li>
+ <li>${sp}</li>
 <li><a href="javascript:FormRows.hide()">X</a></li>
-<li></li>
 </ul>
 </div>
 <div class="form_rows">
@@ -62,12 +41,21 @@ var FormRows = {
 
     const rh = (d) => `<td>${d}</td>`;
     const lers = rows.length;
+    const err = Array(heads.length).fill("")
+    err[1] = "NotFound";
     for (let i = 0; i < lers; i++) {
       const row = rows[i];
       jt.append("<tr>")
       jt.append(rh, i);
-      for (const f of row)
-        jt.append(rh, f);
+      if (row.length == 1) {
+        err[0] = row[0];
+        for (const f of err)
+          jt.append(rh, f);
+      }
+      else
+        for (const f of row)
+          jt.append(rh, f);
+
       jt.append("</tr>")
     }
     jt.append(`</tbody></table></div>`);
@@ -103,11 +91,11 @@ var FormRows = {
     // const winds = UaWindowAdm.getForGroup("text");
     // for (const wind of winds)
     //     wind.w.classList.remove("z-index-hover");
-    this.wind.w.classList.toggle("z-index-hover");
-},
+    this.wind.w.classList.toggle("z-index-hover-hover");
+  },
   bind: function () {
     const a = this.wind.w.querySelector("div.form_rows");
-    a.addEventListener("click", (ev) => {
+    a.addEventListener("dblclick", (ev) => {
       ev.preventDefault();
       ev.stopImmediatePropagation();
       this.hover();

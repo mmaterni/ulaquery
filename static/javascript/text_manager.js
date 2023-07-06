@@ -143,14 +143,17 @@ var TextMgr = {
                 this.wind.w.classList.toggle("z-index-hover");
             },
             getRowsOfFormakey: function (formakeys) {
+                const puncttre = /^[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]$/;
                 const rows = [];
                 for (const fk of formakeys) {
+                    if (fk.length == 1 && puncttre.test(fk))
+                        continue;
                     const idx = D_M.findIndnxFormakey(fk);
                     let r = [];
                     if (idx > -1) {
                         r = D_M.dict_rsl_rows[idx];
                     } else {
-                        xlog(fk);
+                        r = [fk];
                     }
                     rows.push(r);
                 }
