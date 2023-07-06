@@ -1053,7 +1053,6 @@ div.resultset {
   }
 }
 
-// @form_height: calc(@ulaquery_height - 100px);
 @form_width: calc(@html_width - 100px);
 @form_row_height: 25px;
 @form_col_width: 30px;
@@ -1314,7 +1313,7 @@ div.text {
   justify-content: flex-start;
   align-items: stretch;
 
-  div.rows {
+  div.row {
     margin: 0;
     padding: 1px 5px 1px 0;
     min-width: 60px;
@@ -1365,6 +1364,13 @@ div.text {
     background: darken(@line_text_back, 20%);
     color: @line_text_color;
     border-bottom: 1px solid @line_text_border_color;
+  }
+  div.select{
+    background: @select_back;
+    color:@select_color;
+  }
+  div.err{
+    background-color: red;
   }
 }
 

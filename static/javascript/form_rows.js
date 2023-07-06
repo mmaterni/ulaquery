@@ -1,7 +1,7 @@
 "use strict"
 
 const form_rows_top = 35;
-const form_rows_left = 5;
+const form_rows_left = 50;
 const form_rows_z = 22;
 
 var FormRows = {
@@ -99,11 +99,18 @@ var FormRows = {
     this.setXY();
     this.show();
   },
+  hover: function () {
+    // const winds = UaWindowAdm.getForGroup("text");
+    // for (const wind of winds)
+    //     wind.w.classList.remove("z-index-hover");
+    this.wind.w.classList.toggle("z-index-hover");
+},
   bind: function () {
     const a = this.wind.w.querySelector("div.form_rows");
     a.addEventListener("click", (ev) => {
       ev.preventDefault();
       ev.stopImmediatePropagation();
+      this.hover();
     });
   }
 };

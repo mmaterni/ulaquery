@@ -80,7 +80,7 @@ var TextMgr = {
                 jt.append(menu);
                 jt.append(`<div class='h'>${name}</div> `);
                 let fh = (row_n, row_text) => `
-<div class='rows'>
+<div class='row'>
    <span class='n' >${row_n}</span>
    <span class='text'>${row_text}</span>
 </div>
@@ -146,10 +146,14 @@ var TextMgr = {
                 const rows = [];
                 for (const fk of formakeys) {
                     const idx = D_M.findIndnxFormakey(fk);
-                    const r = D_M.dict_rsl_rows[idx];
+                    let r = [];
+                    if (idx > -1) {
+                        r = D_M.dict_rsl_rows[idx];
+                    } else {
+                        xlog(fk);
+                    }
                     rows.push(r);
                 }
-                xlog(rows);
                 FormRows.open(rows);
             },
             bind: function () {
@@ -171,6 +175,7 @@ var TextMgr = {
                     const text = e.innerHTML;
                     const formakeys = text.split(" ");
                     this.getRowsOfFormakey(formakeys);
+                    pr.classList.add("select");
                 });
                 const m = this.wind.w.querySelector("div.menu_wnd");
                 m.addEventListener("click", (ev) => {
