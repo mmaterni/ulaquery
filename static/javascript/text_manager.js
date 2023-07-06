@@ -143,13 +143,17 @@ var TextMgr = {
                 this.wind.w.classList.toggle("z-index-hover");
             },
             getRowsOfFormakey: function (formakeys) {
+                // AAA controllo punteggiatura
                 const puncttre = /^[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]$/;
                 const rows = [];
+                let n = 0;
                 for (const fk of formakeys) {
                     if (fk.length == 1 && puncttre.test(fk))
                         continue;
-                    const idx = D_M.findIndnxFormakey(fk);
+                    let idx = D_M.findIndnxFormakey(fk);
                     let r = [];
+                    n++;
+                    if (n == 3) idx = -1;
                     if (idx > -1) {
                         r = D_M.dict_rsl_rows[idx];
                     } else {
