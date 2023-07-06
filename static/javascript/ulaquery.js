@@ -246,7 +246,7 @@ var Help = {
     <div class="top_bar">
     <a href="javascript:Help.close();">X</a>
     </div>
-    <div class="text" >${text}</div>
+    ${text}
     </div>
      `;
     w.setHtml(html);

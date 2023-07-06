@@ -372,12 +372,12 @@ div.menu_wnd {
 }
 
 div.help {
-  .b0;
+  // .b0;
   margin: 0;
   padding: 0;
   background: @help_back;
   color: @help_color;
-  font-size: @fsize_08;
+  font-size: @fsize_07;
   font-family: @fserif;
   font-weight: normal;
   width: 1000px !important;
@@ -403,15 +403,19 @@ div.help {
   }
 
   div.text {
+    // background: @help_back;
+    // color: @help_color;
+    box-sizing: border-box;
     font-size: inherit;
     font-weight: normal;
     padding-left: 15px;
     padding-right: 15px;
     margin-right: 0;
     max-height: 600px;
+    width:100%;
     overflow-y: scroll;
     overflow-x: scroll;
-    scrollbar-color: @scroll_bar1 @scroll_bar2;
+    // scrollbar-color: @scroll_bar1 @scroll_bar2;
   
     div {
       font-size: inherit;
@@ -442,7 +446,7 @@ div.help {
     }
 
     hr {
-      // width: 300px;
+      width: 300px;
       color: @color_red;
     }
   }
