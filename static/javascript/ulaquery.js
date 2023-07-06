@@ -184,7 +184,7 @@ var UlaQuery = {
     await Funct.build();
     await LangDate.build();
     await PosMsd.build();
-    TextMgr.createObjs();
+    await TextMgr.createObjs();
     Where.build();
      // UaLog.setXY(-3, 0).setZ(999).new();
     // FLT.open();

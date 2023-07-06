@@ -3,7 +3,7 @@
 var TextMgr = {
     names: [],
     objs: {},
-    createObjs: function () {
+    createObjs: async function () {
         const names = Object.keys(D_M.token_list);
         let left = 0;
         for (const name of names) {
@@ -41,6 +41,16 @@ var TextMgr = {
         let names = D_M.token_selected;
         for (const name of names)
             this.objs[name].resetXY();
+    },
+    openFR: function (rows) {
+        // FormRows.open(rows);
+        // const a=SelectText;
+        // const b=D_M;
+        // const c=FLT;
+        // const d=Where;
+        // const e=FormLemma;
+        // xlog(a,b,c);
+        FormRows.open(rows);
     },
     // ///////////////////////////
     new: function (name, left, top) {
@@ -143,14 +153,17 @@ var TextMgr = {
                 this.wind.w.classList.toggle("z-index-hover");
             },
             getRowsOfFormakey: function (formakeys) {
+                const rows = [];
                 for (const fk of formakeys) {
                     const idx = D_M.findIndnxFormakey(fk);
-                    xlog(idx);
                     const r = D_M.dict_rsl_rows[idx];
-                    xlog(r);
+                    rows.push(r);
                 }
+                TextMgr.openFR(rows);
+                // FormRows.open(rows);
             },
             bind: function () {
+                // pone la window sopra a tutte le altre
                 this.wind.w.addEventListener("dblclick", (ev) => {
                     ev.preventDefault();
                     ev.stopImmediatePropagation();

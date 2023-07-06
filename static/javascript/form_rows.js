@@ -1,24 +1,24 @@
 "use strict"
 
-
 const form_rows_top = 35;
 const form_rows_left = 5;
-const form_rows_z = 11;
-
-
+const form_rows_z = 12;
+// var FormRows = {
+//   id: "formrows_id",
+//   wind: null,
+//   open: function (rows) {
+//     xlog(rows);
+//   }
+// }
 var FormRows = {
   id: "formrows_id",
   wind: null,
-  open: function () {
-    const rows = D_M.dict_rsl_rows;
+  open: function (rows) {
+    // const rows = D_M.dict_rsl_rows;s
     this.build(rows);
     this.show();
   },
-  openSelected: function (rows) {
-    this.build(rows);
-    this.show();
-  },
-  build:  function (rows) {
+  build: function (rows) {
     const sp = "         ";
     const menu = `
 <div class="menu_wnd" >
@@ -111,6 +111,6 @@ var FormRows = {
       ev.preventDefault();
       ev.stopImmediatePropagation();
     });
-  },
-
+  }
 };
+
