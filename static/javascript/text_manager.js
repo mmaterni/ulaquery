@@ -175,7 +175,12 @@ var TextMgr = {
                     const text = e.innerHTML;
                     const formakeys = text.split(" ");
                     this.getRowsOfFormakey(formakeys);
+
+                    const slcs = this.wind.w.querySelectorAll("div.text div.select");
+                    for (const e of slcs)
+                        e.classList.remove('select');
                     pr.classList.add("select");
+
                 });
                 const m = this.wind.w.querySelector("div.menu_wnd");
                 m.addEventListener("click", (ev) => {
