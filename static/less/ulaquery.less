@@ -443,7 +443,7 @@ div.dict_form {
           font-weight: normal;
           border-width: 0 1px 1px 0;
           border-style: solid;
-           border-color: @cell_border_color;
+          border-color: @cell_border_color;
           max-height: @dict_row_height;
           min-height: @dict_row_height;
           min-width: @dict_col_width;
@@ -1056,7 +1056,7 @@ div.resultset {
 @form_width: calc(@html_width - 100px);
 @form_row_height: 25px;
 @form_col_width: 30px;
-div.form_rows{
+div.form_rows {
   box-sizing: border-box;
   // height: @form_height;
   // min-width: @form_width !important;
@@ -1074,7 +1074,6 @@ div.form_rows{
     table-layout: fixed;
     margin-left: 5px;
     thead {
-      // z-index: 1;
       top: 0;
       position: sticky;
       tr {
@@ -1127,6 +1126,12 @@ div.form_rows{
         td {
           background: @cell_hover_back;
           color: @cell_hover_color;
+        }
+      }
+      tr.err {
+        td {
+          background: @error_back;
+          color: @error_color;
         }
       }
     }
@@ -1365,11 +1370,11 @@ div.text {
     color: @line_text_color;
     border-bottom: 1px solid @line_text_border_color;
   }
-  div.select{
+  div.select {
     background: @select_back;
-    color:@select_color;
+    color: @select_color;
   }
-  div.err{
+  div.err {
     background-color: red;
   }
 }
