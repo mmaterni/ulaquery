@@ -1,4 +1,5 @@
 "use strict"
+const punctuationRegex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/;
 
 var TextMgr = {
     names: [],
@@ -143,11 +144,9 @@ var TextMgr = {
                 this.wind.w.classList.toggle("z-index-hover");
             },
             getRowsOfFormakey: function (formakeys) {
-                // AAA controllo punteggiatura
-                const puncttre = /^[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]$/;
                 const rows = [];
                 for (const fk of formakeys) {
-                    if (fk.length == 1 && puncttre.test(fk))
+                    if (fk.length == 1 && punctuationRegex.test(fk))
                         continue;
                     let idx = D_M.findIndnxFormakey(fk);
                     let r = [];
