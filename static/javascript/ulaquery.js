@@ -72,7 +72,7 @@ function sleep(delay) {
 
 const menu = function () {
   const h = `
-<div id="ulaquery_id" class="menu_bar">
+<div class="menu_bar">
 <ul>
 
 <li class="v"><a href="#">Filter</a>
@@ -158,9 +158,9 @@ const menu = function () {
 </ul>
 </li>
 
-<li class="v"><a class="cmd" cmd="help" href="#">Help</a></li>
-<li class="v"><a onclick="test()" href="#" >Test</a></li>
-<li class="v"><a onclick="cmd_close()" href="#" >close</a></li>
+<li class="v"><a cmd="help" href="#" >Help</a></li>
+<li class="v"><a cmd="test" href="#" >Test</a></li>
+<li class="v"><a cmd"close" href="#" >close</a></li>
 
 </ul>
 </div>
@@ -173,12 +173,12 @@ var UlaQuery = {
   id: "ulaquery_id",
   open: async function () {
     wait_start();
-
     QUERY_ID = document.getElementById("ulaquery_id");
     await sleep(100);
+    this.build();
+    this.bind();
     await D_M.load_dict();
     await D_M.load_tokens();
-    await this.builD_Menu();
     await FormLemma.build();
     await Sigl.build();
     await Funct.build();
@@ -186,12 +186,75 @@ var UlaQuery = {
     await PosMsd.build();
     await TextMgr.createObjs();
     Where.build();
-     // UaLog.setXY(-3, 0).setZ(999).new();
     // FLT.open();
     wait_stop();
   },
-  builD_Menu: async function () {
+  build: function () {
     const html = menu();
-    document.getElementById("ulaquery_id").innerHTML = html;
+    QUERY_ID.innerHTML = html;
+  },
+  bind: function () {
+    const m = QUERY_ID.querySelector("div.menu_bar");
+    m.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+      const t = ev.target;
+      const cmd = t.getAttribute("cmd");
+      switch (cmd) {
+        case "close":
+          this.hide();
+          break;
+        case "help":
+          this.help();
+          break;
+        case "test":
+          test();
+          break;
+        default:
+        // alert(cmd + ": command not found")
+      }
+    });
+  },
+  help: async function () {
+    await Help.toggle("help1.html");
   }
 }
+
+
+var Help = {
+  id: "help_id_",
+  top: 70,
+  left: 50,
+  toggle: async function (url) {
+    let w = UaWindowAdm.get(this.id);
+    if (!w) {
+      w = UaWindowAdm.create(this.id);
+    }
+    this.wnd = w;
+    const resp = await fetch(url, {
+      method: 'GET',
+      headers: { "Content-Type": "text/plain;charset=UTF-8" },
+      cache: 'default'
+    });
+    if (!resp.ok) {
+      alert("ERROR Help()" + resp.status);
+      return;
+    }
+    let text = await resp.text();
+    let html = `
+    <div class="help">
+    <div class="top_bar">
+    <a href="javascript:Help.close();">X</a>
+    </div>
+    <div class="text" >${text}</div>
+    </div>
+     `;
+    w.setHtml(html);
+    // w.addClassStyle("help");
+    w.setXY(this.left, this.top).drag();
+    w.toggle();
+  },
+  close: function () {
+    this.wnd.close();
+  }
+};
