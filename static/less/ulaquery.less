@@ -372,21 +372,18 @@ div.menu_wnd {
 }
 
 div.help {
-  .b0;
   margin: 0;
   padding: 0;
-  // background: @help_back;
-  // color: @help_color;
   font-size: @fsize_07;
   font-family: @fserif;
   font-weight: normal;
   width: 1000px !important;
   border-radius: 9px;
   line-height: 1;
+  z-index: 9999;
 
   div.top_bar {
     cursor: move;
-    // background: red;;
     background: @help_head_back;
     color: @help_head_color;
     text-align: right;
@@ -394,6 +391,7 @@ div.help {
 
     a {
       color: @help_head_color;
+      font-size: @fsize_07;
       font-weight: bold;
       margin: 0 10px 5px 0;
       text-decoration: none;
@@ -405,10 +403,10 @@ div.help {
   }
 
   div.text {
-    background: @help_back;
+    background: lighten(@help_back,5%);
     color: @help_color;
     box-sizing: border-box;
-    font-size: inherit;
+    font-size: @fsize_07;
     font-weight: normal;
     padding-left: 15px;
     padding-right: 15px;
@@ -420,25 +418,30 @@ div.help {
     scrollbar-color: @scroll_bar1 @scroll_bar2;
 
     div {
-      font-size: inherit;
-      font-weight: bold;
+      background: darken(@help_back,10%);
+      font-size: @fsize_07;
+      font-weight: normal;
       padding-top: 5px;
 
       div {
-        font-size: inherit;
+        background: lighten(@help_back,5%);
+        font-size: @fsize_07;
         font-weight: normal;
-        font-family: @fsans;
+          font-family: @fsans;
         padding-left: 10px;
         padding-right: 10px;
 
         div {
-          font-size: inherit;
-        }
+          background: lighten(@help_back,5%);
+          font-size: @fsize_07;
+          font-weight: normal;
+          }
       }
     }
 
     p {
-      font-size: inherit;
+      background: lighten(@help_back,5%);
+      font-size: @fsize_07;
       font-weight: normal;
       font-family: @fserif;
       text-align: justify;

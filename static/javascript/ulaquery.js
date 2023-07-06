@@ -103,8 +103,8 @@ const menu = function () {
 </li>
 
 <li class="v">
-<a class="tipb" onclick="SelectText.toggle()" ref="#" >Slect Text
-<span class="tiptextb">Slect Text For SHow in Context</span> </a>
+<a class="tipb" onclick="SelectText.toggle()" ref="#" >Select Text
+<span class="tiptextb">Select Text For SHow in Context</span> </a>
 </li>
 
 <li class="v">
@@ -146,13 +146,13 @@ const menu = function () {
 
 <a href="#">Text</a>
 <ul class="v">
-<li class="h""><a class="tipr" href="javascript:TextMgr.openSelected()">Open
-<span class="tiptextr">Open All Text Selected</span></a>
+<li class="h""><a class="tipr" onclick="TextMgr.openSelected()" href="#">Open
+<span class="tiptextr">Open Text Selected</span></a>
 </li>
-<li class="h""><a class="tipr" href="javascript:TextMgr.relocateAll()">Relocate
+<li class="h""><a class="tipr" onclick="TextMgr.relocateAll() " href="#"">Relocate
 <span class="tiptextr">Relocat and Open All Text Selected</span></a>
 </li>
-<li class="h""><a class="tipr" href="javascript:TextMgr.closeAll()">Close 
+<li class="h""><a class="tipr" onclick="TextMgr.closeAll()" href="#"">Close 
 <span class="tiptextr">Close All Text</span></a>
 </li>
 </ul>
