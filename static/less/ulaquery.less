@@ -372,11 +372,11 @@ div.menu_wnd {
 }
 
 div.help {
-  // .b0;
+  .b0;
   margin: 0;
   padding: 0;
-  background: @help_back;
-  color: @help_color;
+  // background: @help_back;
+  // color: @help_color;
   font-size: @fsize_07;
   font-family: @fserif;
   font-weight: normal;
@@ -386,7 +386,9 @@ div.help {
 
   div.top_bar {
     cursor: move;
+    // background: red;;
     background: @help_head_back;
+    color: @help_head_color;
     text-align: right;
     padding: 0;
 
@@ -403,8 +405,8 @@ div.help {
   }
 
   div.text {
-    // background: @help_back;
-    // color: @help_color;
+    background: @help_back;
+    color: @help_color;
     box-sizing: border-box;
     font-size: inherit;
     font-weight: normal;
@@ -412,11 +414,11 @@ div.help {
     padding-right: 15px;
     margin-right: 0;
     max-height: 600px;
-    width:100%;
+    width: 100%;
     overflow-y: scroll;
     overflow-x: scroll;
-    // scrollbar-color: @scroll_bar1 @scroll_bar2;
-  
+    scrollbar-color: @scroll_bar1 @scroll_bar2;
+
     div {
       font-size: inherit;
       font-weight: bold;
@@ -1215,7 +1217,6 @@ div.form_rows {
           background: @error_back;
           color: @error_color;
           white-space: nowrap;
-
         }
       }
     }
