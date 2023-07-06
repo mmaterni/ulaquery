@@ -1053,15 +1053,14 @@ div.resultset {
   }
 }
 
-@form_height: calc(@ulaquery_height - 50px);
-@form_width: @html_width;
+// @form_height: calc(@ulaquery_height - 100px);
+@form_width: calc(@html_width - 100px);
 @form_row_height: 25px;
 @form_col_width: 30px;
-
-div.form_rows div{
+div.form_rows{
   box-sizing: border-box;
-  height: @form_height;
-  min-width: @form_width !important;
+  // height: @form_height;
+  // min-width: @form_width !important;
   max-width: @form_width !important;
   overflow-y: scroll;
   overflow-x: scroll;
@@ -1076,7 +1075,7 @@ div.form_rows div{
     table-layout: fixed;
     margin-left: 5px;
     thead {
-      z-index: 1;
+      // z-index: 1;
       top: 0;
       position: sticky;
       tr {

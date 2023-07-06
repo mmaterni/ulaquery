@@ -2,14 +2,8 @@
 
 const form_rows_top = 35;
 const form_rows_left = 5;
-const form_rows_z = 12;
-// var FormRows = {
-//   id: "formrows_id",
-//   wind: null,
-//   open: function (rows) {
-//     xlog(rows);
-//   }
-// }
+const form_rows_z = 22;
+
 var FormRows = {
   id: "formrows_id",
   wind: null,

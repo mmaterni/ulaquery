@@ -42,16 +42,6 @@ var TextMgr = {
         for (const name of names)
             this.objs[name].resetXY();
     },
-    openFR: function (rows) {
-        // FormRows.open(rows);
-        // const a=SelectText;
-        // const b=D_M;
-        // const c=FLT;
-        // const d=Where;
-        // const e=FormLemma;
-        // xlog(a,b,c);
-        FormRows.open(rows);
-    },
     // ///////////////////////////
     new: function (name, left, top) {
         return {
@@ -159,8 +149,8 @@ var TextMgr = {
                     const r = D_M.dict_rsl_rows[idx];
                     rows.push(r);
                 }
-                TextMgr.openFR(rows);
-                // FormRows.open(rows);
+                xlog(rows);
+                FormRows.open(rows);
             },
             bind: function () {
                 // pone la window sopra a tutte le altre

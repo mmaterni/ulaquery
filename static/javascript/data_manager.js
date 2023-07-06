@@ -429,7 +429,10 @@
           const token_name = file_path.split('.').slice(0, 2).join('_');
           this.token_list[token_name] = arr;
         }
-
+        // TODO AAAs
+        const names = Object.keys(this.token_list);
+        this.token_selected.push(names[0]);
+        this.token_selected.push(names[2]);
       }
     };
     window.D_M = DM;
