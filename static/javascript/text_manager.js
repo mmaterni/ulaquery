@@ -142,23 +142,32 @@ var TextMgr = {
                     wind.w.classList.remove("z-index-hover");
                 this.wind.w.classList.toggle("z-index-hover");
             },
+            getRowsOfFormakey: function (formakeys) {
+                for (const fk of formakeys) {
+                    const idx = D_M.findIndnxFormakey(fk);
+                    xlog(idx);
+                    const r = D_M.dict_rsl_rows[idx];
+                    xlog(r);
+                }
+            },
             bind: function () {
                 this.wind.w.addEventListener("dblclick", (ev) => {
                     ev.preventDefault();
                     ev.stopImmediatePropagation();
                     this.hover();
                 });
+                // prende fli indici delle righei dict/resultet 
+                // corrispondenti alle formakesy  della riga di testo
                 const pr = this.wind.w.querySelector("div.text");
                 pr.addEventListener("click", (ev) => {
                     ev.preventDefault();
                     ev.stopImmediatePropagation();
                     const tg = ev.target;
                     const pr = tg.parentNode;
-                    let e = pr.querySelector("span.n");
-                    const n=e.innerHTML;
-                    e = pr.querySelector("span.text");
-                    const text=e.innerHTML;
-                    xlog(n,text);
+                    const e = pr.querySelector("span.text");
+                    const text = e.innerHTML;
+                    const formakeys = text.split(" ");
+                    this.getRowsOfFormakey(formakeys);
                 });
                 const m = this.wind.w.querySelector("div.menu_wnd");
                 m.addEventListener("click", (ev) => {
@@ -183,15 +192,7 @@ var TextMgr = {
                         // alert(cmd + ": command not found")
                     }
                 });
-                const a = this.wind.w.querySelector("div.text");
-                a.addEventListener("click", (ev) => {
-                    ev.preventDefault();
-                    ev.stopImmediatePropagation();
-                    // let t = ev.target;
-                    // while (t && t.tagName !== 'TR')
-                    //   t = t.parentNode;
-                });
-            },
+            }
         }
     }
 }
@@ -510,8 +511,6 @@ var FormLemmaMgr = {
             //   aaa
             open: function () {
                 this.text_rows = D_M.token_list[this.name];
-
-
                 this.build();
                 this.show();
             },

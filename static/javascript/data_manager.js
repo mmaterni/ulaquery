@@ -89,6 +89,35 @@
           this.dict_rsl_rows.push(r);
         }
       },
+      // AAA check formakey
+      check: function () {
+        const arr = this.dict_rows.map(x => x[1]);
+        // const occorr = function (array) {
+        //   const ocrs = array.reduce((obj, item) => {
+        //     obj[item] = (obj[item] || 0) + 1;
+        //     return obj;
+        //   }, {});
+        //   const rs = Object.entries(ocrs).filter(([item, count]) => count > 1);
+        //   return rs;
+        // }
+        // let r = occorr(arr);
+        // xlog(r);
+        // const st = new Set(arr);
+        // const la = arr.length;
+        // const ls = st.size;
+        // xlog(la, ls); 
+      },
+      findIndnxFormakey: function (formakey) {
+        // AAA controllare la sigla
+        let index = -1;
+        for (let i = 0; i < this.dict_rows.length; i++) {
+          if (this.dict_rows[i][1] === formakey) {
+            index = i;
+            break;
+          }
+        }
+        return index;
+      },
       findIndices: function (js) {
 
         const match = (ptrn, str) => {
