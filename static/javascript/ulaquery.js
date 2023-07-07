@@ -224,8 +224,8 @@ var UlaQuery = {
 
 
 var Help = {
-  id: "help_id_",
-  top: 70,
+  id: "help_id",
+  top: 30,
   left: 50,
   toggle: async function (url) {
     let w = UaWindowAdm.get(this.id);
@@ -244,15 +244,13 @@ var Help = {
     }
     let text = await resp.text();
     let html = `
-    <div class="help">
     <div class="top_bar">
     <a href="javascript:Help.close();">X</a>
     </div>
     ${text}
-    </div>
      `;
     w.setHtml(html);
-    // w.addClassStyle("help");
+    w.addClassStyle("help");
     w.setXY(this.left, this.top).drag();
     w.toggle();
   },
