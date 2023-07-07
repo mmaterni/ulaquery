@@ -74,42 +74,32 @@ const menu = function () {
 <li class="v"><a href="#">Filter</a>
 <ul class="v">
 
-<li class="h">
-<a class="tipr" onclick="FLT.open()" href="#">Open
+<li class="h"><a class="tipr" onclick="FLT.open()" href="#">Open
 <span class="tiptextr">Opoen All Window Filter</span></a>
 </li>
-<li class="h">
-<a class="tipr" onclick="FLT.resetXY()" href="#">Relocate
+<li class="h"><a class="tipr" onclick="FLT.resetXY()" href="#">Relocate
 <span class="tiptextr">Relocat and Open All Window Filter</span></a>
 </li>
-<li class="h">
-<a class="tipr" onclick="FLT.show()" href="#">Show
+<li class="h"><a class="tipr" onclick="FLT.show()" href="#">Show
 <span class="tiptextr">Opoen Window Filter Active</span></a>
 </li>
-<li class="h">
-<a class="tipr" onclick="FLT.hide()" ref="#">Hide
+<li class="h"><a class="tipr" onclick="FLT.hide()" ref="#">Close
 <span class="tiptextr">Close All Windows Filetr</span> </a>
 </li>
-<li class="h">
-<a class="tipr" onclick="FLT.unselect()" href="#">UnSelect
+<li class="h"><a class="tipr" onclick="FLT.unselect()" href="#">UnSelect
 <span class="tiptextr">UnSelect All Slect Options Active</span></a>
 </li>
-</ul>
-</li>
+</ul></li>
   
-<li class="v">
-<a class="tipb" onclick="Where.testQuery()" ref="#" >Test Query
+<li class="v"><a class="tipb" onclick="Where.testQuery()" ref="#" >Test Query
 <span class="tiptextb">Display Number of Results</span> </a>
 </li>
 
-<li class="v">
-<a class="tipb" onclick="SelectText.toggle()" ref="#" >Select Text
+<li class="v"><a class="tipb" onclick="SelectText.toggle()" ref="#" >Select Text
 <span class="tiptextb">Select Text For SHow in Context</span> </a>
 </li>
 
-
-<li class="v">
-<a href="#">ReusltSet</a>
+<li class="v"><a href="#">ReusltSet</a>
 <ul class="v">
 <li class="h"><a class="tipr" onclick="FLT.queryRslt()" href="#" >Slection
 <span class="tiptextr">Show Selected ResultSet</span> </a>
@@ -117,11 +107,9 @@ const menu = function () {
 <li class="h"><a class="tipr" onclick="ResultSet.open()" href="#">All
 <span class="tiptextr">Show All ResultSet</span></a>
 </li>
-</ul>
-</li>
+</ul></li>
 
-<li class="v">
-<a href="#">Dictionary</a>
+<li class="v"><a href="#">Dictionary</a>
 <ul class="v">
 <li class="h"><a class="tipr" onclick="FLT.queryDict()" href="#">Slection
 <span class="tiptextr">Show Selected Dictionary</span></a>
@@ -129,13 +117,9 @@ const menu = function () {
 <li class="h"><a class="tipr" onclick="DictForm.open()" href="#">All 
 <span class="tiptextr">Show All Dictionary</span></a>
 </li>
-</ul>
-</li>
-<li class="v">
+</ul></li>
 
-
-<li class="v">
-<a href="#">Context</a>
+<li class="v"><a href="#">Context</a>
 <ul class="v">
 <li class="h""><a class="tipr" onclick="ContextMgr.relocateAll() href="#" >Relocate
 <span class="tiptextr">Relocat and Open All Context Selected</span></a>
@@ -143,10 +127,9 @@ const menu = function () {
 <li class="h""><a class="tipr" onclick="ContextMgr.closeAll()" href="#" >Close All
 <span class="tiptextr">Close All Context</span></a>
 </li>
-</ul>
-</li>
+</ul></li>
 
-<a href="#">Text</a>
+<li class="v"><a href="#">Text</a>
 <ul class="v">
 <li class="h""><a class="tipr" onclick="TextMgr.openSelected()" href="#">Open
 <span class="tiptextr">Open Text Selected</span></a>
@@ -157,8 +140,7 @@ const menu = function () {
 <li class="h""><a class="tipr" onclick="TextMgr.closeAll()" href="#"">Close 
 <span class="tiptextr">Close All Text</span></a>
 </li>
-</ul>
-</li>
+</ul></li>
 
 <li class="v"><a cmd="help" href="#" >Help</a></li>
 <li class="v"><a cmd="test" href="#" >Test</a></li>
