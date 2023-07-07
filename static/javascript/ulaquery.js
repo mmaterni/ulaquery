@@ -39,7 +39,10 @@ function test() {
 }
 
 function cmd_close() {
-  if (confirm("Chiudi Applicazione ?")) window.close();
+  if (confirm("Chiudi Applicazione ?")) {
+    // window.close();
+    window.open('static/close.html', '_self');
+  }
 };
 
 function cmd_log_toggle() {
@@ -192,9 +195,6 @@ var UlaQuery = {
     const html = menu();
     QUERY_ID.innerHTML = html;
   },
-  close: function () {
-    if (confirm("Chiudi Applicazione ?")) window.close();
-  },
   help: async function () {
     await Help.toggle("static/help1.html");
   },
@@ -207,7 +207,7 @@ var UlaQuery = {
       const cmd = t.getAttribute("cmd");
       switch (cmd) {
         case "close":
-          this.close();
+          cmd_close();
           break;
         case "help":
           this.help();
