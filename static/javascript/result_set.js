@@ -5,18 +5,18 @@
 const result_set_top = 35;
 const result_set_left = 5;
 const z_result_set = 11;
-const g_result_set = "resultste";
+const g_result_set = "resultset";
 
 
 var ResultSet = {
   id: "resultset_id",
   wind: null,
-  open: async function () {
+  open: function () {
     const rows = D_M.dict_rsl_rows;
-    this.build(rows);
+    this.build( D_M.dict_rsl_rows);
     this.show();
   },
-  openSelected: async function (rows) {
+  openSelected: function (rows) {
     this.build(rows);
     this.show();
   },
@@ -85,8 +85,8 @@ var ResultSet = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
+      this.wind.addGroup(g_result_set);
       this.wind.setZ(z_result_set);
-      this.wind.addGroup(g_resultset);
     }
     this.wind.hide();
     this.wind.setHtml(html);
@@ -95,7 +95,7 @@ var ResultSet = {
   show: async function (url) {
     if (!this.wind) return;
     wait_start();
-    await sleep(1);
+    await sleep(10);
     this.wind.show();
     wait_stop();
   },

@@ -48,9 +48,7 @@ const g_dict = "dict";
 
 var DictForm = {
   id: "dict_form.id",
-  tr_selected: null,
   wind: null,
-  rows: [],
   open: function () {
     this.build(D_M.dict_rows);
     this.show();
@@ -140,10 +138,10 @@ var DictForm = {
   },
   show: async function (url) {
     if (!this.wind) return;
-    wait_start();
-    await sleep(10);
+    // wait_start();
+    // await sleep(10);
     this.wind.show();
-    wait_stop();
+    // wait_stop();
   },
   hide: function () {
     if (!this.wind) return;

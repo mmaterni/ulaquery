@@ -141,10 +141,6 @@ var FLT = {
     Where.show();
   },
   queryRslt: function () {
-    if (this.visible) {
-      this.hide();
-      this.visible = true;
-    }
     this.getAllSelected();
     const js = D_M.setQueryConditions();
     const rows = D_M.findRsltRows(js);
