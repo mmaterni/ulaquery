@@ -43,6 +43,8 @@
 36: DATE.2
 */
 
+const z_dict = 11;
+const g_dict = "dict";
 
 var DictForm = {
   id: "dict_form.id",
@@ -129,8 +131,8 @@ var DictForm = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
-      this.wind.addGroup(G_DICT);
-      this.wind.setZ(Z_DICT);
+      this.wind.addGroup(g_dict);
+      this.wind.setZ(z_dict);
     }
     this.wind.hide();
     this.wind.setHtml(html);

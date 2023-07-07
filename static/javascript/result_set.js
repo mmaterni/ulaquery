@@ -4,7 +4,8 @@
 
 const result_set_top = 35;
 const result_set_left = 5;
-const result_set_z = 11;
+const z_result_set = 11;
+const g_result_set = "resultste";
 
 
 var ResultSet = {
@@ -84,7 +85,8 @@ var ResultSet = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
-      this.wind.setZ(result_set_z);
+      this.wind.setZ(z_result_set);
+      this.wind.addGroup(g_resultset);
     }
     this.wind.hide();
     this.wind.setHtml(html);
