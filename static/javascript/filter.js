@@ -6,27 +6,27 @@ const top_filter = 35;
 
 const where_top = top_filter + 380;
 const where_left = 5;
-const where_z = 100;
+const z_where = 100;
 
 const form_lemma_top = top_filter;
 const form_lemma_left = 3;
-const form_lemma_z = 9;
+const z_form_lemma = 9;
 
 const sigl_top = top_filter + 130;
 const sigl_left = 5;
-const sigl_z = 8;
+const z_sigl = 8;
 
 const funct_top = top_filter;
 const funct_left = 490;
-const funct_z = 7;
+const z_funct = 7;
 
 const lang_date_top = top_filter;
 const lang_date_left = 300;
-const lang_date_z = 6;
+const z_lang_date = 6;
 
 const pos_msd_top = top_filter;
 const pos_msd_left = 670;
-const pos_msd_z = 5;
+const z_pos_msd = 5;
 
 const VS = {
   forma: '',
@@ -236,7 +236,7 @@ var Where = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
-      this.wind.setZ(where_z)
+      this.wind.setZ(z_where)
       this.wind.addGroup(filter_group);
     }
    this.wind.hide();
@@ -325,7 +325,7 @@ var FormLemma = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
-      this.wind.setZ(form_lemma_z);
+      this.wind.setZ(z_form_lemma);
       this.wind.addGroup(filter_group);
     }
     this.wind.setHtml(html);
@@ -469,7 +469,7 @@ var Sigl = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
-      this.wind.setZ(sigl_z);
+      this.wind.setZ(z_sigl);
       this.wind.addGroup(filter_group);
     }
     this.wind.setHtml(html);
@@ -610,7 +610,7 @@ var Funct = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
-      this.wind.setZ(funct_z);
+      this.wind.setZ(z_funct);
       this.wind.addGroup(filter_group);
     }
     this.wind.setHtml(html);
@@ -735,7 +735,7 @@ var LangDate = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
-      this.wind.setZ(lang_date_z);
+      this.wind.setZ(z_lang_date);
       this.wind.addGroup(filter_group);
     }
     this.wind.setHtml(html);
@@ -876,7 +876,7 @@ var PosMsd = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
-      this.wind.setZ(pos_msd_z);
+      this.wind.setZ(z_pos_msd);
       this.wind.addGroup(filter_group);
     }
     this.wind.setHtml(html);

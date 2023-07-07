@@ -5,15 +5,12 @@ z_menu_bar=9998
 z_help=9999
 z_hover 9000
 z_hover_hover 9001
-filter
-10 ..5
+
+filter 10 ..5
+dict 11
+result_set 11
 
 */
-const Z_DICT = 11;
-const G_IDCT = "dict";
-
-const Z_RESULTSET = 11;
-const G_RESULTSET = "resultset";
 
 var Z_SLECTTEXT = 11;
 const g_SELECTCONTEXT = "selecttext";
