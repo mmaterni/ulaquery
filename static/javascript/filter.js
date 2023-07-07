@@ -1,10 +1,12 @@
 "use strict"
 
+const filter_group="filter";
+
 const top_filter = 35;
 
 const where_top = top_filter + 380;
 const where_left = 5;
-const where_z = 10;
+const where_z = 100;
 
 const form_lemma_top = top_filter;
 const form_lemma_left = 3;
@@ -234,8 +236,10 @@ var Where = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
-      this.wind.setZ(where_z);
+      this.wind.setZ(where_z)
+      this.wind.addGroup(filter_group);
     }
+   this.wind.hide();
     this.wind.setHtml(html);
   },
   close: function () {
@@ -322,6 +326,7 @@ var FormLemma = {
       this.setXY();
       this.wind.drag();
       this.wind.setZ(form_lemma_z);
+      this.wind.addGroup(filter_group);
     }
     this.wind.setHtml(html);
     this.bind();
@@ -465,6 +470,7 @@ var Sigl = {
       this.setXY();
       this.wind.drag();
       this.wind.setZ(sigl_z);
+      this.wind.addGroup(filter_group);
     }
     this.wind.setHtml(html);
     this.bind();
@@ -605,6 +611,7 @@ var Funct = {
       this.setXY();
       this.wind.drag();
       this.wind.setZ(funct_z);
+      this.wind.addGroup(filter_group);
     }
     this.wind.setHtml(html);
     this.bind();
@@ -729,6 +736,7 @@ var LangDate = {
       this.setXY();
       this.wind.drag();
       this.wind.setZ(lang_date_z);
+      this.wind.addGroup(filter_group);
     }
     this.wind.setHtml(html);
     this.bind();
@@ -869,6 +877,7 @@ var PosMsd = {
       this.setXY();
       this.wind.drag();
       this.wind.setZ(pos_msd_z);
+      this.wind.addGroup(filter_group);
     }
     this.wind.setHtml(html);
     this.bind();

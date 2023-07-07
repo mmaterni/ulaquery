@@ -1,26 +1,34 @@
 "use strict"
-
 /*
-<span class="arrow-up">&#8593;</span>
-<span class="arrow-down">&#8595;</span>
-<span class="arrow-right">&#8594;</span>
-<span class="arrow-left">&#8592;</span>
-
-triangle-up      
-&#9650;
-
-triangle-down    
-&#9660;
-
-triangle-right    
-&#9654;
-
-triangle-left     
-&#9664;
-
+definiti nel css
+z_menu_bar=9998
+z_help=9999
+z_hover 9000
+z_hover_hover 9001
+filter
+10 ..5
 
 */
+const Z_DICT = 11;
+const G_IDCT = "dict";
 
+const Z_RESULTSET = 11;
+const G_RESULTSET = "resultset";
+
+var Z_SLECTTEXT = 11;
+const g_SELECTCONTEXT = "selecttext";
+
+var Z_TEXT = 11;
+const g_TEXT = "text";
+
+var Z_CONTEXT = 11;
+const g_CONTEXT = "context";
+
+var Z_FILTER = 11;
+const G_FILTER = "filter";
+
+var Z_WHERE = 11;
+const G_WHERE = "filter";
 
 var xlog = console.log;
 
@@ -176,6 +184,8 @@ var UlaQuery = {
   open: async function () {
     wait_start();
     QUERY_ID = document.getElementById("ulaquery_id");
+    this.build();
+    this.bind();
     await sleep(100);
     await D_M.load_dict();
     await D_M.load_tokens();
@@ -186,8 +196,6 @@ var UlaQuery = {
     await PosMsd.build();
     await TextMgr.createObjs();
     Where.build();
-    this.build();
-    this.bind();
     // FLT.open();
     wait_stop();
   },

@@ -79,6 +79,7 @@ var UaWindowAdm = {
             },
             addGroup: function (group) {
                 this.groups.push(group);
+                return this;
             },
             addClassStyle: function (className) {
                 if (!this.w.classList.contains(className))

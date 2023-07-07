@@ -129,7 +129,8 @@ var DictForm = {
       this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
       this.setXY();
       this.wind.drag();
-      this.wind.setZ(11);
+      this.wind.addGroup(G_DICT);
+      this.wind.setZ(Z_DICT);
     }
     this.wind.hide();
     this.wind.setHtml(html);
