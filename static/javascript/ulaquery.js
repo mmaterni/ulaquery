@@ -9,23 +9,11 @@ z_hover_hover 9001
 filter 10 ..5
 dict 11
 result_set 11
-
+text 11
+context 12
+select_text 13
+form_rows 12
 */
-
-var Z_SLECTTEXT = 11;
-const g_SELECTCONTEXT = "selecttext";
-
-var Z_TEXT = 11;
-const g_TEXT = "text";
-
-var Z_CONTEXT = 11;
-const g_CONTEXT = "context";
-
-var Z_FILTER = 11;
-const G_FILTER = "filter";
-
-var Z_WHERE = 11;
-const G_WHERE = "filter";
 
 var xlog = console.log;
 

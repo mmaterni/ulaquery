@@ -1,6 +1,20 @@
 "use strict"
 const punctuationRegex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/;
 
+const g_text="text"
+const g_context="context"
+const g_select_text="selecttext"
+const g_form_rows = "formrows";
+
+const z_text = 11;
+const z_context=12;
+const z_select_text = 13;
+const z_form_rows = 12;
+
+const form_rows_top = 35;
+const form_rows_left = 50;
+
+
 var TextMgr = {
     names: [],
     objs: {},
@@ -98,9 +112,9 @@ var TextMgr = {
                 if (!this.wind) {
                     this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
                     this.setXY();
-                    this.wind.addGroup("text");
+                    this.wind.addGroup(g_text); 
                     this.wind.drag();
-                    this.wind.setZ(this.z);
+                    this.wind.setZ(z_text);
                 }
                 this.wind.hide();
                 this.wind.setHtml(html);
@@ -138,7 +152,7 @@ var TextMgr = {
                 SelectText.update();
             },
             hover: function () {
-                const winds = UaWindowAdm.getForGroup("text");
+                const winds = UaWindowAdm.getForGroup(g_text);
                 for (const wind of winds)
                     wind.w.classList.remove("z-index-hover");
                 this.wind.w.classList.toggle("z-index-hover");
@@ -173,7 +187,7 @@ var TextMgr = {
                     ev.preventDefault();
                     ev.stopImmediatePropagation();
                     const tg = ev.target;
-                    if(!tg.classList.contains('n'))
+                    if (!tg.classList.contains('n'))
                         return;
                     const pr = tg.parentNode;
                     const e = pr.querySelector("span.text");
@@ -249,8 +263,6 @@ var ContextMgr = {
     },
     // //////////////////////////
     create: function (name, left, top) {
-        const context_z = 12;
-
         const obj = {
             id: `${name}context_id`,
             name: name,
@@ -294,9 +306,9 @@ var ContextMgr = {
                 if (!this.wind) {
                     this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
                     this.setXY();
-                    this.wind.addGroup("context");
+                    this.wind.addGroup(g_context);
                     this.wind.drag();
-                    this.wind.setZ(context_z);
+                    this.wind.setZ(z_context);
                 }
                 this.wind.hide();
                 this.wind.setHtml(html);
@@ -374,7 +386,6 @@ var ContextMgr = {
 var SelectText = {
     id: "select_text_id",
     wind: null,
-    z: 20,
     open: async function () {
         this.build();
         this.show();
@@ -412,10 +423,10 @@ var SelectText = {
         if (!this.wind) {
             this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
             this.setXY();
-            this.wind.addGroup("select_text");
-            this.wind.addGroup("text");
+            this.wind.addGroup(g_select_text);
+            this.wind.addGroup(g_text);
             this.wind.drag();
-            this.wind.setZ(this.z);
+            this.wind.setZ(z_select_text);
         }
         this.wind.setHtml(html);
         this.bind();
@@ -497,11 +508,6 @@ var SelectText = {
     }
 };
 
-"use strict"
-
-const form_rows_top = 35;
-const form_rows_left = 50;
-const form_rows_z = 9000;
 
 var FormRows = {
     id: "formrows_id",
@@ -567,7 +573,8 @@ var FormRows = {
             this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
             this.setXY();
             this.wind.drag();
-            this.wind.setZ(form_rows_z);
+            this.wind.setZ(z_form_rows);
+            this.wind.addGroup(g_form_rows);
         }
         this.wind.hide();
         this.wind.setHtml(html);
@@ -593,8 +600,6 @@ var FormRows = {
         this.wind.w.classList.toggle("z-index-hover-hover");
     },
     bind: function () {
-        // const a = this.wind.w.querySelector("div.form_rows");
-        // a.addEventListener("dblclick", (ev) => {
         this.wind.w.addEventListener("dblclick", (ev) => {
             ev.preventDefault();
             ev.stopImmediatePropagation();
