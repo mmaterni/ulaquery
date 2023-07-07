@@ -9,10 +9,10 @@ z_hover_hover 9100
 filter 10 ..5
 dict 11
 result_set 11
-text 11
+text 11 12 ..
 context 12
-select_text 13
-form_rows 12
+select_text 51
+form_rows 40
 */
 
 var xlog = console.log;
@@ -121,7 +121,7 @@ const menu = function () {
 
 <li class="v"><a href="#">Context</a>
 <ul class="v">
-<li class="h""><a class="tipr" onclick="ContextMgr.relocateAll() href="#" >Relocate
+<li class="h""><a class="tipr" onclick="ContextMgr.relocateAll()" href="#" >Relocate
 <span class="tiptextr">Relocat and Open All Context Selected</span></a>
 </li>
 <li class="h""><a class="tipr" onclick="ContextMgr.closeAll()" href="#" >Close All

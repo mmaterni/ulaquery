@@ -1,15 +1,15 @@
 "use strict"
 const punctuationRegex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/;
 
-const g_text="text"
-const g_context="context"
-const g_select_text="selecttext"
+const g_text = "text"
+const g_context = "context"
+const g_select_text = "selecttext"
 const g_form_rows = "formrows";
 
-const z_text = 11;
-const z_context=12;
-const z_select_text = 13;
-const z_form_rows = 12;
+const z_text0 = 11; // +1
+const z_context = 12;
+const z_select_text = 9200;
+const z_form_rows = 9110;
 
 const form_rows_top = 35;
 const form_rows_left = 50;
@@ -21,11 +21,15 @@ var TextMgr = {
     createObjs: async function () {
         const names = Object.keys(D_M.token_list);
         let left = 0;
+        let top = 30;
+        let z_text = z_text0;
         for (const name of names) {
-            const obj = this.new(name, left, 30);
+            const obj = this.new(name, left, top, z_text);
             this.objs[name] = obj;
             this.names.push(name);
-            left += 300;
+            left += 200;
+            top += 30;
+            z_text += 1;
         }
     },
     open: function (name) {
@@ -58,13 +62,12 @@ var TextMgr = {
             this.objs[name].resetXY();
     },
     // ///////////////////////////
-    new: function (name, left, top) {
+    new: function (name, left, top, z) {
         return {
             id: `${name}text_id`,
             name: name,
             wind: null,
             text_rows: [],
-            z: 12,
             open: function () {
                 this.text_rows = D_M.token_list[this.name];
                 this.build();
@@ -112,9 +115,9 @@ var TextMgr = {
                 if (!this.wind) {
                     this.wind = UaWindowAdm.create(this.id, "ulaquery_id");
                     this.setXY();
-                    this.wind.addGroup(g_text); 
+                    this.wind.addGroup(g_text);
                     this.wind.drag();
-                    this.wind.setZ(z_text);
+                    this.wind.setZ(z);
                 }
                 this.wind.hide();
                 this.wind.setHtml(html);
@@ -129,10 +132,11 @@ var TextMgr = {
                 this.wind.hide();
             },
             setXY: function () {
-                this.wind.setXY(10 + left, 30 + top, -1);
+                this.wind.setXY(left, top, -1);
             },
             resetXY: function () {
                 this.wind.reset();
+                this.wind.w.classList.remove("z-index-hover");
                 this.setXY();
                 this.show();
             },
@@ -247,6 +251,10 @@ var ContextMgr = {
                 this.objs[name] = obj;
             }
             left += 300;
+            if (left > 1000) {
+                top = 400;
+                left = 0;
+            }
             const obj = this.objs[name];
             obj.open(formakey);
         }
@@ -600,11 +608,11 @@ var FormRows = {
         this.wind.w.classList.toggle("z-index-hover-hover");
     },
     bind: function () {
-        this.wind.w.addEventListener("dblclick", (ev) => {
-            ev.preventDefault();
-            ev.stopImmediatePropagation();
-            this.hover();
-        });
+        // this.wind.w.addEventListener("dblclick", (ev) => {
+        //     ev.preventDefault();
+        //     ev.stopImmediatePropagation();
+        //     this.hover();
+        // });
     }
 };
 
