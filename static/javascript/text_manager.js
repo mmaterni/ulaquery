@@ -173,6 +173,8 @@ var TextMgr = {
                     ev.preventDefault();
                     ev.stopImmediatePropagation();
                     const tg = ev.target;
+                    if(!tg.classList.contains('n'))
+                        return;
                     const pr = tg.parentNode;
                     const e = pr.querySelector("span.text");
                     const text = e.innerHTML;
