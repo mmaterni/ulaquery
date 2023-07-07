@@ -160,7 +160,7 @@ const menu = function () {
 
 <li class="v"><a cmd="help" href="#" >Help</a></li>
 <li class="v"><a cmd="test" href="#" >Test</a></li>
-<li class="v"><a cmd"close" href="#" >close</a></li>
+<li class="v"><a cmd="close" href="#" >close</a></li>
 
 </ul>
 </div>
@@ -170,13 +170,10 @@ const menu = function () {
 let QUERY_ID = null;
 
 var UlaQuery = {
-  id: "ulaquery_id",
   open: async function () {
     wait_start();
     QUERY_ID = document.getElementById("ulaquery_id");
     await sleep(100);
-    this.build();
-    this.bind();
     await D_M.load_dict();
     await D_M.load_tokens();
     await FormLemma.build();
@@ -186,12 +183,20 @@ var UlaQuery = {
     await PosMsd.build();
     await TextMgr.createObjs();
     Where.build();
+    this.build();
+    this.bind();
     // FLT.open();
     wait_stop();
   },
   build: function () {
     const html = menu();
     QUERY_ID.innerHTML = html;
+  },
+  close: function () {
+    if (confirm("Chiudi Applicazione ?")) window.close();
+  },
+  help: async function () {
+    await Help.toggle("help1.html");
   },
   bind: function () {
     const m = QUERY_ID.querySelector("div.menu_bar");
@@ -202,7 +207,7 @@ var UlaQuery = {
       const cmd = t.getAttribute("cmd");
       switch (cmd) {
         case "close":
-          this.hide();
+          this.close();
           break;
         case "help":
           this.help();
@@ -214,9 +219,6 @@ var UlaQuery = {
         // alert(cmd + ": command not found")
       }
     });
-  },
-  help: async function () {
-    await Help.toggle("help1.html");
   }
 }
 
