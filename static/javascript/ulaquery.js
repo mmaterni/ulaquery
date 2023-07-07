@@ -4,7 +4,7 @@ definiti nel css
 z_menu_bar=9998
 z_help=9999
 z_hover 9000
-z_hover_hover 9001
+z_hover_hover 9100
 
 filter 10 ..5
 dict 11
@@ -75,8 +75,12 @@ const menu = function () {
 <ul class="v">
 
 <li class="h">
-<a class="tipr" onclick="FLT.resetXY()" href="#">Open
-<span class="tiptextr">Opoen Window FIlter</span></a>
+<a class="tipr" onclick="FLT.open()" href="#">Open
+<span class="tiptextr">Opoen All Window Filter</span></a>
+</li>
+<li class="h">
+<a class="tipr" onclick="FLT.resetXY()" href="#">Relocate
+<span class="tiptextr">Relocat and Open All Window Filter</span></a>
 </li>
 <li class="h">
 <a class="tipr" onclick="FLT.show()" href="#">Show
@@ -84,7 +88,7 @@ const menu = function () {
 </li>
 <li class="h">
 <a class="tipr" onclick="FLT.hide()" ref="#">Hide
-<span class="tiptextr">Close Windows Filetr</span> </a>
+<span class="tiptextr">Close All Windows Filetr</span> </a>
 </li>
 <li class="h">
 <a class="tipr" onclick="FLT.unselect()" href="#">UnSelect
@@ -103,17 +107,6 @@ const menu = function () {
 <span class="tiptextb">Select Text For SHow in Context</span> </a>
 </li>
 
-<li class="v">
-<a href="#">Context</a>
-<ul class="v">
-<li class="h""><a class="tipr" onclick="ContextMgr.relocateAll() href="#" >Relocate
-<span class="tiptextr">Relocat and Open All Context Selected</span></a>
-</li>
-<li class="h""><a class="tipr" onclick="ContextMgr.closeAll()" href="#" >Close All
-<span class="tiptextr">Close All Context</span></a>
-</li>
-</ul>
-</li>
 
 <li class="v">
 <a href="#">ReusltSet</a>
@@ -139,6 +132,19 @@ const menu = function () {
 </ul>
 </li>
 <li class="v">
+
+
+<li class="v">
+<a href="#">Context</a>
+<ul class="v">
+<li class="h""><a class="tipr" onclick="ContextMgr.relocateAll() href="#" >Relocate
+<span class="tiptextr">Relocat and Open All Context Selected</span></a>
+</li>
+<li class="h""><a class="tipr" onclick="ContextMgr.closeAll()" href="#" >Close All
+<span class="tiptextr">Close All Context</span></a>
+</li>
+</ul>
+</li>
 
 <a href="#">Text</a>
 <ul class="v">
