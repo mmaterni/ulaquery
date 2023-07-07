@@ -196,7 +196,7 @@ var UlaQuery = {
     if (confirm("Chiudi Applicazione ?")) window.close();
   },
   help: async function () {
-    await Help.toggle("help1.html");
+    await Help.toggle("static/help1.html");
   },
   bind: function () {
     const m = QUERY_ID.querySelector("div.menu_bar");
