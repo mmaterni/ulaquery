@@ -1430,12 +1430,17 @@ div.text {
       box-sizing: border-box;
       background: darken(@line_text_back, 15%);
       text-align: right;
-      padding-right: 5px;
-      width: 60px;
+      padding-top: 2px;;
+      padding-right: 3px;
+      border-width: 0 1px 0 0;
+      border-style: solid;
+      border-color: @line_text_border_color;
+        width: 50px;
       flex-shrink: 0;
     }
     span.text {
       flex: 1;
+      padding-top: 2px;;
       padding-left: 5px;
       text-align: left;
       white-space: nowrap;
