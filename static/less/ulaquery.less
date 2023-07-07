@@ -475,12 +475,10 @@ div.help {
 div.dict_form {
   box-sizing: border-box;
   height: @dict_form_height;
-  // width: @dict_form_width !important;
   min-width: @dict_form_width !important;
   max-width: @dict_form_width !important;
   overflow-y: scroll;
   overflow-x: scroll;
-  // padding-left: 5px;
   table {
     box-sizing: border-box;
     width: 100%;
@@ -490,7 +488,6 @@ div.dict_form {
     table-layout: fixed;
     margin-left: 5px;
     thead {
-      // z-index: 1;
       top: 0;
       position: sticky;
       tr {
@@ -1138,6 +1135,89 @@ div.resultset {
   }
 }
 
+div.select_text {
+  box-sizing: border-box;
+  border: 1px solid @wnd_border_color;
+  padding: 5px 5px 5px 0;
+  background: @wnd_back;
+
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  justify-content: flex-start;
+
+  div {
+    box-sizing: border-box;
+    margin: 0 auto 0 auto;
+    ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      list-style: none;
+      li {
+        box-sizing: border-box;
+        margin: 0;
+        display: flex;
+        padding: 2px 0 0 0;
+        a {
+          box-sizing: border-box;
+          display: block;
+          padding: 2px 0 2px 0;
+          text-align: center;
+          background: darken(@wnd_back, -10%);
+          color: @wnd_color;
+          font-size: @fsize_07;
+          font-family: @fsans;
+          font-style: normal;
+          text-decoration: none;
+          border-width: 1px 1px 1px 1px;
+          border-color: @wnd_color;
+          border-style: solid;
+          border-radius: 6px;
+        }
+        a:hover {
+          font-style: italic;
+          background: @wnd_hover_back;
+          color: @wnd_hover_color;
+        }
+        a.select {
+          background: @wnd_select_back;
+          color: @wnd_select_color;
+          text-decoration: underline;
+        }
+        a.select:hover {
+          background: lighten(@wnd_select_back, 20%);
+          color: @wnd_select_color;
+          text-decoration: underline;
+        }
+        span {
+          background: darken(@wnd_back, 10%);
+          font-size: @fsize_07;
+          border-width: 1px 1px 1px 1px;
+          margin: 0 0 2px 0;
+          border-color: @wnd_color;
+          border-style: solid;
+          text-align: center;
+        }
+      }
+      li.h {
+        span {
+          width: 150px;
+        }
+      }
+      li.a {
+        a {
+          width: 150px;
+        }
+        span {
+          width: 150px;
+        }
+      }
+    }
+  }
+}
+
 @form_width: calc(@html_width - 100px);
 @form_row_height: 25px;
 @form_col_width: 30px;
@@ -1218,89 +1298,6 @@ div.form_rows {
           background: @error_back;
           color: @error_color;
           white-space: nowrap;
-        }
-      }
-    }
-  }
-}
-
-div.select_text {
-  box-sizing: border-box;
-  border: 1px solid @wnd_border_color;
-  padding: 5px 5px 5px 0;
-  background: @wnd_back;
-
-  display: flex;
-  flex-direction: row;
-  align-items: top;
-  justify-content: flex-start;
-
-  div {
-    box-sizing: border-box;
-    margin: 0 auto 0 auto;
-    ul {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      list-style: none;
-      li {
-        box-sizing: border-box;
-        margin: 0;
-        display: flex;
-        padding: 2px 0 0 0;
-        a {
-          box-sizing: border-box;
-          display: block;
-          padding: 2px 0 2px 0;
-          text-align: center;
-          background: darken(@wnd_back, -10%);
-          color: @wnd_color;
-          font-size: @fsize_07;
-          font-family: @fsans;
-          font-style: normal;
-          text-decoration: none;
-          border-width: 1px 1px 1px 1px;
-          border-color: @wnd_color;
-          border-style: solid;
-          border-radius: 6px;
-        }
-        a:hover {
-          font-style: italic;
-          background: @wnd_hover_back;
-          color: @wnd_hover_color;
-        }
-        a.select {
-          background: @wnd_select_back;
-          color: @wnd_select_color;
-          text-decoration: underline;
-        }
-        a.select:hover {
-          background: lighten(@wnd_select_back, 20%);
-          color: @wnd_select_color;
-          text-decoration: underline;
-        }
-        span {
-          background: darken(@wnd_back, 10%);
-          font-size: @fsize_07;
-          border-width: 1px 1px 1px 1px;
-          margin: 0 0 2px 0;
-          border-color: @wnd_color;
-          border-style: solid;
-          text-align: center;
-        }
-      }
-      li.h {
-        span {
-          width: 150px;
-        }
-      }
-      li.a {
-        a {
-          width: 150px;
-        }
-        span {
-          width: 150px;
         }
       }
     }
@@ -1406,7 +1403,7 @@ div.text {
 
   div.row {
     margin: 0;
-    padding: 1px 5px 1px 0;
+    padding: 0 5px 0 0;
     min-width: 60px;
     background: @line_text_back;
     color: @line_text_color;
@@ -1428,8 +1425,9 @@ div.text {
       box-sizing: border-box;
       background: darken(@line_text_back, 15%);
       text-align: right;
+      margin: 0;
       padding-top: 2px;
-      padding-right: 3px;
+      padding-right: 2px;
       border-width: 0 1px 0 0;
       border-style: solid;
       border-color: @line_text_border_color;
@@ -1453,6 +1451,8 @@ div.text {
     background: darken(@line_text_back, 15%);
   }
   div.h {
+    top: 0;
+    position: sticky;
     text-align: center;
     font-size: @fsize_08;
     font-family: @fsans;
@@ -1482,4 +1482,3 @@ div.text {
   font-weight: bold !important;
   color: white !important;
 }
-

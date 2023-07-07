@@ -11,7 +11,7 @@ dict 11
 result_set 11
 text 11 12 ..
 context 12
-select_text 51
+select_text 9200
 form_rows 40
 */
 

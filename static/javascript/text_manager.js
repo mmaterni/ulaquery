@@ -28,7 +28,7 @@ var TextMgr = {
             this.objs[name] = obj;
             this.names.push(name);
             left += 200;
-            top += 30;
+            // top += 30;
             z_text += 1;
         }
     },
