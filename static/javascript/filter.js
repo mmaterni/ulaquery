@@ -6,7 +6,7 @@ const top_filter = 35;
 
 const where_top = top_filter + 380;
 const where_left = 5;
-const z_where = 100;
+const z_where = 10;
 
 const form_lemma_top = top_filter;
 const form_lemma_left = 3;

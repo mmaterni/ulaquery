@@ -138,10 +138,10 @@ var DictForm = {
   },
   show: async function (url) {
     if (!this.wind) return;
-    // wait_start();
-    // await sleep(10);
+    wait_start();
+    await sleep(10);
     this.wind.show();
-    // wait_stop();
+    wait_stop();
   },
   hide: function () {
     if (!this.wind) return;
