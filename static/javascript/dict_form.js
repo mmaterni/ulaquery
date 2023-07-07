@@ -90,7 +90,7 @@ var DictForm = {
 </a>
 </li>
 <li>${sp}</li>
-<li><a  href="javascript:DictForm.hide()">X</a></li>
+<li><a  href="javascript:DictForm.hide()">x</a></li>
 <li></li>
 </ul>
 </div>
